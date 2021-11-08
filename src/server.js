@@ -5,8 +5,6 @@ const port = 4500;
 
 app.use('/', express.static('build'));
 
-//app.use('/static', express.static(path.join(__dirname, 'public')));
-
 app.listen(port, () => {
     console.log(`App listening at http://localhost: ${port}`);
 })
