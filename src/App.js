@@ -5,16 +5,58 @@ import "./App.css";
 function App() {
   return (
    <div>
-       <h1>Welcom to React Router!</h1>
        <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='shipping_creator' element={<ShippingCreator />} />
             <Route path='about' element={<About />} />
+            <Route path='pack_slip' element={<PackSlip />} />
+            <Route path='labels' element={<Labels />} />
+            <Route path='ship_to_papers' element={<ShipTo />} />
        </Routes>
-       <Text />
    </div>
   );
 }
 
+function Nav() {
+    return(
+        <nav>
+              <Link to='/'>Home</Link>
+              <Link to='/shipping_creator'>Shipping Create Docs</Link>
+              <Link to='/about'>About</Link>
+              <Link to='/pack_slip'>Pack Slip</Link>
+              <Link to='/labels'>Lables</Link>
+              <Link to='/ship_to_papers'>Ship To Slip</Link>
+        </nav>
+    )
+}
+
+function PackSlip() {
+    return(
+        <div>
+            <h1>This is the pack slip page</h1> 
+            <Nav />
+
+        </div>
+    );
+}
+
+function Labels() {
+    return(
+        <div>
+            <h1>This is the labels page</h1>
+            <Nav />
+        </div>
+    );
+}
+
+function ShipTo() {
+    return(
+        <div>
+            <h1>This is the ship to page</h1>
+            <Nav />
+        </div>
+    )
+}
 function Text() {
     return(
         <div>
@@ -30,10 +72,18 @@ function Home() {
             <h1>This is the home Page</h1>
             <p>Welcome to the home page</p>
           </main>
-          <nav>
-              <Link to='/about'>About</Link>
-          </nav>
+          <Text />
+          <Nav />
+        </div>
+    )
+}
 
+function ShippingCreator() {
+    return(
+        <div>
+            <h1>Shipping Creator</h1>
+            <p>This is where we will create all of the various labels and slips</p>
+            <Nav />
         </div>
     )
 }
@@ -45,10 +95,7 @@ function About() {
             <h1>This is the about page</h1>
             <p>Welcome to the about page</p>
           </main>
-          <nav>
-              <Link to='/'>Home</Link>
-          </nav>
-
+          <Nav />
         </div>
     )
 }
