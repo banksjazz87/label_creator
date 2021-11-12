@@ -2,7 +2,9 @@ import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
-function App() {
+let testing = "";
+
+function App(){
   return (
    <div>
        <Routes>
@@ -17,6 +19,7 @@ function App() {
   );
 }
 
+
 function Nav() {
     return(
         <nav>
@@ -30,10 +33,14 @@ function Nav() {
     )
 }
 
-function PackSlip() {
+function PackSlip(props) {
     return(
         <div>
             <h1>This is the pack slip page</h1> 
+            <h2>{testing}</h2>
+            <h2>{testing}</h2>
+            <h2>{testing}</h2>
+            <h2>{testing}</h2>
             <Nav />
 
         </div>
@@ -79,38 +86,38 @@ function Home() {
 }
 
 function ShippingCreator() {
+    
     return(
         <div>
             <h1>Shipping Creator</h1>
             <p>This is where we will create all of the various labels and slips</p>
-            <UserInfo handleOnChange={this.state.currentInput} inputValue={this.state.test} />
+            <UserInfo />
             <Nav />
         </div>
     )
 }
 
 
-class UserInfo extends React.Component {
+class UserInfo extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             test: ""
         }
-        this.currentInput = this.currentInput.bind(this);
+        this.currentInput = this.currentInput.bind('this');
     }
 
-        currentInput = (e) => {
-            this.setState({
-                test: e.target.value
-            })
+   currentInput(e){
+        this.setState({
+            test: e.target.value
+        });
     }
-
     render(){
 
     return(
         <div>
-            <p>{this.props.inputValue}</p>
-            <input type='text' onChange={this.props.handleOnChange}></input>
+            <p>{this.state.test}</p>
+            <input type='text' onChange={this.currentInput}></input>
         </div>
     )
 }
