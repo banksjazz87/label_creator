@@ -1,6 +1,12 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
+import About from "../React-Parents/about.js";
+import ShippingCreator from "../React-Parents/creator.js";
+import Home from "../React-Parents/home.js";
+import Labels from "../React-Parents/label.js";
+import PackSlip from "../React-Parents/packSlip.js";
+import ShipTo from "../React-Parents/shipTo.js";
 
 let testing = "";
 
@@ -138,3 +144,5 @@ function About() {
 
 
 export default App;
+export default Nav;
+
