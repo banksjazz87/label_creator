@@ -107,7 +107,7 @@ class UserInfo extends React.Component{
         this.currentInput = this.currentInput.bind('this');
     }
 
-   currentInput(e){
+   currentInput = (e) => {
         this.setState({
             test: e.target.value
         });
