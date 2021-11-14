@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./App.css";
-import Nav from "../src/App.js";
+import { Nav } from "./App.js";
 
 function ShipTo() {
   return (

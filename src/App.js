@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import About from "../React-Parents/about.js";
-import ShippingCreator from "../React-Parents/creator.js";
-import Home from "../React-Parents/home.js";
-import Labels from "../React-Parents/label.js";
-import PackSlip from "../React-Parents/packSlip.js";
-import ShipTo from "../React-Parents/shipTo.js";
+import About from "./about.js";
+import ShippingCreator from "./creator.js";
+import Home from "./home.js";
+import Labels from "./label.js";
+import PackSlip from "./packSlip.js";
+import ShipTo from "./shipTo.js";
 
-let testing = "";
+
 
 function App(){
   return (
@@ -39,7 +39,7 @@ function Nav() {
     )
 }
 
-function PackSlip(props) {
+/*function PackSlip(props) {
     return(
         <div>
             <h1>This is the pack slip page</h1> 
@@ -139,10 +139,9 @@ function About() {
           <Nav />
         </div>
     )
-}
+}*/
 
 
 
-export default App;
-export default Nav;
+export {App, Nav};
 
