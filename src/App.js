@@ -99,5 +99,5 @@ function About() {
 
 
 
-export {App};
+export default App;
 
