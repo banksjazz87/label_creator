@@ -1,14 +1,12 @@
 import * as React from "react";
 import "./App.css";
-import { Nav } from "./App.js";
 
-function ShippingCreator() {
+function ParentShippingCreator() {
   return (
     <div>
       <h1> Shipping Creator </h1>{" "}
       <p> This is where we will create all of the various labels and slips </p>{" "}
       <UserInfo />
-      <Nav />
     </div>
   );
 }
@@ -39,4 +37,4 @@ class UserInfo extends React.Component {
   }
 }
 
-export default ShippingCreator;
+export default ParentShippingCreator;

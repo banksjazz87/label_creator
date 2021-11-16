@@ -1,6 +1,5 @@
 import * as React from "react";
 import "./App.css";
-import { Nav } from "./App.js";
 
 function Text() {
   return (
@@ -10,7 +9,7 @@ function Text() {
   );
 }
 
-function Home() {
+function ParentHome() {
   return (
     <div>
       <main>
@@ -18,9 +17,8 @@ function Home() {
         <p>Welcome to the home page</p>
       </main>
       <Text />
-      <Nav />
     </div>
   );
 }
 
-export default Home;
+export default ParentHome;

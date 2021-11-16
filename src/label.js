@@ -1,14 +1,12 @@
 import * as React from "react";
 import "./App.css";
-import { Nav } from "./App.js";
 
-function Labels() {
+function ParentLabels() {
   return (
     <div>
-      <h1>This is the labels page</h1>
-      <Nav />
+      <h1> This is the labels page </h1>
     </div>
   );
 }
 
-export default Labels;
+export default ParentLabels;

@@ -1,13 +1,12 @@
 import * as React from "react";
 import "./App.css";
-import { Nav } from "./App.js";
 
-function ShipTo() {
+function ParentShipTo() {
   return (
     <div>
-      <h1> This is the ship to page </h1> <Nav />
+      <h1> This is the ship to page </h1>{" "}
     </div>
   );
 }
 
-export default ShipTo;
+export default ParentShipTo;
