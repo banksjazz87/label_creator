@@ -4,8 +4,8 @@ import "./App.css";
 function ParentShippingCreator() {
   return (
     <div>
-      <h1> Shipping Creator </h1>{" "}
-      <p> This is where we will create all of the various labels and slips </p>{" "}
+      <h1> Shipping Creator </h1>
+      <p> This is where we will create all of the various labels and slips </p>
       <UserInfo />
     </div>
   );
