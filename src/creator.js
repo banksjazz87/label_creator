@@ -28,10 +28,8 @@ class UserInfo extends React.Component {
   render() {
     return (
       <div>
-        <p> {this.state.test} </p>{" "}
-        <input type="text" onChange={this.currentInput}>
-          {" "}
-        </input>{" "}
+        <p> {this.state.test} </p>
+        <input type="text" onChange={this.currentInput} />
       </div>
     );
   }
