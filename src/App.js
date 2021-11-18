@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import ParentAbout from "./about.js";
-import ParentShippingCreator from "./creator.js";
-import ParentHome from "./home.js";
-import ParentLabels from "./label.js";
-import ParentPackSlip from "./packSlip.js";
-import ParentShipTo from "./shipTo.js";
+import ParentAbout from "./parents/about.js";
+import ParentShippingCreator from "./parents/creator.js";
+import ParentHome from "./parents/home.js";
+import ParentLabels from "./parents/label.js";
+import ParentPackSlip from "./parents/packSlip.js";
+import ParentShipTo from "./parents/shipTo.js";
 
 
 
