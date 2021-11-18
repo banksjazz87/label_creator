@@ -6,9 +6,32 @@ function ParentShippingCreator() {
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
+      <InputData />
       <UserInfo />
     </div>
   );
+}
+
+class InputData extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+
+    }
+
+  }
+  render(){
+    return(
+      <table>
+        <tbody>
+          <tr>
+          <th>Shipping To</th>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
 }
 
 class UserInfo extends React.Component {
