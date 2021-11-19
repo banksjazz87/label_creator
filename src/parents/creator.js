@@ -33,12 +33,12 @@ function ParentShippingCreator() {
 }
 
 //This will dynamically render all of the elements needed for the shipping to and from.
-const ShippingToFrom = (arr, toFrom) => {
+const ShippingToFrom = (props) => {
   
-  let elements = arr.map((x, y => {
+  let elements = props.map((x, y => {
    return(
-   <div id={toFrom + y}>
-    <label id={toFrom + x}>{x}</label>
+   <div id={props.toFrom + y}>
+    <label id={props.toFrom + x}>{x}</label>
     <input type="text"></input>
     </div>
    )
