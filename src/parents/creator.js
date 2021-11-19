@@ -1,6 +1,26 @@
 import * as React from "react";
 import "../App.css";
 
+const UserData = {
+  shipFrom: {
+    companyName: "",
+    streetAddress: "",
+    city: "", 
+    state: "",
+    zip: "", 
+    attention: ""
+  },
+
+  shipTo: {
+    companyName: "",
+    streetAddress: "",
+    city: "", 
+    state: "",
+    zip: "", 
+    attention: ""
+  }
+}
+
 function ParentShippingCreator() {
   return (
     <div>
@@ -12,6 +32,21 @@ function ParentShippingCreator() {
   );
 }
 
+//This will dynamically render all of the elements needed for the shipping to and from.
+const ShippingToFrom = (arr, toFrom) => {
+  
+  let elements = arr.map((x, y => {
+   return(
+   <div id={toFrom + y}>
+    <label id={toFrom + x}>{x}</label>
+    <input type="text"></input>
+    </div>
+   )
+  }))
+
+  return elements;
+
+}
 class InputData extends React.Component {
   constructor(props){
     super(props);
