@@ -3,17 +3,16 @@ import "../App.css";
 
 const UserData = {
   shipFrom: {
-    companyName: "",
-    streetAddress: "",
+    company: "",
+    street: "",
     city: "", 
     state: "",
     zip: "", 
-    attention: ""
   },
 
   shipTo: {
-    companyName: "",
-    streetAddress: "",
+    company: "",
+    street: "",
     city: "", 
     state: "",
     zip: "", 
@@ -21,11 +20,14 @@ const UserData = {
   }
 }
 
+
 function ParentShippingCreator() {
   return (
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
+      <ShippingToFrom title={Object.keys(UserData.shipFrom)} />
+      <ShippingToFrom title={Object.keys(UserData.shipTo)} />
       <InputData />
       <UserInfo />
     </div>
@@ -35,16 +37,22 @@ function ParentShippingCreator() {
 //This will dynamically render all of the elements needed for the shipping to and from.
 const ShippingToFrom = (props) => {
   
-  let elements = props.map((x, y => {
-   return(
-   <div id={props.toFrom + y}>
-    <label id={props.toFrom + x}>{x}</label>
-    <input type="text"></input>
-    </div>
-   )
-  }))
+  let names = props.title;
 
-  return elements;
+  let elements = names.map((x, y) => {
+   return(
+  <div key={x + y.toString()}>
+    <label id={props.toFrom + x}>{x}</label>
+    <input type="text" placeholder={x}></input>
+  </div>
+   )
+  })
+
+  return (
+    <div>
+      {elements}
+    </div>
+  )
 
 }
 class InputData extends React.Component {
