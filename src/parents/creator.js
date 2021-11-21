@@ -21,21 +21,53 @@ const UserData = {
 }
 
 
-function ParentShippingCreator() {
+class ParentShippingCreator extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      shipFrom: {
+        company: "",
+        street: "",
+        city: "", 
+        state: "",
+        zip: "", 
+      },
+    
+      shipTo: {
+        company: "",
+        street: "",
+        city: "", 
+        state: "",
+        zip: "", 
+        attention: ""
+      }
+    }
+
+    this.updateObj = this.updateObj.bind(this);
+  }
+
+  updateObj(e, current){
+    this.setState({
+      current: e.target.value
+    })
+    console.log(this.state[current]);
+  }
+  render(){
   return (
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
-      <ShippingToFrom title={Object.keys(UserData.shipFrom)} />
-      <ShippingToFrom title={Object.keys(UserData.shipTo)} />
+      <ShippingToFrom title={Object.keys(UserData.shipFrom)} handleChange={() => this.updateObj}  />
+      <ShippingToFrom title={Object.keys(UserData.shipTo)} handleChange={this.updateObj} />
       <InputData />
       <UserInfo />
     </div>
   );
 }
+}
 
 //This will dynamically render all of the elements needed for the shipping to and from.
-const ShippingToFrom = (props) => {
+const ShippingToFrom = (props) => { 
   
   let names = props.title;
 
@@ -43,7 +75,7 @@ const ShippingToFrom = (props) => {
    return(
   <div key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
-    <input type="text" placeholder={x}></input>
+    <input type="text" placeholder={x} onChange={props.handleChange({x})}></input>
   </div>
    )
   })
