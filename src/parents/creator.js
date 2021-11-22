@@ -47,10 +47,14 @@ class ParentShippingCreator extends React.Component {
   }
 
   updateObj(e){
-
    
+    const shipToOrFrom = e.target.className;
+    const label = e.target.placeholder;
+
     this.setState({
-      [e.target.id]: e.target.value
+      [shipToOrFrom]: {
+      [label]: e.target.value
+      }
   })
     console.log(this.state);
   }
@@ -59,8 +63,8 @@ class ParentShippingCreator extends React.Component {
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
-      <ShippingToFrom title={Object.keys(UserData.shipFrom)} handleChange={(e)=> this.updateObj(e)}  />
-      <ShippingToFrom title={Object.keys(UserData.shipTo)} handleChange={(e) => this.updateObj(e)} />
+      <ShippingToFrom toFrom={'shipFrom'} title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
+      <ShippingToFrom toFrom={"shipTo"} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
       <InputData />
       <UserInfo />
     </div>
@@ -77,7 +81,7 @@ const ShippingToFrom = (props) => {
    return(
   <div key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
-    <input id={x} type="text" placeholder={x} onChange={(e) => props.handleChange(e)}></input>
+    <input id={props.toFrom + x} className={props.toFrom} type="text" placeholder={x} onChange={(e) => props.handleChange(e)}></input>
   </div>
    )
   })
