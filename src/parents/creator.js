@@ -46,19 +46,21 @@ class ParentShippingCreator extends React.Component {
     this.updateObj = this.updateObj.bind(this);
   }
 
-  updateObj(e, current){
+  updateObj(e){
+
+   
     this.setState({
-      current: e.target.value
-    })
-    console.log(this.state[current]);
+      [e.target.id]: e.target.value
+  })
+    console.log(this.state);
   }
   render(){
   return (
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
-      <ShippingToFrom title={Object.keys(UserData.shipFrom)} handleChange={() => this.updateObj}  />
-      <ShippingToFrom title={Object.keys(UserData.shipTo)} handleChange={this.updateObj} />
+      <ShippingToFrom title={Object.keys(UserData.shipFrom)} handleChange={(e)=> this.updateObj(e)}  />
+      <ShippingToFrom title={Object.keys(UserData.shipTo)} handleChange={(e) => this.updateObj(e)} />
       <InputData />
       <UserInfo />
     </div>
@@ -75,7 +77,7 @@ const ShippingToFrom = (props) => {
    return(
   <div key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
-    <input type="text" placeholder={x} onChange={props.handleChange({x})}></input>
+    <input id={x} type="text" placeholder={x} onChange={(e) => props.handleChange(e)}></input>
   </div>
    )
   })
