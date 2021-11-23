@@ -17,8 +17,19 @@ const UserData = {
     state: "",
     zip: "", 
     attention: ""
+  }, 
+
+  skid: {
+    cartons: null, 
+    itemDescription: "",
+    quantityNeded: null, 
+    quantityShipped: null, 
+    packsRolls: null, 
+    qtyPerCarton: null
   }
 }
+
+const data = [];
 
 
 class ParentShippingCreator extends React.Component {
@@ -46,6 +57,7 @@ class ParentShippingCreator extends React.Component {
     this.updateObj = this.updateObj.bind(this);
   }
 
+  //This function is being used to store the data that is being input by the user.
   updateObj(e){
    
     const shipToOrFrom = e.target.className;
@@ -53,20 +65,19 @@ class ParentShippingCreator extends React.Component {
 
     this.setState({
       [shipToOrFrom]: {
-      [label]: e.target.value
+      [label]: e.target.value.toString
       }
   })
     console.log(this.state);
   }
+
   render(){
   return (
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
-      <ShippingToFrom toFrom={'shipFrom'} title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
-      <ShippingToFrom toFrom={"shipTo"} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
-      <InputData />
-      <UserInfo />
+      <ShippingToFrom toFrom={'shipFrom'} header={'Shipping From'} title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
+      <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
     </div>
   );
 }
@@ -88,55 +99,10 @@ const ShippingToFrom = (props) => {
 
   return (
     <div>
+    <h2>{props.header}</h2>
       {elements}
     </div>
   )
-
-}
-class InputData extends React.Component {
-  constructor(props){
-    super(props);
-
-    this.state = {
-
-    }
-
-  }
-  render(){
-    return(
-      <table>
-        <tbody>
-          <tr>
-          <th>Shipping To</th>
-          </tr>
-        </tbody>
-      </table>
-    )
-  }
-}
-
-class UserInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      test: "",
-    };
-    this.currentInput = this.currentInput.bind("this");
-  }
-
-  currentInput = (e) => {
-    this.setState({
-      test: e.target.value,
-    });
-  };
-  render() {
-    return (
-      <div>
-        <p> {this.state.test} </p>
-        <input type="text" onChange={this.currentInput} />
-      </div>
-    );
-  }
 }
 
 export default ParentShippingCreator;
