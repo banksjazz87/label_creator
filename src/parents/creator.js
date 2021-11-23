@@ -29,7 +29,7 @@ const UserData = {
   }
 }
 
-const data = [];
+
 
 
 class ParentShippingCreator extends React.Component {
@@ -110,13 +110,7 @@ const SkidContents = (props) => {
   const newInput = props.title;
   const elements = newInput.map((x, y) => {
     return (
-      //<table key={y.toString() + props.name}>
-        //<tbody>
-         // <tr>
           <th key={'header' + x} class="table_header">{x}</th>
-          //</tr>
-        //</tbody>
-      //</table>
     )
   })
   return(
