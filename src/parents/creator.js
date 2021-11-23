@@ -26,7 +26,9 @@ const UserData = {
     packsRolls: null, 
     qtyPerCarton: null,
     numOfCartons: null,
-  }
+    PO: null, 
+    Job: null,
+  },
 }
 
 
@@ -51,10 +53,24 @@ class ParentShippingCreator extends React.Component {
         state: "",
         zip: "", 
         attention: ""
-      }
+      }, 
+      skid: {
+        itemDescription: "",
+        qtyNeeded: null, 
+        qtyShipped: null, 
+        packsRolls: null, 
+        qtyPerCarton: null,
+        numOfCartons: null,
+        PO: null, 
+        Job: null,
+      },
+
+      lines: 0
     }
 
     this.updateObj = this.updateObj.bind(this);
+    this.lineNumbers = this.lineNumbers.bind(this);
+
   }
 
   //This function is being used to store the data that is being input by the user.
@@ -67,17 +83,32 @@ class ParentShippingCreator extends React.Component {
       [shipToOrFrom]: {
       [label]: e.target.value.toString
       }
-  })
+  });
     console.log(this.state);
-  }
+  };
+
+  //updates the number of lines that are needed for the items.
+  lineNumbers = (e) => {
+    this.setState({
+      lines: e.target.value
+    });
+    console.log(this.state.lines);
+  };
 
   render(){
   return (
     <div>
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
+
       <ShippingToFrom toFrom={'shipFrom'} header={'Shipping From'} title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
+
       <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+
+      <label>Number of Lines Needed</label>
+      <input placeholder="number of lines" onChange={this.lineNumbers}></input>
+      <button type='button'>Submit</button> 
+
       <SkidContents title={Object.keys(UserData.skid)} />
     </div>
   );
@@ -123,4 +154,5 @@ const SkidContents = (props) => {
     </table>
   )
 }
+
 export default ParentShippingCreator;
