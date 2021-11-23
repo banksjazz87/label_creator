@@ -20,12 +20,12 @@ const UserData = {
   }, 
 
   skid: {
-    cartons: null, 
     itemDescription: "",
-    quantityNeded: null, 
-    quantityShipped: null, 
+    qtyNeeded: null, 
+    qtyShipped: null, 
     packsRolls: null, 
-    qtyPerCarton: null
+    qtyPerCarton: null,
+    numOfCartons: null,
   }
 }
 
@@ -78,6 +78,7 @@ class ParentShippingCreator extends React.Component {
       <p> This is where we will create all of the various labels and slips </p>
       <ShippingToFrom toFrom={'shipFrom'} header={'Shipping From'} title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
       <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+      <SkidContents title={Object.keys(UserData.skid)} />
     </div>
   );
 }
@@ -105,4 +106,27 @@ const ShippingToFrom = (props) => {
   )
 }
 
+const SkidContents = (props) => {
+  const newInput = props.title;
+  const elements = newInput.map((x, y) => {
+    return (
+      //<table key={y.toString() + props.name}>
+        //<tbody>
+         // <tr>
+          <th key={'header' + x} class="table_header">{x}</th>
+          //</tr>
+        //</tbody>
+      //</table>
+    )
+  })
+  return(
+    <table>
+      <tbody>
+        <tr>
+          {elements}
+        </tr>
+      </tbody>
+    </table>
+  )
+}
 export default ParentShippingCreator;
