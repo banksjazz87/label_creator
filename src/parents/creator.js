@@ -88,11 +88,14 @@ class ParentShippingCreator extends React.Component {
   };
 
   //updates the number of lines that are needed for the items.
-  lineNumbers = (e) => {
-    this.setState({
-      lines: e.target.value
-    });
-    console.log(this.state.lines);
+  lineNumbers(e){
+    e.preventDefault();
+
+    const currentLines = document.getElementById('lines_input');
+
+    this.setState((prevState) => ({
+      lines: prevState.lines = currentLines.value
+    }));
   };
 
   render(){
@@ -106,10 +109,10 @@ class ParentShippingCreator extends React.Component {
       <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
 
       <label>Number of Lines Needed</label>
-      <input placeholder="number of lines" onChange={this.lineNumbers}></input>
-      <button type='button'>Submit</button> 
+      <input id="lines_input" placeholder="number of lines"></input>
+      <button type='button' onClick={this.lineNumbers}>Submit</button> 
 
-      <SkidContents title={Object.keys(UserData.skid)} />
+      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} />
     </div>
   );
 }
@@ -138,21 +141,40 @@ const ShippingToFrom = (props) => {
 }
 
 const SkidContents = (props) => {
+  
   const newInput = props.title;
   const elements = newInput.map((x, y) => {
     return (
           <th key={'header' + x} class="table_header">{x}</th>
     )
   })
+
+  const lineItems = () => {
+    let lines = Number(props.linesNeeded);
+    let i = 0;
+
+    while(i < lines){
+      return (
+        
+        <td style={{borderWidth: '.5em', borderColor: 'Black'}}>
+          <input></input>
+        </td>
+      )
+    }
+  }
+
   return(
     <table>
       <tbody>
         <tr>
           {elements}
+          {lineItems}
         </tr>
       </tbody>
     </table>
   )
 }
+
+
 
 export default ParentShippingCreator;
