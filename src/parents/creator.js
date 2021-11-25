@@ -26,9 +26,10 @@ const UserData = {
     packsRolls: null, 
     qtyPerCarton: null,
     numOfCartons: null,
-    PO: null, 
-    Job: null,
   },
+
+  PO: null, 
+  Job: null
 }
 
 
@@ -90,13 +91,13 @@ class ParentShippingCreator extends React.Component {
   //updates the number of lines that are needed for the items.
   lineNumbers(e){
     e.preventDefault();
-
-    const currentLines = document.getElementById('lines_input');
+    const linesNeeded = document.getElementById('lines_input');
 
     this.setState((prevState) => ({
-      lines: prevState.lines = currentLines.value
+      lines: prevState.lines = linesNeeded.value
     }));
   };
+
 
   render(){
   return (
@@ -149,32 +150,39 @@ const SkidContents = (props) => {
     )
   })
 
-  const lineItems = () => {
-    let lines = Number(props.linesNeeded);
-    let i = 0;
+  let rows = props.linesNeeded;
+  let i = 0;
+  let arr = [];
 
-    while(i < lines){
-      return (
-        
-        <td style={{borderWidth: '.5em', borderColor: 'Black'}}>
-          <input></input>
-        </td>
-      )
-    }
-  }
-
+  while(i < rows){
+    i++;
+    arr.push(i);
+  };
+  
+  const newColumns = newInput.map((x) => {
+    return(
+      <td key={'column_num' + x}>
+        <input placeholder="data"></input>
+      </td>
+    )
+  })
+  const newRows = arr.map((x) => {
+    return(
+      <tr key={'row_num' + x}>
+        {newColumns}
+      </tr>
+    )
+  })
   return(
     <table>
       <tbody>
         <tr>
           {elements}
-          {lineItems}
         </tr>
+        {newRows}
       </tbody>
     </table>
   )
 }
-
-
 
 export default ParentShippingCreator;
