@@ -62,15 +62,17 @@ class ParentShippingCreator extends React.Component {
         packsRolls: null, 
         qtyPerCarton: null,
         numOfCartons: null,
-        PO: null, 
-        Job: null,
+        
       },
 
+      PO: null, 
+      Job: null,
       lines: 0
     }
 
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
+    this.poJobNumbers = this.poJobNumbers.bind(this);
 
   }
 
@@ -98,6 +100,18 @@ class ParentShippingCreator extends React.Component {
     }));
   };
 
+  //update the object for the po and job numbers
+  poJobNumbers(e){
+    const data = e.target.id;
+
+    this.setState({
+      [data]: e.target.value
+    })
+
+    console.log(this.state[data]);
+  }
+
+
 
   render(){
   return (
@@ -109,8 +123,15 @@ class ParentShippingCreator extends React.Component {
 
       <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
 
+      <label>PO#</label>
+      <input id='PO' type='text' ></input>
+
+      <label>Job</label>
+      <input id='Job' type='text' onChange={this.poJobNumbers}></input> 
+
       <label>Number of Lines Needed</label>
-      <input id="lines_input" placeholder="number of lines"></input>
+      <input id="lines_input" placeholder="number of lines" onChange={this.poJobNumbers}></input>
+
       <button type='button' onClick={this.lineNumbers}>Submit</button> 
 
       <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} />
@@ -159,10 +180,10 @@ const SkidContents = (props) => {
     arr.push(i);
   };
   
-  const newColumns = newInput.map((x) => {
+  const newColumns = newInput.map((x, y) => {
     return(
       <td key={'column_num' + x}>
-        <input placeholder="data"></input>
+        <input class={Object.keys(UserData.skid)[y]}></input>
       </td>
     )
   })
