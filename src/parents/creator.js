@@ -32,8 +32,13 @@ const UserData = {
   Job: null
 }
 
+function UserTest(color, size) {
+  this.color =  color;
+  this.size = size;
+}
 
-
+const skid1 = new UserTest('black', 12);
+console.log('this is UserTest' + Object.entries(skid1));
 
 class ParentShippingCreator extends React.Component {
   constructor(props){
@@ -104,9 +109,9 @@ class ParentShippingCreator extends React.Component {
   poJobNumbers(e){
     const data = e.target.id;
 
-    this.setState({
-      [data]: e.target.value
-    })
+    this.setState((prevState) => ({
+      [data]: prevState = e.target.value
+    }))
 
     console.log(this.state[data]);
   }
@@ -124,7 +129,7 @@ class ParentShippingCreator extends React.Component {
       <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
 
       <label>PO#</label>
-      <input id='PO' type='text' ></input>
+      <input id='PO' type='text' onChange={this.poJobNumbers} ></input>
 
       <label>Job</label>
       <input id='Job' type='text' onChange={this.poJobNumbers}></input> 
