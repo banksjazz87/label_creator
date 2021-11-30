@@ -32,13 +32,15 @@ const UserData = {
   Job: null
 }
 
-function UserTest(color, size) {
-  this.color =  color;
-  this.size = size;
+function SkidItems(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
+  this.itemDescription = itemDescription;
+  this.qtyNeeded = qtyNeeded;
+  this.qtyShipped = qtyShipped;
+  this.packsRolls = packsRolls;
+  this.qtyPerCarton = qtyPerCarton;
+  this.numOfCartons = numOfCartons;
 }
 
-const skid1 = new UserTest('black', 12);
-console.log('this is UserTest' + Object.entries(skid1));
 
 class ParentShippingCreator extends React.Component {
   constructor(props){
@@ -60,15 +62,7 @@ class ParentShippingCreator extends React.Component {
         zip: "", 
         attention: ""
       }, 
-      skid: {
-        itemDescription: "",
-        qtyNeeded: null, 
-        qtyShipped: null, 
-        packsRolls: null, 
-        qtyPerCarton: null,
-        numOfCartons: null,
-        
-      },
+      skid: [],
 
       PO: null, 
       Job: null,
@@ -113,7 +107,6 @@ class ParentShippingCreator extends React.Component {
       [data]: prevState = e.target.value
     }))
 
-    console.log(this.state[data]);
   }
 
 
@@ -139,7 +132,7 @@ class ParentShippingCreator extends React.Component {
 
       <button type='button' onClick={this.lineNumbers}>Submit</button> 
 
-      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} />
+      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} />
     </div>
   );
 }
@@ -172,29 +165,31 @@ const SkidContents = (props) => {
   const newInput = props.title;
   const elements = newInput.map((x, y) => {
     return (
-          <th key={'header' + x} class="table_header">{x}</th>
+          <th key={'header' + x} className="table_header">{x}</th>
     )
   })
 
   let rows = props.linesNeeded;
   let i = 0;
-  let arr = [];
+  let skidInfo = new SkidItems();
 
   while(i < rows){
     i++;
-    arr.push(i);
+    props.skidObjectsArr.push(skidInfo);
   };
+
+  console.log(props.skidObjectsArr);
   
   const newColumns = newInput.map((x, y) => {
     return(
       <td key={'column_num' + x}>
-        <input class={Object.keys(UserData.skid)[y]}></input>
+        <input id={Object.keys(UserData.skid)[y]}></input>
       </td>
     )
   })
-  const newRows = arr.map((x) => {
+  const newRows = props.skidObjectsArr.map((x, y) => {
     return(
-      <tr key={'row_num' + x}>
+      <tr key={'row_num' + y}>
         {newColumns}
       </tr>
     )
