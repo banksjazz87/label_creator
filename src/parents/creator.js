@@ -73,6 +73,8 @@ class ParentShippingCreator extends React.Component {
     this.lineNumbers = this.lineNumbers.bind(this);
     this.poJobNumbers = this.poJobNumbers.bind(this);
 
+    this.updateSkid = this.updateSkid.bind(this);
+
   }
 
   //This function is being used to store the data that is being input by the user.
@@ -109,6 +111,40 @@ class ParentShippingCreator extends React.Component {
 
   }
 
+  //update the skid items
+  //we will need data from the event, the line number, and the skid item key
+  updateSkid(e){
+
+    //get the parent element of the input
+    let currentElement = e.target;
+    let parentOfCurrentElement = currentElement.parentElement;
+
+   
+    let grandParent = parentOfCurrentElement.parentElement;
+
+   /* let keyNeeded = "";
+    let i = 0;
+
+    while(i < grandParent.key){
+      if(typeof(grandParent.key[i]) == Number){
+       keyNeeded = grandParent.key[i].toString() + keyNeeded;
+      }
+      i++;
+    }*/
+
+    console.log(grandParent);
+
+    /*this.setState({
+      skid:{
+        [line]:{
+          [item]: e.target.value
+        }
+      }
+    })
+
+    console.log(this.state.skid[line]);*/
+  }
+
 
 
   render(){
@@ -132,7 +168,7 @@ class ParentShippingCreator extends React.Component {
 
       <button type='button' onClick={this.lineNumbers}>Submit</button> 
 
-      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} />
+      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} handleChange={this.updateSkid} />
     </div>
   );
 }
@@ -182,8 +218,8 @@ const SkidContents = (props) => {
   
   const newColumns = newInput.map((x, y) => {
     return(
-      <td key={'column_num' + x}>
-        <input id={Object.keys(UserData.skid)[y]}></input>
+      <td id={'column_num' + y} key={'column_num' + y}>
+        <input id={Object.keys(UserData.skid)[y]} onChange={props.handleChange}></input>
       </td>
     )
   })
