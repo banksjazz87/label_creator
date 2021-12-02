@@ -1,4 +1,5 @@
 import * as React from "react";
+import { isNumberObject } from "util/types";
 import "../App.css";
 
 const UserData = {
@@ -118,21 +119,22 @@ class ParentShippingCreator extends React.Component {
     //get the parent element of the input
     let currentElement = e.target;
     let parentOfCurrentElement = currentElement.parentElement;
-
-   
     let grandParent = parentOfCurrentElement.parentElement;
 
-   /* let keyNeeded = "";
+    let line = "";
     let i = 0;
 
-    while(i < grandParent.key){
-      if(typeof(grandParent.key[i]) == Number){
-       keyNeeded = grandParent.key[i].toString() + keyNeeded;
+    while(i < grandParent.id.length){
+      
+      if(parseInt(grandParent.id[i]) > 0){
+       line = grandParent.id[i] + line;
       }
-      i++;
-    }*/
+      
 
-    console.log(grandParent);
+      i++;
+    }
+
+    console.log(line);
 
     /*this.setState({
       skid:{
@@ -214,7 +216,6 @@ const SkidContents = (props) => {
     props.skidObjectsArr.push(skidInfo);
   };
 
-  console.log(props.skidObjectsArr);
   
   const newColumns = newInput.map((x, y) => {
     return(
@@ -225,7 +226,7 @@ const SkidContents = (props) => {
   })
   const newRows = props.skidObjectsArr.map((x, y) => {
     return(
-      <tr key={'row_num' + y}>
+      <tr id={'row_num' + y} key={'row_num' + y}>
         {newColumns}
       </tr>
     )
