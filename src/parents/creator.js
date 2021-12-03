@@ -1,5 +1,4 @@
 import * as React from "react";
-import { isNumberObject } from "util/types";
 import "../App.css";
 
 const UserData = {
@@ -116,7 +115,7 @@ class ParentShippingCreator extends React.Component {
   //we will need data from the event, the line number, and the skid item key
   updateSkid(e){
 
-    //get the parent element of the input
+    //get the grand-parent element of the input to get the line number
     let currentElement = e.target;
     let parentOfCurrentElement = currentElement.parentElement;
     let grandParent = parentOfCurrentElement.parentElement;
@@ -126,7 +125,7 @@ class ParentShippingCreator extends React.Component {
 
     while(i < grandParent.id.length){
       
-      if(parseInt(grandParent.id[i]) > 0){
+      if(parseInt(grandParent.id[i]) > -1){
        line = grandParent.id[i] + line;
       }
       
@@ -134,17 +133,15 @@ class ParentShippingCreator extends React.Component {
       i++;
     }
 
-    console.log(line);
+    //This will return the Object key that needs manipulated
+    let currentObjectItem = e.target.id;
 
-    /*this.setState({
-      skid:{
-        [line]:{
-          [item]: e.target.value
-        }
-      }
+    this.setState({
+      skid:  
+      [line][currentObjectItem] = e.target.value 
     })
 
-    console.log(this.state.skid[line]);*/
+    console.log(Object.entries(this.state.skid[line]));
   }
 
 
