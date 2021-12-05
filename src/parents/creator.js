@@ -129,19 +129,23 @@ class ParentShippingCreator extends React.Component {
        line = grandParent.id[i] + line;
       }
       
-
+      line = parseInt(line);
       i++;
     }
 
     //This will return the Object key that needs manipulated
-    let currentObjectItem = e.target.id;
+    let currentObjectItem = e.target.className;
+
+    let skidCopy = [...this.state.skid];
+    let newItem = {...skidCopy[line]};
+    newItem[currentObjectItem] = e.target.value;
+    skidCopy[line][currentObjectItem] = newItem;
 
     this.setState({
-      skid:  
-      [line][currentObjectItem] = e.target.value 
+      skid: skidCopy
     })
 
-    console.log(Object.entries(this.state.skid[line]));
+    console.log(this.state.skid);
   }
 
 
@@ -217,7 +221,7 @@ const SkidContents = (props) => {
   const newColumns = newInput.map((x, y) => {
     return(
       <td id={'column_num' + y} key={'column_num' + y}>
-        <input id={Object.keys(UserData.skid)[y]} onChange={props.handleChange}></input>
+        <input class={Object.keys(UserData.skid)[y]} onChange={props.handleChange}></input>
       </td>
     )
   })
