@@ -135,14 +135,21 @@ class ParentShippingCreator extends React.Component {
 
     //This will return the Object key that needs manipulated
     let currentObjectItem = e.target.className;
+    
+    //Get all elements with the class name;
+    let allClassElements = document.getElementsByClassName(currentObjectItem);
+
+    //Get Particular element 
+    let element = allClassElements[line];
 
     let skidCopy = [...this.state.skid];
+    skidCopy[line][currentObjectItem] = e.target.value;
     let newItem = {...skidCopy[line]};
     newItem[currentObjectItem] = e.target.value;
     skidCopy[line][currentObjectItem] = newItem;
 
     this.setState({
-      skid: skidCopy
+      skidCopy
     })
 
     console.log(this.state.skid);
@@ -210,7 +217,9 @@ const SkidContents = (props) => {
 
   let rows = props.linesNeeded;
   let i = 0;
+
   let skidInfo = new SkidItems();
+
 
   while(i < rows){
     i++;
