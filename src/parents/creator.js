@@ -114,8 +114,18 @@ class ParentShippingCreator extends React.Component {
   //update the skid items
   //we will need data from the event, the line number, and the skid item key
   updateSkid(e){
+   
+    e.preventDefault();
+    //Get the correct number of lines we're going to need to extract all of the data this will be the number of times that we will need to loop.
+    let lines = document.getElementsByClassName('line_data');
 
-    //get the grand-parent element of the input to get the line number
+    //Get the correct number of rows and all of the contents.
+    for(let i = 0; i < lines.length; i++){
+      console.log(lines[i]);
+    }
+
+
+    /*//get the grand-parent element of the input to get the line number
     let currentElement = e.target;
     let parentOfCurrentElement = currentElement.parentElement;
     let grandParent = parentOfCurrentElement.parentElement;
@@ -152,7 +162,7 @@ class ParentShippingCreator extends React.Component {
       skidCopy
     })
 
-    console.log(this.state.skid);
+    console.log(this.state.skid);*/
   }
 
 
@@ -178,7 +188,8 @@ class ParentShippingCreator extends React.Component {
 
       <button type='button' onClick={this.lineNumbers}>Submit</button> 
 
-      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} handleChange={this.updateSkid} />
+      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} />
+      <button id="final_submit" type='submit' onClick={this.updateSkid}>Submit</button>
     </div>
   );
 }
@@ -218,25 +229,24 @@ const SkidContents = (props) => {
   let rows = props.linesNeeded;
   let i = 0;
 
-  let skidInfo = new SkidItems();
-
+  let skidItems = [];
 
   while(i < rows){
     i++;
-    props.skidObjectsArr.push(skidInfo);
+    skidItems.push(i);
   };
 
-  
+
   const newColumns = newInput.map((x, y) => {
     return(
-      <td id={'column_num' + y} key={'column_num' + y}>
-        <input class={Object.keys(UserData.skid)[y]} onChange={props.handleChange}></input>
+      <td id={'column_num' + y} class="column_data" key={'column_num' + y}>
+        <input class={Object.keys(UserData.skid)[y]}></input>
       </td>
     )
   })
-  const newRows = props.skidObjectsArr.map((x, y) => {
+  const newRows = skidItems.map((x, y) => {
     return(
-      <tr id={'row_num' + y} key={'row_num' + y}>
+      <tr id={'row_num' + y} class="line_data" key={'row_num' + y}>
         {newColumns}
       </tr>
     )
