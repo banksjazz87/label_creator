@@ -119,10 +119,24 @@ class ParentShippingCreator extends React.Component {
     //Get the correct number of lines we're going to need to extract all of the data this will be the number of times that we will need to loop.
     let lines = document.getElementsByClassName('line_data');
 
+    let items = document.getElementsByClassName('itemDescription');
+    let needed = document.getElementsByClassName('qtyNeeded');
+    let shipped = document.getElementsByClassName('qtyShipped');
+    let packs = document.getElementsByClassName('packsRolls');
+    let carton = document.getElementsByClassName('qtyPerCarton');
+    let cartons = document.getElementsByClassName('numOfCartons');
+
     //Get the correct number of rows and all of the contents.
     for(let i = 0; i < lines.length; i++){
-      console.log(lines[i]);
+      
+      let currentItems = new SkidItems(items[i].value, needed[i].value, shipped[i].value, packs[i].value, carton[i].value, cartons[i].value);
+
+      this.state.skid.push(currentItems);
     }
+
+    console.log(this.state.skid);
+    //console.log(this.state.skid);
+    
 
 
     /*//get the grand-parent element of the input to get the line number
@@ -239,14 +253,14 @@ const SkidContents = (props) => {
 
   const newColumns = newInput.map((x, y) => {
     return(
-      <td id={'column_num' + y} class="column_data" key={'column_num' + y}>
-        <input class={Object.keys(UserData.skid)[y]}></input>
+      <td id={'column_num' + y} className="column_data" key={'column_num' + y}>
+        <input className={Object.keys(UserData.skid)[y]}></input>
       </td>
     )
   })
   const newRows = skidItems.map((x, y) => {
     return(
-      <tr id={'row_num' + y} class="line_data" key={'row_num' + y}>
+      <tr id={'row_num' + y} className="line_data" key={'row_num' + y}>
         {newColumns}
       </tr>
     )
