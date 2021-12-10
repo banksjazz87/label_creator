@@ -66,7 +66,9 @@ class ParentShippingCreator extends React.Component {
 
       PO: null, 
       Job: null,
-      lines: 0
+      lines: 0, 
+
+      clicked: false
     }
 
     this.updateObj = this.updateObj.bind(this);
@@ -134,49 +136,18 @@ class ParentShippingCreator extends React.Component {
       this.state.skid.push(currentItems);
     }
 
-    console.log(this.state.skid);
-    //console.log(this.state.skid);
-    
-
-
-    /*//get the grand-parent element of the input to get the line number
-    let currentElement = e.target;
-    let parentOfCurrentElement = currentElement.parentElement;
-    let grandParent = parentOfCurrentElement.parentElement;
-
-    let line = "";
-    let i = 0;
-
-    while(i < grandParent.id.length){
-      
-      if(parseInt(grandParent.id[i]) > -1){
-       line = grandParent.id[i] + line;
-      }
-      
-      line = parseInt(line);
-      i++;
+    if(this.state.clicked){
+      this.setState({
+        clicked: false
+      })
+    }else{
+      this.setState({
+        clicked: true
+      })
     }
 
-    //This will return the Object key that needs manipulated
-    let currentObjectItem = e.target.className;
-    
-    //Get all elements with the class name;
-    let allClassElements = document.getElementsByClassName(currentObjectItem);
-
-    //Get Particular element 
-    let element = allClassElements[line];
-
-    let skidCopy = [...this.state.skid];
-    skidCopy[line][currentObjectItem] = e.target.value;
-    let newItem = {...skidCopy[line]};
-    newItem[currentObjectItem] = e.target.value;
-    skidCopy[line][currentObjectItem] = newItem;
-
-    this.setState({
-      skidCopy
-    })
-
-    console.log(this.state.skid);*/
+    console.log(this.state.skid);
+  
   }
 
 
@@ -204,6 +175,7 @@ class ParentShippingCreator extends React.Component {
 
       <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} />
       <button id="final_submit" type='submit' onClick={this.updateSkid}>Submit</button>
+     <button id="send" type='submit' style={this.state.clicked ? {display: 'block'} : {display: 'none'}}>Send</button>
     </div>
   );
 }
