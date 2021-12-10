@@ -76,6 +76,7 @@ class ParentShippingCreator extends React.Component {
     this.poJobNumbers = this.poJobNumbers.bind(this);
 
     this.updateSkid = this.updateSkid.bind(this);
+    this.finalSubmit = this.finalSubmit.bind(this);
 
   }
 
@@ -87,10 +88,9 @@ class ParentShippingCreator extends React.Component {
 
     this.setState({
       [shipToOrFrom]: {
-      [label]: e.target.value.toString
+      [label]: e.target.value
       }
   });
-    console.log(this.state);
   };
 
   //updates the number of lines that are needed for the items.
@@ -128,27 +128,38 @@ class ParentShippingCreator extends React.Component {
     let carton = document.getElementsByClassName('qtyPerCarton');
     let cartons = document.getElementsByClassName('numOfCartons');
 
+    let arr = [];
+
+    this.setState({
+      skid: arr
+    })
+
     //Get the correct number of rows and all of the contents.
     for(let i = 0; i < lines.length; i++){
       
       let currentItems = new SkidItems(items[i].value, needed[i].value, shipped[i].value, packs[i].value, carton[i].value, cartons[i].value);
 
-      this.state.skid.push(currentItems);
+      arr.push(currentItems);
     }
 
-    if(this.state.clicked){
-      this.setState({
-        clicked: false
-      })
-    }else{
-      this.setState({
+    this.setState({
+      skid: arr
+    })
+
+     this.setState({
         clicked: true
       })
-    }
-
-    console.log(this.state.skid);
   
   }
+
+  finalSubmit(e){
+
+    e.preventDefault();
+
+    console.log(this.state);
+  }
+
+
 
 
 
@@ -163,19 +174,35 @@ class ParentShippingCreator extends React.Component {
       <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
 
       <label>PO#</label>
-      <input id='PO' type='text' onChange={this.poJobNumbers} ></input>
+      <input id='PO' 
+             type='text' 
+             onChange={this.poJobNumbers}></input>
 
       <label>Job</label>
-      <input id='Job' type='text' onChange={this.poJobNumbers}></input> 
+      <input id='Job' 
+             type='text' 
+             onChange={this.poJobNumbers}></input> 
 
       <label>Number of Lines Needed</label>
-      <input id="lines_input" placeholder="number of lines" onChange={this.poJobNumbers}></input>
+      <input id="lines_input" 
+             placeholder="number of lines" 
+             onChange={this.poJobNumbers}></input>
 
-      <button type='button' onClick={this.lineNumbers}>Submit</button> 
+      <button type='button' 
+              onClick={this.lineNumbers}>Submit</button> 
 
-      <SkidContents title={Object.keys(UserData.skid)} linesNeeded={this.state.lines} skidObjectsArr={this.state.skid} />
-      <button id="final_submit" type='submit' onClick={this.updateSkid}>Submit</button>
-     <button id="send" type='submit' style={this.state.clicked ? {display: 'block'} : {display: 'none'}}>Send</button>
+      <SkidContents title={Object.keys(UserData.skid)}
+                    linesNeeded={this.state.lines} 
+                    skidObjectsArr={this.state.skid} />
+
+      <button id="final_submit" 
+              type='submit' 
+              onClick={this.updateSkid}>Submit</button>
+
+     <button id="send" 
+             type='submit' 
+             style={this.state.clicked ? {display: 'block'} :    {display: 'none'}} 
+             onClick={this.finalSubmit}>Send</button>
     </div>
   );
 }
