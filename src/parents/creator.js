@@ -32,7 +32,8 @@ const UserData = {
   Job: null
 }
 
-function SkidItems(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
+class SkidItems{
+constructor(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
   this.itemDescription = itemDescription;
   this.qtyNeeded = qtyNeeded;
   this.qtyShipped = qtyShipped;
@@ -40,7 +41,7 @@ function SkidItems(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCar
   this.qtyPerCarton = qtyPerCarton;
   this.numOfCartons = numOfCartons;
 }
-
+}
 
 class ParentShippingCreator extends React.Component {
   constructor(props){
@@ -87,11 +88,12 @@ class ParentShippingCreator extends React.Component {
     const label = e.target.placeholder;
 
     this.setState({
-      [shipToOrFrom]: {
-      [label]: e.target.value
-      }
-  });
+        [shipToOrFrom]: {...this.state[shipToOrFrom], [label]: e.target.value}
+      });
+
+      console.log(this.state);
   };
+
 
   //updates the number of lines that are needed for the items.
   lineNumbers(e){
@@ -169,9 +171,15 @@ class ParentShippingCreator extends React.Component {
       <h1> Shipping Creator </h1>
       <p> This is where we will create all of the various labels and slips </p>
 
-      <ShippingToFrom toFrom={'shipFrom'} header={'Shipping From'} title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
+      <ShippingToFrom divId={'shipFrom'} 
+                      toFrom={'shipFrom'} 
+                      header={'Shipping From'} 
+                      title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
 
-      <ShippingToFrom toFrom={"shipTo"} header={'Shipping To'} title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+      <ShippingToFrom divId={'shipTo'} 
+                      toFrom={"shipTo"} 
+                      header={'Shipping To'} 
+                      title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
 
       <label>PO#</label>
       <input id='PO' 
