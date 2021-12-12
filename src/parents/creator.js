@@ -75,6 +75,7 @@ class ParentShippingCreator extends React.Component {
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
     this.poJobNumbers = this.poJobNumbers.bind(this);
+    this.itemChange = this.itemChange.bind(this);
 
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
@@ -90,8 +91,6 @@ class ParentShippingCreator extends React.Component {
     this.setState({
         [shipToOrFrom]: {...this.state[shipToOrFrom], [label]: e.target.value}
       });
-
-      console.log(this.state);
   };
 
 
@@ -115,13 +114,37 @@ class ParentShippingCreator extends React.Component {
 
   }
 
+  //This will be an onChange event that will require the event target value, the current line number and the item that is being changed.
+  itemChange(e){
+    let item = e.target.className;
+    let selection = e.target;
+
+    //We need to get the current line number
+    let parent = selection.parentNode.id;
+    let number = "";
+
+    for(let i = 0; i < parent.length; i++){
+      if(parseInt(parent[i]) > -1){
+        number = number + parent[i];
+      }
+    }
+
+    this.setState({
+      skid: {...this.state.skid}
+    })
+
+    console.log(this.state.skid);
+  }
+
   //update the skid items
   //we will need data from the event, the line number, and the skid item key
   updateSkid(e){
    
     e.preventDefault();
     //Get the correct number of lines we're going to need to extract all of the data this will be the number of times that we will need to loop.
-    let lines = document.getElementsByClassName('line_data');
+
+
+    /*let lines = document.getElementsByClassName('line_data');
 
     let items = document.getElementsByClassName('itemDescription');
     let needed = document.getElementsByClassName('qtyNeeded');
@@ -148,6 +171,7 @@ class ParentShippingCreator extends React.Component {
       skid: arr
     })
 
+    */
      this.setState({
         clicked: true
       })
@@ -201,7 +225,8 @@ class ParentShippingCreator extends React.Component {
 
       <SkidContents title={Object.keys(UserData.skid)}
                     linesNeeded={this.state.lines} 
-                    skidObjectsArr={this.state.skid} />
+                    skidObjectsArr={this.state.skid}
+                    itemChangeHandler={this.itemChange} />
 
       <button id="final_submit" 
               type='submit' 
@@ -261,7 +286,7 @@ const SkidContents = (props) => {
   const newColumns = newInput.map((x, y) => {
     return(
       <td id={'column_num' + y} className="column_data" key={'column_num' + y}>
-        <input className={Object.keys(UserData.skid)[y]}></input>
+        <input className={Object.keys(UserData.skid)[y]} onChange={props.itemChangeHandler}></input>
       </td>
     )
   })
