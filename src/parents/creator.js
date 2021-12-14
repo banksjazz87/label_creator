@@ -32,6 +32,23 @@ const UserData = {
   Job: null
 }
 
+//Post request
+async function postData(url = '', data = {}){
+  const response= await fetch(url, {
+    method: 'POST',
+    mode: 'cors', 
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'
+    }, 
+    redirect: 'follow', 
+    referrerPolicy: 'no-referrer', 
+    body: JSON.stringify(data)
+  });
+  return response.json();
+}
+
 class SkidItems{
 constructor(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
   this.itemDescription = itemDescription;
@@ -80,8 +97,6 @@ class ParentShippingCreator extends React.Component {
 
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
-
-    this.postRequest = this.postRequest.bind(this);
 
   }
 
@@ -159,38 +174,20 @@ class ParentShippingCreator extends React.Component {
   
   }
 
-  componentDidMount(){
-    
-  this.finalSubmit = (e) => {
-
-    const url = 'http://shipping_creator/storage'
-    let data = this.state;
-
-    async function postData() {
-      const response = await fetch(url, {
-        method: 'POST', 
-        mode: 'cors', 
-        cache: 'no-cache', 
-        credentials: 'same-origin', 
-        headers: {
-          'Content-Type': 'application/json'
-        }, 
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer', 
-        body: JSON.stringify(data)
-      });
-      return response.json();
-    }
-
-    postData();
-
+  
+  finalSubmit(e){
 
     e.preventDefault();
+
+    const url = 'http://shipping_creator/data';
+    let data = this.state;
+
+    postData(url, data);
 
     console.log(this.state);
 
 }
-}
+
 
 
 
