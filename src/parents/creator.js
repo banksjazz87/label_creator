@@ -33,8 +33,8 @@ const UserData = {
 }
 
 //Post request
-async function postData(url = '', data = {}){
-  const response= await fetch(url, {
+const postData = async(url = '', data = {}) => {
+  const response = await fetch(url, {
     method: 'POST',
     mode: 'cors', 
     cache: 'no-cache', 
@@ -46,7 +46,13 @@ async function postData(url = '', data = {}){
     referrerPolicy: 'no-referrer', 
     body: JSON.stringify(data)
   });
-  return response.json();
+
+  try{
+    let updatedRes = await response.json();
+    return updatedRes;
+  }catch(e){
+    console.log('error', e);
+  }
 }
 
 class SkidItems{
@@ -179,10 +185,10 @@ class ParentShippingCreator extends React.Component {
 
     e.preventDefault();
 
-    const url = 'http://shipping_creator/data';
-    let data = this.state;
+    const url = 'http://localhost:4500/shipping_creator/data';
+    //let data = this.state;
 
-    postData(url, data);
+    postData(url, {cat: 'poop'});
 
     console.log(this.state);
 
