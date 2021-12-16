@@ -6,12 +6,26 @@ const port = 4500;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/', express.static('build'));
 
+let currentData = {};
+let allData = [];
+
+//Route for the post request
 app.post('/shipping_creator/data', (req, res) => {
-    res.send(req.body);
+    currentData = req.body;
+    allData.push(currentData);
+
+    console.log(allData);
+
+})
+
+//Route for all of the data
+app.get('/allData', (req, res, next) => {
+    res.send(allData);
+    next();
 })
 
 app.listen(port, () => {

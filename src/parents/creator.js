@@ -47,12 +47,7 @@ const postData = async(url = '', data = {}) => {
     body: JSON.stringify(data)
   });
 
-  try{
-    let updatedRes = await response.json();
-    return updatedRes;
-  }catch(e){
-    console.log('error', e);
-  }
+  return response.json();
 }
 
 class SkidItems{
@@ -185,12 +180,15 @@ class ParentShippingCreator extends React.Component {
 
     e.preventDefault();
 
-    const url = 'http://localhost:4500/shipping_creator/data';
-    //let data = this.state;
+    const url = '/shipping_creator/data';
+    let userInput = this.state;
 
-    postData(url, {cat: 'poop'});
+    postData(url, userInput)
+      .then(data => {
+        console.log(data)
+      })
 
-    console.log(this.state);
+   // console.log(this.state);
 
 }
 
