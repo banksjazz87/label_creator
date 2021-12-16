@@ -32,7 +32,13 @@ const UserData = {
   Job: null
 }
 
-//Post request
+/**
+ * 
+ * @param {*} url 
+ * @param {*} data 
+ * @returns sends an HTTP post request to whatever url is specified and posts whatever data is supplied as the second parameter.
+ */
+
 const postData = async(url = '', data = {}) => {
   const response = await fetch(url, {
     method: 'POST',
@@ -50,6 +56,7 @@ const postData = async(url = '', data = {}) => {
   return response.json();
 }
 
+//This will create an object to store all of the information needed for the skid
 class SkidItems{
 constructor(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
   this.itemDescription = itemDescription;
@@ -101,7 +108,8 @@ class ParentShippingCreator extends React.Component {
 
   }
 
-  //This function is being used to store the data that is being input by the user.
+  
+  //updates the ship to or from data fields.
   updateObj(e){
    
     const shipToOrFrom = e.target.className;
@@ -180,19 +188,12 @@ class ParentShippingCreator extends React.Component {
 
     e.preventDefault();
 
+    //information needed for the post request, followed by the postRequest
     const url = '/shipping_creator/data';
     let userInput = this.state;
-
     postData(url, userInput);
 
-   // console.log(this.state);
-
 }
-
-
-
-
-
 
   render(){
   return (
@@ -255,7 +256,13 @@ const ShippingToFrom = (props) => {
    return(
   <div key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
-    <input id={props.toFrom + x} className={props.toFrom} type="text" placeholder={x} onChange={(e) => props.handleChange(e)}></input>
+    <input 
+      id={props.toFrom + x} 
+      className={props.toFrom} 
+      type="text" 
+      placeholder={x} 
+      onChange={(e) => props.handleChange(e)}>
+    </input>
   </div>
    )
   })
@@ -273,7 +280,12 @@ const SkidContents = (props) => {
   const newInput = props.title;
   const elements = newInput.map((x, y) => {
     return (
-          <th key={'header' + x} className="table_header">{x}</th>
+          <th 
+            key={'header' + x} 
+            className="table_header"
+          >
+            {x}
+          </th>
     )
   })
 
@@ -290,14 +302,22 @@ const SkidContents = (props) => {
 
   const newColumns = newInput.map((x, y) => {
     return(
-      <td id={'column_num' + y} className="column_data" key={'column_num' + y}>
+      <td 
+        id={'column_num' + y} 
+        className="column_data" 
+        key={'column_num' + y}
+        >
         <input className={Object.keys(UserData.skid)[y]}></input>
       </td>
     )
   })
   const newRows = skidItems.map((x, y) => {
     return(
-      <tr id={'row_num' + y} className="line_data" key={'row_num' + y}>
+      <tr 
+        id={'row_num' + y} 
+        className="line_data" 
+        key={'row_num' + y}
+      >
         {newColumns}
       </tr>
     )
