@@ -183,10 +183,7 @@ class ParentShippingCreator extends React.Component {
     const url = '/shipping_creator/data';
     let userInput = this.state;
 
-    postData(url, userInput)
-      .then(data => {
-        console.log(data)
-      })
+    postData(url, userInput);
 
    // console.log(this.state);
 
