@@ -55,12 +55,13 @@ class ParentPackSlip extends React.Component {
     super(props);
     
     //Make This active before production
+    //set the response from the serverCall to equal userDataFromCreator
     //serverCall();
     
     this.state = {
       userData: userDataFromCreator[0]
     };
-    console.log(this.state);
+    console.log(this.state.userData);
   }
 
 
@@ -68,15 +69,25 @@ class ParentPackSlip extends React.Component {
     return (
       <div>
         <h1>Packing Slip</h1>
+        <Address id="ship_from" from={true} items={this.state.userData.shipFrom}/>
+        <Address id="ship_to" from={false} items={this.state.userData.shipTo}/>
       </div>
     );
   }
 }
 
-/*const Address = (data) => {
+const Address = (props) => {
   return(
+    <div className={props.id}>
+      {props.from ? <p style={{fontSize: '20px'}}>Ship From</p> : <p style={{fontSize: '20px'}}>Ship To</p>}
+      <p>{props.items.company}</p>
+      <p>{props.items.street}</p>
+      <p>{`${props.items.city}, ${props.items.state} ${props.items.zip}`}</p>
+      {props.items.attention ? <p>{'Attention: ' + props.items.attention}</p> : null}
 
+ 
+    </div>
   )
-}*/
+}
 
 export default ParentPackSlip;
