@@ -28,7 +28,33 @@ let userDataFromCreator = [{
     packsRolls: "1,000", 
     qtyPerCarton: "16,000",
     numOfCartons: "2",
-  }],
+  }, 
+  {
+    itemDescription: "Giorgio Chopped Pieces 16oz",
+    qtyNeeded: "32,000", 
+    qtyShipped: "36,000", 
+    packsRolls: "1,000", 
+    qtyPerCarton: "16,000",
+    numOfCartons: "3",
+  }, 
+  {
+    itemDescription: "Phillips Guans 16oz",
+    qtyNeeded: "48,000", 
+    qtyShipped: "48,000", 
+    packsRolls: "1,000", 
+    qtyPerCarton: "16,000",
+    numOfCartons: "3",
+  }, 
+  {
+    itemDescription: "Giorgio Stems 16oz",
+    qtyNeeded: "56,000", 
+    qtyShipped: "64,000", 
+    packsRolls: "1,000", 
+    qtyPerCarton: "16,000",
+    numOfCartons: "4",
+  }, 
+
+],
 
   PO: "54791", 
   Job: "176592"
@@ -71,6 +97,8 @@ class ParentPackSlip extends React.Component {
         <h1>Packing Slip</h1>
         <Address id="ship_from" from={true} items={this.state.userData.shipFrom}/>
         <Address id="ship_to" from={false} items={this.state.userData.shipTo}/>
+        <p id="po_num">{`PO#: ${this.state.userData.PO}`}</p>
+        <JobNum job={this.state.userData.Job}/>
       </div>
     );
   }
@@ -89,5 +117,35 @@ const Address = (props) => {
     </div>
   )
 }
+
+const JobNum = (props) => {
+  const date = new Date();
+  const day = date.getDate();
+  const month = parseInt(date.getMonth()) + 1;
+  const year = date.getYear();
+
+  const modifiedDate = `${month}/${day}/${year}`;
+
+  return(
+    <table style={{backgroundColor: 'gray', borderWidth: '6px', borderColor: 'black'}}>
+      <tr style={{backgroundColor: "purple", color: "white", boderWidth: '6px', borderColor: 'gray'}}>
+        <th>Customer ID</th>
+        <th>Ship Date</th>
+        <th>Method Shipped</th>
+        <th>Tracking#</th>
+        <th>Job#</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{modifiedDate}</td>
+        <th></th>
+        <th></th>
+        <th>{props.job}</th>
+      </tr>
+    </table>
+  )
+}
+
+
 
 export default ParentPackSlip;
