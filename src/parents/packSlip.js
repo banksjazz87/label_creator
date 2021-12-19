@@ -99,6 +99,7 @@ class ParentPackSlip extends React.Component {
         <Address id="ship_to" from={false} items={this.state.userData.shipTo}/>
         <p id="po_num">{`PO#: ${this.state.userData.PO}`}</p>
         <JobNum job={this.state.userData.Job}/>
+        <MainTable items={this.state.userData.skid}/>
       </div>
     );
   }
@@ -146,6 +147,41 @@ const JobNum = (props) => {
   )
 }
 
+const MainTable = (props) => {
+  
+  const menuItems = props.items.map((x, y) => {
+    return(
+    <>
+      <tr key={'row' + y}>
+        <td>{props.items[y].qtyNeeded}</td>
+        <td>{props.items[y].itemDescription}</td>
+        <td>{props.items[y].qtyShipped}</td>
+      </tr>
+      <tr key={'description' + y}>
+      <td></td>
+        {props.items[y].numOfCartons > 1 ? 
+        <td>{props.items[y].numOfCartons + " Cartons @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>
+        : 
+        <td>{props.items[y].numOfCartons + " Carton @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>}
+      </tr>
+      <td></td>
+    </>
+    )
+  })
+
+
+
+  return(
+    <table>
+      <tr>
+        <th>Quantity</th>
+        <th>Description</th>
+        <th>Ship Quantity</th>
+      </tr>
+      {menuItems}
+    </table>
+  )
+}
 
 
 export default ParentPackSlip;
