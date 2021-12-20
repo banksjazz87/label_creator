@@ -110,19 +110,23 @@ class ParentPackSlip extends React.Component {
       <div>
         <h1>Packing Slip</h1>
         <Address 
-          id="ship_from" 
+          id="ship_from"
+          fetched={this.state.fetched} 
           from={true} 
           items={this.state.fetched ? this.state.userData[0]['shipFrom'] : this.state.userData}/>
         <Address 
           id="ship_to" 
+          fetched={this.state.fetched}
           from={false} 
           items={this.state.fetched ? this.state.userData[0]['shipTo'] : this.state.userData}/>
         <p id="po_num">
           {this.state.fetched ? `PO#: ${this.state.userData[0]['PO']}`: ""}
         </p>
         <JobNum 
+          fetched={this.state.fetched}
           job={this.state.fetched ? this.state.userData[0]['Job'] : ''}/>
         <MainTable 
+          fetched={this.state.fetched}
           items={this.state.fetched ? this.state.userData[0]['skid'] : ''}/>
       </div>
     );
