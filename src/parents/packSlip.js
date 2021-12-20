@@ -3,7 +3,8 @@ import "../App.css";
 
 
 //This is going to be dummy data used for development
-let userDataFromCreator = [{
+let userDataFromCreator;
+/*let userDataFromCreator = [{
   shipFrom: {
     company: "Seneca Printing Express",
     street: "191 Howard Street",
@@ -58,7 +59,7 @@ let userDataFromCreator = [{
 
   PO: "54791", 
   Job: "176592"
-}]
+}]*/
 //async function using fetch to retrieve the data from the server
 const serverCall = async () => {
   const response = await fetch(
@@ -67,7 +68,10 @@ const serverCall = async () => {
 
   try {
     let updatedRes = await response.json();
-    //userDataFromCreator = updatedRes;
+
+    //this was commented out
+    userDataFromCreator = updatedRes;
+
     console.log(updatedRes);
   } catch (e) {
     console.log("error", e);
@@ -85,9 +89,19 @@ class ParentPackSlip extends React.Component {
     //serverCall();
     
     this.state = {
-      userData: userDataFromCreator[0]
+      userData: "",
+      fetched: false
     };
     console.log(this.state.userData);
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:4500/allData')
+      .then(response => response.json())
+      .then(items => this.setState({
+        userData: items,
+        fetched: true
+      }));
   }
 
 
@@ -95,11 +109,21 @@ class ParentPackSlip extends React.Component {
     return (
       <div>
         <h1>Packing Slip</h1>
-        <Address id="ship_from" from={true} items={this.state.userData.shipFrom}/>
-        <Address id="ship_to" from={false} items={this.state.userData.shipTo}/>
-        <p id="po_num">{`PO#: ${this.state.userData.PO}`}</p>
-        <JobNum job={this.state.userData.Job}/>
-        <MainTable items={this.state.userData.skid}/>
+        <Address 
+          id="ship_from" 
+          from={true} 
+          items={this.state.fetched ? this.state.userData[0]['shipFrom'] : this.state.userData}/>
+        <Address 
+          id="ship_to" 
+          from={false} 
+          items={this.state.fetched ? this.state.userData[0]['shipTo'] : this.state.userData}/>
+        <p id="po_num">
+          {this.state.fetched ? `PO#: ${this.state.userData[0]['PO']}`: ""}
+        </p>
+        <JobNum 
+          job={this.state.fetched ? this.state.userData[0]['Job'] : ''}/>
+        <MainTable 
+          items={this.state.fetched ? this.state.userData[0]['skid'] : ''}/>
       </div>
     );
   }
