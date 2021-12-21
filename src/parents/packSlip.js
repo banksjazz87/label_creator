@@ -70,9 +70,10 @@ const serverCall = async () => {
     let updatedRes = await response.json();
 
     //this was commented out
-    userDataFromCreator = updatedRes;
-
+    //userDataFromCreator = updatedRes;
     console.log(updatedRes);
+    return updatedRes;
+
   } catch (e) {
     console.log("error", e);
   }
@@ -96,40 +97,41 @@ class ParentPackSlip extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:4500/allData')
-      .then(response => response.json())
+    serverCall()
       .then(items => this.setState({
-        userData: items,
+        userData: items[0],
         fetched: true
       }));
   }
 
 
   render() {
+    if(this.state.fetched === true){
     return (
       <div>
         <h1>Packing Slip</h1>
         <Address 
           id="ship_from"
-          fetched={this.state.fetched} 
           from={true} 
-          items={this.state.fetched ? this.state.userData[0]['shipFrom'] : this.state.userData}/>
+          items={this.state.userData['shipFrom']}/>
         <Address 
           id="ship_to" 
-          fetched={this.state.fetched}
           from={false} 
-          items={this.state.fetched ? this.state.userData[0]['shipTo'] : this.state.userData}/>
+          items={this.state.userData['shipTo']}/>
         <p id="po_num">
-          {this.state.fetched ? `PO#: ${this.state.userData[0]['PO']}`: ""}
+          {`PO#: ${this.state.userData['PO']}`}
         </p>
         <JobNum 
-          fetched={this.state.fetched}
-          job={this.state.fetched ? this.state.userData[0]['Job'] : ''}/>
+          job={this.state.userData['Job']}/>
         <MainTable 
-          fetched={this.state.fetched}
-          items={this.state.fetched ? this.state.userData[0]['skid'] : ''}/>
+          items={this.state.userData['skid']}/>
       </div>
     );
+    }else{
+      return(
+      <h1>Fetching currently</h1>
+      )
+    }
   }
 }
 
