@@ -7,7 +7,8 @@ const UserData = {
     street: "",
     city: "", 
     state: "",
-    zip: "", 
+    zip: "",
+    phone:""
   },
 
   shipTo: {

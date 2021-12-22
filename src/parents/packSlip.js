@@ -11,6 +11,7 @@ let userDataFromCreator = [{
     city: "Franklin", 
     state: "PA",
     zip: "16323", 
+    phone: '814-671-2074'
   },
 
   shipTo: {
@@ -129,6 +130,7 @@ this.state = {
           job={this.state.userData['Job']}/>
         <MainTable 
           items={this.state.userData['skid']}/>
+        <ThankYou phone={this.state.userData['shipFrom']['phone']} />
       </div>
     );
     }else{
@@ -202,9 +204,6 @@ const MainTable = (props) => {
     </>
     )
   })
-
-
-
   return(
     <table>
       <tr>
@@ -214,6 +213,16 @@ const MainTable = (props) => {
       </tr>
       {menuItems}
     </table>
+  )
+}
+
+const ThankYou = (props) => {
+  return(
+    <p id="thank_you_text">{`Please contact Accounts Receivable (${props.phone}) with any questions or concerns`}
+    <br/>
+    <b>Thank you for your business!</b>
+    </p>
+    
   )
 }
 
