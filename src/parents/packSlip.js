@@ -3,8 +3,8 @@ import "../App.css";
 
 
 //This is going to be dummy data used for development
-let userDataFromCreator;
-/*let userDataFromCreator = [{
+//let userDataFromCreator;
+let userDataFromCreator = [{
   shipFrom: {
     company: "Seneca Printing Express",
     street: "191 Howard Street",
@@ -59,7 +59,7 @@ let userDataFromCreator;
 
   PO: "54791", 
   Job: "176592"
-}]*/
+}]
 //async function using fetch to retrieve the data from the server
 const serverCall = async () => {
   const response = await fetch(
@@ -84,25 +84,29 @@ const serverCall = async () => {
 class ParentPackSlip extends React.Component {
   constructor(props) {
     super(props);
-    
-    //Make This active before production
-    //set the response from the serverCall to equal userDataFromCreator
-    //serverCall();
-    
+  
+//The code listed below is just for the development mode
+this.state = {
+  fetched: true, 
+  userData: userDataFromCreator[0]
+}
+  }
+//The code listed below is for the production mode
+  /* 
     this.state = {
       userData: "",
       fetched: false
     };
-    console.log(this.state.userData);
   }
 
+  
   componentDidMount(){
     serverCall()
       .then(items => this.setState({
         userData: items[0],
         fetched: true
       }));
-  }
+  }*/
 
 
   render() {
@@ -153,7 +157,7 @@ const JobNum = (props) => {
   const date = new Date();
   const day = date.getDate();
   const month = parseInt(date.getMonth()) + 1;
-  const year = date.getYear();
+  const year = date.getFullYear();
 
   const modifiedDate = `${month}/${day}/${year}`;
 
