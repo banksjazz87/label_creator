@@ -1,5 +1,6 @@
 import * as React from "react";
 import "../App.css";
+import serverCall from "./serverCall.js"
 
 
 //This is going to be dummy data used for development
@@ -61,8 +62,10 @@ let userDataFromCreator = [{
   PO: "54791", 
   Job: "176592"
 }]
+
+
 //async function using fetch to retrieve the data from the server
-const serverCall = async () => {
+/*const serverCall = async () => {
   const response = await fetch(
     "http://localhost:4500/allData"
   );
@@ -78,7 +81,7 @@ const serverCall = async () => {
   } catch (e) {
     console.log("error", e);
   }
-};
+};*/
 
 
 
@@ -87,13 +90,14 @@ class ParentPackSlip extends React.Component {
     super(props);
   
 //The code listed below is just for the development mode
+/*
 this.state = {
   fetched: true, 
   userData: userDataFromCreator[0]
 }
   }
+  */
 //The code listed below is for the production mode
-  /* 
     this.state = {
       userData: "",
       fetched: false
@@ -107,8 +111,7 @@ this.state = {
         userData: items[0],
         fetched: true
       }));
-  }*/
-
+  }
 
   render() {
     if(this.state.fetched === true){
