@@ -1,6 +1,5 @@
 import * as React from "react";
 import "../App.css";
-import serverCall from "./serverCall.js"
 
 
 //This is going to be dummy data used for development
@@ -65,7 +64,7 @@ let userDataFromCreator = [{
 
 
 //async function using fetch to retrieve the data from the server
-/*const serverCall = async () => {
+const serverCall = async () => {
   const response = await fetch(
     "http://localhost:4500/allData"
   );
@@ -81,7 +80,7 @@ let userDataFromCreator = [{
   } catch (e) {
     console.log("error", e);
   }
-};*/
+};
 
 
 
