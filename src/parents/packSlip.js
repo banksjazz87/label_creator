@@ -2,7 +2,7 @@ import * as React from "react";
 import "../App.css";
 
 
-//This is going to be dummy data used for development
+//This is going to be dummy data used for DEVELOPMENT
 //let userDataFromCreator;
 let userDataFromCreator = [{
   shipFrom: {
@@ -62,9 +62,9 @@ let userDataFromCreator = [{
   Job: "176592"
 }]
 
-
+//Used in production mode
 //async function using fetch to retrieve the data from the server
-const serverCall = async () => {
+/*const serverCall = async () => {
   const response = await fetch(
     "http://localhost:4500/allData"
   );
@@ -80,7 +80,7 @@ const serverCall = async () => {
   } catch (e) {
     console.log("error", e);
   }
-};
+};*/
 
 
 
@@ -88,29 +88,29 @@ class ParentPackSlip extends React.Component {
   constructor(props) {
     super(props);
   
-//The code listed below is just for the development mode
-/*
+//The code listed below is just for the DEVELOPMENT mode
 this.state = {
   fetched: true, 
   userData: userDataFromCreator[0]
 }
   }
-  */
-//The code listed below is for the production mode
-    this.state = {
+  
+//The code listed below is for the PRODUCTION mode
+  /*  this.state = {
       userData: "",
       fetched: false
     };
-  }
+  }*/
 
-  
+  //used for PRODUCTION mode, only
+  /*
   componentDidMount(){
     serverCall()
       .then(items => this.setState({
         userData: items[0],
         fetched: true
       }));
-  }
+  }*/
 
   render() {
     if(this.state.fetched === true){
