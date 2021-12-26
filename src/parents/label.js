@@ -90,11 +90,20 @@ class ParentLabels extends React.Component {
     this.state = {
       fetched: true,
       userData: userDataFromCreator[0],
+      increment: 0
     };
   }
   render() {
-    return <h1> We have just updated this component </h1>;
+    return(
+    <div>
+      <p id="job">{`Job# ${this.state.userData.Job}`}</p>
+      <p id="company_name">{this.state.userData.shipFrom.company}</p>
+      <p id="attention">{`Attention: ${this.state.userData.shipTo.attention}`}</p>
+      <p id="purchase_order">{`PO#: ${this.state.userData.PO}`}</p>
+    </div>
+    )
   }
 }
+
 
 export default ParentLabels;
