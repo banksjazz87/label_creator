@@ -60,6 +60,7 @@ let userDataFromCreator = [
 
     PO: "54791",
     Job: "176592",
+    date: "12/28/2021"
   },
 ];
 
@@ -96,26 +97,42 @@ class ParentLabels extends React.Component {
   render() {
     return (
       <div>
-        <ParagraphCreator id="job" text={`Job# ${this.state.userData.Job}`} />
-        <ParagraphCreator
-          id="company_name"
-          text={this.state.userData.shipFrom.company}
+        <TopHeading 
+          job={this.state.userData.Job}
+          shipFrom={this.state.userData.shipFrom.company}
         />
-        <ParagraphCreator
-          id="attention"
-          text={`Attention: ${this.state.userData.shipTo.attention}`}
+       
+        <LabelBottom
+          attention={this.state.userData.shipTo.attention}
+          purchaseOrder={this.state.userData.PO}
+          packs={this.state.userData.skid[this.state.increment].packsRolls}
+          quantityPerCarton={this.state.userData.skid[this.state.increment].qtyPerCarton}
+          date={this.state.userData.date}
         />
-        <ParagraphCreator
-          id="purchase_order"
-          text={`PO#: ${this.state.userData.PO}`}
-        />{" "}
       </div>
     );
   }
 }
 
-const ParagraphCreator = (props) => {
-  return <p> {props.text} </p>;
-};
+const TopHeading = (props) => {
+  return(
+    <div id="top_of_label">
+      <p id="job">{`Job# ${props.job}`}</p>
+      <p id="company_name">{props.shipFrom}</p>
+    </div>
+  )
+}
+
+const LabelBottom = (props) => {
+  return(
+    <div id="bottom_label">
+      <p id="attention">{`Attention: ${props.attention}`}</p>
+      <p id="purchase_order">{`PO#: ${props.purchaseOrder}`}</p>
+      <p id="packs_rolls">{`Poly'd/Rolls @ ${props.packs}`}</p>
+      <p id="qtyPerCarton">{`Quantity= ${props.quantityPerCarton}`}</p>
+      <p id="date">{`Date: ${props.date}`}</p>
+    </div>
+  )
+}
 
 export default ParentLabels;
