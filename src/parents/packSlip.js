@@ -59,7 +59,8 @@ let userDataFromCreator = [{
 ],
 
   PO: "54791", 
-  Job: "176592"
+  Job: "176592",
+  date: "12/27/2021"
 }]
 
 //Used in production mode
@@ -129,7 +130,9 @@ this.state = {
           {`PO#: ${this.state.userData['PO']}`}
         </p>
         <JobNum 
-          job={this.state.userData['Job']}/>
+          job={this.state.userData['Job']}
+          date={this.state.userData.date}
+          />
         <MainTable 
           items={this.state.userData['skid']}/>
         <ThankYou phone={this.state.userData['shipFrom']['phone']} />
@@ -158,12 +161,6 @@ const Address = (props) => {
 }
 
 const JobNum = (props) => {
-  const date = new Date();
-  const day = date.getDate();
-  const month = parseInt(date.getMonth()) + 1;
-  const year = date.getFullYear();
-
-  const modifiedDate = `${month}/${day}/${year}`;
 
   return(
     <table style={{backgroundColor: 'gray', borderWidth: '6px', borderColor: 'black'}}>
@@ -176,7 +173,7 @@ const JobNum = (props) => {
       </tr>
       <tr>
         <td></td>
-        <td>{modifiedDate}</td>
+        <td>{props.date}</td>
         <th></th>
         <th></th>
         <th>{props.job}</th>

@@ -33,6 +33,16 @@ const UserData = {
   Job: null
 }
 
+//function used to render today's date
+const currentDate = () => {
+  const date = new Date();
+  const day = date.getDate();
+  const month = parseInt(date.getMonth()) + 1;
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+
 /**
  * 
  * @param {*} url 
@@ -94,6 +104,7 @@ class ParentShippingCreator extends React.Component {
       PO: null, 
       Job: null,
       lines: 0, 
+      date: currentDate(),
 
       numberOfLinesSubmitClicked: false,
       submitClicked: false
@@ -221,7 +232,7 @@ class ParentShippingCreator extends React.Component {
       <input id='Job' 
              type='text' 
              onChange={this.poJobNumbers}></input> 
-
+             
       <label>Number of Lines Needed</label>
       <input id="lines_input" 
              placeholder="number of lines" 
