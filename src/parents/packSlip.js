@@ -60,19 +60,8 @@ let userDataFromCreator = [{
 
   PO: "54791", 
   Job: "176592",
-  date: "2021-12-28"
+  date: "12/28/2021"
 }]
-
-//Function to change the format of the date
-const changeDateFormat = (str) => {
-  let month = str[5] + str[6];
-  let day = str[str.length - 2] + str[str.length - 1];
-  let year = str.slice(0, 4);
-
-  let date = `${month}/${day}/${year}`;
-
-  return date;
-}
 
 //Used in production mode
 //async function using fetch to retrieve the data from the server
@@ -142,7 +131,7 @@ this.state = {
         </p>
         <JobNum 
           job={this.state.userData['Job']}
-          date={changeDateFormat(this.state.userData.date)}
+          date={this.state.userData.date}
           />
         <MainTable 
           items={this.state.userData['skid']}/>
