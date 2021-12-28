@@ -102,17 +102,13 @@ class ParentLabels extends React.Component {
   incrementHandler = (e) => {
     e.preventDefault();
 
-    /*if(this.state.count < this.state.userData.skid.length){
-    this.setState((prevCount) => ({
-      count: prevCount + 1
-    }))
+    if(this.state.count === this.state.userData.skid.length - 1){
+      alert('All of the labels have been printed.')
   }else{
-    alert('All of the labels have been printed.')
-  }*/
-  this.setState((prevCount) => ({
-    test: prevCount.test+ 1
-  }))
-  console.log(this.state.test);
+    this.setState((prevCount) => ({
+      count: prevCount.count + 1
+    }))
+  }
   }
 
   decrementHandler = (e) => {
@@ -120,7 +116,7 @@ class ParentLabels extends React.Component {
 
     if(this.state.count > 0){
       this.setState((prevCount) => ({
-        count: prevCount -1
+        count: prevCount.count -1
       }))
     }else{
       alert('You are currently on the first label');
