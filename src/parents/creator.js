@@ -85,7 +85,7 @@ class ParentShippingCreator extends React.Component {
     super(props);
     this.state = {
       shipFrom: {
-        company: "",
+        company: "",                                                                                
         street: "",
         city: "", 
         state: "",
