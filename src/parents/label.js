@@ -91,8 +91,40 @@ class ParentLabels extends React.Component {
     this.state = {
       fetched: true,
       userData: userDataFromCreator[0],
-      increment: 0,
+      count: 0,
+      test: 0
     };
+
+    this.incrementHandler = this.incrementHandler.bind(this);
+    this.decrementHandler = this.decrementHandler.bind(this);
+  }
+
+  incrementHandler = (e) => {
+    e.preventDefault();
+
+    /*if(this.state.count < this.state.userData.skid.length){
+    this.setState((prevCount) => ({
+      count: prevCount + 1
+    }))
+  }else{
+    alert('All of the labels have been printed.')
+  }*/
+  this.setState((prevCount) => ({
+    test: prevCount.test+ 1
+  }))
+  console.log(this.state.test);
+  }
+
+  decrementHandler = (e) => {
+    e.preventDefault();
+
+    if(this.state.count > 0){
+      this.setState((prevCount) => ({
+        count: prevCount -1
+      }))
+    }else{
+      alert('You are currently on the first label');
+    }
   }
   render() {
     return (
@@ -101,13 +133,29 @@ class ParentLabels extends React.Component {
           job={this.state.userData.Job}
           shipFrom={this.state.userData.shipFrom.company}
         />
+
+        <LabelMiddle
+          description={this.state.userData.skid[this.state.count].itemDescription}
+        />
        
         <LabelBottom
           attention={this.state.userData.shipTo.attention}
           purchaseOrder={this.state.userData.PO}
-          packs={this.state.userData.skid[this.state.increment].packsRolls}
-          quantityPerCarton={this.state.userData.skid[this.state.increment].qtyPerCarton}
+          packs={this.state.userData.skid[this.state.count].packsRolls}
+          quantityPerCarton={this.state.userData.skid[this.state.count].qtyPerCarton}
           date={this.state.userData.date}
+        />
+
+        <Button
+          id="previous_button"
+          clickHandler={this.decrementHandler}
+          text="Previous"
+        />
+       
+        <Button 
+          id="next_button"
+          clickHandler={this.incrementHandler}
+          text="Next"
         />
       </div>
     );
@@ -123,6 +171,14 @@ const TopHeading = (props) => {
   )
 }
 
+const LabelMiddle = (props) => {
+  return(
+    <div id="middle_label">
+      <p id="description">{props.description}</p>
+    </div>
+  )
+}
+
 const LabelBottom = (props) => {
   return(
     <div id="bottom_label">
@@ -132,6 +188,12 @@ const LabelBottom = (props) => {
       <p id="qtyPerCarton">{`Quantity= ${props.quantityPerCarton}`}</p>
       <p id="date">{`Date: ${props.date}`}</p>
     </div>
+  )
+}
+
+const Button = (props) => {
+  return(
+    <button onClick={props.clickHandler}>{props.text}</button>
   )
 }
 
