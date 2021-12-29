@@ -64,6 +64,7 @@ let userDataFromCreator = [
   },
 ];
 
+
 //Used in production mode
 //async function using fetch to retrieve the data from the server
 /*const serverCall = async () => {
@@ -89,15 +90,25 @@ class ParentLabels extends React.Component {
     super(props);
 
     this.state = {
+      //switch fetched to true for development, false for production
       fetched: true,
+      //switch userData to userDataFromCreator[0] for development and "" for production
       userData: userDataFromCreator[0],
-      count: 0,
-      test: 0
+      count: 0
     };
 
     this.incrementHandler = this.incrementHandler.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
   }
+
+  //use this function only for production
+  /*componentDidMount(){
+    serverCall()
+    .then(items => this.setState({
+        fetched: true,
+        userData: items[0]
+      }))
+  }*/
 
   incrementHandler = (e) => {
     e.preventDefault();
@@ -123,9 +134,10 @@ class ParentLabels extends React.Component {
     }
   }
   render() {
+    if(this.state.fetched){
     return (
       <div>
-        <p id="labels_needed">{`${this.state.userData.skid[this.state.count].numOfCartons} labels need printed`}</p>
+        <p id="labels_needed">{`Print ${this.state.userData.skid[this.state.count].numOfCartons}`}</p>
         <TopHeading 
           job={this.state.userData.Job}
           shipFrom={this.state.userData.shipFrom.company}
@@ -156,7 +168,12 @@ class ParentLabels extends React.Component {
         />
       </div>
     );
+  }else{
+    return(
+      <h1>Fetching</h1>
+    )
   }
+}
 }
 
 const TopHeading = (props) => {
