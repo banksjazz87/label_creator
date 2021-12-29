@@ -125,6 +125,7 @@ class ParentLabels extends React.Component {
   render() {
     return (
       <div>
+        <p id="labels_needed">{`${this.state.userData.skid[this.state.count].numOfCartons} labels need printed`}</p>
         <TopHeading 
           job={this.state.userData.Job}
           shipFrom={this.state.userData.shipFrom.company}
