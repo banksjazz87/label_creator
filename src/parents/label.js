@@ -1,5 +1,7 @@
 import * as React from "react";
 import "../App.css";
+//import userDataFromCreator from "../dummyData"
+
 
 //This is going to be dummy data used for DEVELOPMENT
 //let userDataFromCreator;
@@ -63,7 +65,6 @@ let userDataFromCreator = [
     date: "12/28/2021"
   },
 ];
-
 
 //Used in production mode
 //async function using fetch to retrieve the data from the server
