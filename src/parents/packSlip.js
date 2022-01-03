@@ -1,28 +1,7 @@
 import * as React from "react";
 import "../App.css";
 import userDataFromCreator from "../variables/dummyData"
-
-//Used in production mode
-//async function using fetch to retrieve the data from the server
-/*const serverCall = async () => {
-  const response = await fetch(
-    "http://localhost:4500/allData"
-  );
-
-  try {
-    let updatedRes = await response.json();
-
-    //this was commented out
-    //userDataFromCreator = updatedRes;
-    console.log(updatedRes);
-    return updatedRes;
-
-  } catch (e) {
-    console.log("error", e);
-  }
-};*/
-
-
+//import serverCall from "../functions/serverCall"
 
 class ParentPackSlip extends React.Component {
   constructor(props) {
@@ -30,18 +9,13 @@ class ParentPackSlip extends React.Component {
   
 //The code listed below is just for the DEVELOPMENT mode
 this.state = {
+  //switch fetched to true for development, false for production
   fetched: true, 
+  //switch userData to userDataFromCreator[0] for development and "" for production
   userData: userDataFromCreator[0]
 }
   }
   
-//The code listed below is for the PRODUCTION mode
-  /*  this.state = {
-      userData: "",
-      fetched: false
-    };
-  }*/
-
   //used for PRODUCTION mode, only
   /*
   componentDidMount(){

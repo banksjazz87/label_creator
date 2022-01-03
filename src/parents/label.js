@@ -1,26 +1,8 @@
 import * as React from "react";
 import "../App.css";
 import userDataFromCreator from "../variables/dummyData"
+//import serverCall from "../functions/serverCall"
 
-//Used in production mode
-//async function using fetch to retrieve the data from the server
-/*const serverCall = async () => {
-  const response = await fetch(
-    "http://localhost:4500/allData"
-  );
-
-  try {
-    let updatedRes = await response.json();
-
-    //this was commented out
-    //userDataFromCreator = updatedRes;
-    console.log(updatedRes);
-    return updatedRes;
-
-  } catch (e) {
-    console.log("error", e);
-  }
-};*/
 
 class ParentLabels extends React.Component {
   constructor(props) {
@@ -39,7 +21,7 @@ class ParentLabels extends React.Component {
   }
 
   //use this function only for production
-  /*componentDidMount(){
+ /* componentDidMount(){
     serverCall()
     .then(items => this.setState({
         fetched: true,

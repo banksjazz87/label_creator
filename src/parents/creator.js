@@ -1,36 +1,13 @@
 import * as React from "react";
 import "../App.css";
 
-const UserData = {
-  shipFrom: {
-    company: "",
-    street: "",
-    city: "", 
-    state: "",
-    zip: "",
-    phone:""
-  },
-
-  shipTo: {
-    company: "",
-    street: "",
-    city: "", 
-    state: "",
-    zip: "", 
-    attention: ""
-  }, 
-
-  skid: {
+const SkidDescriptors = {
     itemDescription: "",
     qtyNeeded: null, 
     qtyShipped: null, 
     packsRolls: null, 
     qtyPerCarton: null,
     numOfCartons: null,
-  },
-
-  PO: null, 
-  Job: null
 }
 
 //Function to change the format of the date
@@ -219,12 +196,12 @@ class ParentShippingCreator extends React.Component {
       <ShippingToFrom divId={'shipFrom'} 
                       toFrom={'shipFrom'} 
                       header={'Shipping From'} 
-                      title={Object.keys(UserData.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
+                      title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
 
       <ShippingToFrom divId={'shipTo'} 
                       toFrom={"shipTo"} 
                       header={'Shipping To'} 
-                      title={Object.keys(UserData.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+                      title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
 
       <label>PO#</label>
       <input id='PO' 
@@ -249,7 +226,7 @@ class ParentShippingCreator extends React.Component {
       <button type='button' 
               onClick={this.lineNumbers}>Submit</button> 
 
-      <SkidContents title={Object.keys(UserData.skid)}
+      <SkidContents title={Object.keys(SkidDescriptors)}
                     linesNeeded={this.state.lines} 
                     skidObjectsArr={this.state.skid} />
 
@@ -327,7 +304,7 @@ const SkidContents = (props) => {
         className="column_data" 
         key={'column_num' + y}
         >
-        <input className={Object.keys(UserData.skid)[y]}></input>
+        <input className={Object.keys(SkidDescriptors)[y]}></input>
       </td>
     )
   })

@@ -1,36 +1,29 @@
 import * as React from "react";
 import "../App.css";
 import userDataFromCreator from "../variables/dummyData"
-
-//Used in production mode
-//async function using fetch to retrieve the data from the server
-/*const serverCall = async () => {
-  const response = await fetch(
-    "http://localhost:4500/allData"
-  );
-
-  try {
-    let updatedRes = await response.json();
-
-    //this was commented out
-    //userDataFromCreator = updatedRes;
-    console.log(updatedRes);
-    return updatedRes;
-
-  } catch (e) {
-    console.log("error", e);
-  }
-};*/
+//import serverCall from "../functions/serverCall"
 
 class ParentShipTo extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      //switch fectched to true for developoment, false for production
       fetched: true,
+      //switch userData to userDataFromCreator[0] for development and "" for production
       userData: userDataFromCreator[0],
     };
   }
+
+  //use this function only for production
+  /*componentDidMount(){
+    serverCall()
+    .then(items => this.setState({
+        fetched: true,
+        userData: items[0]
+      }))
+  }*/
+
 
   render() {
     return( 
