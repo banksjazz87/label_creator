@@ -85,7 +85,8 @@ class ParentShippingCreator extends React.Component {
       date: "",
 
       numberOfLinesSubmitClicked: false,
-      submitClicked: false
+      submitClicked: false, 
+      showSkidHeader: false
     }
 
     this.updateObj = this.updateObj.bind(this);
@@ -118,7 +119,8 @@ class ParentShippingCreator extends React.Component {
 
     this.setState((prevState) => ({
       lines: prevState.lines = linesNeeded.value, 
-      numberOfLinesSubmitClicked: true
+      numberOfLinesSubmitClicked: true, 
+      showSkidHeader: true
     }));
   };
 
@@ -228,7 +230,8 @@ class ParentShippingCreator extends React.Component {
 
       <SkidContents title={Object.keys(SkidDescriptors)}
                     linesNeeded={this.state.lines} 
-                    skidObjectsArr={this.state.skid} />
+                    skidObjectsArr={this.state.skid}
+                    hide={this.state.showSkidHeader} />
 
       <button id="final_submit" 
               type='submit'
@@ -278,6 +281,7 @@ const SkidContents = (props) => {
   const elements = newInput.map((x, y) => {
     return (
           <th 
+            style={props.hide ? {display:""}: {display: "none"}}
             key={'header' + x} 
             className="table_header"
           >
