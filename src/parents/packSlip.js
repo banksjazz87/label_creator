@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../App.css";
+import "../assets/packSlip.scss";
 import userDataFromCreator from "../variables/dummyData"
 //import serverCall from "../functions/serverCall"
 

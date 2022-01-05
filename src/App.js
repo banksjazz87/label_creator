@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import "./App.css";
+import "../src/assets/app.scss";
 import ParentAbout from "./parents/about.js";
 import ParentShippingCreator from "./parents/creator.js";
 import ParentHome from "./parents/home.js";
