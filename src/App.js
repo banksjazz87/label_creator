@@ -42,7 +42,7 @@ function Nav() {
 
 function PackSlip() {
   return (
-    <div>
+    <div id="pack_slip_body">
       <ParentPackSlip />
       <Nav />
     </div>
@@ -51,7 +51,7 @@ function PackSlip() {
 
 function Labels() {
   return (
-    <div>
+    <div id="labels_body">
       <ParentLabels />
       <Nav />
     </div>
@@ -60,7 +60,7 @@ function Labels() {
 
 function ShipTo() {
   return (
-    <div>
+    <div id="ship_to_body">
       <ParentShipTo />
       <Nav />
     </div>
