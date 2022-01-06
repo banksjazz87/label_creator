@@ -1,6 +1,10 @@
 import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "../src/assets/app.scss";
+import "../src/assets/creator.scss";
+import "../src/assets/label.scss";
+import "../src/assets/packSlip.scss";
+import "../src/assets/shipTo.scss";
 import ParentAbout from "./parents/about.js";
 import ParentShippingCreator from "./parents/creator.js";
 import ParentHome from "./parents/home.js";
@@ -74,10 +78,10 @@ function Home() {
 
 function ShippingCreator() {
   return (
-    <div>
+    <body id="creator_body">
       <ParentShippingCreator />
       <Nav />
-    </div>
+    </body>
   );
 }
 
