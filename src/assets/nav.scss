@@ -1,0 +1,19 @@
+#hamburger_icon{
+    border-width: 2px;
+    border-color: white;
+    border-radius: 5%;
+    border-style: solid;
+    margin: 16px;
+    width: 4em;
+    height: 3em;
+    background-color: purple;
+        .line{
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: .35em;
+            margin-bottom: .35em;
+            height: .25em;
+            width: 3em;
+            background-color: white;
+        }
+}
