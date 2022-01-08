@@ -193,8 +193,8 @@ class ParentShippingCreator extends React.Component {
   return (
     <div>
       <h1> Shipping Creator </h1>
-      <p> This is where we will create all of the various labels and slips </p>
 
+    <div id="ship_to_from">
       <ShippingToFrom divId={'shipFrom'} 
                       toFrom={'shipFrom'} 
                       header={'Shipping From'} 
@@ -204,6 +204,7 @@ class ParentShippingCreator extends React.Component {
                       toFrom={"shipTo"} 
                       header={'Shipping To'} 
                       title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+    </div>
 
       <label>PO#</label>
       <input id='PO' 
@@ -254,7 +255,7 @@ const ShippingToFrom = (props) => {
 
   let elements = names.map((x, y) => {
    return(
-  <div key={x + y.toString()}>
+  <div id={props.divId} key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
     <input 
       id={props.toFrom + x} 

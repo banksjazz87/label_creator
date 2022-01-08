@@ -31,8 +31,8 @@ class Nav extends React.Component {
   render(){
   return (
     <div>
-    <MenuButton />
-    <nav id="navbar">
+    <MenuButton clickHandler={this.showHide} />
+    <nav id="navbar" style={this.state.display ? {display:"flex"} : {display:"none"}}>
       <Link to="/shipping_creator">Shipping Create Docs</Link>
       <Link to="/pack_slip">Pack Slip</Link>
       <Link to="/labels">Lables</Link>
@@ -42,9 +42,9 @@ class Nav extends React.Component {
   )};
 }
 
-const MenuButton = () => {
+const MenuButton = (props) => {
     return(
-        <div id="hamburger_icon">
+        <div id="hamburger_icon" onClick={props.clickHandler}>
             <div className="line"></div>
             <div className="line"></div>
             <div className="line"></div>
