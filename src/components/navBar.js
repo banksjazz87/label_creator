@@ -2,16 +2,47 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import "../assets/nav.scss"
 
+
 class Nav extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      display: false
+      display: false,
+      width: 0
     }
 
     this.showHide = this.showHide.bind(this);
+    this.retractMenu = this.retractMenu.bind(this);
+    this.displayMenu = this.displayMenu.bind(this);
     
   }
+
+  retractMenu = () => {
+      setInterval(() => {
+          if(this.state.width >= 0){
+              this.setState((state) => ({
+                width: state.width -1
+              }))
+          }else{
+              clearInterval(this.retractMenu())
+          }
+      }, 1000);
+  }
+
+  displayMenu = () => {
+      setInterval(() => {
+          if(this.state.width < 100){
+              this.setState((state) => ({
+                  width: state.width + 1
+              }))
+              }else{
+                  clearInterval(this.displayMenu())
+              }
+          }, 1000);
+  }
+
+ 
+
 
   showHide = (e) => {
     e.preventDefault();
@@ -20,18 +51,20 @@ class Nav extends React.Component {
       this.setState({
         display: false
       })
+      this.displayMenu();
+
     }else{
       this.setState({
         display: true
       })
+      this.displayMenu();
     }
 
-    console.log(this.state.display);
   }
   render(){
   return (
     <div>
-    <MenuButton clickHandler={this.showHide} />
+    <MenuButton clickHandler={this.showHide}/>
     <nav id="navbar" style={this.state.display ? {display:"flex"} : {display:"none"}}>
       <Link to="/shipping_creator">Shipping Create Docs</Link>
       <Link to="/pack_slip">Pack Slip</Link>

@@ -11,14 +11,22 @@
     border: 0;
     outline: 0;
     color: $font-color;
+    text-align: center;
 }
 
 #ship_to_from{
+    margin: auto;
     display: flex;
     flex-direction: row;
     width: 100vw;
     justify-content: space-evenly;
+    padding: 1em 2em 1em 2em;
     background-color: $button-color;
+
+h2{
+    text-align: center;
+}
+    
 
 #shipFrom{
     display: flex;
