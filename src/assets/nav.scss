@@ -1,5 +1,7 @@
 @import "library";
 #hamburger_icon{
+    position: fixed;
+    z-index: 3;
     border-width: 2px;
     border-color: $dark-border;
     border-radius: 10%;
@@ -22,6 +24,19 @@
             width: 2em;
             background-color: white;
         }
+}
+
+#navbar{
+    position: fixed;
+    top: 0;
+    background-color: $third-color;
+    opacity: .98;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    z-index: 2;
+    text-decoration: none;
 }
 
 

@@ -2,6 +2,12 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import "../assets/nav.scss"
 
+const linkStyles = {
+    textDecoration: 'none', 
+    fontSize: '1.5em', 
+    color: 'white',
+    textShadow: '.5px 1px #494949'
+}
 
 class Nav extends React.Component {
   constructor(props){
@@ -12,38 +18,36 @@ class Nav extends React.Component {
     }
 
     this.showHide = this.showHide.bind(this);
-    this.retractMenu = this.retractMenu.bind(this);
     this.displayMenu = this.displayMenu.bind(this);
     
   }
 
-  retractMenu = () => {
-      setInterval(() => {
-          if(this.state.width >= 0){
-              this.setState((state) => ({
-                width: state.width -1
-              }))
-          }else{
-              clearInterval(this.retractMenu())
-          }
-      }, 1000);
-  }
+  
+  //A function that will update how the navbar should be displayed, and the rate in which it should do so.
 
   displayMenu = () => {
       setInterval(() => {
-          if(this.state.width < 100){
+          if(this.state.width < 100 && this.state.display){
               this.setState((state) => ({
                   width: state.width + 1
               }))
-              }else{
-                  clearInterval(this.displayMenu())
+              console.log('width = ', this.state.width);
+
+              }else if(this.state.width > 0 && this.state.display === false){
+              this.setState((state) => ({
+                width: state.width -1
+              }))
+
+              console.log('width = ', this.state.width);
+          }else{
+              clearInterval(this.displayMenu);
               }
-          }, 1000);
+          }, 2);
   }
 
  
 
-
+  //A function that updates the state, whether the navbar should be displayed, or not.
   showHide = (e) => {
     e.preventDefault();
 
@@ -51,25 +55,32 @@ class Nav extends React.Component {
       this.setState({
         display: false
       })
-      this.displayMenu();
+      
 
     }else{
+
       this.setState({
         display: true
       })
-      this.displayMenu();
     }
-
+    this.displayMenu();
   }
+
   render(){
   return (
     <div>
     <MenuButton clickHandler={this.showHide}/>
-    <nav id="navbar" style={this.state.display ? {display:"flex"} : {display:"none"}}>
-      <Link to="/shipping_creator">Shipping Create Docs</Link>
-      <Link to="/pack_slip">Pack Slip</Link>
-      <Link to="/labels">Lables</Link>
-      <Link to="/ship_to_papers">Ship To Slip</Link>
+    <nav id="navbar" 
+        style={this.state.display ? 
+        {display:"flex", height: "100vh", width:`${this.state.width}vw`} 
+        : this.state.width > 0 ? 
+        {display: "flex", height: "100vh", width: `${this.state.width}vw`} 
+        : {display: "none"}}>
+
+      <Link to="/shipping_creator" style={linkStyles}>Shipping Create Docs</Link>
+      <Link to="/pack_slip" style={linkStyles}>Pack Slip</Link>
+      <Link to="/labels" style={linkStyles}>Lables</Link>
+      <Link to="/ship_to_papers" style={linkStyles}>Ship To Slip</Link>
     </nav>
     </div>
   )};
