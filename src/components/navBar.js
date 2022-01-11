@@ -2,35 +2,18 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import "../assets/nav.scss"
 
-const linkStyles = {
-    textDecoration: 'none', 
-    fontSize: '1.5em', 
-    color: 'white',
-    textShadow: '.5px 1px #494949'
-}
-
-const hoverLinkStyles = {
-    textDecoration: 'none', 
-    fontSize: '1.5em', 
-    color: 'black',
-    textShadow: '.5px 1px #494949'
- }
-
 class Nav extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       display: false,
       width: 0, 
-      over: false,
+      overItem: null,
       color: 'white'
     }
 
     this.showHide = this.showHide.bind(this);
     this.displayMenu = this.displayMenu.bind(this);
-    this.mouseOverOption = this.mouseOverOption.bind(this);
-    this.mouseLeaveOption = this.mouseLeaveOption.bind(this);
-    
   }
 
   
@@ -77,17 +60,6 @@ class Nav extends React.Component {
     this.displayMenu();
   }
 
-  //Mouse over option function, this will change the state of the boolean labeled as 'option'
-  mouseOverOption = (e) => {
-      e.preventDefault();
-      e.target.setAttribute('style', "textDecoration: none; font-size: 1.5em; color: black; textShadow: .5pz 1px #494949");
-  }
-
-  mouseLeaveOption = (e) => {
-      e.preventDefault();
-      e.target.setAttribute('style', "textDecoration: none; font-size: 1.5em; color: white; textShadow: .5pz 1px #494949");
-  }
-
   render(){
   return (
     <div>
@@ -102,31 +74,26 @@ class Nav extends React.Component {
         : {display: "none"}}>
 
      
-      <Link to="/shipping_creator" 
-        style={linkStyles} 
-        onMouseOver={this.mouseOverOption}
-        onMouseLeave={this.mouseLeaveOption}>
+      <Link to="/"
+        className="link"
+        >
         Shipping Create Docs
       </Link>
 
-      <Link to="/pack_slip" 
-        style={linkStyles} 
-        onMouseOver={this.mouseOverOption}
-        onMouseLeave={this.mouseLeaveOption}>
+      <Link to="/pack_slip"
+        className="link"
+        >
         Pack Slip
      </Link>
 
       <Link to="/labels" 
-        style={linkStyles} 
-        onMouseOver={this.mouseOverOption}
-        onMouseLeave={this.mouseLeaveOption}>
+        className="link"
+        >
         Lables
       </Link>
 
       <Link to="/ship_to_papers" 
-        style={linkStyles} 
-        onMouseOver={this.mouseOverOption}
-        onMouseLeave={this.mouseLeaveOption}>
+        className = "link">
         Ship To Slip
       </Link>
 

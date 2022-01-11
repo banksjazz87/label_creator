@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="shipping_creator" element={<ShippingCreator />} />
+        <Route path="/" element={<ShippingCreator />} />
         <Route path="pack_slip" element={<PackSlip />} />
         <Route path="labels" element={<Labels />} />
         <Route path="ship_to_papers" element={<ShipTo />} />
