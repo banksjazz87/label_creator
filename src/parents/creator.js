@@ -1,5 +1,6 @@
 import * as React from "react";
 import "../assets/creator.scss";
+import "../assets/nav.scss";
 
 const SkidDescriptors = {
     itemDescription: "",
@@ -195,7 +196,7 @@ class ParentShippingCreator extends React.Component {
       <h1> Shipping Creator </h1>
 
     <div id="ship_to_from">
-      <ShippingToFrom divId={'shipFrom'} 
+      <ShippingToFrom divId={'shipFrom'}
                       toFrom={'shipFrom'} 
                       header={'Shipping From'} 
                       title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
@@ -255,7 +256,7 @@ const ShippingToFrom = (props) => {
 
   let elements = names.map((x, y) => {
    return(
-  <div id={props.divId} key={x + y.toString()}>
+  <div className={`${props.divId}_input`} key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
     <input 
       id={props.toFrom + x} 
@@ -269,7 +270,7 @@ const ShippingToFrom = (props) => {
   })
 
   return (
-    <div>
+    <div id={props.divId}>
     <h2>{props.header}</h2>
       {elements}
     </div>

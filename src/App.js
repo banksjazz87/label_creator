@@ -62,8 +62,8 @@ function App() {
 function PackSlip() {
   return (
     <div id="pack_slip_body">
-      <ParentPackSlip />
       <Nav />
+      <ParentPackSlip />
     </div>
   );
 }
@@ -71,8 +71,8 @@ function PackSlip() {
 function Labels() {
   return (
     <div id="labels_body">
-      <ParentLabels />
       <Nav />
+      <ParentLabels />
     </div>
   );
 }
@@ -80,8 +80,8 @@ function Labels() {
 function ShipTo() {
   return (
     <div id="ship_to_body">
-      <ParentShipTo />
       <Nav />
+      <ParentShipTo />
     </div>
   );
 }

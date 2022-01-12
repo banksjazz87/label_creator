@@ -1,5 +1,6 @@
 import * as React from "react";
 import "../assets/label.scss";
+import "../assets/nav.scss"
 import userDataFromCreator from "../variables/dummyData"
 //import serverCall from "../functions/serverCall"
 

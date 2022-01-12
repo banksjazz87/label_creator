@@ -31,14 +31,21 @@ h2{
 #shipFrom{
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: 5vh;
-}
-
-#shipTo{
-    display: flex;
-    flex-direction: column;
-    width: 25vw;
-    height: 5vh;
+    background-color: $third-color;
+    padding: 1em 8em 1em 8em;
+    justify-items: center;
+    border-radius: 15%;
+    box-shadow: 1px 5px $secondary-color;
+    
+    .shipFrom_input{
+        display: flex;
+        flex-direction: column;
+        
+        label{
+            text-align: left;
+            margin-top: 2px;
+            margin-bottom: 1px;
+        }
+    }
 }
 }
