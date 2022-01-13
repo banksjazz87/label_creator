@@ -197,16 +197,19 @@ class ParentShippingCreator extends React.Component {
 
     <div id="ship_to_from">
       <ShippingToFrom divId={'shipFrom'}
-                      toFrom={'shipFrom'} 
+                      toFrom={'shipFrom'}
+                      itemClass={'ship'} 
                       header={'Shipping From'} 
                       title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
 
       <ShippingToFrom divId={'shipTo'} 
                       toFrom={"shipTo"} 
+                      itemClass={'ship'} 
                       header={'Shipping To'} 
                       title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
     </div>
 
+    <div id="po_container">
       <label>PO#</label>
       <input id='PO' 
              type='text' 
@@ -229,6 +232,7 @@ class ParentShippingCreator extends React.Component {
 
       <button type='button' 
               onClick={this.lineNumbers}>Submit</button> 
+    </div>
 
       <SkidContents title={Object.keys(SkidDescriptors)}
                     linesNeeded={this.state.lines} 
@@ -256,7 +260,7 @@ const ShippingToFrom = (props) => {
 
   let elements = names.map((x, y) => {
    return(
-  <div className={`${props.divId}_input`} key={x + y.toString()}>
+  <div className="input_field" key={x + y.toString()}>
     <label id={props.toFrom + x}>{x}</label>
     <input 
       id={props.toFrom + x} 
@@ -270,7 +274,7 @@ const ShippingToFrom = (props) => {
   })
 
   return (
-    <div id={props.divId}>
+    <div id={props.divId} className={props.itemClass}>
     <h2>{props.header}</h2>
       {elements}
     </div>

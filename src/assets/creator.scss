@@ -6,7 +6,7 @@
     margin: 0;
     padding: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     margin-top: 0;
     border: 0;
     outline: 0;
@@ -27,8 +27,7 @@ h2{
     text-align: center;
 }
     
-
-#shipFrom{
+.ship{
     display: flex;
     flex-direction: column;
     background-color: $third-color;
@@ -36,16 +35,49 @@ h2{
     justify-items: center;
     border-radius: 15%;
     box-shadow: 1px 5px $secondary-color;
+  
     
-    .shipFrom_input{
+   .input_field{
         display: flex;
         flex-direction: column;
         
         label{
             text-align: left;
-            margin-top: 2px;
+            margin-top: 8px;
             margin-bottom: 1px;
         }
     }
 }
+}
+
+#po_container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    background-color: $third-color;
+    padding: 1em 8em 1em 8em;
+    margin: 32px auto 32px auto;
+    text-align: center;
+    width: 20vw;
+    border-radius: 15%;
+    box-shadow: 1px 5px $secondary-color;
+
+    label{
+        text-align: left;
+        margin-top: 8px;
+        margin-bottom: 1px;
+    }
+
+    button{
+        width: 10vw;
+        margin: 16px auto 16px auto;
+        background-color: $button-color;
+        color: white;
+        padding: 4px 12px 4px 12px;
+        border-radius: 25%;
+
+        &:hover{
+            background-color: $hover-button;
+        }
+    }
 }
