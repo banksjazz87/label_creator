@@ -330,7 +330,7 @@ const SkidContents = (props) => {
     )
   })
   return(
-    <table>
+    <table id="main_table">
       <tbody>
         <tr>
           {elements}

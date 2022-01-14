@@ -1,5 +1,28 @@
 @import "library";
 
+@mixin data-field{
+    display: flex;
+    flex-direction: column;
+    background-color: $third-color;
+    padding: 1em 8em 1em 8em;
+    justify-items: center;
+    border-radius: 15%;
+    box-shadow: 1px 5px $secondary-color;
+}
+
+@mixin button-style{
+        width: 10vw;
+        margin: 16px auto 16px auto;
+        background-color: $button-color;
+        color: white;
+        padding: 4px 12px 4px 12px;
+        border-radius: 25%;
+}
+
+@mixin button-hover{
+    background-color: $hover-button;
+}
+
 #creator_body{
     background-color: $base-color;
     display: flex;
@@ -28,13 +51,7 @@ h2{
 }
     
 .ship{
-    display: flex;
-    flex-direction: column;
-    background-color: $third-color;
-    padding: 1em 8em 1em 8em;
-    justify-items: center;
-    border-radius: 15%;
-    box-shadow: 1px 5px $secondary-color;
+    @include data-field;
   
     
    .input_field{
@@ -51,16 +68,9 @@ h2{
 }
 
 #po_container{
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    background-color: $third-color;
-    padding: 1em 8em 1em 8em;
-    margin: 32px auto 32px auto;
-    text-align: center;
+    @include data-field;
     width: 20vw;
-    border-radius: 15%;
-    box-shadow: 1px 5px $secondary-color;
+    margin: auto;
 
     label{
         text-align: left;
@@ -69,15 +79,30 @@ h2{
     }
 
     button{
-        width: 10vw;
-        margin: 16px auto 16px auto;
-        background-color: $button-color;
-        color: white;
-        padding: 4px 12px 4px 12px;
-        border-radius: 25%;
-
+        @include button-style;
         &:hover{
-            background-color: $hover-button;
+            @include button-hover;
         }
+    }
+}
+
+#main_table{
+    width: 100vw;
+    background-color: $button-color;
+    padding: 1em 3em 1em 3em;
+    color: rgb(223, 223, 223);
+
+    .column_data{
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+        border-radius: 2%;
+       
+    }
+    input{
+        width: 100%;
+    }
+    #row_num0{
+        width: 40vw;
     }
 }
