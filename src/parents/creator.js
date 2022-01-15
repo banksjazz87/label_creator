@@ -218,21 +218,27 @@ class ParentShippingCreator extends React.Component {
         handleOnChange={this.poJobNumbers}
       />
     
+    <PoInput 
+      labelName="Job"
+      dataID='Job'
+      handleOnChange={this.poJobNumbers}
+    />
 
-      <label>Job</label>
-      <input id='Job' 
-             type='text' 
-             onChange={this.poJobNumbers}></input> 
+      <PoInput
+        labelName='Date'
+        dataID='date'
+        differentType='date'
+        handleOnChange={this.poJobNumbers}
+      />
 
-      <label>Date</label>
-      <input id='date' 
-             type='date' 
-             onChange={this.poJobNumbers}></input>
 
-      <label>Number of Lines Needed</label>
-      <input id="lines_input" 
-             placeholder="number of lines" 
-             onChange={this.poJobNumbers}></input>
+      <PoInput
+        labelName={'Lines Needed'}
+        differentType='number'
+        dataID='lines_input'
+        placeholderText='number of lines'
+        handleOnChange={this.poJobNumbers}
+      />
 
       <button type='button' 
               onClick={this.lineNumbers}>Submit</button> 
@@ -265,12 +271,11 @@ const ShippingToFrom = (props) => {
   let elements = names.map((x, y) => {
    return(
   <div className="input_field" key={x + y.toString()}>
-    <label id={props.toFrom + x}>{x}</label>
+    <label id={props.toFrom + x}>{x[0].toUpperCase() + x.slice(1)}</label>
     <input 
       id={props.toFrom + x} 
       className={props.toFrom} 
-      type="text" 
-      placeholder={x} 
+      type="text"  
       onChange={(e) => props.handleChange(e)}>
     </input>
   </div>
@@ -290,7 +295,12 @@ const PoInput = (props) => {
   return (
     <div className="po_inputs">
       <label>{props.labelName}</label> 
-      <input id={props.dataID} type="text" onChange={props.handleOnChange}></input>
+      <input 
+        id={props.dataID} 
+        type={props.differentType ? props.differentType : "text"} 
+        placeHolder={props.placeholderText ? props.placeholderText : ""} 
+        onChange={props.handleOnChange}> 
+      </input>
     </div>
   )
 }
@@ -302,6 +312,7 @@ const SkidContents = (props) => {
           <th 
             style={props.hide ? {display:""}: {display: "none"}}
             key={'header' + x} 
+            id={`${x}_header`}
             className="table_header"
           >
             {x}
