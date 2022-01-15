@@ -186,7 +186,7 @@ class ParentShippingCreator extends React.Component {
     let userInput = this.state;
     postData(url, userInput);
 
-    console.log(this.state.date);
+    console.log(this.state);
 
 }
 
@@ -208,12 +208,16 @@ class ParentShippingCreator extends React.Component {
                       header={'Shipping To'} 
                       title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
     </div>
-
     <div id="po_container">
-      <label>PO#</label>
-      <input id='PO' 
-             type='text' 
-             onChange={this.poJobNumbers}></input>
+    <h2 className="header">Shipping 
+    Details</h2>
+    <hr/>
+      <PoInput 
+        labelName='PO#'
+        dataID='PO'
+        handleOnChange={this.poJobNumbers}
+      />
+    
 
       <label>Job</label>
       <input id='Job' 
@@ -276,11 +280,20 @@ const ShippingToFrom = (props) => {
   return (
     <div id={props.divId} className={props.itemClass}>
     <h2>{props.header}</h2>
+    <hr/>
       {elements}
     </div>
   )
 }
 
+const PoInput = (props) => {
+  return (
+    <div className="po_inputs">
+      <label>{props.labelName}</label> 
+      <input id={props.dataID} type="text" onChange={props.handleOnChange}></input>
+    </div>
+  )
+}
 const SkidContents = (props) => {
   
   const newInput = props.title;

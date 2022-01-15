@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     background-color: $third-color;
-    padding: 1em 8em 1em 8em;
+    padding: 10px 20px 10px 20px;
     justify-items: center;
     border-radius: 15%;
     box-shadow: 1px 5px $secondary-color;
@@ -22,6 +22,7 @@
 @mixin button-hover{
     background-color: $hover-button;
 }
+
 
 #creator_body{
     background-color: $base-color;
@@ -48,21 +49,27 @@
 
 h2{
     text-align: center;
+    margin-bottom: 1px;
 }
     
 .ship{
     @include data-field;
   
+ hr{
+     background-color: black;
+     border: 0;
+     height: 2px;
+     margin: 0 0 8px 0;
+
+ }
     
    .input_field{
         display: flex;
-        flex-direction: column;
-        
-        label{
-            text-align: left;
-            margin-top: 8px;
-            margin-bottom: 1px;
-        }
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: space-between;
+        margin-top: 4px;
+
     }
 }
 }
@@ -72,6 +79,24 @@ h2{
     width: 20vw;
     margin: auto;
 
+    h2{
+        margin-bottom: 1px;
+    }
+
+    hr{
+        
+        background-color: black;
+        height: 2px;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .po_inputs{
+        display: flex;
+        flex-direction: column;
+    }
     label{
         text-align: left;
         margin-top: 8px;
