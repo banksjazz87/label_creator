@@ -3,12 +3,12 @@ import "../assets/creator.scss";
 import "../assets/nav.scss";
 
 const SkidDescriptors = {
-    itemDescription: "",
     qtyNeeded: null, 
-    qtyShipped: null, 
+    itemDescription: "",
     packsRolls: null, 
     qtyPerCarton: null,
     numOfCartons: null,
+    qtyShipped: null
 }
 
 //Function to change the format of the date
@@ -48,13 +48,18 @@ const postData = async(url = '', data = {}) => {
 
 //This will create an object to store all of the information needed for the skid
 class SkidItems{
-constructor(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
-  this.itemDescription = itemDescription;
+
+//constructor(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
+
+
+  constructor(qtyNeeded, itemDescription, packsRolls, qtyPerCarton, numOfCartons, qtyShipped){
+
   this.qtyNeeded = qtyNeeded;
-  this.qtyShipped = qtyShipped;
+  this.itemDescription = itemDescription;
   this.packsRolls = packsRolls;
   this.qtyPerCarton = qtyPerCarton;
   this.numOfCartons = numOfCartons;
+  this.qtyShipped = qtyShipped;
 }
 }
 
@@ -160,8 +165,8 @@ class ParentShippingCreator extends React.Component {
 
     //Get the correct number of rows and all of the contents.
     for(let i = 0; i < lines.length; i++){
-      
-      let currentItems = new SkidItems(items[i].value, needed[i].value, shipped[i].value, packs[i].value, carton[i].value, cartons[i].value);
+
+      let currentItems = new SkidItems(needed[i].value, items[i].value, packs[i].value, carton[i].value, cartons[i].value, shipped[i].value);
 
       arr.push(currentItems);
     }
@@ -231,7 +236,6 @@ class ParentShippingCreator extends React.Component {
         handleOnChange={this.poJobNumbers}
       />
 
-
       <PoInput
         labelName={'Lines Needed'}
         differentType='number'
@@ -271,10 +275,11 @@ const ShippingToFrom = (props) => {
   let elements = names.map((x, y) => {
    return(
   <div className="input_field" key={x + y.toString()}>
-    <label id={props.toFrom + x}>{x[0].toUpperCase() + x.slice(1)}</label>
+    <label id={props.toFrom + x}>{x}</label>
     <input 
       id={props.toFrom + x} 
-      className={props.toFrom} 
+      className={props.toFrom}
+      placeHolder={x} 
       type="text"  
       onChange={(e) => props.handleChange(e)}>
     </input>
