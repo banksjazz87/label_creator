@@ -2,6 +2,7 @@ import * as React from "react";
 import { Routes, Route } from "react-router-dom";
 import "../src/assets/app.scss";
 import "../src/assets/creator.scss";
+import "../src/assets/creatorMediaQueries.scss";
 import "../src/assets/label.scss";
 import "../src/assets/packSlip.scss";
 import "../src/assets/shipTo.scss";

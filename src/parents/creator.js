@@ -1,5 +1,6 @@
 import * as React from "react";
 import "../assets/creator.scss";
+import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
 
 const SkidDescriptors = {
@@ -197,8 +198,8 @@ class ParentShippingCreator extends React.Component {
 
   render(){
   return (
-    <div>
-      <h1> Shipping Creator </h1>
+    <div id="creator_container">
+      <h1 id="header"> Shipping Creator </h1>
 
     <div id="ship_to_from">
       <ShippingToFrom divId={'shipFrom'}

@@ -1,0 +1,33 @@
+@media (min-width: 900px){
+    #creator_container{
+        display: grid;
+    }
+
+    #header{
+        grid-area: head;
+    }
+
+    #shipFrom{
+        grid-area: from;
+    }
+
+    #shipTo{
+        grid-area: to;
+    }
+
+    #po_container{
+        grid-area: po;
+    }
+
+    #main_table{
+        grid-area: table;
+    }
+
+    #final_submit{
+        grid-area: submit;
+    }
+
+    #send{
+        grid-area: send;
+    }
+}
