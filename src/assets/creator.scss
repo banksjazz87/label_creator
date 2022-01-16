@@ -121,20 +121,35 @@ h2{
     color: rgb(223, 223, 223);
 
     .column_data{
-        border-style: solid;
-        border-width: 2px;
-        border-color: black;
-        border-radius: 2%;
+        margin-bottom: 8px;
        
     }
 
     #itemDescription_header{
-        width: 40%;
-    }
-    input{
-        width: 100%;
-    }
-    #row_num0{
         width: 40vw;
     }
+    .itemDescription{
+        width: 95%;
+        margin: 8px auto auto auto;
+    }
+    /*tr{
+        margin-bottom: 20px;
+        margin-right: 28px;
+        margin-left: 28px;
+    }*/
+
+    /*th{
+        background-color: rgb(58, 8, 238);
+    }*/
+    
+   /* input{
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-bottom: 8px;
+        padding: 2px;
+    }*/
+    input{
+        margin-top: 8px;
+    }
+    
 }

@@ -181,7 +181,7 @@ class ParentShippingCreator extends React.Component {
       })
   }
 
-  
+  //This function will post all of the data that has been supplied by the user, to the server.
   finalSubmit(e){
 
     e.preventDefault();
@@ -361,7 +361,7 @@ const SkidContents = (props) => {
   return(
     <table id="main_table">
       <tbody>
-        <tr>
+        <tr id="header_row">
           {elements}
         </tr>
         {newRows}
