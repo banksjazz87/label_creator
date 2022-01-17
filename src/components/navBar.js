@@ -106,7 +106,7 @@ const MenuButton = (props) => {
     return(
         <div id="hamburger_icon" 
             onClick={props.clickHandler}
-            style={{backgroundColor: props.clicked ? "#494949" : "#082b44"}}>
+            >
             <div className="line"></div>
             <div className="line"></div>
             <div className="line"></div>

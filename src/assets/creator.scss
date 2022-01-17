@@ -4,15 +4,16 @@
     display: flex;
     flex-direction: column;
     flex-grow: 3;
-    /*background-color: $third-color;*/
-    background-color: rgb(189, 189, 189);
+    background-color: rgb(196, 196, 196); 
+    /*background-color: rgb(189, 189, 189);*/
     border-style: solid;
     border-width: 2px;
-    border-color: $button-color;
+    border-color: $secondary-color;
     padding: 10px 20px 10px 20px;
     justify-items: center;
     border-radius: 15%;
     box-shadow: 1px 5px $secondary-color;
+    color: black;
 }
 
 @mixin button-style{
@@ -41,6 +42,15 @@
     outline: 0;
     color: $font-color;
     text-align: center;
+
+h1{
+    background-color: $secondary-color;
+    text-shadow: 1px 3px black;
+    height: 100%;
+    margin-top: 0;
+    padding-top: .5em;
+}
+
 }
 
 #ship_to_from_po{
@@ -53,6 +63,7 @@
     border-color: black;
     align-items: space-evenly;
     margin: auto;
+    background-color: white;
 
 h2{
     text-align: center;
