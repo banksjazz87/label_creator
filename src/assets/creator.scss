@@ -3,6 +3,7 @@
 @mixin data-field{
     display: flex;
     flex-direction: column;
+    flex-grow: 3;
     /*background-color: $third-color;*/
     background-color: rgb(189, 189, 189);
     border-style: solid;
@@ -20,7 +21,7 @@
         background-color: $button-color;
         color: white;
         padding: 4px 12px 4px 12px;
-        border-radius: 25%;
+        border-radius: 8px;
 }
 
 @mixin button-hover{
@@ -42,13 +43,16 @@
     text-align: center;
 }
 
-#ship_to_from{
-    margin: 0px auto auto 8px;
+#ship_to_from_po{
+    /*margin: 0px auto auto 8px;*/
     display: flex;
     flex-direction: column;
-    width: 20vw;
-    justify-content: flex-start;
-    padding: 1em 2em 1em 2em;
+    /*padding: 1em 2em 1em 2em;*/
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    align-items: space-evenly;
+    margin: auto;
 
 h2{
     text-align: center;
@@ -57,7 +61,7 @@ h2{
     
 .ship{
     @include data-field;
-    margin-bottom: 8px;
+    margin: 8px auto 8px auto;
   
  hr{
      background-color: black;
@@ -80,8 +84,7 @@ h2{
 
 #po_container{
     @include data-field;
-    width: 20vw;
-    margin: auto;
+    margin: 8px auto 8px auto;
 
     h2{
         margin-bottom: 1px;
@@ -156,4 +159,24 @@ h2{
         margin-top: 8px;
     }
     
+}
+
+#final_buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    button{
+        @include button-style;
+
+        &:hover{
+            @include button-hover;
+        }
+    }
+    #final_submit{
+        margin-right: 16px;
+    }
+    #send{
+        margin-left: 16px;
+    }
 }

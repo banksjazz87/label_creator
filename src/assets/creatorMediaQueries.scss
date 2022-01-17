@@ -2,15 +2,16 @@
     #creator_container{
         display: grid;
         grid-template-rows: 10vh;
-        grid-template-columns: 30vw 30vw 30vw;
+        grid-template-columns: auto auto auto;
         width: 100vw;
+        margin: auto;
         grid-row-gap: 8px;
         /*grid-column-gap: 8px 32px 8px;*/
         grid-template-areas: 
         "head head head"
-        "to-from to-from po"
+        "to-from to-from to-from"
         "table table table"
-        "submit . send";
+        ". final-buttons .";
     }
 
     #header{
@@ -18,30 +19,36 @@
     }
 
 
-    #ship_to_from{
+    #ship_to_from_po{
         grid-area: to-from;
         display: flex;
         flex-direction: row;
+        width: 100vw;
+        padding-top: 16px;
+        padding-bottom: 16px;
+
+        #shipFrom{
+            margin-left: 64px;
+            margin-right: 64px;
+        }
+
+        #shipTo{
+            margin-right: 64px;
+        }
+
+        #po_container{
+            margin-right: 64px;
+        }
     }
 
-
-    #po_container{
-        grid-area: po;
-    }
+    
 
     #main_table{
         grid-area: table;
     }
 
-    #final_submit{
-        grid-area: submit;
-    }
+   #final_buttons{
+       grid-area: final-buttons;
+   }
 
-    #send{
-        grid-area: send;
-    }
-
-    #shipFrom{
-        margin-right: 128px;
-    }
 }

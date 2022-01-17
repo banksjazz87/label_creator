@@ -201,7 +201,7 @@ class ParentShippingCreator extends React.Component {
     <div id="creator_container">
       <h1 id="header"> Shipping Creator </h1>
 
-    <div id="ship_to_from">
+    <div id="ship_to_from_po">
       <ShippingToFrom divId={'shipFrom'}
                       toFrom={'shipFrom'}
                       itemClass={'ship'} 
@@ -213,7 +213,8 @@ class ParentShippingCreator extends React.Component {
                       itemClass={'ship'} 
                       header={'Shipping To'} 
                       title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
-    </div>
+   {/* </div>*/}
+
     <div id="po_container">
     <h2 className="header">Shipping 
     Details</h2>
@@ -249,11 +250,14 @@ class ParentShippingCreator extends React.Component {
               onClick={this.lineNumbers}>Submit</button> 
     </div>
 
+    </div>
+
       <SkidContents title={Object.keys(SkidDescriptors)}
                     linesNeeded={this.state.lines} 
                     skidObjectsArr={this.state.skid}
                     hide={this.state.showSkidHeader} />
 
+    <div id="final_buttons">
       <button id="final_submit" 
               type='submit'
               style={this.state.numberOfLinesSubmitClicked ? {display: 'block'} : {display: 'none'}} 
@@ -263,6 +267,7 @@ class ParentShippingCreator extends React.Component {
              type='submit' 
              style={this.state.clicked ? {display: 'block'} :    {display: 'none'}} 
              onClick={this.finalSubmit}>Send</button>
+    </div>
     </div>
   );
 }
