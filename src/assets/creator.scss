@@ -29,9 +29,15 @@
     background-color: $hover-button;
 }
 
+@mixin button-active{
+    border-style: solid;
+    border-width: 2px;
+    border-color: $third-color;
+}
+
 
 #creator_body{
-    background-color: $base-color;
+    background-color: rgb(196, 196, 196);
     display: flex;
     margin: 0;
     padding: 0;
@@ -42,6 +48,7 @@
     outline: 0;
     color: $font-color;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 
 h1{
     background-color: $secondary-color;
@@ -128,13 +135,16 @@ h2{
         @include button-style;
         &:hover{
             @include button-hover;
+        &:active{
+            @include button-active;
+        }
         }
     }
 }
 
 #main_table{
     width: 100vw;
-    background-color: $button-color;
+    background-color: $secondary-color;
     padding: 1em 3em 1em 3em;
     color: rgb(223, 223, 223);
 

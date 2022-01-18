@@ -268,6 +268,7 @@ class ParentShippingCreator extends React.Component {
              style={this.state.clicked ? {display: 'block'} :    {display: 'none'}} 
              onClick={this.finalSubmit}>Send</button>
     </div>
+
     </div>
   );
 }
@@ -360,7 +361,7 @@ const SkidContents = (props) => {
         className="line_data" 
         key={'row_num' + y}
       >
-        {newColumns}
+       {newColumns}
       </tr>
     )
   })
