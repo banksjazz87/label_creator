@@ -3,27 +3,21 @@
 @mixin data-field{
     display: flex;
     flex-direction: column;
-    flex-grow: 2;
+    //flex-grow: 2;
     background-color: rgb(196, 196, 196);
     background: linear-gradient(to bottom right, rgb(177, 173, 173), rgb(196, 196,196), rgb(177, 173, 173));
-    /*background-color: rgb(189, 189, 189);*/
-    border-style: solid;
-    border-width: 2px;
-    border-color: $secondary-color;
     padding: 10px 20px 10px 20px;
     justify-items: center;
-    //border-radius: 15%;
     border-radius: 1%;
-    box-shadow: 1px 2px $secondary-color;
+    box-shadow: 2px 4px $secondary-color;
     color: black;
 }
 
 @mixin button-style{
-        width: 10vw;
         margin: 16px auto 16px auto;
         background-color: $button-color;
         color: white;
-        padding: 12px 16px 12px 16px;
+        padding: .25em 2em .25em 2em;
         border-radius: 8px;
 }
 
@@ -41,7 +35,12 @@
 #creator_body{
     background-color: rgb(196, 196, 196);
     display: flex;
+    flex-direction: row;
     margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
     padding: 0;
     width: 100vw;
     height: 100%;
@@ -50,6 +49,7 @@
     outline: 0;
     color: $font-color;
     text-align: center;
+    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
 
 input{
@@ -61,17 +61,16 @@ h1{
     background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
     text-shadow: 1px 3px black;
     margin-top: 0;
-    height: 100%;
+    margin-bottom: 0;
     padding-top: .5em;
+    padding-bottom: .5em;
 }
 
 }
 
 #ship_to_from_po{
-    /*margin: 0px auto auto 8px;*/
     display: flex;
     flex-direction: column;
-    /*padding: 1em 2em 1em 2em;*/
     border-style: solid;
     border-width: 2px;
     border-color: black;
@@ -91,7 +90,7 @@ h2{
  hr{
      background-color: black;
      border: 0;
-     height: 2px;
+     height: .5px;
      margin: 0 0 8px 0;
 
  }
@@ -118,7 +117,7 @@ h2{
     hr{
         
         background-color: black;
-        height: 2px;
+        height: .5px;
         border: 0;
         margin: 0;
         padding: 0;
@@ -153,7 +152,6 @@ h2{
     width: 100vw;
     height: 100%;
     background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
-    /*background-color: $secondary-color;*/
     padding: 1em 3em 1em 3em;
     margin-top: 0;
     color: rgb(223, 223, 223);
@@ -171,26 +169,9 @@ h2{
         margin: 8px auto auto auto;
     }
 
-    /*tr{
-        margin-bottom: 20px;
-        margin-right: 28px;
-        margin-left: 28px;
-    }*/
-
-    /*th{
-        background-color: rgb(58, 8, 238);
-    }*/
-    
-   /* input{
-        margin-left: 16px;
-        margin-right: 16px;
-        margin-bottom: 8px;
-        padding: 2px;
-    }*/
     input{
         margin-top: 8px;
-    }
-    
+    }   
 }
 
 #final_buttons{
