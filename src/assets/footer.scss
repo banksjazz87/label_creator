@@ -1,0 +1,19 @@
+@import "library";
+
+#footer_container{
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-items: center;
+    background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
+    color: white;
+    width: 100vw;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 15px 0px 15px 0px;
+    bottom: 0px;
+    margin-top: 23em;
+    line-height: 2px;
+
+}

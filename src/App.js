@@ -2,6 +2,7 @@ import * as React from "react";
 import { Routes, Route } from "react-router-dom";
 import "../src/assets/app.scss";
 import "../src/assets/creator.scss";
+import "../src/assets/footer.scss";
 import "../src/assets/creatorMediaQueries.scss";
 import "../src/assets/label.scss";
 import "../src/assets/packSlip.scss";
@@ -11,6 +12,7 @@ import ParentLabels from "./parents/label.js";
 import ParentPackSlip from "./parents/packSlip.js";
 import ParentShipTo from "./parents/shipTo.js";
 import Nav from "./components/navBar.js";
+import Footer from "./components/footer.js";
 
 function App() {
   return (

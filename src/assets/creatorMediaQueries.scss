@@ -53,6 +53,14 @@
 
 @media (max-width: 1000px){
     #creator_body{
+        font-size: 14px;
+    }
+
+    #main_table{
+        display: flex;
+        flex-flow: row wrap;
+        transition: 0.5s;
         font-size: 12px;
+        width: 100vw;
     }
 }

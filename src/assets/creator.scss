@@ -3,7 +3,7 @@
 @mixin data-field{
     display: flex;
     flex-direction: column;
-    //flex-grow: 2;
+    flex-grow: 2;
     background-color: rgb(196, 196, 196);
     background: linear-gradient(to bottom right, rgb(177, 173, 173), rgb(196, 196,196), rgb(177, 173, 173));
     padding: 10px 20px 10px 20px;
@@ -36,15 +36,19 @@
     background-color: rgb(196, 196, 196);
     display: flex;
     flex-direction: row;
-    margin: 0;
-    margin-left: 0;
+    margin: 0px;
+    padding: 0px;
+    /*margin-left: 0;
     margin-right: 0;
     padding-left: 0;
-    padding-right: 0;
-    padding: 0;
+    padding-right: 0;*/
+    top: 0; 
+    //right: 0;
+    //left: 0;
+    //padding: 0;
     width: 100vw;
-    height: 100%;
-    margin-top: 0;
+    
+    //margin-top: 0;
     border: 0;
     outline: 0;
     color: $font-color;
@@ -75,7 +79,8 @@ h1{
     border-width: 2px;
     border-color: black;
     align-items: space-evenly;
-    margin: auto;
+    margin: 0;
+    padding: 0;
     background-color: white;
 
 h2{
@@ -150,10 +155,11 @@ h2{
 
 #main_table{
     width: 100vw;
-    height: 100%;
+    
     background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
     padding: 1em 3em 1em 3em;
     margin-top: 0;
+    margin-bottom: 0;
     color: rgb(223, 223, 223);
 
     .column_data{
@@ -185,11 +191,5 @@ h2{
         &:hover{
             @include button-hover;
         }
-    }
-    #final_submit{
-        margin-right: 16px;
-    }
-    #send{
-        margin-left: 16px;
     }
 }
