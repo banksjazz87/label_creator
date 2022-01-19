@@ -38,17 +38,8 @@
     flex-direction: row;
     margin: 0px;
     padding: 0px;
-    /*margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;*/
     top: 0; 
-    //right: 0;
-    //left: 0;
-    //padding: 0;
     width: 100vw;
-    
-    //margin-top: 0;
     border: 0;
     outline: 0;
     color: $font-color;
@@ -159,7 +150,7 @@ h2{
     background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
     padding: 1em 3em 1em 3em;
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 0px;
     color: rgb(223, 223, 223);
 
     .column_data{
@@ -184,6 +175,7 @@ h2{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 128px;
 
     button{
         @include button-style;

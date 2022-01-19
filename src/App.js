@@ -95,6 +95,7 @@ function ShippingCreator() {
     <body id="creator_body">
       <Nav />
       <ParentShippingCreator />
+      <Footer />
     </body>
   );
 }
