@@ -30,8 +30,8 @@ this.state = {
   render() {
     if(this.state.fetched === true){
     return (
-      <div>
-        <h1>Packing Slip</h1>
+      <div id="container">
+        <h1 id="header">Packing Slip</h1>
         <Address 
           id="ship_from"
           from={true} 
@@ -63,7 +63,7 @@ this.state = {
 const Address = (props) => {
   return(
     <div className={props.id}>
-      {props.from ? <p style={{fontSize: '20px'}}>Ship From</p> : <p style={{fontSize: '20px'}}>Ship To</p>}
+      {props.from ? <p style={{fontSize: '20px', fontWeight: 'bold'}}>Ship From</p> : <p style={{fontSize: '22px', fontWeight: 'bold'}}>Ship To</p>}
       <p>{props.items.company}</p>
       <p>{props.items.street}</p>
       <p>{`${props.items.city}, ${props.items.state} ${props.items.zip}`}</p>
