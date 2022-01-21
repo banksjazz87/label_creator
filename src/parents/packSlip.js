@@ -31,7 +31,7 @@ this.state = {
     if(this.state.fetched === true){
     return (
       <div id="container">
-        <h1 id="header">Packing Slip</h1>
+        <h1 id="packing_slip_header">Packing Slip</h1>
         <Address 
           id="ship_from"
           from={true} 
@@ -103,17 +103,17 @@ const MainTable = (props) => {
   const menuItems = props.items.map((x, y) => {
     return(
     <>
-      <tr key={'row' + y}>
-        <td>{props.items[y].qtyNeeded}</td>
-        <td>{props.items[y].itemDescription}</td>
-        <td>{props.items[y].qtyShipped}</td>
+      <tr key={'row' + y} id="description_row">
+        <td id="qty_needed" class="item_info qty">{props.items[y].qtyNeeded}</td>
+        <td id="item_description" class="item_info">{props.items[y].itemDescription}</td>
+        <td id="qty_shipped" class="item_info qty">{props.items[y].qtyShipped}</td>
       </tr>
       <tr key={'description' + y}>
       <td></td>
         {props.items[y].numOfCartons > 1 ? 
-        <td>{props.items[y].numOfCartons + " Cartons @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>
+        <td class="item_info">{props.items[y].numOfCartons + " Cartons @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>
         : 
-        <td>{props.items[y].numOfCartons + " Carton @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>}
+        <td class="item_info">{props.items[y].numOfCartons + " Carton @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>}
       </tr>
       <td></td>
     </>
@@ -121,7 +121,7 @@ const MainTable = (props) => {
   })
   return(
     <table id="pack_slip_table">
-      <tr>
+      <tr id="qty_desc_ship_headers">
         <th>Quantity</th>
         <th>Description</th>
         <th>Ship Quantity</th>

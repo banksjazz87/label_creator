@@ -8,7 +8,7 @@
     width: 100vw;
 }
 
-#header{
+#packing_slip_header{
     text-align: right;
     margin-right: 64px;
     color: gray;
@@ -42,8 +42,7 @@
 
 #details_header{
     background-color: rgb(8, 8, 78);
-    color: white;
-    
+    color: white;  
 }
 
 
@@ -54,12 +53,31 @@
     border-style: solid;
     border-width: 2px;
     border-color: black;
+    font-size: 18px;
+    font-family: arial;
 
     #date_job_header{
         text-align: center;
-        border-collapse: collapse;
-        border: solid thin;
+        background-color: rgb(206, 206, 206);
     }
+}
+
+.item_info{
+    text-align: left;
+    font-weight: 525;
+}
+
+.qty{
+    text-align: center;
+}
+
+#qty_desc_ship_headers{
+    background-color: rgb(8, 8, 78);
+    color: white;
+}
+
+#description_row{
+    background-color: rgb(206, 206, 206);
 }
 
 #thank_you_text{
@@ -67,3 +85,5 @@
     line-height: 24px;
     margin-top: 2em;
 }
+
+
