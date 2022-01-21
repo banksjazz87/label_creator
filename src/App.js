@@ -13,6 +13,7 @@ import ParentPackSlip from "./parents/packSlip.js";
 import ParentShipTo from "./parents/shipTo.js";
 import Nav from "./components/navBar.js";
 import Footer from "./components/footer.js";
+import PrintButton from "./components/printButton.js";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function PackSlip() {
     <div id="pack_slip_body">
       <Nav />
       <ParentPackSlip />
+      <PrintButton />
     </div>
   );
 }
