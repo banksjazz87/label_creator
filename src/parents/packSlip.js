@@ -43,12 +43,14 @@ this.state = {
         <p id="po_num">
           {`PO#: ${this.state.userData['PO']}`}
         </p>
+      <div id="table_container">
         <JobNum 
           job={this.state.userData['Job']}
           date={this.state.userData.date}
           />
         <MainTable 
           items={this.state.userData['skid']}/>
+      </div>
         <ThankYou phone={this.state.userData['shipFrom']['phone']} />
       </div>
     );
@@ -77,15 +79,15 @@ const Address = (props) => {
 const JobNum = (props) => {
 
   return(
-    <table style={{backgroundColor: 'gray', borderWidth: '6px', borderColor: 'black'}}>
-      <tr style={{backgroundColor: "purple", color: "white", boderWidth: '6px', borderColor: 'gray'}}>
+    <table>
+      <tr id="details_header">
         <th>Customer ID</th>
         <th>Ship Date</th>
         <th>Method Shipped</th>
         <th>Tracking#</th>
         <th>Job#</th>
       </tr>
-      <tr>
+      <tr id="date_job_header">
         <td></td>
         <td>{props.date}</td>
         <th></th>
@@ -118,7 +120,7 @@ const MainTable = (props) => {
     )
   })
   return(
-    <table>
+    <table id="pack_slip_table">
       <tr>
         <th>Quantity</th>
         <th>Description</th>

@@ -1,3 +1,5 @@
+@import "library";
+
 #pack_slip_body{
     background-color: white;
     margin: 0;
@@ -36,6 +38,28 @@
     font-size: 22px;
     line-height: 16px;
     margin-bottom: 64px;
+}
+
+#details_header{
+    background-color: rgb(8, 8, 78);
+    color: white;
+    
+}
+
+
+
+#table_container{
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+
+    #date_job_header{
+        text-align: center;
+        border-collapse: collapse;
+        border: solid thin;
+    }
 }
 
 #thank_you_text{
