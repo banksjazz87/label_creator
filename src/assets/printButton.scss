@@ -1,0 +1,25 @@
+@import "library";
+
+
+#print_button{
+    padding: 1em 3em 1em 3em;
+    color: white;
+    justify-self: center;
+    border-radius: 6px;
+    border-style: none;
+    font-size: 1.05em;
+    background-color: $hover-button;
+
+    &:hover{
+        background-color: $button-color;
+        
+    }
+
+    &:active{
+        background-color: $button-color;
+        border-style: solid;
+        border-width: 4px;
+        border-color: $third-color;
+    }
+
+}

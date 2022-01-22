@@ -2,6 +2,8 @@
 
 #pack_slip_body{
     background-color: white;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -42,7 +44,7 @@
 }
 
 #details_header{
-    background-color: rgb(8, 8, 78);
+    background-color: $hover-button;
     color: white;  
 }
 
@@ -73,7 +75,7 @@
 }
 
 #qty_desc_ship_headers{
-    background-color: rgb(8, 8, 78);
+    background-color: $hover-button;
     color: white;
 }
 
@@ -85,6 +87,11 @@
     text-align: center;
     line-height: 24px;
     margin-top: 2em;
+}
+
+#print_container{
+    display: flex;
+    justify-content: center;
 }
 
 

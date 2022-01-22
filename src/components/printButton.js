@@ -6,7 +6,11 @@ const PrintButton = () => {
         e.preventDefault();
         window.print();
     }
-  return <button onClick={print}>Print</button>;
+  return(
+  <div id="print_container">
+    <button id="print_button" onClick={print}>Print</button>;
+  </div>
+  )
 };
 
 export default PrintButton;
