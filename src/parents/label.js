@@ -58,6 +58,8 @@ class ParentLabels extends React.Component {
     return (
       <div>
         <p id="labels_needed">{`Print ${this.state.userData.skid[this.state.count].numOfCartons}`}</p>
+
+      <div id="label_container">
         <TopHeading 
           job={this.state.userData.Job}
           shipFrom={this.state.userData.shipFrom.company}
@@ -74,7 +76,9 @@ class ParentLabels extends React.Component {
           quantityPerCarton={this.state.userData.skid[this.state.count].qtyPerCarton}
           date={this.state.userData.date}
         />
+      </div>
 
+      <div id="label_buttons_container">
         <Button
           id="previous_button"
           clickHandler={this.decrementHandler}
@@ -86,6 +90,7 @@ class ParentLabels extends React.Component {
           clickHandler={this.incrementHandler}
           text="Next"
         />
+      </div>
       </div>
     );
   }else{

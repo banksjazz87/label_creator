@@ -1,0 +1,12 @@
+@media print{
+   #hamburger_icon{
+       display: none;
+       opacity: 0;
+   } 
+   #print_container{
+       display: none;
+   }
+   #packing_slip_header{
+       margin-right: 0px;
+   }
+}

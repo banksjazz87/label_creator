@@ -27,12 +27,15 @@
 .ship_from{
     line-height: 1px;
     top: 0px;
+    font-size: 1.75em;
+    color: gray;
+    font-style: italic;
 }
 
 .ship_to{
-    margin-top: 32px;
+    margin-top: 64px;
     line-height: 6px;
-    font-size: 22px;
+    font-size: 1.15em;
 }
 
 #po_num{
@@ -40,7 +43,7 @@
     font-size: 22px;
     font-weight: bold;
     line-height: 16px;
-    margin-bottom: 64px;
+    margin-bottom: 24px;
 }
 
 #details_header{
