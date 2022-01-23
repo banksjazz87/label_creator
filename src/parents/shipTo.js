@@ -1,7 +1,8 @@
 import * as React from "react";
 import "../assets/shipTo.scss";
 import "../assets/nav.scss";
-import userDataFromCreator from "../variables/dummyData"
+import userDataFromCreator from "../variables/dummyData";
+import PrintButton from "../components/printButton";
 //import serverCall from "../functions/serverCall"
 
 class ParentShipTo extends React.Component {
@@ -28,8 +29,7 @@ class ParentShipTo extends React.Component {
 
   render() {
     return( 
-    <div>
-
+    <div id="ship_to_container">
       <ShipToFrom 
         toFrom="ship_from"
         items={this.state.userData.shipFrom}
@@ -40,9 +40,9 @@ class ParentShipTo extends React.Component {
         items={this.state.userData.shipTo}
       />
 
-      <p style={{fontSize: '32px'}}>{`PO#: ${this.state.userData.PO}`}</p>
-
+      <p id="pack_slip_po">{`PO#: ${this.state.userData.PO}`}</p>
       
+      <PrintButton />
     </div>
     )
   }
@@ -58,7 +58,7 @@ const ShipToFrom = (props) => {
   }
 
   return (
-    <div id={props.ship_from}>
+    <div id={props.toFrom}>
       <p>{props.items.company}</p>
       <p>{props.items.street}</p>
       <p>{`${props.items.city}, ${props.items.state} ${props.items.zip}`}</p>
