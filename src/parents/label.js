@@ -1,7 +1,8 @@
 import * as React from "react";
 import "../assets/label.scss";
 import "../assets/nav.scss"
-import userDataFromCreator from "../variables/dummyData"
+import userDataFromCreator from "../variables/dummyData";
+import PrintButton from "../components/printButton";
 //import serverCall from "../functions/serverCall"
 
 
@@ -84,7 +85,9 @@ class ParentLabels extends React.Component {
           clickHandler={this.decrementHandler}
           text="Previous"
         />
-       
+
+       <PrintButton />
+
         <Button 
           id="next_button"
           clickHandler={this.incrementHandler}
@@ -103,7 +106,7 @@ class ParentLabels extends React.Component {
 
 const TopHeading = (props) => {
   return(
-    <div id="top_of_label">
+    <div id="top_of_label" class="label_content">
       <p id="job">{`Job# ${props.job}`}</p>
       <p id="company_name">{props.shipFrom}</p>
     </div>
@@ -112,7 +115,7 @@ const TopHeading = (props) => {
 
 const LabelMiddle = (props) => {
   return(
-    <div id="middle_label">
+    <div id="middle_label" class="label_content">
       <p id="description">{props.description}</p>
     </div>
   )
@@ -120,7 +123,7 @@ const LabelMiddle = (props) => {
 
 const LabelBottom = (props) => {
   return(
-    <div id="bottom_label">
+    <div id="bottom_label" class="label_content">
       <p id="attention">{`Attention: ${props.attention}`}</p>
       <p id="purchase_order">{`PO#: ${props.purchaseOrder}`}</p>
       <p id="packs_rolls">{`Poly'd/Rolls @ ${props.packs}`}</p>
@@ -132,7 +135,7 @@ const LabelBottom = (props) => {
 
 const Button = (props) => {
   return(
-    <button onClick={props.clickHandler}>{props.text}</button>
+    <button className="label_buttons" onClick={props.clickHandler}>{props.text}</button>
   )
 }
 
