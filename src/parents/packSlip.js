@@ -49,7 +49,10 @@ this.state = {
           date={this.state.userData.date}
           />
         <MainTable 
-          items={this.state.userData['skid']}/>
+          items={this.state.userData['skid']}
+          totalCartons={this.state.userData['totalCartons']}
+          total={this.state.userData['totalQty']}
+          />
       </div>
         <ThankYou phone={this.state.userData['shipFrom']['phone']} />
       </div>
@@ -126,6 +129,14 @@ const MainTable = (props) => {
         <th>Ship Quantity</th>
       </tr>
       {menuItems}
+      <tr id="total_cartons" className="totals">
+        <th>Total Cartons</th>
+        <td>{props.totalCartons}</td>
+      </tr>
+      <tr id="total_quantity" className="totals">
+        <th>Total Quantity</th>
+        <td>{props.total}</td>
+      </tr>
     </table>
   )
 }

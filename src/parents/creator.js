@@ -23,6 +23,19 @@ const changeDateFormat = (str) => {
   return date;
 }
 
+//Function to get the total number of cartons and the total qty.
+const total = (itemsClassName) => {
+  const items = document.getElementsByClassName(itemsClassName);
+  let currentTotal = 0;
+
+  for(let i = 0; i < items.length; i++){
+    
+    currentTotal = currentTotal + parseInt(items[i].value);
+  }
+
+  return currentTotal;
+}
+
 /**
  * 
  * @param {*} url 
@@ -90,6 +103,9 @@ class ParentShippingCreator extends React.Component {
       Job: null,
       lines: 0, 
       date: "",
+      
+      totalCartons: 0,
+      totalQty: 0,
 
       numberOfLinesSubmitClicked: false,
       submitClicked: false, 
@@ -180,6 +196,12 @@ class ParentShippingCreator extends React.Component {
         clicked: true, 
         date: changeDateFormat(this.state.date)
       })
+
+   this.setState({
+     totalCartons: total("numOfCartons"),
+     totalQty: total("qtyShipped")
+   })
+
   }
 
   //This function will post all of the data that has been supplied by the user, to the server.
