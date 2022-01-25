@@ -130,10 +130,12 @@ const MainTable = (props) => {
       </tr>
       {menuItems}
       <tr id="total_cartons" className="totals">
+        <th></th>
         <th>Total Cartons</th>
         <td>{props.totalCartons}</td>
       </tr>
       <tr id="total_quantity" className="totals">
+        <th></th>
         <th>Total Quantity</th>
         <td>{props.total}</td>
       </tr>
