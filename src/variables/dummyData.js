@@ -38,6 +38,14 @@ let userDataFromCreator = [
         numOfCartons: "3",
       },
       {
+        itemDescription: "Giorgio Chopped Pieces 16oz",
+        qtyNeeded: "32,000",
+        qtyShipped: "36,000",
+        packsRolls: "1,000",
+        qtyPerCarton: "12,000",
+        numOfCartons: "1",
+      },
+      {
         itemDescription: "Phillips Guans 16oz",
         qtyNeeded: "48,000",
         qtyShipped: "48,000",

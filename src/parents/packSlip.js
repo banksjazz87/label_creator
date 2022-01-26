@@ -103,49 +103,66 @@ const JobNum = (props) => {
 
 const MainTable = (props) => {
 
-  let newArr;
-
+/**
+ * 
+ * @param {*} arr 
+ * @param {*} itemNum 
+ * @returns text for the cartonText field. 
+ */
   const skidText = (arr, itemNum) => {
    
     let text = "";
      
-    arr[itemNum].numOfCartons > 1 ? text =
-     `${arr[itemNum].numOfCartons} Cartons @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})` :
+    arr[itemNum].numOfCartons > 1 ? 
+    text = `${arr[itemNum].numOfCartons} Cartons @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})` :
 
      text = `${arr[itemNum].numOfCartons} Carton @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})`
 
      return text;
   }
 
+  /**
+   * 
+   * @returns an array of objects with a cartonText field added to it. All duplicate items with the same name are conoslidated to one object.
+   */
   const checkForDuplicateItems = () => {
 
-    newArr = props.items;
+    let newArr = props.items;
 
-    for(let i = 0; i < newArr.length; i ++){
-      if(newArr[i + 1].itemDescription === newArr[i].itemDescription){
+   for(let i = 0; i < newArr.length; i ++){
+      
+    if( i < newArr.length - 1 && newArr[i + 1].itemDescription === newArr[i].itemDescription){
         
-        newArr.cartonText = skidText('newArr', i) + " " + skidText('newArr', i + 1);
+        while(newArr[i].itemDescription === newArr[i + 1].itemDescription){
+        
+          newArr[i].cartonText = skidText(newArr, i) + " " + skidText(newArr, i + 1);
+
+          newArr.splice(i + 1, 1);
+        }
+
       }else{
-        newArr.cartonText = skidText('newArr', i);
+        
+        newArr[i].cartonText = skidText(newArr, i);
       }
     }
-
+      
+    return newArr;
   }
+
   
-  const menuItems = props.items.map((x, y) => {
+  const noDuplicates = checkForDuplicateItems();
+
+  const menuItems = noDuplicates.map((x, y) => {
     return(
     <>
       <tr key={'row' + y} id="description_row">
-        <td id="qty_needed" class="item_info qty">{props.items[y].qtyNeeded}</td>
-        <td id="item_description" class="item_info">{props.items[y].itemDescription}</td>
-        <td id="qty_shipped" class="item_info qty">{props.items[y].qtyShipped}</td>
+        <td id="qty_needed" class="item_info qty">{noDuplicates[y].qtyNeeded}</td>
+        <td id="item_description" class="item_info">{noDuplicates[y].itemDescription}</td>
+        <td id="qty_shipped" class="item_info qty">{noDuplicates[y].qtyShipped}</td>
       </tr>
       <tr key={'description' + y}>
       <td></td>
-        {props.items[y].numOfCartons > 1 ? 
-        <td class="item_info">{props.items[y].numOfCartons + " Cartons @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>
-        : 
-        <td class="item_info">{props.items[y].numOfCartons + " Carton @ " + props.items[y].qtyPerCarton + " (Packs/Rolls @  " + props.items[y].packsRolls + ")"}</td>}
+        <td class="item_info">{noDuplicates[y].cartonText}</td>
       </tr>
       <td></td>
     </>
