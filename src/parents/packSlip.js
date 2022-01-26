@@ -102,6 +102,35 @@ const JobNum = (props) => {
 }
 
 const MainTable = (props) => {
+
+  let newArr;
+
+  const skidText = (arr, itemNum) => {
+   
+    let text = "";
+     
+    arr[itemNum].numOfCartons > 1 ? text =
+     `${arr[itemNum].numOfCartons} Cartons @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})` :
+
+     text = `${arr[itemNum].numOfCartons} Carton @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})`
+
+     return text;
+  }
+
+  const checkForDuplicateItems = () => {
+
+    newArr = props.items;
+
+    for(let i = 0; i < newArr.length; i ++){
+      if(newArr[i + 1].itemDescription === newArr[i].itemDescription){
+        
+        newArr.cartonText = skidText('newArr', i) + " " + skidText('newArr', i + 1);
+      }else{
+        newArr.cartonText = skidText('newArr', i);
+      }
+    }
+
+  }
   
   const menuItems = props.items.map((x, y) => {
     return(
