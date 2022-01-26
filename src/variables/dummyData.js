@@ -58,8 +58,8 @@ let userDataFromCreator = [
     PO: "54791",
     Job: "176592",
     date: "12/28/2021",
-    totalCartons: 50,
-    totalQty: 2600,
+    totalCartons: 500000,
+    totalQty: 20700600,
   },
 ];
 

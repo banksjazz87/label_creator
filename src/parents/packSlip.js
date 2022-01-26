@@ -4,6 +4,38 @@ import "../assets/nav.scss"
 import userDataFromCreator from "../variables/dummyData"
 //import serverCall from "../functions/serverCall"
 
+/**
+ * 
+ * @param {*} value 
+ * @returns string of the value that it is given, with a comma placed in the correct location.
+ */
+const commaPlacer = (value) => {
+  let finalValue;
+  let valueString = value.toString();
+
+  if(value.length <= 3){
+    finalValue = valueString;
+
+  }else{
+    let arrOfValue = valueString.split("");
+    let lastThree = arrOfValue.slice(arrOfValue.length - 3);
+    let arr = [];
+
+    while(arrOfValue.length > 3){
+
+      let joinThree = lastThree.join('');
+      arr.unshift(joinThree);
+      arrOfValue.splice(arrOfValue.length - 3, 3);
+    }
+
+    let joinFirstDigits = arrOfValue.join('');
+    arr.unshift(joinFirstDigits);
+    finalValue = arr.join(',');  
+  }
+  
+  return finalValue;
+}
+
 class ParentPackSlip extends React.Component {
   constructor(props) {
     super(props);
@@ -132,12 +164,12 @@ const MainTable = (props) => {
       <tr id="total_cartons" className="totals">
         <th></th>
         <th>Total Cartons</th>
-        <td>{props.totalCartons}</td>
+        <td>{commaPlacer(props.totalCartons)}</td>
       </tr>
       <tr id="total_quantity" className="totals">
         <th></th>
         <th>Total Quantity</th>
-        <td>{props.total}</td>
+        <td>{commaPlacer(props.total)}</td>
       </tr>
     </table>
   )
