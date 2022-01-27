@@ -121,15 +121,29 @@ const MainTable = (props) => {
      return text;
   }
 
+/**
+ * 
+ * @param {*} value 
+ * @returns removes all commas and returns a number with all of the trailing zeroes.
+ */
   const numOrNot = (value) => {
 
-    let indexOfComma = value.indexOf(',');
-    let firstHalf = value.slice(0, indexOfComma);
-    let lastHalf = value.slice(indexOfComma + 1, value.length);
+    let copyOfValue = value;
 
-    let finalNum = firstHalf + lastHalf;
+    while(copyOfValue.indexOf(',') > -1){
+      
+      let indexOfComma = copyOfValue.indexOf(',');
+      let firstHalf = copyOfValue.slice(0, indexOfComma);
+      let lastHalf = copyOfValue.slice(indexOfComma + 1, value.length);
 
-    return parseInt(finalNum);
+      copyOfValue = firstHalf + lastHalf;
+    }
+    
+
+    let finalNum = parseInt(copyOfValue);
+    console.log(finalNum);
+
+    return finalNum;
   }
 
 
@@ -150,8 +164,11 @@ const MainTable = (props) => {
           newArr[i].cartonText = skidText(newArr, i) + " " + skidText(newArr, i + 1);
           
 
-          newArr[i].qtyShipped = 
+          
+          let sum = 
           numOrNot(newArr[i].qtyShipped) + numOrNot(newArr[i + 1].qtyShipped);
+
+          newArr[i].qtyShipped = commaPlacer(sum);
 
           newArr.splice(i + 1, 1);
         }
