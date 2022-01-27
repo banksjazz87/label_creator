@@ -121,21 +121,17 @@ const MainTable = (props) => {
      return text;
   }
 
-  const addNumbers = (a, b) => {
+  const numOrNot = (value) => {
 
-    let sum = parseInt(a) + parseInt(b);
-    let stringOfSum = sum.toString();
-    let numOfZeroes = a.length - sum.length;
+    let indexOfComma = value.indexOf(',');
+    let firstHalf = value.slice(0, indexOfComma);
+    let lastHalf = value.slice(indexOfComma + 1, value.length);
 
-    for(var i = 0; i < numOfZeroes; i++){
-      stringOfSum = stringOfSum + '0';
-    }
-    console.log(a.length);
-    console.log('sum', stringOfSum.length);
+    let finalNum = firstHalf + lastHalf;
 
-    console.log(stringOfSum);
-    return stringOfSum;
+    return parseInt(finalNum);
   }
+
 
   /**
    * 
@@ -147,14 +143,15 @@ const MainTable = (props) => {
 
    for(let i = 0; i < newArr.length; i ++){
       
-    if( i < newArr.length - 1 && newArr[i + 1].itemDescription === newArr[i].itemDescription){
+    if( newArr[i + 1] && newArr[i + 1].itemDescription === newArr[i].itemDescription){
         
         while(newArr[i].itemDescription === newArr[i + 1].itemDescription){
         
           newArr[i].cartonText = skidText(newArr, i) + " " + skidText(newArr, i + 1);
           
 
-          newArr[i].qtyShipped = addNumbers(newArr[i].qtyShipped, newArr[i + 1].qtyShipped);
+          newArr[i].qtyShipped = 
+          numOrNot(newArr[i].qtyShipped) + numOrNot(newArr[i + 1].qtyShipped);
 
           newArr.splice(i + 1, 1);
         }
