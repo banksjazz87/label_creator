@@ -121,6 +121,22 @@ const MainTable = (props) => {
      return text;
   }
 
+  const addNumbers = (a, b) => {
+
+    let sum = parseInt(a) + parseInt(b);
+    let stringOfSum = sum.toString();
+    let numOfZeroes = a.length - sum.length;
+
+    for(var i = 0; i < numOfZeroes; i++){
+      stringOfSum = stringOfSum + '0';
+    }
+    console.log(a.length);
+    console.log('sum', stringOfSum.length);
+
+    console.log(stringOfSum);
+    return stringOfSum;
+  }
+
   /**
    * 
    * @returns an array of objects with a cartonText field added to it. All duplicate items with the same name are conoslidated to one object.
@@ -136,6 +152,9 @@ const MainTable = (props) => {
         while(newArr[i].itemDescription === newArr[i + 1].itemDescription){
         
           newArr[i].cartonText = skidText(newArr, i) + " " + skidText(newArr, i + 1);
+          
+
+          newArr[i].qtyShipped = addNumbers(newArr[i].qtyShipped, newArr[i + 1].qtyShipped);
 
           newArr.splice(i + 1, 1);
         }

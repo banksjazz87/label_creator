@@ -40,7 +40,7 @@ let userDataFromCreator = [
       {
         itemDescription: "Giorgio Chopped Pieces 16oz",
         qtyNeeded: "32,000",
-        qtyShipped: "36,000",
+        qtyShipped: "12,000",
         packsRolls: "1,000",
         qtyPerCarton: "12,000",
         numOfCartons: "1",
