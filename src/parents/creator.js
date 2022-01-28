@@ -2,6 +2,7 @@ import * as React from "react";
 import "../assets/creator.scss";
 import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
+import MathFunctions from "../functions/mathFunctions.js";
 
 const SkidDescriptors = {
     qtyNeeded: null, 
@@ -21,19 +22,6 @@ const changeDateFormat = (str) => {
   let date = `${month}/${day}/${year}`;
 
   return date;
-}
-
-//Function to get the total number of cartons and the total qty.
-const total = (itemsClassName) => {
-  const items = document.getElementsByClassName(itemsClassName);
-  let currentTotal = 0;
-
-  for(let i = 0; i < items.length; i++){
-    
-    currentTotal = currentTotal + parseInt(items[i].value);
-  }
-
-  return currentTotal;
 }
 
 /**
@@ -198,8 +186,8 @@ class ParentShippingCreator extends React.Component {
       })
 
    this.setState({
-     totalCartons: total("numOfCartons"),
-     totalQty: total("qtyShipped")
+     totalCartons: MathFunctions.total("numOfCartons"),
+     totalQty: MathFunctions.total("qtyShipped")
    })
 
   }

@@ -2,7 +2,7 @@ import * as React from "react";
 import "../assets/packSlip.scss";
 import "../assets/nav.scss"
 import userDataFromCreator from "../variables/dummyData"
-import commaPlacer from "../functions/commaPlacer.js";
+import MathFunctions from "../functions/mathFunctions.js";
 //import serverCall from "../functions/serverCall"
 
 class ParentPackSlip extends React.Component {
@@ -121,31 +121,6 @@ const MainTable = (props) => {
      return text;
   }
 
-/**
- * 
- * @param {*} value 
- * @returns removes all commas and returns a number with all of the trailing zeroes.
- */
-  const numOrNot = (value) => {
-
-    let copyOfValue = value;
-
-    while(copyOfValue.indexOf(',') > -1){
-      
-      let indexOfComma = copyOfValue.indexOf(',');
-      let firstHalf = copyOfValue.slice(0, indexOfComma);
-      let lastHalf = copyOfValue.slice(indexOfComma + 1, value.length);
-
-      copyOfValue = firstHalf + lastHalf;
-    }
-    
-
-    let finalNum = parseInt(copyOfValue);
-    console.log(finalNum);
-
-    return finalNum;
-  }
-
 
   /**
    * 
@@ -166,9 +141,9 @@ const MainTable = (props) => {
 
           
           let sum = 
-          numOrNot(newArr[i].qtyShipped) + numOrNot(newArr[i + 1].qtyShipped);
+          MathFunctions.numOrNot(newArr[i].qtyShipped) + MathFunctions.numOrNot(newArr[i + 1].qtyShipped);
 
-          newArr[i].qtyShipped = commaPlacer(sum);
+          newArr[i].qtyShipped = MathFunctions.commaPlacer(sum);
 
           newArr.splice(i + 1, 1);
         }
@@ -212,12 +187,12 @@ const MainTable = (props) => {
       <tr id="total_cartons" className="totals">
         <th></th>
         <th>Total Cartons</th>
-        <td>{commaPlacer(props.totalCartons)}</td>
+        <td>{MathFunctions.commaPlacer(props.totalCartons)}</td>
       </tr>
       <tr id="total_quantity" className="totals">
         <th></th>
         <th>Total Quantity</th>
-        <td>{commaPlacer(props.total)}</td>
+        <td>{MathFunctions.commaPlacer(props.total)}</td>
       </tr>
     </table>
   )
