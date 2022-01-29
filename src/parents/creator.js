@@ -51,9 +51,6 @@ const postData = async(url = '', data = {}) => {
 //This will create an object to store all of the information needed for the skid
 class SkidItems{
 
-//constructor(itemDescription, qtyNeeded, qtyShipped, packsRolls, qtyPerCarton, numOfCartons) {
-
-
   constructor(qtyNeeded, itemDescription, packsRolls, qtyPerCarton, numOfCartons, qtyShipped){
 
   this.qtyNeeded = qtyNeeded;
@@ -107,6 +104,7 @@ class ParentShippingCreator extends React.Component {
 
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
+    this.numberOnChange = this.numberOnChange.bind(this);
 
   }
 
@@ -206,6 +204,14 @@ class ParentShippingCreator extends React.Component {
 
 }
 
+//function to automatically added a comma to a number that should have a comma, based on its length.
+numberOnChange(e){
+  e.preventDefault();
+  let newValue = MathFunctions.numOrNot(e.target.value);
+  e.target.value = MathFunctions.commaPlacer(newValue);
+}
+
+
   render(){
   return (
     <div id="creator_container">
@@ -222,7 +228,7 @@ class ParentShippingCreator extends React.Component {
                       toFrom={"shipTo"} 
                       itemClass={'ship'} 
                       header={'Shipping To'} 
-                      title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+                      title={Object.keys(this.state.shipTo)} handleFocus={(e, key) => this.updateObj(e, key)} />
    {/* </div>*/}
 
     <div id="po_container">
@@ -265,7 +271,9 @@ class ParentShippingCreator extends React.Component {
       <SkidContents title={Object.keys(SkidDescriptors)}
                     linesNeeded={this.state.lines} 
                     skidObjectsArr={this.state.skid}
-                    hide={this.state.showSkidHeader} />
+                    hide={this.state.showSkidHeader} 
+                    changeHandler={this.numberOnChange}
+                    />
 
     <div id="final_buttons">
       <button id="final_submit" 
@@ -360,7 +368,7 @@ const SkidContents = (props) => {
         className="column_data" 
         key={'column_num' + y}
         >
-        <input className={Object.keys(SkidDescriptors)[y]}></input>
+        <input className={Object.keys(SkidDescriptors)[y]} onChange={props.changeHandler}></input>
       </td>
     )
   })

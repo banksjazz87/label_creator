@@ -1,4 +1,7 @@
 @media print{
+    #pack_slip_body{
+       color-adjust: exact; 
+    }
    #hamburger_icon{
        display: none;
        opacity: 0;

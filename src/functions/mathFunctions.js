@@ -37,13 +37,16 @@ const MathFunctions = {
   
     }else{
       let arrOfValue = valueString.split("");
-      let lastThree = arrOfValue.slice(arrOfValue.length - 3);
       let arr = [];
   
       while(arrOfValue.length > 3){
+
+        let lastThree = arrOfValue.slice(arrOfValue.length - 3);
         let joinThree = lastThree.join('');
+        
         arr.unshift(joinThree);
         arrOfValue.splice(arrOfValue.length - 3, 3);
+
       }
   
       let joinFirstDigits = arrOfValue.join('');
