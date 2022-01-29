@@ -17,6 +17,7 @@ import Nav from "./components/navBar.js";
 import Footer from "./components/footer.js";
 import PrintButton from "./components/printButton.js";
 
+
 function App() {
   return (
     <div>

@@ -8,7 +8,7 @@ const PrintButton = () => {
     }
   return(
   <div id="print_container">
-    <button id="print_button" onClick={print}>Print</button>
+    <button id="print_button" className="big_button" onClick={print}>Print</button>
   </div>
   )
 };
