@@ -10,22 +10,25 @@
 }
 
 #ship_from{
-    margin-left: 1em;
-    margin-top: 2em;
+    margin-left: 4em;
     font-size: 1.75em;
     line-height: .25em;
 }
 
+
 #ship_to{
-    margin-left: 3em;
-    font-size: 3em;
+    //margin-left: 3em;
+    margin-left: 20vw;
+    font-size: 3.5em;
     line-height: .25em;
 }
 
+
 #pack_slip_po{
     font-size: 3em;
-    margin-left: 1em;
+    margin-left: .25em;
 }
+
 
 @media print{
     #hamburger_icon{

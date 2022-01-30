@@ -59,7 +59,7 @@ const ShipToFrom = (props) => {
 
   return (
     <div id={props.toFrom}>
-      <p>{props.items.company}</p>
+      <p>{props.toFrom === "ship_from" ? <span style={{fontSize: ".75em", marginLeft: "-4.7em"}}>Ship From: </span> : <span style={{fontSize: ".75em", marginLeft: "-3.7em"}}>Ship To: </span>}{props.items.company}</p>
       <p>{props.items.street}</p>
       <p>{`${props.items.city}, ${props.items.state} ${props.items.zip}`}</p>
       {checkForItem('attention')}
