@@ -215,7 +215,7 @@ const ThankYou = (props) => {
 const DownloadButton = (props) => {
   return(
     <div>
-      <a href={props.url} download={props.fileName}>
+      <a href={props.url.toString()} download={props.fileName}>
         <button className="big_button" >Download</button>
       </a>
     </div>

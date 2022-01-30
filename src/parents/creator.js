@@ -368,7 +368,8 @@ const SkidContents = (props) => {
         className="column_data" 
         key={'column_num' + y}
         >
-        <input className={Object.keys(SkidDescriptors)[y]} onChange={props.changeHandler}></input>
+        <input className={Object.keys(SkidDescriptors)[y]} 
+        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}></input>
       </td>
     )
   })
