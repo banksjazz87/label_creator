@@ -56,9 +56,6 @@ this.state = {
           />
       </div>
         <ThankYou phone={this.state.userData['shipFrom']['phone']} />
-        <DownloadButton url={window.location.href} 
-                        fileName={`${this.state.userData.Job}_${this.state.userData.shipTo.company}_${this.state.userData.date}.pdf`}
-        />
       </div>
 
     );
@@ -209,16 +206,6 @@ const ThankYou = (props) => {
     <b>Thank you for your business!</b>
     </p>
     
-  )
-}
-
-const DownloadButton = (props) => {
-  return(
-    <div>
-      <a href={props.url.toString()} download={props.fileName}>
-        <button className="big_button" >Download</button>
-      </a>
-    </div>
   )
 }
 
