@@ -13,3 +13,12 @@
        margin-right: 0px;
    }
 }
+
+@media (max-width: 850px){
+    #ship_to_container{
+        font-size: 10px;
+    }
+    #print_button{
+        font-size: 1.5em;
+    }
+}
