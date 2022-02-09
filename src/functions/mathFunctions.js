@@ -43,7 +43,7 @@ const MathFunctions = {
 
         let lastThree = arrOfValue.slice(arrOfValue.length - 3);
         let joinThree = lastThree.join('');
-        
+
         arr.unshift(joinThree);
         arrOfValue.splice(arrOfValue.length - 3, 3);
 

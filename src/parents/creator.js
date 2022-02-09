@@ -228,7 +228,7 @@ numberOnChange(e){
                       toFrom={"shipTo"} 
                       itemClass={'ship'} 
                       header={'Shipping To'} 
-                      title={Object.keys(this.state.shipTo)} handleFocus={(e, key) => this.updateObj(e, key)} />
+                      title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
    {/* </div>*/}
 
     <div id="po_container">

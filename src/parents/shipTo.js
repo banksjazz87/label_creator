@@ -1,9 +1,12 @@
 import * as React from "react";
 import "../assets/shipTo.scss";
 import "../assets/nav.scss";
-import userDataFromCreator from "../variables/dummyData";
+
+//userDataFromCreator used for development
+//import userDataFromCreator from "../variables/dummyData";
+
 import PrintButton from "../components/printButton";
-//import serverCall from "../functions/serverCall"
+import serverCall from "../functions/serverCall"
 
 class ParentShipTo extends React.Component {
   constructor(props) {
@@ -11,20 +14,20 @@ class ParentShipTo extends React.Component {
 
     this.state = {
       //switch fectched to true for developoment, false for production
-      fetched: true,
+      fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: userDataFromCreator[0],
+      userData: "",
     };
   }
 
   //use this function only for production
-  /*componentDidMount(){
+  componentDidMount(){
     serverCall()
     .then(items => this.setState({
         fetched: true,
         userData: items[0]
       }))
-  }*/
+  }
 
 
   render() {

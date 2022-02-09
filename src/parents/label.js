@@ -1,9 +1,11 @@
 import * as React from "react";
 import "../assets/label.scss";
 import "../assets/nav.scss"
-import userDataFromCreator from "../variables/dummyData";
+
+//userDataFromCreator used for development mode
+//import userDataFromCreator from "../variables/dummyData";
 import PrintButton from "../components/printButton";
-//import serverCall from "../functions/serverCall"
+import serverCall from "../functions/serverCall"
 
 
 class ParentLabels extends React.Component {
@@ -12,9 +14,9 @@ class ParentLabels extends React.Component {
 
     this.state = {
       //switch fetched to true for development, false for production
-      fetched: true,
+      fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: userDataFromCreator[0],
+      userData: "",
       count: 0
     };
 
@@ -23,13 +25,13 @@ class ParentLabels extends React.Component {
   }
 
   //use this function only for production
- /* componentDidMount(){
+ componentDidMount(){
     serverCall()
     .then(items => this.setState({
         fetched: true,
         userData: items[0]
       }))
-  }*/
+  }
 
   incrementHandler = (e) => {
     e.preventDefault();

@@ -1,9 +1,12 @@
 import * as React from "react";
 import "../assets/packSlip.scss";
 import "../assets/nav.scss"
-import userDataFromCreator from "../variables/dummyData"
+
+//userDataFromCreator for development only
+//import userDataFromCreator from "../variables/dummyData"
+
 import MathFunctions from "../functions/mathFunctions.js";
-//import serverCall from "../functions/serverCall"
+import serverCall from "../functions/serverCall"
 
 class ParentPackSlip extends React.Component {
   constructor(props) {
@@ -12,21 +15,20 @@ class ParentPackSlip extends React.Component {
 //The code listed below is just for the DEVELOPMENT mode
 this.state = {
   //switch fetched to true for development, false for production
-  fetched: true, 
+  fetched: false, 
   //switch userData to userDataFromCreator[0] for development and "" for production
-  userData: userDataFromCreator[0]
+  userData: ""
 }
   }
   
-  //used for PRODUCTION mode, only
-  /*
+  //used for PRODUCTION mode, only 
   componentDidMount(){
     serverCall()
       .then(items => this.setState({
         userData: items[0],
         fetched: true
       }));
-  }*/
+  }
 
   render() {
     if(this.state.fetched === true){
@@ -188,12 +190,12 @@ const MainTable = (props) => {
       <tr id="total_cartons" className="totals">
         <th></th>
         <th>Total Cartons</th>
-        <td>{MathFunctions.commaPlacer(props.totalCartons)}</td>
+        <td>{props.totalCartons}</td>
       </tr>
       <tr id="total_quantity" className="totals">
         <th></th>
         <th>Total Quantity</th>
-        <td>{MathFunctions.commaPlacer(props.total)}</td>
+        <td>{props.total}</td>
       </tr>
     </table>
   )
