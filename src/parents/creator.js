@@ -207,8 +207,14 @@ class ParentShippingCreator extends React.Component {
 //function to automatically added a comma to a number that should have a comma, based on its length.
 numberOnChange(e){
   e.preventDefault();
-  let newValue = MathFunctions.numOrNot(e.target.value);
-  e.target.value = MathFunctions.commaPlacer(newValue);
+  
+  if(parseInt(e.target.value)){
+    let newValue = MathFunctions.numOrNot(e.target.value);
+    e.target.value = MathFunctions.commaPlacer(newValue);
+  }else{
+    e.target.value = "";
+    alert("Please insert a valid number");
+  }
 }
 
 
@@ -229,7 +235,6 @@ numberOnChange(e){
                       itemClass={'ship'} 
                       header={'Shipping To'} 
                       title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
-   {/* </div>*/}
 
     <div id="po_container">
     <h2 className="header">Shipping 
@@ -369,7 +374,7 @@ const SkidContents = (props) => {
         key={'column_num' + y}
         >
         <input className={Object.keys(SkidDescriptors)[y]} 
-        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}></input>
+        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null} ></input>
       </td>
     )
   })

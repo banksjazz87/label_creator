@@ -31,6 +31,8 @@ class ParentShipTo extends React.Component {
 
 
   render() {
+
+    if(this.state.fetched){
     return( 
     <div id="ship_to_container">
       <ShipToFrom 
@@ -48,6 +50,11 @@ class ParentShipTo extends React.Component {
       <PrintButton />
     </div>
     )
+    }else{
+      return(
+        <h1>Fetching Data</h1>
+      )
+    }
   }
 }
 

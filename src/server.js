@@ -16,7 +16,7 @@ let allData = [];
 //Route for the post request
 app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
-    allData.push(currentData);
+    allData.unshift(currentData);
 
     console.log(allData);
 
