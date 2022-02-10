@@ -4,6 +4,10 @@ const app = express();
 const port = 4500;
 //const path = require('path');
 
+
+require('dotenv').config();
+console.log(process.env.TESTING);
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
