@@ -24,6 +24,7 @@ const changeDateFormat = (str) => {
   return date;
 }
 
+console.log("session storage = " + sessionStorage.getItem('domContent'));
 /**
  * 
  * @param {*} url 
@@ -200,6 +201,17 @@ class ParentShippingCreator extends React.Component {
     let userInput = this.state;
     postData(url, userInput);
 
+    //This will save all of the user data to the session storage object
+    let allDom = document.getElementById('creator_container');
+    let domChildren = allDom.childNodes;
+    let length = domChildren.length;
+
+    
+    sessionStorage.setItem('domContent', domChildren);
+
+    console.log(sessionStorage.getItem('domContent'));
+    console.log("dom length = ", length);
+
     console.log(this.state);
 
 }
@@ -219,6 +231,14 @@ numberOnChange(e){
 
 
   render(){
+    if(sessionStorage.getItem('domContent')){
+      return(
+        <div id="creator_container">
+          {sessionStorage.getItem('domContent')}
+        </div>
+      )
+
+    }else{
   return (
     <div id="creator_container">
       <h1 id="header"> Shipping Creator </h1>
@@ -294,6 +314,7 @@ numberOnChange(e){
 
     </div>
   );
+}
 }
 }
 
