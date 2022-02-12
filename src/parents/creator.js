@@ -3,6 +3,7 @@ import "../assets/creator.scss";
 import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
 import MathFunctions from "../functions/mathFunctions.js";
+import serverCall from "../functions/serverCall"
 
 const SkidDescriptors = {
     qtyNeeded: null, 
@@ -24,7 +25,6 @@ const changeDateFormat = (str) => {
   return date;
 }
 
-console.log("session storage = " + sessionStorage.getItem('domContent'));
 /**
  * 
  * @param {*} url 
@@ -67,6 +67,10 @@ class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      currentSession: function(){
+        return sessionStorage.getItem('currentSession');
+      },
+      userData: "",
       shipFrom: {
         company: "",                                                                                
         street: "",
@@ -95,7 +99,7 @@ class ParentShippingCreator extends React.Component {
 
       numberOfLinesSubmitClicked: false,
       submitClicked: false, 
-      showSkidHeader: false
+      showSkidHeader: false, 
     }
 
     this.updateObj = this.updateObj.bind(this);
@@ -108,8 +112,7 @@ class ParentShippingCreator extends React.Component {
     this.numberOnChange = this.numberOnChange.bind(this);
 
   }
-
-  
+ 
   //updates the ship to or from data fields.
   updateObj(e){
    
@@ -201,16 +204,9 @@ class ParentShippingCreator extends React.Component {
     let userInput = this.state;
     postData(url, userInput);
 
-    //This will save all of the user data to the session storage object
-    let allDom = document.getElementById('creator_container');
-    let domChildren = allDom.childNodes;
-    let length = domChildren.length;
+   //Using the session storage object to keep track if there is an active session
 
-    
-    sessionStorage.setItem('domContent', domChildren);
-
-    console.log(sessionStorage.getItem('domContent'));
-    console.log("dom length = ", length);
+   sessionStorage.setItem('currentSession', 'running');
 
     console.log(this.state);
 
@@ -231,14 +227,6 @@ numberOnChange(e){
 
 
   render(){
-    if(sessionStorage.getItem('domContent')){
-      return(
-        <div id="creator_container">
-          {sessionStorage.getItem('domContent')}
-        </div>
-      )
-
-    }else{
   return (
     <div id="creator_container">
       <h1 id="header"> Shipping Creator </h1>
@@ -248,7 +236,10 @@ numberOnChange(e){
                       toFrom={'shipFrom'}
                       itemClass={'ship'} 
                       header={'Shipping From'} 
-                      title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}  />
+                      title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}
+                      sessionRunning={this.state.currentSession() }
+                      allData={this.state}
+                      />
 
       <ShippingToFrom divId={'shipTo'} 
                       toFrom={"shipTo"} 
@@ -308,7 +299,7 @@ numberOnChange(e){
 
      <button id="send" 
              type='submit' 
-             style={this.state.clicked ? {display: 'block'} :    {display: 'none'}} 
+             style={this.state.clicked ? {display: 'block'} : {display: 'none'}} 
              onClick={this.finalSubmit}>Send</button>
     </div>
 
@@ -316,11 +307,20 @@ numberOnChange(e){
   );
 }
 }
-}
 
 //This will dynamically render all of the elements needed for the shipping to and from.
 const ShippingToFrom = (props) => { 
   
+  if(props.sessionRunning){ 
+     //use this function only for production
+    serverCall()
+    .then(items => this.setState({
+        fetched: true,
+        userData: items[0]
+      }))
+  
+  }
+
   let names = props.title;
 
   let elements = names.map((x, y) => {
@@ -332,7 +332,8 @@ const ShippingToFrom = (props) => {
       className={props.toFrom}
       placeHolder={x} 
       type="text"  
-      onChange={(e) => props.handleChange(e)}>
+      onChange={(e) => props.handleChange(e)}
+      value={props.sessionRunning === 'running' ? props.allData[props.toFrom][x] : null}>
     </input>
   </div>
    )
