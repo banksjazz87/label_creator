@@ -329,8 +329,8 @@ const ShippingToFrom = (props) => {
       className={props.toFrom}
       placeHolder={x} 
       type="text"  
-      onChange={(e) => props.handleChange(e)}>
-      {/*value={sessionStorage.getItem('currentSession') === 'running' ? allSessionData[props.toFrom][x] : null}>*/}
+      onChange={(e) => props.handleChange(e)}
+      value={sessionStorage.getItem('currentSession') === 'running' ? allSessionData[props.toFrom][x] : null}>
     </input>
   </div>
    )
