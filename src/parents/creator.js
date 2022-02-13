@@ -3,7 +3,22 @@ import "../assets/creator.scss";
 import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
 import MathFunctions from "../functions/mathFunctions.js";
-import serverCall from "../functions/serverCall"
+
+console.log(sessionStorage);
+console.log(JSON.parse(sessionStorage.getItem('userData')));
+
+//This function will return all of the userData that is stored in the session storage object, and return it as an object.
+let allSessionData = {};
+
+const sessionStorageData = () => {
+  if(sessionStorage.length > 0){
+    allSessionData = JSON.parse(sessionStorage.getItem('userData'));
+  }
+}
+
+sessionStorageData();
+console.log(allSessionData);
+
 
 const SkidDescriptors = {
     qtyNeeded: null, 
@@ -67,9 +82,6 @@ class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      currentSession: function(){
-        return sessionStorage.getItem('currentSession');
-      },
       userData: "",
       shipFrom: {
         company: "",                                                                                
@@ -110,7 +122,6 @@ class ParentShippingCreator extends React.Component {
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
     this.numberOnChange = this.numberOnChange.bind(this);
-
   }
  
   //updates the ship to or from data fields.
@@ -205,10 +216,8 @@ class ParentShippingCreator extends React.Component {
     postData(url, userInput);
 
    //Using the session storage object to keep track if there is an active session
-
    sessionStorage.setItem('currentSession', 'running');
-
-    console.log(this.state);
+   sessionStorage.setItem('userData', JSON.stringify(this.state));
 
 }
 
@@ -225,7 +234,6 @@ numberOnChange(e){
   }
 }
 
-
   render(){
   return (
     <div id="creator_container">
@@ -237,8 +245,6 @@ numberOnChange(e){
                       itemClass={'ship'} 
                       header={'Shipping From'} 
                       title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}
-                      sessionRunning={this.state.currentSession() }
-                      allData={this.state}
                       />
 
       <ShippingToFrom divId={'shipTo'} 
@@ -311,15 +317,6 @@ numberOnChange(e){
 //This will dynamically render all of the elements needed for the shipping to and from.
 const ShippingToFrom = (props) => { 
   
-  if(props.sessionRunning){ 
-     //use this function only for production
-    serverCall()
-    .then(items => this.setState({
-        fetched: true,
-        userData: items[0]
-      }))
-  
-  }
 
   let names = props.title;
 
@@ -332,8 +329,8 @@ const ShippingToFrom = (props) => {
       className={props.toFrom}
       placeHolder={x} 
       type="text"  
-      onChange={(e) => props.handleChange(e)}
-      value={props.sessionRunning === 'running' ? props.allData[props.toFrom][x] : null}>
+      onChange={(e) => props.handleChange(e)}>
+      {/*value={sessionStorage.getItem('currentSession') === 'running' ? allSessionData[props.toFrom][x] : null}>*/}
     </input>
   </div>
    )
