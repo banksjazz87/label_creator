@@ -122,6 +122,8 @@ class ParentShippingCreator extends React.Component {
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
     this.numberOnChange = this.numberOnChange.bind(this);
+
+    this.clearInput = this.clearInput.bind(this);
   }
  
   //updates the ship to or from data fields.
@@ -234,6 +236,11 @@ numberOnChange(e){
   }
 }
 
+//Create an event listener that changes the value of an input element to "" when the user clicks on it
+clearInput(e){
+  e.target.value = "";
+}
+
   render(){
   return (
     <div id="creator_container">
@@ -245,13 +252,15 @@ numberOnChange(e){
                       itemClass={'ship'} 
                       header={'Shipping From'} 
                       title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}
+                      handleClick={this.clearInput}
                       />
 
       <ShippingToFrom divId={'shipTo'} 
                       toFrom={"shipTo"} 
                       itemClass={'ship'} 
                       header={'Shipping To'} 
-                      title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)} />
+                      title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)}
+                      handleClick={this.clearInput} />
 
     <div id="po_container">
     <h2 className="header">Shipping 
@@ -261,12 +270,14 @@ numberOnChange(e){
         labelName='PO#'
         dataID='PO'
         handleOnChange={this.poJobNumbers}
+        handleClick={this.clearInput}
       />
     
     <PoInput 
       labelName="Job"
       dataID='Job'
       handleOnChange={this.poJobNumbers}
+      handleClick={this.clearInput}
     />
 
       <PoInput
@@ -274,6 +285,7 @@ numberOnChange(e){
         dataID='date'
         differentType='date'
         handleOnChange={this.poJobNumbers}
+        handleClick={this.clearInput}
       />
 
       <PoInput
@@ -282,6 +294,7 @@ numberOnChange(e){
         dataID='lines_input'
         placeholderText='number of lines'
         handleOnChange={this.poJobNumbers}
+        handleClick={this.clearInput}
       />
 
       <button type='button' 
@@ -330,7 +343,8 @@ const ShippingToFrom = (props) => {
       placeHolder={x} 
       type="text"  
       onChange={(e) => props.handleChange(e)}
-      value={sessionStorage.getItem('currentSession') === 'running' ? allSessionData[props.toFrom][x] : null}>
+      value={sessionStorage.getItem('currentSession') === 'running' ? allSessionData[props.toFrom][x] : null}
+      onClick={props.handleClick}>
     </input>
   </div>
    )
@@ -353,7 +367,8 @@ const PoInput = (props) => {
         id={props.dataID} 
         type={props.differentType ? props.differentType : "text"} 
         placeHolder={props.placeholderText ? props.placeholderText : ""} 
-        onChange={props.handleOnChange}> 
+        onChange={props.handleOnChange}
+        onClick={props.handleClick}> 
       </input>
     </div>
   )
