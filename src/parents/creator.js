@@ -130,6 +130,9 @@ class ParentShippingCreator extends React.Component {
     this.updateShipFromTo = this.updateShipFromTo.bind(this);
   }
  
+  componenetDidMount(){
+    console.log('the dom has been loaded');
+  }
   //updates the ship to or from data fields.
   updateObj(e){
    
@@ -257,15 +260,21 @@ clearInput(e){
 updateShipFromTo(name){
   const allClass = document.getElementsByClassName(name);
 
+  let arr = [];
+
   for(let i = 0; i < allClass.length; i++){
 
-    let currentPlaceHolder = allClass[i].placeHolder;
+    let currentPlaceHolder = allClass[i].placeholder;
 
-    this.setState({
-      [name]: {...this.state[name], [allClass[i][currentPlaceHolder]]: allClass[i].value}
-    })
+    this.setState(prevState => ({
+      [name]: {...prevState[name],[currentPlaceHolder]: allClass[i].value}
+    }))
+
+    //arr.push(allClass[i].value);
+    arr.push(currentPlaceHolder);
   }
   console.log('look right here', this.state[name]);
+  console.log(arr);
 }
 
 
