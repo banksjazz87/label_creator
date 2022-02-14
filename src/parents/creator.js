@@ -19,6 +19,8 @@ const sessionStorageData = () => {
 sessionStorageData();
 console.log(allSessionData);
 
+window.onload = () => console.log('hello again');
+
 
 const SkidDescriptors = {
     qtyNeeded: null, 
@@ -111,7 +113,8 @@ class ParentShippingCreator extends React.Component {
 
       numberOfLinesSubmitClicked: false,
       submitClicked: false, 
-      showSkidHeader: false, 
+      showSkidHeader: false,
+      changing: false 
     }
 
     this.updateObj = this.updateObj.bind(this);
@@ -124,6 +127,7 @@ class ParentShippingCreator extends React.Component {
     this.numberOnChange = this.numberOnChange.bind(this);
 
     this.clearInput = this.clearInput.bind(this);
+    this.updateShipFromTo = this.updateShipFromTo.bind(this);
   }
  
   //updates the ship to or from data fields.
@@ -205,6 +209,8 @@ class ParentShippingCreator extends React.Component {
      totalQty: MathFunctions.total("qtyShipped")
    })
 
+   this.updateShipFromTo("shipFrom");
+   
   }
 
   //This function will post all of the data that has been supplied by the user, to the server.
@@ -221,6 +227,8 @@ class ParentShippingCreator extends React.Component {
    sessionStorage.setItem('currentSession', 'running');
    sessionStorage.setItem('userData', JSON.stringify(this.state));
 
+   console.log('this is the final state', this.state);
+
 }
 
 //function to automatically added a comma to a number that should have a comma, based on its length.
@@ -236,10 +244,31 @@ numberOnChange(e){
   }
 }
 
-//Create an event listener that changes the value of an input element to "" when the user clicks on it
+//This function will clear the data in an input field and change the changing state to true.
 clearInput(e){
-  e.target.value = "";
+  e.target.value = null;
+
+  this.setState({
+    changing: true
+  })
 }
+
+//This function will loop over the elements by className and placeholder to update the state, and this function will be ran on the final submit.
+updateShipFromTo(name){
+  const allClass = document.getElementsByClassName(name);
+
+  for(let i = 0; i < allClass.length; i++){
+
+    let currentPlaceHolder = allClass[i].placeHolder;
+
+    this.setState({
+      [name]: {...this.state[name], [allClass[i][currentPlaceHolder]]: allClass[i].value}
+    })
+  }
+  console.log('look right here', this.state[name]);
+}
+
+
 
   render(){
   return (
@@ -252,7 +281,8 @@ clearInput(e){
                       itemClass={'ship'} 
                       header={'Shipping From'} 
                       title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}
-                      handleClick={this.clearInput}
+                      handleClick ={this.clearInput}
+                      itemEdit={this.state.changing}
                       />
 
       <ShippingToFrom divId={'shipTo'} 
@@ -260,7 +290,7 @@ clearInput(e){
                       itemClass={'ship'} 
                       header={'Shipping To'} 
                       title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)}
-                      handleClick={this.clearInput} />
+                     />
 
     <div id="po_container">
     <h2 className="header">Shipping 
@@ -270,14 +300,12 @@ clearInput(e){
         labelName='PO#'
         dataID='PO'
         handleOnChange={this.poJobNumbers}
-        handleClick={this.clearInput}
       />
     
     <PoInput 
       labelName="Job"
       dataID='Job'
       handleOnChange={this.poJobNumbers}
-      handleClick={this.clearInput}
     />
 
       <PoInput
@@ -285,7 +313,6 @@ clearInput(e){
         dataID='date'
         differentType='date'
         handleOnChange={this.poJobNumbers}
-        handleClick={this.clearInput}
       />
 
       <PoInput
@@ -294,7 +321,6 @@ clearInput(e){
         dataID='lines_input'
         placeholderText='number of lines'
         handleOnChange={this.poJobNumbers}
-        handleClick={this.clearInput}
       />
 
       <button type='button' 
@@ -330,7 +356,6 @@ clearInput(e){
 //This will dynamically render all of the elements needed for the shipping to and from.
 const ShippingToFrom = (props) => { 
   
-
   let names = props.title;
 
   let elements = names.map((x, y) => {
@@ -343,8 +368,9 @@ const ShippingToFrom = (props) => {
       placeHolder={x} 
       type="text"  
       onChange={(e) => props.handleChange(e)}
-      value={sessionStorage.getItem('currentSession') === 'running' ? allSessionData[props.toFrom][x] : null}
-      onClick={props.handleClick}>
+      onClick={props.handleClick}
+      value={sessionStorage.getItem('currentSession') === 'running' && props.itemEdit === false ? allSessionData[props.toFrom][x] : null}
+      >
     </input>
   </div>
    )
@@ -367,8 +393,7 @@ const PoInput = (props) => {
         id={props.dataID} 
         type={props.differentType ? props.differentType : "text"} 
         placeHolder={props.placeholderText ? props.placeholderText : ""} 
-        onChange={props.handleOnChange}
-        onClick={props.handleClick}> 
+        onChange={props.handleOnChange}> 
       </input>
     </div>
   )
