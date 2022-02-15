@@ -417,8 +417,19 @@ const SkidContents = (props) => {
     skidItems.push(i);
   };
 
+  //This function will return the number associated with the closest row.  This will be used to get the value for the correct input.
+  /*const getRowNum = (element) => {
+    const currentTd = document.getElementById(element);
+
+    const closestRow = currentTd.closest('tr');
+
+    const numberValues = MathFunctions.numbers(closestRow.id);
+
+    return numberValues;
+  }*/
 
   const newColumns = newInput.map((x, y) => {
+
     return(
       <td 
         id={'column_num' + y} 
@@ -426,7 +437,9 @@ const SkidContents = (props) => {
         key={'column_num' + y}
         >
         <input className={Object.keys(SkidDescriptors)[y]} 
-        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null} ></input>
+        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}
+        value={Object.keys(SkidDescriptors)[y]}
+         ></input>
       </td>
     )
   })

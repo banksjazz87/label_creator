@@ -72,6 +72,19 @@ const MathFunctions = {
     }
 
     return MathFunctions.commaPlacer(currentTotal);
+  },
+
+  //Loops over a string and returns all numbers
+  numbers: function(str){
+
+    let arr = [];
+
+    for(let i = 0; i < str.length; i++){
+      if(parseInt(str[i])){
+        arr.push(str[i]);
+      }
+    }
+    return arr.join('');
   }
 }
 
