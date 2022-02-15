@@ -65,6 +65,14 @@ class SkidItems{
 //Data stored in the session storage object
 const currentSessionData = JSON.parse(sessionStorage.getItem('userData'));
 
+const returnValue = (value) => {
+  if(sessionStorage.getItem('currentSession') === 'running'){
+    return value;
+  }else{
+    return null;
+  }
+}
+
 class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
@@ -279,12 +287,14 @@ clearInput(e){
       <PoInput 
         labelName='PO#'
         dataID='PO'
+        itemValue={this.state.PO}
         handleOnChange={this.poJobNumbers}
       />
     
     <PoInput 
       labelName="Job"
       dataID='Job'
+      itemValue={this.state.Job}
       handleOnChange={this.poJobNumbers}
     />
 
@@ -292,6 +302,7 @@ clearInput(e){
         labelName='Date'
         dataID='date'
         differentType='date'
+        itemValue={this.state.date}
         handleOnChange={this.poJobNumbers}
       />
 
@@ -300,6 +311,7 @@ clearInput(e){
         differentType='number'
         dataID='lines_input'
         placeholderText='number of lines'
+        itemValue={this.state.lines}
         handleOnChange={this.poJobNumbers}
       />
 
@@ -349,7 +361,7 @@ const ShippingToFrom = (props) => {
       type="text"  
       onChange={(e) => props.handleChange(e)}
       onClick={props.handleClick}
-      value={sessionStorage.getItem('currentSession') === 'running' ? props.itemValue[x] : null}
+      value={returnValue(props.itemValue[x])}
       >
     </input>
   </div>
@@ -373,7 +385,8 @@ const PoInput = (props) => {
         id={props.dataID} 
         type={props.differentType ? props.differentType : "text"} 
         placeHolder={props.placeholderText ? props.placeholderText : ""} 
-        onChange={props.handleOnChange}> 
+        onChange={props.handleOnChange}
+        value={returnValue(props.itemValue)}> 
       </input>
     </div>
   )
