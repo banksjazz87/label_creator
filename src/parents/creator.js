@@ -4,24 +4,6 @@ import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 
-console.log(sessionStorage);
-console.log(JSON.parse(sessionStorage.getItem('userData')));
-
-//This function will return all of the userData that is stored in the session storage object, and return it as an object.
-let allSessionData = {};
-
-const sessionStorageData = () => {
-  if(sessionStorage.length > 0){
-    allSessionData = JSON.parse(sessionStorage.getItem('userData'));
-  }
-}
-
-sessionStorageData();
-console.log(allSessionData);
-
-window.onload = () => console.log('hello again');
-
-
 const SkidDescriptors = {
     qtyNeeded: null, 
     itemDescription: "",
@@ -80,9 +62,17 @@ class SkidItems{
 }
 }
 
+//Data stored in the session storage object
+const currentSessionData = JSON.parse(sessionStorage.getItem('userData'));
+
 class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
+
+    if(currentSessionData){
+      this.state = currentSessionData;
+
+    }else{
     this.state = {
       userData: "",
       shipFrom: {
@@ -116,6 +106,7 @@ class ParentShippingCreator extends React.Component {
       showSkidHeader: false,
       changing: false 
     }
+  }
 
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
@@ -127,7 +118,6 @@ class ParentShippingCreator extends React.Component {
     this.numberOnChange = this.numberOnChange.bind(this);
 
     this.clearInput = this.clearInput.bind(this);
-    this.updateShipFromTo = this.updateShipFromTo.bind(this);
   }
  
   componenetDidMount(){
@@ -256,28 +246,6 @@ clearInput(e){
   })
 }
 
-//This function will loop over the elements by className and placeholder to update the state, and this function will be ran on the final submit.
-updateShipFromTo(name){
-  const allClass = document.getElementsByClassName(name);
-
-  let arr = [];
-
-  for(let i = 0; i < allClass.length; i++){
-
-    let currentPlaceHolder = allClass[i].placeholder;
-
-    this.setState(prevState => ({
-      [name]: {...prevState[name],[currentPlaceHolder]: allClass[i].value}
-    }))
-
-    //arr.push(allClass[i].value);
-    arr.push(currentPlaceHolder);
-  }
-  console.log('look right here', this.state[name]);
-  console.log(arr);
-}
-
-
 
   render(){
   return (
@@ -289,16 +257,19 @@ updateShipFromTo(name){
                       toFrom={'shipFrom'}
                       itemClass={'ship'} 
                       header={'Shipping From'} 
-                      title={Object.keys(this.state.shipFrom)} handleChange={(e, key)=> this.updateObj(e, key)}
+                      title={Object.keys(this.state.shipFrom)}
+                      itemValue={this.state.shipFrom}
+                      handleChange={(e, key)=> this.updateObj(e, key)}
                       handleClick ={this.clearInput}
-                      itemEdit={this.state.changing}
                       />
 
       <ShippingToFrom divId={'shipTo'} 
                       toFrom={"shipTo"} 
                       itemClass={'ship'} 
                       header={'Shipping To'} 
-                      title={Object.keys(this.state.shipTo)} handleChange={(e, key) => this.updateObj(e, key)}
+                      title={Object.keys(this.state.shipTo)} 
+                      itemValue={this.state.shipTo}
+                      handleChange={(e, key) => this.updateObj(e, key)}
                      />
 
     <div id="po_container">
@@ -378,7 +349,7 @@ const ShippingToFrom = (props) => {
       type="text"  
       onChange={(e) => props.handleChange(e)}
       onClick={props.handleClick}
-      value={sessionStorage.getItem('currentSession') === 'running' && props.itemEdit === false ? allSessionData[props.toFrom][x] : null}
+      value={sessionStorage.getItem('currentSession') === 'running' ? props.itemValue[x] : null}
       >
     </input>
   </div>
