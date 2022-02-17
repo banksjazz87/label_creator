@@ -418,8 +418,8 @@ const SkidContents = (props) => {
   };
 
   //This function will return the number associated with the closest row.  This will be used to get the value for the correct input.
-  const getRowNum = (element, val) => {
-    let arr = [];
+  /*const getRowNum = (element, val) => {
+   
     let allElements = document.querySelectorAll(element);
 
     for(let i = 0; i < allElements.length; i ++){
@@ -427,13 +427,15 @@ const SkidContents = (props) => {
         let rowElement = allElements[i].closest('tr');
         let rowNum = MathFunctions.numbers(rowElement.id);
 
-        allElements[i].value = val[rowNum][allElements[i].className];
+        allElements[i].value = [val][rowNum][allElements[i].className];
 
+      }else{
+        
       }
     }
-  }
+  }*/
 
-  const newColumns = newInput.map((x, y) => {
+  const newColumns = (number) => newInput.map((x, y) => {
 
     return(
       <td 
@@ -443,6 +445,7 @@ const SkidContents = (props) => {
         >
         <input className={Object.keys(SkidDescriptors)[y]} 
         onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}
+        value={props.skidObjectsArr[number][Object.keys(SkidDescriptors[y])]}
          ></input>
       </td>
     )
@@ -454,7 +457,7 @@ const SkidContents = (props) => {
         className="line_data" 
         key={'row_num' + y}
       >
-       {newColumns}
+       {newColumns(y)}
       </tr>
     )
   })
@@ -463,11 +466,11 @@ const SkidContents = (props) => {
     <table id="main_table">
       <tbody>
 
-      {`the following line has been added`}
-      {getRowNum('input', 'props.skidObjectsArr')}
+      {/*the following line has been added`*/}
+      {/*getRowNum('input', 'props.skidObjectsArr')*/}
 
 
-      
+
         <tr id="header_row">
           {elements}
         </tr>
