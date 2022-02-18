@@ -65,6 +65,14 @@ class SkidItems{
 //Data stored in the session storage object
 const currentSessionData = JSON.parse(sessionStorage.getItem('userData'));
 
+const currentStorageRunning = () => {
+  if(sessionStorage.getItem('currentSession') === 'running'){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 const returnValue = (value) => {
   if(sessionStorage.getItem('currentSession') === 'running'){
     return value;
@@ -445,7 +453,7 @@ const SkidContents = (props) => {
         >
         <input className={Object.keys(SkidDescriptors)[y]} 
         onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}
-        value={props.skidObjectsArr[number][Object.keys(SkidDescriptors[y])]}
+        //value={props.skidObjectsArr.length > 0 && currentStorageRunning() ? returnValue(props.skidObjectsArr[number][Object.keys(SkidDescriptors[y])]) : null}
          ></input>
       </td>
     )
@@ -457,7 +465,8 @@ const SkidContents = (props) => {
         className="line_data" 
         key={'row_num' + y}
       >
-       {newColumns(y)}
+      {newColumns(y)}
+       {console.log('this code pertains to ' + props.skidObjectsArr.length > 0 && currentStorageRunning() ? returnValue(props.skidObjectsArr[y][Object.keys(SkidDescriptors[y])]) : null)}
       </tr>
     )
   })
