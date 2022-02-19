@@ -134,6 +134,8 @@ class ParentShippingCreator extends React.Component {
     this.numberOnChange = this.numberOnChange.bind(this);
 
     this.clearInput = this.clearInput.bind(this);
+
+    //this.updateSkidItem = this.updateSkidItem.bind(this);
   }
  
   componenetDidMount(){
@@ -261,6 +263,12 @@ clearInput(e){
     changing: true
   })
 }
+
+/*updateSkidItem(currentItem, e){
+  const currentClass = e.target.className;
+  const rowNum = 
+
+}*/
 
 
   render(){
@@ -425,23 +433,7 @@ const SkidContents = (props) => {
     skidItems.push(i);
   };
 
-  //This function will return the number associated with the closest row.  This will be used to get the value for the correct input.
-  /*const getRowNum = (element, val) => {
-   
-    let allElements = document.querySelectorAll(element);
-
-    for(let i = 0; i < allElements.length; i ++){
-      if(SkidDescriptors.indexOf(allElements[i].className) > -1){
-        let rowElement = allElements[i].closest('tr');
-        let rowNum = MathFunctions.numbers(rowElement.id);
-
-        allElements[i].value = [val][rowNum][allElements[i].className];
-
-      }else{
-        
-      }
-    }
-  }*/
+  
 
   const newColumns = (number) => newInput.map((x, y) => {
 
@@ -451,13 +443,17 @@ const SkidContents = (props) => {
         className="column_data" 
         key={'column_num' + y}
         >
-        <input className={Object.keys(SkidDescriptors)[y]} 
+        <input
+        id={`${props.title[y]}${number}`} 
+        className={Object.keys(SkidDescriptors)[y]} 
         onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}
-        //value={props.skidObjectsArr.length > 0 && currentStorageRunning() ? returnValue(props.skidObjectsArr[number][Object.keys(SkidDescriptors[y])]) : null}
+        value={props.skidObjectsArr.length > 0 && currentStorageRunning() ? props.skidObjectsArr[number][x] : null}
          ></input>
       </td>
     )
   })
+
+
   const newRows = skidItems.map((x, y) => {
     return(
       <tr 
@@ -466,20 +462,14 @@ const SkidContents = (props) => {
         key={'row_num' + y}
       >
       {newColumns(y)}
-       {console.log('this code pertains to ' + props.skidObjectsArr.length > 0 && currentStorageRunning() ? returnValue(props.skidObjectsArr[y][Object.keys(SkidDescriptors[y])]) : null)}
       </tr>
     )
   })
+
   return(
     
     <table id="main_table">
       <tbody>
-
-      {/*the following line has been added`*/}
-      {/*getRowNum('input', 'props.skidObjectsArr')*/}
-
-
-
         <tr id="header_row">
           {elements}
         </tr>
