@@ -243,12 +243,15 @@ class ParentShippingCreator extends React.Component {
 }
 
 //function to automatically added a comma to a number that should have a comma, based on its length.
-numberOnChange(e){
+numberOnChange(object, e){
   e.preventDefault();
   
   if(parseInt(e.target.value)){
     let newValue = MathFunctions.numOrNot(e.target.value);
     e.target.value = MathFunctions.commaPlacer(newValue);
+
+    this.updateSkidItem(object, e);
+
   }else{
     e.target.value = "";
     alert("Please insert a valid number");
@@ -264,11 +267,18 @@ clearInput(e){
   })
 }
 
-/*updateSkidItem(currentItem, e){
-  const currentClass = e.target.className;
-  const rowNum = 
+//This function will be used to update the state of the skid item, if the session storage is true.
+updateSkidItem(object, e){
+  
+  if(currentStorageRunning()){
+    let currentId = e.target.id;
+    let rowNum = MathFunctions.numbers(currentId);
+    let name = e.target.className;
 
-}*/
+    console.log('look here dummy', object[rowNum][name]);
+  }
+
+}
 
 
   render(){
@@ -284,7 +294,6 @@ clearInput(e){
                       title={Object.keys(this.state.shipFrom)}
                       itemValue={this.state.shipFrom}
                       handleChange={(e, key)=> this.updateObj(e, key)}
-                      handleClick ={this.clearInput}
                       />
 
       <ShippingToFrom divId={'shipTo'} 
@@ -341,7 +350,8 @@ clearInput(e){
                     linesNeeded={this.state.lines} 
                     skidObjectsArr={this.state.skid}
                     hide={this.state.showSkidHeader} 
-                    changeHandler={this.numberOnChange}
+                    numberChange={(object, e) => this.numberOnChange(object, e)}
+                    itemChange={(object, e) => this.updateSkidItem(object, e)}
                     />
 
     <div id="final_buttons">
@@ -446,7 +456,7 @@ const SkidContents = (props) => {
         <input
         id={`${props.title[y]}${number}`} 
         className={Object.keys(SkidDescriptors)[y]} 
-        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.changeHandler : null}
+        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.numberChange(props.skidObjectsArr): props.itemChange(props.skidObjectsArr)}
         value={props.skidObjectsArr.length > 0 && currentStorageRunning() ? props.skidObjectsArr[number][x] : null}
          ></input>
       </td>
