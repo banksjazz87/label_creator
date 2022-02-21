@@ -6,6 +6,7 @@ import "../assets/nav.scss"
 //import userDataFromCreator from "../variables/dummyData";
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall"
+import changeDateFormat from "../functions/dateFormat.js"
 
 
 class ParentLabels extends React.Component {
@@ -77,7 +78,7 @@ class ParentLabels extends React.Component {
           purchaseOrder={this.state.userData.PO}
           packs={this.state.userData.skid[this.state.count].packsRolls}
           quantityPerCarton={this.state.userData.skid[this.state.count].qtyPerCarton}
-          date={this.state.userData.date}
+          date={changeDateFormat(this.state.userData.date)}
         />
       </div>
 

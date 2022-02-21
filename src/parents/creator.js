@@ -13,17 +13,6 @@ const SkidDescriptors = {
     qtyShipped: null
 }
 
-//Function to change the format of the date
-const changeDateFormat = (str) => {
-  let month = str[5] + str[6];
-  let day = str[str.length - 2] + str[str.length - 1];
-  let year = str.slice(0, 4);
-
-  let date = `${month}/${day}/${year}`;
-
-  return date;
-}
-
 /**
  * 
  * @param {*} url 
@@ -168,11 +157,12 @@ class ParentShippingCreator extends React.Component {
 
   //update the object for the po and job numbers
   poJobNumbers(e){
+    e.preventDefault();
     const data = e.target.id;
 
-    this.setState((prevState) => ({
-      [data]: prevState = e.target.value
-    }))
+    this.setState({
+      [data]: e.target.value
+    })
 
   }
 
@@ -213,7 +203,7 @@ class ParentShippingCreator extends React.Component {
 
      this.setState({
         clicked: true, 
-        date: changeDateFormat(this.state.date)
+        //date: changeDateFormat(this.state.date)
       })
 
    this.setState({

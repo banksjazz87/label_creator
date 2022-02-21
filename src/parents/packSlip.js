@@ -7,6 +7,8 @@ import "../assets/nav.scss"
 
 import MathFunctions from "../functions/mathFunctions.js";
 import serverCall from "../functions/serverCall"
+import changeDateFormat from "../functions/dateFormat.js"
+
 
 class ParentPackSlip extends React.Component {
   constructor(props) {
@@ -49,7 +51,7 @@ this.state = {
       <div id="table_container">
         <JobNum 
           job={this.state.userData['Job']}
-          date={this.state.userData.date}
+          date={changeDateFormat(this.state.userData.date)}
           />
         <MainTable 
           items={this.state.userData['skid']}
