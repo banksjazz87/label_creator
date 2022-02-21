@@ -132,10 +132,11 @@ class ParentShippingCreator extends React.Component {
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
     this.numberOnChange = this.numberOnChange.bind(this);
+    this.updateSkidItem = this.updateSkidItem.bind(this);
 
     this.clearInput = this.clearInput.bind(this);
 
-    //this.updateSkidItem = this.updateSkidItem.bind(this);
+    
   }
  
   componenetDidMount(){
@@ -243,14 +244,14 @@ class ParentShippingCreator extends React.Component {
 }
 
 //function to automatically added a comma to a number that should have a comma, based on its length.
-numberOnChange(object, e){
+numberOnChange(e){
   e.preventDefault();
   
   if(parseInt(e.target.value)){
     let newValue = MathFunctions.numOrNot(e.target.value);
     e.target.value = MathFunctions.commaPlacer(newValue);
 
-    this.updateSkidItem(object, e);
+    this.updateSkidItem(e);
 
   }else{
     e.target.value = "";
@@ -268,14 +269,19 @@ clearInput(e){
 }
 
 //This function will be used to update the state of the skid item, if the session storage is true.
-updateSkidItem(object, e){
+updateSkidItem(e){
+
+  e.preventDefault();
   
   if(currentStorageRunning()){
     let currentId = e.target.id;
     let rowNum = MathFunctions.numbers(currentId);
     let name = e.target.className;
 
-    console.log('look here dummy', object[rowNum][name]);
+    this.setState((prevState) => ({
+      skid: {...prevState.skid[rowNum], 
+      [name]: e.target.value}
+    }))
   }
 
 }
@@ -350,8 +356,8 @@ updateSkidItem(object, e){
                     linesNeeded={this.state.lines} 
                     skidObjectsArr={this.state.skid}
                     hide={this.state.showSkidHeader} 
-                    numberChange={(object, e) => this.numberOnChange(object, e)}
-                    itemChange={(object, e) => this.updateSkidItem(object, e)}
+                    numberChange={this.numberOnChange}
+                    itemChange={this.updateSkidItem}
                     />
 
     <div id="final_buttons">
@@ -456,7 +462,7 @@ const SkidContents = (props) => {
         <input
         id={`${props.title[y]}${number}`} 
         className={Object.keys(SkidDescriptors)[y]} 
-        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.numberChange(props.skidObjectsArr): props.itemChange(props.skidObjectsArr)}
+        onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.numberChange : props.itemChange}
         value={props.skidObjectsArr.length > 0 && currentStorageRunning() ? props.skidObjectsArr[number][x] : null}
          ></input>
       </td>

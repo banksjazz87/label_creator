@@ -80,7 +80,7 @@ const MathFunctions = {
     let arr = [];
 
     for(let i = 0; i < str.length; i++){
-      if(parseInt(str[i])){
+      if(isNaN(str[i]) === false){
         arr.push(str[i]);
       }
     }
