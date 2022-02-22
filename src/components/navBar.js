@@ -74,7 +74,7 @@ class Nav extends React.Component {
         : {display: "none"}}>
 
      
-      <Link to="/"
+      <Link to="/creator_page"
         className="link"
         >
         Shipping Create Docs

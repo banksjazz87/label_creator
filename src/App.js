@@ -16,13 +16,15 @@ import ParentShipTo from "./parents/shipTo.js";
 import Nav from "./components/navBar.js";
 import Footer from "./components/footer.js";
 import PrintButton from "./components/printButton.js";
+import OptionsPage from "./parents/optionsPage.js";
 
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<ShippingCreator />} />
+        <Route path="/" element={<Options/>}/>
+        <Route path="creator_page" element={<ShippingCreator />} />
         <Route path="pack_slip" element={<PackSlip />} />
         <Route path="labels" element={<Labels />} />
         <Route path="ship_to_papers" element={<ShipTo />} />
@@ -103,6 +105,15 @@ function ShippingCreator() {
       <Footer />
     </body>
   );
+}
+
+function Options(){
+  return(
+    <div id="options_body">
+      <Nav />
+      <OptionsPage />
+    </div>
+  )
 }
 
 

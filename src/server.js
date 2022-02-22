@@ -20,8 +20,8 @@ app.use('/', express.static('build'));
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
-//function to insert a document into the packSlips collection
-async function run(currentData) {
+
+async function insertNewPackSlip(currentData) {
     try {
         await client.connect();
 
@@ -45,7 +45,7 @@ app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
     allData.unshift(currentData);
 
-    run(currentData);
+    insertNewPackSlip(currentData);
 
     console.log(allData);
 
