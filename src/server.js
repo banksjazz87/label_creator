@@ -20,6 +20,23 @@ app.use('/', express.static('build'));
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
+//function to insert a document into the packSlips collection
+async function run(currentData) {
+    try {
+        await client.connect();
+
+        const database = client.db('senecaPrinting');
+        const slip = database.collection('packSlips');
+
+        const result = await slip.insertOne(currentData);
+
+        console.log(`A document was inserted with the _id: ${result.insertedId}`)
+    }finally{
+        await client.close();
+    }
+}
+
+
 let currentData = {};
 let allData = [];
 
@@ -28,11 +45,7 @@ app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
     allData.unshift(currentData);
 
-    const result = async() => await client.insertOne(currentData);
-    
-    result();
-
-    console.log(`A document was inserted with the _id: ${result.insertId}`);
+    run(currentData);
 
     console.log(allData);
 
