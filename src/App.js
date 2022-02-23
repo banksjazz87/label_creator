@@ -9,6 +9,7 @@ import "../src/assets/packSlip.scss";
 import "../src/assets/shipTo.scss";
 import "../src/assets/printButton.scss";
 import "../src/assets/packSlipMediaQuery.scss";
+import "../src/assets/options.scss"
 import ParentShippingCreator from "./parents/creator.js";
 import ParentLabels from "./parents/label.js";
 import ParentPackSlip from "./parents/packSlip.js";

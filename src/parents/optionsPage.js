@@ -1,5 +1,6 @@
 import * as React from 'react'
-
+import "../assets/options.scss"
+import "../assets/library.scss"
 class OptionsPage extends React.Component{
     constructor(props){
         super(props);
@@ -31,14 +32,21 @@ class OptionsPage extends React.Component{
     render() {
         return(
             <div id="options_page_container">
+
+                <h1 id="header_text">Welcome to the Label Creator <br/> Please Select an Option Below</h1> 
+
+             <div id="button_container">
                 <Choice idName="new"
                         clickHandler={this.choiceClick}
                         label="New" 
+                        className="button"
                 />
                 <Choice idName="search"
                         clickHandler={this.choiceClick}
                         label="Search" 
+                        className="button"
                 />
+             </div>
 
             </div>
         )
