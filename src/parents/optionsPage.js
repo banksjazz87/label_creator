@@ -11,11 +11,13 @@ class OptionsPage extends React.Component{
         this.state = {
             search: false,
             new: false,
-            searchBy: ""
+            searchBy: "",
+            searchText: ""
         }
 
         this.choiceClick = this.choiceClick.bind(this);
         this.optionSelection = this.optionSelection.bind(this);
+        this.searchInfo = this.searchInfo.bind(this);
     }
 
     choiceClick(e){
@@ -45,6 +47,16 @@ class OptionsPage extends React.Component{
         })
     }
 
+    searchInfo(e){
+        e.preventDefault();
+
+        this.setState({
+            searchText: e.target.value
+        })
+
+        console.log(this.state);
+    }
+
     render() {
         return(
             <div id="options_page_container">
@@ -66,10 +78,17 @@ class OptionsPage extends React.Component{
 
                 <Options searching={this.state.search}
                          changeHandler={this.optionSelection}
+                         arrayOfOptions={searchSelections}
                 />
                 <Input searchType={this.state.searchBy}
                        searching={this.state.search}
+                       changeHandler={this.searchInfo}
                 />
+                <Choice idName="search_input"
+                        clickHandler={console.log(this.state)}
+                        label="Search"
+                />
+
              
             </div>
         )
@@ -88,7 +107,7 @@ const Choice = (props) => {
 }
 
 const Options = (props) => {
-    const allOptions = searchSelections.map((x, y) => {
+    const allOptions = props.arrayOfOptions.map((x, y) => {
         return(
         <option id={x} 
                 key={x + "_y"}
@@ -108,8 +127,9 @@ const Options = (props) => {
 const Input = (props) => {
     return(
         <form style={props.searchType.length === 0 ? {display: "none"} : {display: "flex"}}>
-        <label>{props.searchType}</label>
-        <input type="text"></input>
+            <label>{props.searchType}</label>
+            <input type="text"
+               onChange={props.changeHandler}></input>
         </form>
     )
 }
