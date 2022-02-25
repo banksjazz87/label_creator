@@ -12,12 +12,15 @@ class OptionsPage extends React.Component{
             search: false,
             new: false,
             searchBy: "",
-            searchText: ""
+            searchText: "",
+            display: 'flex',
+            searchResults: ""
         }
 
         this.choiceClick = this.choiceClick.bind(this);
         this.optionSelection = this.optionSelection.bind(this);
         this.searchInfo = this.searchInfo.bind(this);
+        this.searchClick = this.searchClick.bind(this);
     }
 
     choiceClick(e){
@@ -28,12 +31,14 @@ class OptionsPage extends React.Component{
         if(currentId === 'search'){
             this.setState({
                 search: true,
-                new: false
+                new: false,
+                display: 'none'
             })
         }else{
             this.setState({
                 search: false,
-                new: true
+                new: true,
+                display: 'none'
             })
         }
     }
@@ -53,6 +58,10 @@ class OptionsPage extends React.Component{
         this.setState({
             searchText: e.target.value
         })
+    }
+
+    searchClick(e){
+        e.preventDefault();
 
         console.log(this.state);
     }
@@ -67,12 +76,14 @@ class OptionsPage extends React.Component{
                 <Choice idName="new"
                         clickHandler={this.choiceClick}
                         label="New" 
-                        className="button"
+                        buttonClass="button"
+                        currentDisplay={this.state.display}
                 />
                 <Choice idName="search"
                         clickHandler={this.choiceClick}
                         label="Search" 
-                        className="button"
+                        buttonClass="button"
+                        currentDisplay={this.state.display}
                 />
             </div>
 
@@ -83,10 +94,8 @@ class OptionsPage extends React.Component{
                 <Input searchType={this.state.searchBy}
                        searching={this.state.search}
                        changeHandler={this.searchInfo}
-                />
-                <Choice idName="search_input"
-                        clickHandler={console.log(this.state)}
-                        label="Search"
+                       clickHandler={this.searchClick}
+                       buttonClass="button"
                 />
 
              
@@ -97,9 +106,11 @@ class OptionsPage extends React.Component{
 
 const Choice = (props) => {
     return(
-    <button id={props.idName}                   
+    <button id={props.idName}  
+            className={props.buttonClass}                 
             type="button"
             onClick={props.clickHandler}
+            style={{display: props.currentDisplay}}
     >
         {props.label}
     </button>
@@ -130,6 +141,10 @@ const Input = (props) => {
             <label>{props.searchType}</label>
             <input type="text"
                onChange={props.changeHandler}></input>
+            <button type="button" onClick={props.clickHandler}
+                className={props.buttonClass}>
+                Search
+            </button>
         </form>
     )
 }
