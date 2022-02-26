@@ -3,7 +3,7 @@ import "../assets/options.scss"
 import "../assets/library.scss"
 import postData from "../functions/postRequest.js"
 
-const searchSelections = ["Select One", "Company", "Job#", "PO#", "Date"];
+const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
 class OptionsPage extends React.Component{
     constructor(props){
@@ -69,6 +69,7 @@ class OptionsPage extends React.Component{
         let searchObject = {
             [this.state.searchBy]: this.state.searchText
         }
+
 
         postData(url, searchObject)
         console.log(this.state);

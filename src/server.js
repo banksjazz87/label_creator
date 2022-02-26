@@ -48,16 +48,34 @@ app.post('/shipping_creator/data', (req, res) => {
     insertNewPackSlip(currentData);
 
     console.log(allData);
+    console.log(`current data type = ${typeof(currentData)}`)
 
 })
 
 
 async function fetchPastPackSlips(searchData){
     
+
+    try{
+        await client.connect();
+
+        const database = client.db('senecaPrinting');
+        const slip = database.collection('packSlips');
+
+        let result = slip.find(searchData);
+        console.log(result);
+
+        //console.log(result);
+    
+    }catch(e){
+        console.log('error', e)
+    }
 }
 //Route for the search request on the options page.
 app.post('/options/data', (req, res, next) => {
     let optionData = req.body;
+
+    fetchPastPackSlips(optionData);
 
     console.log(optionData);
     next();
