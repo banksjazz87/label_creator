@@ -40,7 +40,7 @@ async function insertNewPackSlip(currentData) {
 let currentData = {};
 let allData = [];
 
-//Route for the post request
+//Route for the post request for the label creator page.
 app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
     allData.unshift(currentData);
@@ -49,6 +49,18 @@ app.post('/shipping_creator/data', (req, res) => {
 
     console.log(allData);
 
+})
+
+
+async function fetchPastPackSlips(searchData){
+    
+}
+//Route for the search request on the options page.
+app.post('/options/data', (req, res, next) => {
+    let optionData = req.body;
+
+    console.log(optionData);
+    next();
 })
 
 //Route for all of the data

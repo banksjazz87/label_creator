@@ -3,6 +3,7 @@ import "../assets/creator.scss";
 import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
 import MathFunctions from "../functions/mathFunctions.js";
+import postData from "../functions/postRequest.js"
 
 const SkidDescriptors = {
     qtyNeeded: null, 
@@ -11,30 +12,6 @@ const SkidDescriptors = {
     qtyPerCarton: null,
     numOfCartons: null,
     qtyShipped: null
-}
-
-/**
- * 
- * @param {*} url 
- * @param {*} data 
- * @returns sends an HTTP post request to whatever url is specified and posts whatever data is supplied as the second parameter.
- */
-
-const postData = async(url = '', data = {}) => {
-  const response = await fetch(url, {
-    method: 'POST',
-    mode: 'cors', 
-    cache: 'no-cache', 
-    credentials: 'same-origin', 
-    headers: {
-      'Content-Type': 'application/json'
-    }, 
-    redirect: 'follow', 
-    referrerPolicy: 'no-referrer', 
-    body: JSON.stringify(data)
-  });
-
-  return response.json();
 }
 
 //This will create an object to store all of the information needed for the skid

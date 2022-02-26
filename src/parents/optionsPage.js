@@ -1,6 +1,7 @@
 import * as React from 'react'
 import "../assets/options.scss"
 import "../assets/library.scss"
+import postData from "../functions/postRequest.js"
 
 const searchSelections = ["Select One", "Company", "Job#", "PO#", "Date"];
 
@@ -63,6 +64,13 @@ class OptionsPage extends React.Component{
     searchClick(e){
         e.preventDefault();
 
+        let url = '/options/data';
+
+        let searchObject = {
+            [this.state.searchBy]: this.state.searchText
+        }
+
+        postData(url, searchObject)
         console.log(this.state);
     }
 
