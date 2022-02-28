@@ -53,6 +53,7 @@ app.post('/shipping_creator/data', (req, res) => {
 })
 
 
+const searchDataArray = [];
 async function fetchPastPackSlips(searchData){
     
 
@@ -63,12 +64,20 @@ async function fetchPastPackSlips(searchData){
         const slip = database.collection('packSlips');
 
         let result = slip.find(searchData);
-        console.log(result);
+        
+        if((await result.count()) === 0){
+            console.log("No documents found");
+        }
 
+        await result.forEach((item) => {
+            searchDataArray.push(item)
+        });
         //console.log(result);
     
     }catch(e){
         console.log('error', e)
+    }finally {
+        await client.close();
     }
 }
 //Route for the search request on the options page.
