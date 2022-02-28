@@ -23,7 +23,7 @@ class ParentShipTo extends React.Component {
 
   //use this function only for production
   componentDidMount(){
-    serverCall()
+    serverCall("http://localhost:4500/allData")
     .then(items => this.setState({
         fetched: true,
         userData: items[0]

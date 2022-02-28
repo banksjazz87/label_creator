@@ -1,8 +1,9 @@
 //Used in production mode
 //async function using fetch to retrieve the data from the server
-const serverCall = async () => {
+const serverCall = async (url) => {
   const response = await fetch(
-    "http://localhost:4500/allData"
+    //"http://localhost:4500/allData"
+    url
   );
 
   try {

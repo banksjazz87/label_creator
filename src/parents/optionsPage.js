@@ -2,6 +2,7 @@ import * as React from 'react'
 import "../assets/options.scss"
 import "../assets/library.scss"
 import postData from "../functions/postRequest.js"
+import serverCall from "../functions/serverCall.js"
 
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
@@ -72,6 +73,8 @@ class OptionsPage extends React.Component{
 
 
         postData(url, searchObject)
+        .then(serverCall("http://localhost:4500" + url))
+        
         console.log(this.state);
     }
 
