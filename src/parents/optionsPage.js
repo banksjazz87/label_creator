@@ -16,7 +16,8 @@ class OptionsPage extends React.Component{
             searchBy: "",
             searchText: "",
             display: 'flex',
-            searchResults: ""
+            searchResults: "", 
+            searchDataSent: false
         }
 
         this.choiceClick = this.choiceClick.bind(this);
@@ -73,8 +74,11 @@ class OptionsPage extends React.Component{
 
 
         postData(url, searchObject)
-        .then(serverCall("http://localhost:4500" + url))
-        
+
+        .then(this.setState({
+            searchDataSent: true
+        }))
+
         console.log(this.state);
     }
 
@@ -108,6 +112,10 @@ class OptionsPage extends React.Component{
                        changeHandler={this.searchInfo}
                        clickHandler={this.searchClick}
                        buttonClass="button"
+                />
+
+                <SelectResult sent={this.state.searchDataSent}
+                              query={this.state.searchBy}
                 />
 
              
@@ -158,6 +166,28 @@ const Input = (props) => {
                 Search
             </button>
         </form>
+    )
+}
+
+const SelectResult = (props) => {
+    
+   // const resArr = [];
+    if(props.sent){
+        serverCall("http:localhost:4500/options/data")
+        .then(res => console.log(res))
+    }
+    
+    /*const optionsFromResArr = resArr.map((x) => {
+        return(
+            <option>{`${x[props.query]}, ${x.company}`}</option>
+        )
+    })*/
+
+    return(
+        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={() => console.log('clicked')}>
+            <option>Select From The Following</option>
+          
+        </select>
     )
 }
 
