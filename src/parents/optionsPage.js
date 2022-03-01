@@ -82,6 +82,12 @@ class OptionsPage extends React.Component{
         console.log(this.state);
     }
 
+    componentDidMount(){
+        this.setState({
+            allSearchResults: serverCall("http://localhost/options/data")
+        })
+    }
+
     render() {
         return(
             <div id="options_page_container">
@@ -116,6 +122,7 @@ class OptionsPage extends React.Component{
 
                 <SelectResult sent={this.state.searchDataSent}
                               query={this.state.searchBy}
+                              searchDataResults={this.state.allSearchResults}
                 />
 
              
@@ -171,22 +178,21 @@ const Input = (props) => {
 
 const SelectResult = (props) => {
     
-   // const resArr = [];
-    if(props.sent){
-        serverCall("http:localhost:4500/options/data")
-        .then(res => console.log(res))
-    }
     
-    /*const optionsFromResArr = resArr.map((x) => {
-        return(
-            <option>{`${x[props.query]}, ${x.company}`}</option>
-        )
-    })*/
+    const optionsFromSearchResults = (props) => {
+        if(props.sent){
+            props.searchDataResults.map((x, y) => {
+                return(
+                    <option key={y}>{`${x[props.query]}, ${x.company}`}</option>
+                )
+            })
+        }
+    } 
 
     return(
-        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={() => console.log('clicked')}>
+        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={() => console.log(props.searchDataResults)}>
             <option>Select From The Following</option>
-          
+            {optionsFromSearchResults}
         </select>
     )
 }
