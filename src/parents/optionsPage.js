@@ -18,6 +18,7 @@ class OptionsPage extends React.Component{
             display: 'flex',
             searchResults: "", 
             searchDataSent: false, 
+            selectPreviousClicked: false
             
         }
 
@@ -25,6 +26,7 @@ class OptionsPage extends React.Component{
         this.optionSelection = this.optionSelection.bind(this);
         this.searchInfo = this.searchInfo.bind(this);
         this.searchClick = this.searchClick.bind(this);
+        this.selectPrevious = this.selectPrevious.bind(this);
     }
 
     choiceClick(e){
@@ -65,7 +67,7 @@ class OptionsPage extends React.Component{
     }
 
     searchClick(e){
-        e.preventDefault();
+      
 
         let url = '/options/data';
 
@@ -84,6 +86,19 @@ class OptionsPage extends React.Component{
             searchDataSent: true
         }))
     }
+
+    selectPrevious(e){
+        e.preventDefault();
+
+        serverCall("http://localhost:4500/options/data")
+        .then(res => res.length === 0 ? alert('Invalid search query') : this.setState({
+            searchResults: res,
+            selectPreviousClicked: true
+        }))
+
+        console.log(this.state.searchResults)
+    }
+
 
 
     render() {
@@ -121,6 +136,8 @@ class OptionsPage extends React.Component{
                 <SelectResult sent={this.state.searchDataSent}
                               query={this.state.searchBy}
                               searchDataResults={this.state.searchResults}
+                              clickHandler={this.selectPrevious}
+                              selectClicked={this.state.selectPreviousClicked}
                 />
 
              
@@ -177,8 +194,8 @@ const Input = (props) => {
 const SelectResult = (props) => {
     
     
-    const optionsFromSearchResults = (props) => {
-        if(props.searchDataResults.length > 0){
+    const optionsFromSearchResults = () => {
+        if(props.selectClicked){
             props.searchDataResults.map((x, y) => {
                 return(
                     <option key={y}>{`${x[props.query]}, ${x.company}`}</option>
@@ -188,7 +205,7 @@ const SelectResult = (props) => {
     } 
 
     return(
-        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={() => console.log(props.searchDataResults)}>
+        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={props.clickHandler}>
             <option>Select From The Following</option>
             {optionsFromSearchResults}
         </select>

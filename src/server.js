@@ -76,6 +76,11 @@ async function fetchPastPackSlips(searchData){
 app.post('/options/data', (req, res, next) => {
     let optionData = req.body;
     fetchPastPackSlips(optionData);
+
+
+    res.send(searchDataArray);
+
+    
     console.log(optionData);
     next();
 })
