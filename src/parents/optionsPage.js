@@ -17,7 +17,8 @@ class OptionsPage extends React.Component{
             searchText: "",
             display: 'flex',
             searchResults: "", 
-            searchDataSent: false
+            searchDataSent: false, 
+            
         }
 
         this.choiceClick = this.choiceClick.bind(this);
@@ -74,19 +75,16 @@ class OptionsPage extends React.Component{
 
 
         postData(url, searchObject)
+        .then(serverCall("http://localhost:4500" + url))
+        .then(res => this.setState({
+            searchResults: res
+        }))
 
         .then(this.setState({
             searchDataSent: true
         }))
-
-        console.log(this.state);
     }
 
-    componentDidMount(){
-        this.setState({
-            allSearchResults: serverCall("http://localhost/options/data")
-        })
-    }
 
     render() {
         return(
@@ -122,7 +120,7 @@ class OptionsPage extends React.Component{
 
                 <SelectResult sent={this.state.searchDataSent}
                               query={this.state.searchBy}
-                              searchDataResults={this.state.allSearchResults}
+                              searchDataResults={this.state.searchResults}
                 />
 
              
@@ -180,7 +178,7 @@ const SelectResult = (props) => {
     
     
     const optionsFromSearchResults = (props) => {
-        if(props.sent){
+        if(props.searchDataResults.length > 0){
             props.searchDataResults.map((x, y) => {
                 return(
                     <option key={y}>{`${x[props.query]}, ${x.company}`}</option>
