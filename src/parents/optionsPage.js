@@ -4,6 +4,7 @@ import "../assets/library.scss"
 import postData from "../functions/postRequest.js"
 import serverCall from "../functions/serverCall.js"
 
+
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
 class OptionsPage extends React.Component{
@@ -77,10 +78,10 @@ class OptionsPage extends React.Component{
 
 
         postData(url, searchObject)
-        .then(serverCall("http://localhost:4500" + url))
+        /*.then(() => serverCall("http://localhost:4500" + url))
         .then(res => this.setState({
             searchResults: res
-        }))
+        }))*/
 
         .then(this.setState({
             searchDataSent: true
@@ -96,7 +97,8 @@ class OptionsPage extends React.Component{
             selectPreviousClicked: true
         }))
 
-        console.log(this.state.searchResults)
+        
+        console.log(this.state.searchResults);
     }
 
 
@@ -191,23 +193,34 @@ const Input = (props) => {
     )
 }
 
+
+/*const OptionsFromSearchResults = () => {
+    return(
+        <option>Batman</option>
+    )
+}*/
+
 const SelectResult = (props) => {
     
     
-    const optionsFromSearchResults = () => {
-        if(props.selectClicked){
-            props.searchDataResults.map((x, y) => {
+    const OptionsFromSearchResults = (props) => {
+
+        if(props.searchDataResults.length > 0){
+           const displayResults = props.searchDataResults.map((x, y) => {
                 return(
                     <option key={y}>{`${x[props.query]}, ${x.company}`}</option>
                 )
+
             })
+
+            return displayResults;
         }
-    } 
+    }
 
     return(
         <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={props.clickHandler}>
             <option>Select From The Following</option>
-            {optionsFromSearchResults}
+            <OptionsFromSearchResults />
         </select>
     )
 }
