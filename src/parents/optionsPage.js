@@ -28,13 +28,14 @@ class OptionsPage extends React.Component{
         this.searchInfo = this.searchInfo.bind(this);
         this.searchClick = this.searchClick.bind(this);
         this.selectPrevious = this.selectPrevious.bind(this);
+
+        //working on creating a method to save the chosen data to a new route
+        this.useData = this.useData.bind(this);
     }
 
     choiceClick(e){
         e.preventDefault();
-
         const currentId = e.target.id;
-
         if(currentId === 'search'){
             this.setState({
                 search: true,
@@ -51,9 +52,7 @@ class OptionsPage extends React.Component{
     }
 
     optionSelection(e){
-
         e.preventDefault();
-
         this.setState({
             searchBy: e.target.value
         })
@@ -61,28 +60,17 @@ class OptionsPage extends React.Component{
 
     searchInfo(e){
         e.preventDefault();
-
         this.setState({
             searchText: e.target.value
         })
     }
 
     searchClick(e){
-      
-
         let url = '/options/data';
-
         let searchObject = {
             [this.state.searchBy]: this.state.searchText
         }
-
-
         postData(url, searchObject)
-        /*.then(() => serverCall("http://localhost:4500" + url))
-        .then(res => this.setState({
-            searchResults: res
-        }))*/
-
         .then(this.setState({
             searchDataSent: true
         }))
@@ -90,15 +78,17 @@ class OptionsPage extends React.Component{
 
     selectPrevious(e){
         e.preventDefault();
-
         serverCall("http://localhost:4500/options/data")
         .then(res => res.length === 0 ? alert('Invalid search query') : this.setState({
             searchResults: res,
             selectPreviousClicked: true
         }))
-
-        
         console.log(this.state.searchResults);
+    }
+
+    useData(e){
+        e.preventDefault();
+        const url = '/chosen/data';
     }
 
 
@@ -134,15 +124,12 @@ class OptionsPage extends React.Component{
                        clickHandler={this.searchClick}
                        buttonClass="button"
                 />
-
                 <SelectResult sent={this.state.searchDataSent}
                               query={this.state.searchBy}
                               searchDataResults={this.state.searchResults}
                               clickHandler={this.selectPrevious}
                               selectClicked={this.state.selectPreviousClicked}
                 />
-
-             
             </div>
         )
     }
@@ -193,16 +180,8 @@ const Input = (props) => {
     )
 }
 
-
-/*const OptionsFromSearchResults = () => {
-    return(
-        <option>Batman</option>
-    )
-}*/
-
 const SelectResult = (props) => {
-    
-    
+     
     const optionsFromSearchResults = (arr, searchedItem) => {
            const displayResults = arr.map((x, y) => {
                 return(
