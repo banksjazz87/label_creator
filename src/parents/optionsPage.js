@@ -203,24 +203,19 @@ const Input = (props) => {
 const SelectResult = (props) => {
     
     
-    const OptionsFromSearchResults = (props) => {
-
-        if(props.searchDataResults.length > 0){
-           const displayResults = props.searchDataResults.map((x, y) => {
+    const optionsFromSearchResults = (arr, searchedItem) => {
+           const displayResults = arr.map((x, y) => {
                 return(
-                    <option key={y}>{`${x[props.query]}, ${x.company}`}</option>
-                )
-
+                    <option key={y}>{`${x[searchedItem]}, ${x.shipTo.company}`}</option>
+                 )
             })
-
-            return displayResults;
+            return displayResults;   
         }
-    }
 
     return(
         <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={props.clickHandler}>
             <option>Select From The Following</option>
-            <OptionsFromSearchResults />
+            {props.selectClicked ? optionsFromSearchResults(props.searchDataResults, props.query) : ""}
         </select>
     )
 }
