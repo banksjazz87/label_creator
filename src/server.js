@@ -13,6 +13,10 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', express.static('build'));
 
+app.listen(port, () => {
+    console.log(`App listening at http://localhost: ${port}`);
+})
+
 //all information pertaining to connecting to Mongo.
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
@@ -76,11 +80,7 @@ async function fetchPastPackSlips(searchData){
 app.post('/options/data', (req, res, next) => {
     let optionData = req.body;
     fetchPastPackSlips(optionData);
-
-
     res.send(searchDataArray);
-
-    
     console.log(optionData);
     next();
 })
@@ -97,6 +97,15 @@ app.get('/allData', (req, res, next) => {
     next();
 })
 
-app.listen(port, () => {
-    console.log(`App listening at http://localhost: ${port}`);
+//Route for all of the data pertaining to the search results for what the user is looking for.
+let confirmedSelection;
+app.post('/chosen/data', (req, res, next) => {
+    confirmedSelection = req.body;
+    res.send(confirmedSelection);
+    next();
+})
+
+app.get('/chosen/data', (req, res, next) => {
+    res.send(confirmedSelection);
+    next();
 })

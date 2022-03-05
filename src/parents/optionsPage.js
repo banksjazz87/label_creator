@@ -7,6 +7,16 @@ import serverCall from "../functions/serverCall.js"
 
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
+const allBeginningNumbers = (str) => {
+    let i = 0;
+    let arr = [];
+    while(str[i] !== "."){
+        arr.push(str[i]);
+        i++;
+    }
+    return(arr.join(''));
+}
+
 class OptionsPage extends React.Component{
     constructor(props){
         super(props);
@@ -19,7 +29,8 @@ class OptionsPage extends React.Component{
             display: 'flex',
             searchResults: "", 
             searchDataSent: false, 
-            selectPreviousClicked: false
+            selectPreviousClicked: false, 
+            selectedResults: ""
             
         }
 
@@ -30,7 +41,8 @@ class OptionsPage extends React.Component{
         this.selectPrevious = this.selectPrevious.bind(this);
 
         //working on creating a method to save the chosen data to a new route
-        this.useData = this.useData.bind(this);
+        this.updateSelectedResults = this.updateSelectedResults.bind(this);
+        this.sendSelectedData = this.sendSelectedData.bind(this);
     }
 
     choiceClick(e){
@@ -78,7 +90,7 @@ class OptionsPage extends React.Component{
 
     selectPrevious(e){
         e.preventDefault();
-        serverCall("http://localhost:4500/options/data")
+        serverCall("/options/data")
         .then(res => res.length === 0 ? alert('Invalid search query') : this.setState({
             searchResults: res,
             selectPreviousClicked: true
@@ -86,9 +98,19 @@ class OptionsPage extends React.Component{
         console.log(this.state.searchResults);
     }
 
-    useData(e){
+    updateSelectedResults(e){
+        e.preventDefault();
+        let selectedValue = e.target.value;
+        this.setState({
+            selectedResults: this.state.searchResults[allBeginningNumbers(selectedValue) - 1]
+        });
+    }
+
+    sendSelectedData(e){
         e.preventDefault();
         const url = '/chosen/data';
+        postData(url, this.state.selectedResults);
+        console.log('changed');
     }
 
 
@@ -129,7 +151,10 @@ class OptionsPage extends React.Component{
                               searchDataResults={this.state.searchResults}
                               clickHandler={this.selectPrevious}
                               selectClicked={this.state.selectPreviousClicked}
+                              changeHandler={this.updateSelectedResults}
                 />
+
+               <button type="submit" onClick={this.sendSelectedData} className="button">Submit</button>
             </div>
         )
     }
@@ -185,14 +210,14 @@ const SelectResult = (props) => {
     const optionsFromSearchResults = (arr, searchedItem) => {
            const displayResults = arr.map((x, y) => {
                 return(
-                    <option key={y}>{`${x[searchedItem]}, ${x.shipTo.company}`}</option>
+                    <option id={`option${y}`} key={y}>{`${y + 1}. ${x[searchedItem]}, ${x.shipTo.company}`}</option>
                  )
             })
             return displayResults;   
         }
 
     return(
-        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={props.clickHandler}>
+        <select style={props.sent ? {display: "flex"} : {display: "none"}} onClick={props.clickHandler} onChange={props.changeHandler}>
             <option>Select From The Following</option>
             {props.selectClicked ? optionsFromSearchResults(props.searchDataResults, props.query) : ""}
         </select>
