@@ -30,7 +30,8 @@ class OptionsPage extends React.Component{
             searchResults: "", 
             searchDataSent: false, 
             selectPreviousClicked: false, 
-            selectedResults: ""
+            selectedResults: "", 
+            dataSelectionMade: false
             
         }
 
@@ -102,14 +103,17 @@ class OptionsPage extends React.Component{
         e.preventDefault();
         let selectedValue = e.target.value;
         this.setState({
-            selectedResults: this.state.searchResults[allBeginningNumbers(selectedValue) - 1]
+            selectedResults: this.state.searchResults[allBeginningNumbers(selectedValue) - 1], 
+            dataSelectionMade: true
         });
+
     }
 
     sendSelectedData(e){
         e.preventDefault();
         const url = '/chosen/data';
         postData(url, this.state.selectedResults);
+        sessionStorage.setItem('revising', true);
         console.log('changed');
     }
 
@@ -154,7 +158,10 @@ class OptionsPage extends React.Component{
                               changeHandler={this.updateSelectedResults}
                 />
 
-               <button type="submit" onClick={this.sendSelectedData} className="button">Submit</button>
+               <button type="submit" 
+                       onClick={this.sendSelectedData} className="button"
+                       style={this.state.dataSelectionMade ? {display: 'flex'} : {display: 'none'}}>Submit
+               </button>
             </div>
         )
     }
