@@ -3,19 +3,11 @@ import "../assets/options.scss"
 import "../assets/library.scss"
 import postData from "../functions/postRequest.js"
 import serverCall from "../functions/serverCall.js"
+import { Link } from "react-router-dom"
+import MathFunctions from "../functions/mathFunctions";
 
 
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
-
-const allBeginningNumbers = (str) => {
-    let i = 0;
-    let arr = [];
-    while(str[i] !== "."){
-        arr.push(str[i]);
-        i++;
-    }
-    return(arr.join(''));
-}
 
 class OptionsPage extends React.Component{
     constructor(props){
@@ -103,7 +95,7 @@ class OptionsPage extends React.Component{
         e.preventDefault();
         let selectedValue = e.target.value;
         this.setState({
-            selectedResults: this.state.searchResults[allBeginningNumbers(selectedValue) - 1], 
+            selectedResults: this.state.searchResults[MathFunctions.allBeginningNumbers(selectedValue) - 1], 
             dataSelectionMade: true
         });
 
@@ -114,7 +106,7 @@ class OptionsPage extends React.Component{
         const url = '/chosen/data';
         postData(url, this.state.selectedResults);
         sessionStorage.setItem('revising', true);
-        console.log('changed');
+
     }
 
 
@@ -158,9 +150,12 @@ class OptionsPage extends React.Component{
                               changeHandler={this.updateSelectedResults}
                 />
 
-               <button type="submit" 
-                       onClick={this.sendSelectedData} className="button"
-                       style={this.state.dataSelectionMade ? {display: 'flex'} : {display: 'none'}}>Submit
+               <button
+                  type="submit"
+                  onClick={this.sendSelectedData} 
+                  className="button"
+                  style={this.state.dataSelectionMade ? {display: 'flex'} : {display: 'none'}}>
+                  <Link to='/creator_page' className="button">Submit</Link>
                </button>
             </div>
         )
