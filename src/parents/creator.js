@@ -4,6 +4,7 @@ import "../assets/creatorMediaQueries.scss";
 import "../assets/nav.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 import postData from "../functions/postRequest.js"
+import serverCall from "../functions/serverCall";
 
 const SkidDescriptors = {
     qtyNeeded: null, 
@@ -51,9 +52,11 @@ class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
 
-    if(currentSessionData){
+    if(sessionStorage.getItem('revising')){
+      serverCall('/chose/data')
+      .then(res => this.state = res)
+    }else if(currentSessionData){
       this.state = currentSessionData;
-
     }else{
     this.state = {
       userData: "",
@@ -105,8 +108,8 @@ class ParentShippingCreator extends React.Component {
     
   }
  
-  componenetDidMount(){
-    console.log('the dom has been loaded');
+  componentDidMount(){
+   console.log('component mounted');
   }
   //updates the ship to or from data fields.
   updateObj(e){
@@ -146,50 +149,35 @@ class ParentShippingCreator extends React.Component {
   //update the skid items
   //we will need data from the event, the line number, and the skid item key
   updateSkid(e){
-   
     e.preventDefault();
     //Get the correct number of lines we're going to need to extract all of the data this will be the number of times that we will need to loop.
-
-
     let lines = document.getElementsByClassName('line_data');
-
     let items = document.getElementsByClassName('itemDescription');
     let needed = document.getElementsByClassName('qtyNeeded');
     let shipped = document.getElementsByClassName('qtyShipped');
     let packs = document.getElementsByClassName('packsRolls');
     let carton = document.getElementsByClassName('qtyPerCarton');
     let cartons = document.getElementsByClassName('numOfCartons');
-
     let arr = [];
-
     this.setState({
       skid: arr
     })
-
     //Get the correct number of rows and all of the contents.
     for(let i = 0; i < lines.length; i++){
-
       let currentItems = new SkidItems(needed[i].value, items[i].value, packs[i].value, carton[i].value, cartons[i].value, shipped[i].value);
-
       arr.push(currentItems);
     }
-
     this.setState({
       skid: arr
     })
-
      this.setState({
         clicked: true, 
-        //date: changeDateFormat(this.state.date)
       })
-
    this.setState({
      totalCartons: MathFunctions.total("numOfCartons"),
      totalQty: MathFunctions.total("qtyShipped")
    })
-
    this.updateShipFromTo("shipFrom");
-   
   }
 
   //This function will post all of the data that has been supplied by the user, to the server.
