@@ -106,6 +106,9 @@ class OptionsPage extends React.Component{
         const url = '/chosen/data';
         postData(url, this.state.selectedResults);
         sessionStorage.setItem('revising', true);
+
+        sessionStorage.setItem('currentSession', 'running')
+        sessionStorage.setItem('userData', JSON.stringify(this.state.selectedResults));
     }
 
 

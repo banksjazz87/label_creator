@@ -51,7 +51,6 @@ const returnValue = (value) => {
 class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
-
    if(currentSessionData){
       this.state = currentSessionData;
     }else{
@@ -105,9 +104,16 @@ class ParentShippingCreator extends React.Component {
     
   }
  
-  componentDidMount(){
-   console.log('component mounted');
-  }
+  /*componentDidMount(){
+    if(sessionStorage.getItem('revising')){
+      serverCall('/chosen/data')
+      .then(res => this.setState({
+        fetched: true,
+        userData: res
+      }))
+    }
+  }*/
+
   //updates the ship to or from data fields.
   updateObj(e){
    
