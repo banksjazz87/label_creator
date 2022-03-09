@@ -52,10 +52,7 @@ class ParentShippingCreator extends React.Component {
   constructor(props){
     super(props);
 
-    if(sessionStorage.getItem('revising')){
-      serverCall('/chose/data')
-      .then(res => this.state = res)
-    }else if(currentSessionData){
+   if(currentSessionData){
       this.state = currentSessionData;
     }else{
     this.state = {

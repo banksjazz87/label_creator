@@ -27,7 +27,7 @@ class ParentLabels extends React.Component {
 
   //use this function only for production
  componentDidMount(){
-    serverCall("http://localhost:4500/allData")
+    serverCall("/allData")
     .then(items => this.setState({
         fetched: true,
         userData: items[0]

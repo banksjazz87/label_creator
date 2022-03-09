@@ -25,7 +25,7 @@ this.state = {
   
   //used for PRODUCTION mode, only 
   componentDidMount(){
-    serverCall("http://localhost:4500/allData")
+    serverCall("/allData")
       .then(items => this.setState({
         userData: items[0],
         fetched: true
