@@ -77,7 +77,7 @@ class ParentShippingCreator extends React.Component {
 
       PO: null, 
       Job: null,
-      lines: 0, 
+      lines: "", 
       date: "",
       
       totalCartons: 0,
@@ -132,7 +132,7 @@ class ParentShippingCreator extends React.Component {
   //updates the number of lines that are needed for the items.
   lineNumbers(e){
     e.preventDefault();
-    const linesNeeded = document.getElementById('lines_input');
+    const linesNeeded = document.getElementById('lines');
 
     this.setState((prevState) => ({
       lines: prevState.lines = linesNeeded.value, 
@@ -249,7 +249,7 @@ updateSkidItem(e){
 
 
   render(){
-    if((sessionStorage.getItem('revising') && this.state.retrieved === true) || sessionStorage.getItem('currentSession') || (sessionStorage.length === 0 && this.state.retrieved === false)){
+    /*if((sessionStorage.getItem('revising') && this.state.retrieved === true) || sessionStorage.getItem('currentSession') || (sessionStorage.length === 0 && this.state.retrieved === false)){*/
   return (
     <div id="creator_container">
       <h1 id="header"> Shipping Creator </h1>
@@ -300,9 +300,9 @@ updateSkidItem(e){
       />
 
       <PoInput
-        labelName={'Lines Needed'}
+        labelName='Lines Name'
         differentType='number'
-        dataID='lines_input'
+        dataID='lines'
         placeholderText='number of lines'
         itemValue={this.state.lines}
         handleOnChange={this.poJobNumbers}
@@ -336,11 +336,11 @@ updateSkidItem(e){
 
     </div>
   );
-}else{
+/*}else{
   return (
     <h1>Fetching</h1>
   )
-}
+}*/
   }
 }
 
