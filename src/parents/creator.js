@@ -44,7 +44,7 @@ const returnValue = (value) => {
   if(sessionStorage.getItem('currentSession') === 'running'){
     return value;
   }else{
-    return null;
+    return value;
   }
 }
 
@@ -56,6 +56,7 @@ class ParentShippingCreator extends React.Component {
     }else{
     this.state = {
       userData: "",
+      retrieved: false,
       shipFrom: {
         company: "",                                                                                
         street: "",
@@ -104,15 +105,17 @@ class ParentShippingCreator extends React.Component {
     
   }
  
-  /*componentDidMount(){
+  componentDidMount(){
     if(sessionStorage.getItem('revising')){
       serverCall('/chosen/data')
-      .then(res => this.setState({
-        fetched: true,
-        userData: res
-      }))
+      .then(res => this.setState((prevState) => ({
+        ...prevState = res,
+        retrieved: true
+      })))
+
+      console.log(this.state);
     }
-  }*/
+  }
 
   //updates the ship to or from data fields.
   updateObj(e){
@@ -246,6 +249,7 @@ updateSkidItem(e){
 
 
   render(){
+    if((sessionStorage.getItem('revising') && this.state.retrieved === true) || sessionStorage.getItem('currentSession') || (sessionStorage.length === 0 && this.state.retrieved === false)){
   return (
     <div id="creator_container">
       <h1 id="header"> Shipping Creator </h1>
@@ -332,7 +336,12 @@ updateSkidItem(e){
 
     </div>
   );
+}else{
+  return (
+    <h1>Fetching</h1>
+  )
 }
+  }
 }
 
 //This will dynamically render all of the elements needed for the shipping to and from.
@@ -421,7 +430,7 @@ const SkidContents = (props) => {
         id={`${props.title[y]}${number}`} 
         className={Object.keys(SkidDescriptors)[y]} 
         onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.numberChange : props.itemChange}
-        value={props.skidObjectsArr.length > 0 && currentStorageRunning() ? props.skidObjectsArr[number][x] : null}
+        value={props.skidObjectsArr.length > 0  ? props.skidObjectsArr[number][x] : null}
          ></input>
       </td>
     )
