@@ -93,7 +93,6 @@ class ParentShippingCreator extends React.Component {
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
     this.poJobNumbers = this.poJobNumbers.bind(this);
-    
 
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
@@ -157,6 +156,7 @@ class ParentShippingCreator extends React.Component {
   updateSkid(e){
     e.preventDefault();
     //Get the correct number of lines we're going to need to extract all of the data this will be the number of times that we will need to loop.
+
     let lines = document.getElementsByClassName('line_data');
     let items = document.getElementsByClassName('itemDescription');
     let needed = document.getElementsByClassName('qtyNeeded');
@@ -451,7 +451,7 @@ const SkidContents = (props) => {
 
   return(
     
-    <table id="main_table">
+    <table id="main_table" style={props.hide ? {display: ""} : {display: "none"}}>
       <tbody>
         <tr id="header_row">
           {elements}
