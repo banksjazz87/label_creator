@@ -93,7 +93,7 @@ class ParentShippingCreator extends React.Component {
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
     this.poJobNumbers = this.poJobNumbers.bind(this);
-
+   
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
     this.numberOnChange = this.numberOnChange.bind(this);
@@ -118,7 +118,6 @@ class ParentShippingCreator extends React.Component {
 
   //updates the ship to or from data fields.
   updateObj(e){
-   
     const shipToOrFrom = e.target.className;
     const label = e.target.placeholder;
 
@@ -249,7 +248,6 @@ updateSkidItem(e){
 
 
   render(){
-    /*if((sessionStorage.getItem('revising') && this.state.retrieved === true) || sessionStorage.getItem('currentSession') || (sessionStorage.length === 0 && this.state.retrieved === false)){*/
   return (
     <div id="creator_container">
       <h1 id="header"> Shipping Creator </h1>
@@ -300,13 +298,16 @@ updateSkidItem(e){
       />
 
       <PoInput
-        labelName='Lines Name'
+        labelName='Lines Needed'
         differentType='number'
         dataID='lines'
         placeholderText='number of lines'
         itemValue={this.state.lines}
-        handleOnChange={this.poJobNumbers}
+        handleOnChange={sessionStorage.getItem('revising') ? "" : this.poJobNumbers}
       />
+
+      <button type='button'
+      >Add Line</button>
 
       <button type='button' 
               onClick={this.lineNumbers}>Submit</button> 
@@ -336,11 +337,6 @@ updateSkidItem(e){
 
     </div>
   );
-/*}else{
-  return (
-    <h1>Fetching</h1>
-  )
-}*/
   }
 }
 
