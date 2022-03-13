@@ -77,7 +77,8 @@ class ParentShippingCreator extends React.Component {
 
       PO: null, 
       Job: null,
-      lines: "", 
+      lines: 0, 
+      addingLines: 0,
       date: "",
       
       totalCartons: 0,
@@ -101,6 +102,8 @@ class ParentShippingCreator extends React.Component {
 
     this.clearInput = this.clearInput.bind(this);
 
+    this.addLine = this.addLine.bind(this);
+
     
   }
  
@@ -109,10 +112,8 @@ class ParentShippingCreator extends React.Component {
       serverCall('/chosen/data')
       .then(res => this.setState((prevState) => ({
         ...prevState = res,
-        retrieved: true
+        retrieved: true 
       })))
-
-      console.log(this.state);
     }
   }
 
@@ -128,15 +129,14 @@ class ParentShippingCreator extends React.Component {
 
 
   //updates the number of lines that are needed for the items.
-  lineNumbers(e){
-    e.preventDefault();
+  lineNumbers(){
     const linesNeeded = document.getElementById('lines');
-
-    this.setState((prevState) => ({
-      lines: prevState.lines = linesNeeded.value, 
-      numberOfLinesSubmitClicked: true, 
-      showSkidHeader: true
-    }));
+  this.setState((prevState) => ({
+    lines: prevState.lines = linesNeeded.value, 
+    numberOfLinesSubmitClicked: true, 
+    showSkidHeader: true, 
+    clicked: false
+  }));
   };
 
   //update the object for the po and job numbers
@@ -152,10 +152,8 @@ class ParentShippingCreator extends React.Component {
 
   //update the skid items
   //we will need data from the event, the line number, and the skid item key
-  updateSkid(e){
-    e.preventDefault();
+  updateSkid(){
     //Get the correct number of lines we're going to need to extract all of the data this will be the number of times that we will need to loop.
-
     let lines = document.getElementsByClassName('line_data');
     let items = document.getElementsByClassName('itemDescription');
     let needed = document.getElementsByClassName('qtyNeeded');
@@ -246,6 +244,14 @@ updateSkidItem(e){
 
 }
 
+addLine(){
+  this.setState((prev) => ({
+    lines: parseInt(prev.lines) + 1, 
+    clicked: false
+  }))
+}
+
+
 
   render(){
   return (
@@ -302,12 +308,14 @@ updateSkidItem(e){
         differentType='number'
         dataID='lines'
         placeholderText='number of lines'
-        itemValue={this.state.lines}
-        handleOnChange={sessionStorage.getItem('revising') ? "" : this.poJobNumbers}
+        itemValue={this.state.lines ? this.state.lines : ""}
+        handleOnChange={this.poJobNumbers}
       />
 
       <button type='button'
-      >Add Line</button>
+              onClick={this.addLine}>
+        Add Line
+     </button>
 
       <button type='button' 
               onClick={this.lineNumbers}>Submit</button> 
@@ -406,13 +414,10 @@ const SkidContents = (props) => {
   let i = 0;
 
   let skidItems = [];
-
   while(i < rows){
     i++;
     skidItems.push(i);
   };
-
-  
 
   const newColumns = (number) => newInput.map((x, y) => {
 
@@ -426,7 +431,7 @@ const SkidContents = (props) => {
         id={`${props.title[y]}${number}`} 
         className={Object.keys(SkidDescriptors)[y]} 
         onChange={Object.keys(SkidDescriptors)[y] !== "itemDescription" ? props.numberChange : props.itemChange}
-        value={props.skidObjectsArr.length > 0  ? props.skidObjectsArr[number][x] : null}
+        value={number < props.skidObjectsArr.length ? props.skidObjectsArr[number][x] : null}
          ></input>
       </td>
     )
