@@ -103,6 +103,7 @@ class ParentShippingCreator extends React.Component {
     this.clearInput = this.clearInput.bind(this);
 
     this.addLine = this.addLine.bind(this);
+    this.removeLine = this.removeLine.bind(this);
 
     
   }
@@ -251,6 +252,14 @@ addLine(){
   }))
 }
 
+removeLine(e){
+  const parent = e.target.parentElement;
+  parent.remove();
+  this.setState((prev) => ({
+    lines: parseInt(prev.lines) - 1
+  }));
+}
+
 
 
   render(){
@@ -329,6 +338,7 @@ addLine(){
                     hide={this.state.showSkidHeader} 
                     numberChange={this.numberOnChange}
                     itemChange={this.updateSkidItem}
+                    removeChange={this.removeLine}
                     />
 
     <div id="final_buttons">
@@ -445,7 +455,13 @@ const SkidContents = (props) => {
         className="line_data" 
         key={'row_num' + y}
       >
-      {newColumns(y)}
+        {newColumns(y)}
+        <button id={'remove' + y} 
+                className="remove_button" 
+                type="button" 
+                onClick={props.removeChange}>
+                Remove
+        </button>
       </tr>
     )
   })
