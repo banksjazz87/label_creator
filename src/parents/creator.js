@@ -253,11 +253,18 @@ addLine(){
 }
 
 removeLine(e){
-  const parent = e.target.parentElement;
-  parent.remove();
+  if(this.state.skid.length > 0){
+    const parent = e.target.parentElement;
+    const lineNumber = MathFunctions.numbers(parent.id);
+    this.setState((prev) => ({
+      skidItems: prev.skid.splice(lineNumber, 1),
+      lines: parseInt(prev.lines) -1
+    }))
+  }else{
   this.setState((prev) => ({
     lines: parseInt(prev.lines) - 1
   }));
+}
 }
 
 
