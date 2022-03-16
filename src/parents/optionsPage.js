@@ -36,6 +36,7 @@ class OptionsPage extends React.Component{
         //working on creating a method to save the chosen data to a new route
         this.updateSelectedResults = this.updateSelectedResults.bind(this);
         this.sendSelectedData = this.sendSelectedData.bind(this);
+        this.goToCreator = this.goToCreator.bind(this);
     }
 
     choiceClick(e){
@@ -53,6 +54,8 @@ class OptionsPage extends React.Component{
                 new: true,
                 display: 'none'
             })
+
+            this.goToCreator();
         }
     }
 
@@ -98,7 +101,10 @@ class OptionsPage extends React.Component{
             selectedResults: this.state.searchResults[MathFunctions.allBeginningNumbers(selectedValue) - 1], 
             dataSelectionMade: true
         });
+    }
 
+    goToCreator(){
+        window.location.href = "./creator.js";
     }
 
     sendSelectedData(e){
@@ -106,7 +112,7 @@ class OptionsPage extends React.Component{
         const url = '/chosen/data';
         postData(url, this.state.selectedResults);
         sessionStorage.setItem('revising', true);
-
+        this.goToCreator();
     }
 
     render() {
