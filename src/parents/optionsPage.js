@@ -55,7 +55,8 @@ class OptionsPage extends React.Component{
                 display: 'none'
             })
 
-            this.goToCreator();
+            //this.goToCreator();
+            window.location.href = "/creator_page";
         }
     }
 
@@ -104,7 +105,8 @@ class OptionsPage extends React.Component{
     }
 
     goToCreator(){
-        window.location.href = "./creator.js";
+        //window.location.href = "./creator.js";
+        console.log('cat');
     }
 
     sendSelectedData(e){
@@ -112,7 +114,8 @@ class OptionsPage extends React.Component{
         const url = '/chosen/data';
         postData(url, this.state.selectedResults);
         sessionStorage.setItem('revising', true);
-        this.goToCreator();
+        //this.goToCreator();
+        window.location = "./creator.js";
     }
 
     render() {
