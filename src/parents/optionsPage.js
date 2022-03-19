@@ -56,7 +56,7 @@ class OptionsPage extends React.Component{
             })
 
             //this.goToCreator();
-            window.location.href = "/creator_page";
+            //window.location.href = "/creator_page";
         }
     }
 
@@ -115,7 +115,7 @@ class OptionsPage extends React.Component{
         postData(url, this.state.selectedResults);
         sessionStorage.setItem('revising', true);
         //this.goToCreator();
-        window.location = "./creator.js";
+        //window.location.href = "/creator_page";
     }
 
     render() {
