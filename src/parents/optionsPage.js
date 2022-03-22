@@ -177,7 +177,9 @@ const Choice = (props) => {
             onClick={props.clickHandler}
             style={{display: props.currentDisplay}}
     >
+    <Link to={props.idName === 'new' ? '/creator_page' : ''} className="button">
         {props.label}
+    </Link>
     </button>
     )
 }
