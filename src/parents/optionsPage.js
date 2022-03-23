@@ -32,11 +32,8 @@ class OptionsPage extends React.Component{
         this.searchInfo = this.searchInfo.bind(this);
         this.searchClick = this.searchClick.bind(this);
         this.selectPrevious = this.selectPrevious.bind(this);
-
-        //working on creating a method to save the chosen data to a new route
         this.updateSelectedResults = this.updateSelectedResults.bind(this);
         this.sendSelectedData = this.sendSelectedData.bind(this);
-        this.goToCreator = this.goToCreator.bind(this);
     }
 
     choiceClick(e){
@@ -54,9 +51,6 @@ class OptionsPage extends React.Component{
                 new: true,
                 display: 'none'
             })
-
-            //this.goToCreator();
-            //window.location.href = "/creator_page";
         }
     }
 
@@ -104,18 +98,11 @@ class OptionsPage extends React.Component{
         });
     }
 
-    goToCreator(){
-        //window.location.href = "./creator.js";
-        console.log('cat');
-    }
-
     sendSelectedData(e){
         e.preventDefault();
         const url = '/chosen/data';
         postData(url, this.state.selectedResults);
         sessionStorage.setItem('revising', true);
-        //this.goToCreator();
-        //window.location.href = "/creator_page";
     }
 
     render() {
@@ -125,36 +112,41 @@ class OptionsPage extends React.Component{
                 <h1 id="header_text">Welcome to the Label Creator <br/> Please Select an Option Below</h1> 
 
              <div id="button_container">
-                <Choice idName="new"
-                        clickHandler={this.choiceClick}
-                        label="New" 
-                        buttonClass="button"
-                        currentDisplay={this.state.display}
+                <Choice 
+                    idName="new"
+                    clickHandler={this.choiceClick}
+                    label="New" 
+                    buttonClass="button"
+                    currentDisplay={this.state.display}
                 />
-                <Choice idName="search"
-                        clickHandler={this.choiceClick}
-                        label="Search" 
-                        buttonClass="button"
-                        currentDisplay={this.state.display}
+                <Choice 
+                    idName="search"
+                    clickHandler={this.choiceClick}
+                    label="Search" 
+                    buttonClass="button"
+                    currentDisplay={this.state.display}
                 />
             </div>
 
-                <Options searching={this.state.search}
-                         changeHandler={this.optionSelection}
-                         arrayOfOptions={searchSelections}
+                <Options 
+                    searching={this.state.search}
+                    changeHandler={this.optionSelection}
+                    arrayOfOptions={searchSelections}
                 />
-                <Input searchType={this.state.searchBy}
-                       searching={this.state.search}
-                       changeHandler={this.searchInfo}
-                       clickHandler={this.searchClick}
-                       buttonClass="button"
+                <Input 
+                    searchType={this.state.searchBy}
+                    searching={this.state.search}
+                    changeHandler={this.searchInfo}
+                    clickHandler={this.searchClick}
+                    buttonClass="button"
                 />
-                <SelectResult sent={this.state.searchDataSent}
-                              query={this.state.searchBy}
-                              searchDataResults={this.state.searchResults}
-                              clickHandler={this.selectPrevious}
-                              selectClicked={this.state.selectPreviousClicked}
-                              changeHandler={this.updateSelectedResults}
+                <SelectResult 
+                    sent={this.state.searchDataSent}
+                    query={this.state.searchBy}
+                    searchDataResults={this.state.searchResults}
+                    clickHandler={this.selectPrevious}
+                    selectClicked={this.state.selectPreviousClicked}
+                    changeHandler={this.updateSelectedResults}
                 />
 
                <button
@@ -162,7 +154,11 @@ class OptionsPage extends React.Component{
                   onClick={this.sendSelectedData} 
                   className="button"
                   style={this.state.dataSelectionMade ? {display: 'flex'} : {display: 'none'}}>
-                  <Link to='/creator_page' className="button">Submit</Link>
+                    <Link 
+                        to='/creator_page' className="button"
+                    >
+                        Submit
+                    </Link>
                </button>
             </div>
         )
