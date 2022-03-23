@@ -39,13 +39,13 @@ class OptionsPage extends React.Component{
     choiceClick(e){
         e.preventDefault();
         const currentId = e.target.id;
-        if(currentId === 'search'){
+        if (currentId === 'search') {
             this.setState({
                 search: true,
                 new: false,
                 display: 'none'
             })
-        }else{
+        } else {
             this.setState({
                 search: false,
                 new: true,
@@ -155,7 +155,8 @@ class OptionsPage extends React.Component{
                   className="button"
                   style={this.state.dataSelectionMade ? {display: 'flex'} : {display: 'none'}}>
                     <Link 
-                        to='/creator_page' className="button"
+                        to='/creator_page' 
+                        className="button"
                     >
                         Submit
                     </Link>
@@ -234,7 +235,12 @@ const SelectResult = (props) => {
     const optionsFromSearchResults = (arr, searchedItem) => {
            const displayResults = arr.map((x, y) => {
                 return(
-                    <option id={`option${y}`} key={y}>{`${y + 1}. ${x[searchedItem]}, ${x.shipTo.company}`}</option>
+                    <option 
+                        id={`option${y}`} 
+                        key={y}
+                    >
+                    {`${y + 1}. ${x[searchedItem]}, ${x.shipTo.company}`}
+                    </option>
                  )
             })
             return displayResults;   

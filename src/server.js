@@ -76,6 +76,16 @@ async function fetchPastPackSlips(searchData){
     }
 }
 
+//Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
+async function updatePastPackSlip(currentId, po, job){
+    try{
+        await client.connect();
+        const database = client.db('senecaPrinting');
+        const slip = database.collection('packSlips');
+        let result = 
+    }
+}
+
 //Route for the search request on the options page.
 app.post('/options/data', (req, res, next) => {
     let optionData = req.body;

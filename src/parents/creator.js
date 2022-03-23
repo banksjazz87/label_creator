@@ -99,14 +99,11 @@ class ParentShippingCreator extends React.Component {
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
     this.poJobNumbers = this.poJobNumbers.bind(this);
-
     this.updateSkid = this.updateSkid.bind(this);
     this.finalSubmit = this.finalSubmit.bind(this);
     this.numberOnChange = this.numberOnChange.bind(this);
     this.updateSkidItem = this.updateSkidItem.bind(this);
-
     this.clearInput = this.clearInput.bind(this);
-
     this.addLine = this.addLine.bind(this);
     this.removeLine = this.removeLine.bind(this);
   }
