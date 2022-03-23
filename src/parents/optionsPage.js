@@ -170,6 +170,24 @@ class OptionsPage extends React.Component{
 }
 
 const Choice = (props) => {
+    if (props.idName === 'new') {
+        return(
+            <button id={props.idName}  
+            className={props.buttonClass}                 
+            type="button"
+            onClick={props.clickHandler}
+            style={{display: props.currentDisplay}}
+    >
+    <Link 
+        to='creator_page'
+        className='button'
+    >    
+        {props.label}
+    </Link>
+    </button>
+    )
+
+    } else {
     return(
     <button id={props.idName}  
             className={props.buttonClass}                 
@@ -177,11 +195,10 @@ const Choice = (props) => {
             onClick={props.clickHandler}
             style={{display: props.currentDisplay}}
     >
-    <Link to={props.idName === 'new' ? '/creator_page' : ''} className="button">
         {props.label}
-    </Link>
     </button>
     )
+    }
 }
 
 const Options = (props) => {
