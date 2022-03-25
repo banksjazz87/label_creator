@@ -34,7 +34,6 @@ async function insertNewPackSlip(currentData) {
     }
 }
 
-
 let currentData = {};
 let allData = [];
 
@@ -52,15 +51,14 @@ app.post('/shipping_creator/data', (req, res) => {
     console.log(`current data type = ${typeof(currentData)}`)
 })
 
-
-const searchDataArray = [];
-
+let searchDataArray = [];
 /**
  * 
  * @param {*} searchData 
  * This function is used to update the searchDataArray and provide information for the /options/data page.
  */
 async function fetchPastPackSlips(searchData){
+    searchDataArray = [];
 
     try{
         await client.connect();

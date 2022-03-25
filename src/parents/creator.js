@@ -53,6 +53,14 @@ const returnValue = (value) => {
   }
 };
 
+const currentlyRevising = () => {
+  if (sessionStorage.getItem("revising")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 class ParentShippingCreator extends React.Component {
   constructor(props) {
     super(props);
@@ -110,10 +118,11 @@ class ParentShippingCreator extends React.Component {
 
   componentDidMount() {
     if (sessionStorage.getItem("revising")) {
-      serverCall("/chosen/data").then((res) =>
+      serverCall("/chosen/data")
+      .then((res) =>
         this.setState((prevState) => ({
           ...(prevState = res),
-          retrieved: true,
+          retrieved: true
         }))
       );
     }
@@ -230,7 +239,7 @@ class ParentShippingCreator extends React.Component {
   updateSkidItem(e) {
     e.preventDefault();
 
-    if (currentStorageRunning()) {
+    if (currentStorageRunning() || currentlyRevising()) {
       let currentId = e.target.id;
       let rowNum = MathFunctions.numbers(currentId);
       let name = e.target.className;
