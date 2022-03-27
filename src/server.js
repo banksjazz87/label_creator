@@ -49,9 +49,12 @@ app.post('/shipping_creator/data', (req, res) => {
         console.log('item is being inserted');   
         insertNewPackSlip(currentData);
     }*/
-    updatePastPackSlip(currentData._id, currentData)
+    updatePastPackSlip(currentData, currentData._id, currentData.Job, currentData.PO, currentData.shipTo.company)
     //(currentData._id, currentData.PO, currentData.Job, currentData);
     console.log(currentData._id);
+    console.log(currentData.Job);
+    console.log(currentData.PO);
+    console.log(currentData.shipTo.company);
     /*console.log(allData);
     console.log(`current data type = ${typeof(currentData)}`)*/
 })
@@ -85,7 +88,7 @@ async function fetchPastPackSlips(searchData){
 }
 
 //Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
-async function updatePastPackSlip(currentId, currentObject){
+async function updatePastPackSlip(currentObject, currentId, job, po, toCompany, toCompanyAddress){
 //(currentId, po, job, currentObject)
 //{
     try{
@@ -94,7 +97,7 @@ async function updatePastPackSlip(currentId, currentObject){
         const slip = database.collection('packSlips');
         
         //const filter = {"_id": currentId, "PO": po, "Job": job};
-        const filter = {_id: currentId}
+        const filter =  {_id: currentId, Job: job, PO: po,[toCompany]: toCompanyAddress};
         const options = {upsert: true};
 
         const updateDoc = currentObject;
