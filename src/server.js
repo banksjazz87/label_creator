@@ -42,13 +42,18 @@ app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
     allData.unshift(currentData);
 
-    if (currentData.changing) {
+    /*if (currentData.changing) {
+        console.log('item is being updated');
         updatePastPackSlip(currentData._id, currentData.PO, currentData.Job, currentData);
-    } else {   
+    } else {
+        console.log('item is being inserted');   
         insertNewPackSlip(currentData);
-    }
-    console.log(allData);
-    console.log(`current data type = ${typeof(currentData)}`)
+    }*/
+    updatePastPackSlip(currentData._id, currentData)
+    //(currentData._id, currentData.PO, currentData.Job, currentData);
+    console.log(currentData._id);
+    /*console.log(allData);
+    console.log(`current data type = ${typeof(currentData)}`)*/
 })
 
 let searchDataArray = [];
@@ -80,35 +85,20 @@ async function fetchPastPackSlips(searchData){
 }
 
 //Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
-async function updatePastPackSlip(currentId, po, job, currentObject){
+async function updatePastPackSlip(currentId, currentObject){
+//(currentId, po, job, currentObject)
+//{
     try{
         await client.connect();
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
         
-        const filter = {"_id": currentId, "PO": po, "Job": job};
+        //const filter = {"_id": currentId, "PO": po, "Job": job};
+        const filter = {_id: currentId}
         const options = {upsert: true};
 
-        const updateDoc = {
-            $set: {
-                shipFrom: currentObject.shipFrom, 
-                shipTo: currentObject.shipTo, 
-                skid: currentObject.skid, 
-                PO: currentObject.PO,
-                Job: currentObject.job,
-                lines: currentObject.lines,
-                date: currentObject.date,
-                totalCartons: currentObject.totalCartons,
-                totalQty: currentObject.totalQty,
-                numberOfLinesSubmitClicked: currentObject.numberOfLinesSubmitClicked,
-                submitClicked: currentObject.submitClicked,
-                showSkidHeader: currentObject.showSkidHeader,
-                changing: currentObject.changing,
-                lines_input: currentObject.lines_input,
-                clicked: currentObject.clicked,
-            }
-        }
-        const result = await slip.updateOne(filter, updateDoc, options);
+        const updateDoc = currentObject;
+        const result = await slip.findOneAndReplace(filter, updateDoc, options);
 
         console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
 
