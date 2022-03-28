@@ -24,7 +24,11 @@ const client = new MongoClient(uri);
 //This will remove the _id field if it exists
 const removeId = (object, id) => {
     if (id) {
-        return delete object[id]
+        console.log('index was present');
+        return delete object[id];
+    }else{
+        console.log('index was NOT present')
+        return;
     }
 }
 
@@ -35,7 +39,7 @@ app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
     removeId(currentData, "_id");
     allData.unshift(currentData);
-    updatePastPackSlip(currentData, currentData._id);
+    updatePastPackSlip(currentData);
 })
 
 let searchDataArray = [];
@@ -67,19 +71,21 @@ async function fetchPastPackSlips(searchData){
 }
 
 //Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
-async function updatePastPackSlip(currentObject, currentId){
+async function updatePastPackSlip(currentObject){
     try {
         await client.connect();
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
         
-        const filter =  {_id: currentId};
+        const filter =  {Job: currentObject.Job, PO: currentObject.PO, shipTo: {company: currentObject.shipTo.company}};
         const options = {upsert: true, returnNewDocument: true};
 
         const updateDoc = currentObject;
         const result = await slip.findOneAndReplace(filter, updateDoc, options);
 
         console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
+        console.log(filter);
+        
 
     } finally {
         await client.close();
