@@ -21,42 +21,21 @@ app.listen(port, () => {
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
-//inserts a new pack slip into the database.
-async function insertNewPackSlip(currentData) {
-    try {
-        await client.connect();
-        const database = client.db('senecaPrinting');
-        const slip = database.collection('packSlips');
-        const result = await slip.insertOne(currentData);
-        console.log(`A document was inserted with the _id: ${result.insertedId}`)
-    }finally{
-        await client.close();
+//This will remove the _id field if it exists
+const removeId = (object, id) => {
+    if (id) {
+        return delete object[id]
     }
 }
 
 let currentData = {};
 let allData = [];
-
 //Route for the post request for the label creator page.
 app.post('/shipping_creator/data', (req, res) => {
     currentData = req.body;
+    removeId(currentData, "_id");
     allData.unshift(currentData);
-
-    /*if (currentData.changing) {
-        console.log('item is being updated');
-        updatePastPackSlip(currentData._id, currentData.PO, currentData.Job, currentData);
-    } else {
-        console.log('item is being inserted');   
-        insertNewPackSlip(currentData);
-    }*/
-    updatePastPackSlip(currentData, currentData._id, currentData.Job, currentData.PO, currentData.shipTo.company)
-    //(currentData._id, currentData.PO, currentData.Job, currentData);
-    console.log(currentData._id);
-    console.log(currentData.Job);
-    console.log(currentData.PO);
-    console.log(currentData.shipTo.company);
-    /*console.log(allData);
-    console.log(`current data type = ${typeof(currentData)}`)*/
+    updatePastPackSlip(currentData, currentData._id);
 })
 
 let searchDataArray = [];
@@ -68,37 +47,34 @@ let searchDataArray = [];
 async function fetchPastPackSlips(searchData){
     searchDataArray = [];
 
-    try{
+    try {
         await client.connect();
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
         let result = slip.find(searchData);
         
-        if((await result.count()) === 0){
+        if ((await result.count()) === 0) {
             console.log("No documents found");
         }
         await result.forEach((item) => {
             searchDataArray.push(item)
         });
-    }catch(e){
+    } catch(e) {
         console.log('error', e)
-    }finally {
+    } finally {
         await client.close();
     }
 }
 
 //Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
-async function updatePastPackSlip(currentObject, currentId, job, po, toCompany, toCompanyAddress){
-//(currentId, po, job, currentObject)
-//{
-    try{
+async function updatePastPackSlip(currentObject, currentId){
+    try {
         await client.connect();
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
         
-        //const filter = {"_id": currentId, "PO": po, "Job": job};
-        const filter =  {_id: currentId, Job: job, PO: po,[toCompany]: toCompanyAddress};
-        const options = {upsert: true};
+        const filter =  {_id: currentId};
+        const options = {upsert: true, returnNewDocument: true};
 
         const updateDoc = currentObject;
         const result = await slip.findOneAndReplace(filter, updateDoc, options);
