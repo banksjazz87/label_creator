@@ -23,7 +23,7 @@ const client = new MongoClient(uri);
 
 //This will remove the _id field if it exists
 const removeId = (object, id) => {
-    if (id) {
+    if (object[id]) {
         console.log('index was present');
         return delete object[id];
     }else{
@@ -76,16 +76,19 @@ async function updatePastPackSlip(currentObject){
         await client.connect();
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
+
+        const stringOfJob = currentObject.Job.toString();
         
-        const filter =  {Job: currentObject.Job, PO: currentObject.PO, shipTo: {company: currentObject.shipTo.company}};
-        const options = {upsert: true, returnNewDocument: true};
+        const filter =  {Job: currentObject.Job};
+        const options = {upsert: true};
 
         const updateDoc = currentObject;
-        const result = await slip.findOneAndReplace(filter, updateDoc, options);
-
-        console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
-        console.log(filter);
         
+       const result = await slip.replaceOne(filter, updateDoc, options);
+
+       console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
+        console.log(currentObject);
+        console.log(stringOfJob); 
 
     } finally {
         await client.close();
