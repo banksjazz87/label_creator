@@ -21,17 +21,6 @@ app.listen(port, () => {
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
-//This will remove the _id field if it exists
-const removeId = (object, id) => {
-    if (object[id]) {
-        console.log('index was present');
-        return delete object[id];
-    }else{
-        console.log('index was NOT present')
-        return;
-    }
-}
-
 let currentData = {};
 let allData = [];
 //Route for the post request for the label creator page.
@@ -70,26 +59,30 @@ async function fetchPastPackSlips(searchData){
     }
 }
 
+//This will remove the _id field if it exists
+const removeId = (object, id) => {
+    if (object[id]) {
+        console.log('index was present');
+        return delete object[id];
+    }else{
+        console.log('index was NOT present')
+        return;
+    }
+}
 //Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
 async function updatePastPackSlip(currentObject){
     try {
         await client.connect();
+
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
-
-        const stringOfJob = currentObject.Job.toString();
-        
         const filter =  {'Job': currentObject.Job, 'PO': currentObject.PO, 'shipTo.company': currentObject.shipTo.company };
+        const updateDoc = currentObject;
         const options = {upsert: true};
 
-        const updateDoc = currentObject;
+        const result = await slip.replaceOne(filter, updateDoc, options);
+        console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
         
-       const result = await slip.replaceOne(filter, updateDoc, options);
-
-       console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
-        console.log(currentObject);
-        console.log(stringOfJob); 
-
     } finally {
         await client.close();
     }
