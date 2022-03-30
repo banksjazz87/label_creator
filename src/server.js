@@ -79,7 +79,7 @@ async function updatePastPackSlip(currentObject){
 
         const stringOfJob = currentObject.Job.toString();
         
-        const filter =  {Job: currentObject.Job};
+        const filter =  {'Job': currentObject.Job, 'PO': currentObject.PO, 'shipTo.company': currentObject.shipTo.company };
         const options = {upsert: true};
 
         const updateDoc = currentObject;
