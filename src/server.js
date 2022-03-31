@@ -82,9 +82,29 @@ async function updatePastPackSlip(currentObject){
 
         const result = await slip.replaceOne(filter, updateDoc, options);
         console.log(`${result.matchedCount} documents matched the filter, updated ${result.modifiedCount} documents`);
-        
+
     } finally {
         await client.close();
+    }
+}
+
+//Delete method for the database, this is going to get the current _id from the item that has been selected.
+async function deletePastPackSlip(currentObject){
+    try {
+        await client.connect();
+
+        const database = client.db('senecaPrinting');
+        const slip = database.collection('packSlips');
+        const currentIndex = currentObject._id;
+        const currentDoc = slip.find(currentIndex);
+
+        const result = await slip.deleteOne(currentDoc);
+        console.dir(result.resultCount);
+
+    } catch(e) {
+        console.log('error', e)
+    } finally {
+
     }
 }
 
