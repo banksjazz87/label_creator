@@ -114,6 +114,7 @@ class ParentShippingCreator extends React.Component {
     this.clearInput = this.clearInput.bind(this);
     this.addLine = this.addLine.bind(this);
     this.removeLine = this.removeLine.bind(this);
+    this.deleteAll = this.deleteAll.bind(this);
   }
 
   componentDidMount() {
@@ -272,6 +273,11 @@ class ParentShippingCreator extends React.Component {
     }
   }
 
+  deleteAll(e) {
+    e.preventDefault;
+    sessionStorage.removeItem('currentSession');
+  }
+
   render() {
     return (
       <div id="creator_container">
@@ -370,11 +376,17 @@ class ParentShippingCreator extends React.Component {
             id="send"
             type="submit"
             style={
-              this.state.clicked ? { display: "block" } : { display: "none" }
-            }
+              this.state.clicked ? { display: "block" } : { display: "none" }}
             onClick={this.finalSubmit}
           >
             Send
+          </button>
+          <button 
+            id="delete"
+            type="submit"
+            style={this.state.clicked ? {display: "block"} : {display: "none"}}
+            onClick={}>
+
           </button>
         </div>
       </div>

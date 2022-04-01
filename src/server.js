@@ -31,6 +31,13 @@ app.post('/shipping_creator/data', (req, res) => {
     updatePastPackSlip(currentData);
 })
 
+//This post request will delete the current item from the database.
+app.post('/delete_current_item', (req, res, next) => {
+    currentData = req.body;
+    deletePastPackSlip(currentData, "_id");
+    next();
+})
+
 let searchDataArray = [];
 /**
  * 
@@ -89,13 +96,13 @@ async function updatePastPackSlip(currentObject){
 }
 
 //Delete method for the database, this is going to get the current _id from the item that has been selected.
-async function deletePastPackSlip(currentObject){
+async function deletePastPackSlip(currentObject, key){
     try {
         await client.connect();
 
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
-        const currentIndex = currentObject._id;
+        const currentIndex = currentObject[key];
         const currentDoc = slip.find(currentIndex);
 
         const result = await slip.deleteOne(currentDoc);
