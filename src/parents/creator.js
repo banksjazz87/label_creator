@@ -276,7 +276,7 @@ class ParentShippingCreator extends React.Component {
     e.preventDefault();
     console.log("batman is your mother");
     sessionStorage.setItem("revising", false);
-
+    postData('/delete_current_item', this.state);
   }
 
   render() {

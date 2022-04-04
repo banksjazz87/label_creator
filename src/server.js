@@ -103,10 +103,18 @@ async function deletePastPackSlip(currentObject, key){
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
         const currentIndex = currentObject[key];
-        const currentDoc = slip.find(currentIndex);
+        const currentDoc = {'_id': currentIndex.toString()};
 
         const result = await slip.deleteOne(currentDoc);
-        console.dir(result.resultCount);
+        console.log(currentIndex);
+        if (result.deletedCount === 1) {
+            console.log('One document has been deleted');
+        } else {
+            console.log('no document found');
+        }
+        /*console.log(currentIndex);
+        console.log(currentDoc);
+        console.dir(result.resultCount);*/
 
     } catch(e) {
         console.log('error', e)
