@@ -193,7 +193,6 @@ class ParentShippingCreator extends React.Component {
       totalCartons: MathFunctions.total("numOfCartons"),
       totalQty: MathFunctions.total("qtyShipped"),
     });
-    this.updateShipFromTo("shipFrom");
   }
 
   //This function will post all of the data that has been supplied by the user, to the server.
@@ -274,8 +273,10 @@ class ParentShippingCreator extends React.Component {
   }
 
   deleteAll(e) {
-    e.preventDefault;
-    sessionStorage.removeItem('currentSession');
+    e.preventDefault();
+    console.log("batman is your mother");
+    sessionStorage.setItem("revising", false);
+
   }
 
   render() {
@@ -385,8 +386,8 @@ class ParentShippingCreator extends React.Component {
             id="delete"
             type="submit"
             style={this.state.clicked ? {display: "block"} : {display: "none"}}
-            onClick={}>
-
+            onClick={this.deleteAll}>
+            Delete All
           </button>
         </div>
       </div>
