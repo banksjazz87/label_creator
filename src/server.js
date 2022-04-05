@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const port = 4500;
 const MongoClient = require("mongodb").MongoClient;
+const {ObjectId} = require('mongodb');
 
 require('dotenv').config();
 console.log(process.env.TESTING);
@@ -103,7 +104,7 @@ async function deletePastPackSlip(currentObject, key){
         const database = client.db('senecaPrinting');
         const slip = database.collection('packSlips');
         const currentIndex = currentObject[key];
-        const currentDoc = {'_id': currentIndex.toString()};
+        const currentDoc = {'_id': ObjectId(currentIndex)};
 
         const result = await slip.deleteOne(currentDoc);
         console.log(currentIndex);
