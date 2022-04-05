@@ -390,6 +390,8 @@ class ParentShippingCreator extends React.Component {
             Delete All
           </button>
         </div>
+
+        <ValidateRemoval />
       </div>
     );
   }
@@ -517,5 +519,18 @@ const SkidContents = (props) => {
     </table>
   );
 };
+
+const ValidateRemoval = (props) => {
+  return (
+    <div 
+      id='validate_removal'
+      >
+      <p>Are you sure that you would like delete this document?</p>
+      <button>Yes</button>
+      <button>No</button> 
+
+    </div>
+  )
+}
 
 export default ParentShippingCreator;
