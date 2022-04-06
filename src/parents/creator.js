@@ -101,6 +101,8 @@ class ParentShippingCreator extends React.Component {
         submitClicked: false,
         showSkidHeader: false,
         changing: false,
+        deleteItems: false,
+        showDeleteMessage: false
       };
     }
 
@@ -115,6 +117,9 @@ class ParentShippingCreator extends React.Component {
     this.addLine = this.addLine.bind(this);
     this.removeLine = this.removeLine.bind(this);
     this.deleteAll = this.deleteAll.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this);
+    this.cancelDelete = this.cancelDelete.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
   }
 
   componentDidMount() {
@@ -279,6 +284,26 @@ class ParentShippingCreator extends React.Component {
     postData('/delete_current_item', this.state);
   }
 
+  confirmDelete(e) {
+    e.preventDefault();
+    this.setState({
+      deleteItems: true
+    });
+  }
+
+  cancelDelete(e) {
+    e.preventDefault();
+    this.setState({
+      deleteItems: false
+    });
+    this.deleteMessage(false);
+  }
+
+ deleteMessage(bool) {
+   this.setState({
+     showDeleteMessage: bool
+   })
+ }
   render() {
     return (
       <div id="creator_container">
@@ -386,12 +411,16 @@ class ParentShippingCreator extends React.Component {
             id="delete"
             type="submit"
             style={this.state.clicked ? {display: "block"} : {display: "none"}}
-            onClick={this.deleteAll}>
+            onClick={this.deleteMessage(true)}>
             Delete All
           </button>
         </div>
 
-        <ValidateRemoval />
+        <ValidateRemoval 
+          deleteClick={this.deleteAll}
+          showMessage={this.state.showDeleteMessage}
+          noDelete={this.deleteMessage(false)}
+        />
       </div>
     );
   }
@@ -524,10 +553,11 @@ const ValidateRemoval = (props) => {
   return (
     <div 
       id='validate_removal'
+      style={props.showMessage === true ? {display: "flex"} : {display: "none"}}
       >
       <p>Are you sure that you would like delete this document?</p>
-      <button>Yes</button>
-      <button>No</button> 
+      <button onClick={props.deleteClick}>Yes</button>
+      <button onClick={props.noDelete}>No</button> 
 
     </div>
   )
