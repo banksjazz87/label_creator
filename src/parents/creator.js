@@ -102,7 +102,7 @@ class ParentShippingCreator extends React.Component {
         showSkidHeader: false,
         changing: false,
         deleteItems: false,
-        showDeleteMessage: false
+        deleteMessage: false
       };
     }
 
@@ -119,7 +119,8 @@ class ParentShippingCreator extends React.Component {
     this.deleteAll = this.deleteAll.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
     this.cancelDelete = this.cancelDelete.bind(this);
-    this.deleteMessage = this.deleteMessage.bind(this);
+    this.showDeleteMessage = this.showDeleteMessage.bind(this);
+    this.hideDeleteMessage = this.hideDeleteMessage.bind(this);
   }
 
   componentDidMount() {
@@ -282,13 +283,15 @@ class ParentShippingCreator extends React.Component {
     console.log("batman is your mother");
     sessionStorage.setItem("revising", false);
     postData('/delete_current_item', this.state);
+    this.confirmDelete();
   }
 
-  confirmDelete(e) {
-    e.preventDefault();
+  confirmDelete() {
     this.setState({
       deleteItems: true
     });
+    this.hideDeleteMessage();
+    alert('One document has been deleted');
   }
 
   cancelDelete(e) {
@@ -296,12 +299,18 @@ class ParentShippingCreator extends React.Component {
     this.setState({
       deleteItems: false
     });
-    this.deleteMessage(false);
+    this.hideDeleteMessage();
   }
 
- deleteMessage(bool) {
+ showDeleteMessage() {
    this.setState({
-     showDeleteMessage: bool
+     deleteMessage: true
+   })
+ }
+
+ hideDeleteMessage() {
+   this.setState({
+     deleteMessage: false
    })
  }
   render() {
@@ -390,7 +399,7 @@ class ParentShippingCreator extends React.Component {
             type="submit"
             style={
               this.state.numberOfLinesSubmitClicked
-                ? { display: "block" }
+                ? { display: "" }
                 : { display: "none" }
             }
             onClick={this.updateSkid}
@@ -402,7 +411,7 @@ class ParentShippingCreator extends React.Component {
             id="send"
             type="submit"
             style={
-              this.state.clicked ? { display: "block" } : { display: "none" }}
+              this.state.clicked ? { display: "" } : { display: "none" }}
             onClick={this.finalSubmit}
           >
             Send
@@ -410,16 +419,17 @@ class ParentShippingCreator extends React.Component {
           <button 
             id="delete"
             type="submit"
-            style={this.state.clicked ? {display: "block"} : {display: "none"}}
-            onClick={this.deleteMessage(true)}>
+            style={this.state.clicked ? {display: ""} : {display: "none"}}
+            onClick={this.showDeleteMessage}
+            >
             Delete All
           </button>
         </div>
 
         <ValidateRemoval 
           deleteClick={this.deleteAll}
-          showMessage={this.state.showDeleteMessage}
-          noDelete={this.deleteMessage(false)}
+          showMessage={this.state.deleteMessage}
+          noDelete={this.hideDeleteMessage}
         />
       </div>
     );
@@ -553,11 +563,11 @@ const ValidateRemoval = (props) => {
   return (
     <div 
       id='validate_removal'
-      style={props.showMessage === true ? {display: "flex"} : {display: "none"}}
+      style={props.showMessage === true ? {display: ""} : {display: "none"}}
       >
-      <p>Are you sure that you would like delete this document?</p>
+      <p>Are you sure that you would like to delete this document?</p>
       <button onClick={props.deleteClick}>Yes</button>
-      <button onClick={props.noDelete}>No</button> 
+      <button onClick={props.noClick}>No</button> 
 
     </div>
   )
