@@ -393,7 +393,8 @@ class ParentShippingCreator extends React.Component {
           removeChange={this.removeLine}
         />
 
-        <div id="final_buttons">
+        <div id="final_buttons"
+             style={this.state.numberOfLinesSubmitClicked && this.state.deleteMessage === false ? {display: ""} : {display: "none"}}>
           <button
             id="final_submit"
             type="submit"
@@ -567,7 +568,7 @@ const ValidateRemoval = (props) => {
       >
       <p>Are you sure that you would like to delete this document?</p>
       <button onClick={props.deleteClick}>Yes</button>
-      <button onClick={props.noClick}>No</button> 
+      <button onClick={props.noDelete}>No</button> 
 
     </div>
   )

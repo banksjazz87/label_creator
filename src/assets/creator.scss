@@ -194,3 +194,23 @@ h2{
         }
     }
 }
+
+#validate_removal{
+    text-align: center;
+    color: purple;
+    justify-content: center;
+    width: 100vw;
+    margin: auto;
+    margin-bottom: 2em;
+    line-height: 1px;
+
+    button{
+        @include button-style;
+        margin-top: 1px;
+
+        &:hover{
+            @include button-hover;
+        }
+    }
+    
+}
