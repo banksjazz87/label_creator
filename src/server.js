@@ -36,6 +36,7 @@ app.post('/shipping_creator/data', (req, res) => {
 app.post('/delete_current_item', (req, res, next) => {
     currentData = req.body;
     deletePastPackSlip(currentData, "_id");
+    confirmedSelection = "";
     next();
 })
 
@@ -113,9 +114,6 @@ async function deletePastPackSlip(currentObject, key){
         } else {
             console.log('no document found');
         }
-        /*console.log(currentIndex);
-        console.log(currentDoc);
-        console.dir(result.resultCount);*/
 
     } catch(e) {
         console.log('error', e)

@@ -292,6 +292,8 @@ class ParentShippingCreator extends React.Component {
     });
     this.hideDeleteMessage();
     alert('One document has been deleted');
+    window.location.href = '/';
+
   }
 
   cancelDelete(e) {
