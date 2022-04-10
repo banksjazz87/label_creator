@@ -9,7 +9,8 @@ import "../src/assets/packSlip.scss";
 import "../src/assets/shipTo.scss";
 import "../src/assets/printButton.scss";
 import "../src/assets/packSlipMediaQuery.scss";
-import "../src/assets/options.scss"
+import "../src/assets/options.scss";
+import "../src/assets/login.scss";
 import ParentShippingCreator from "./parents/creator.js";
 import ParentLabels from "./parents/label.js";
 import ParentPackSlip from "./parents/packSlip.js";
@@ -18,13 +19,15 @@ import Nav from "./components/navBar.js";
 import Footer from "./components/footer.js";
 import PrintButton from "./components/printButton.js";
 import OptionsPage from "./parents/optionsPage.js";
+import LoginPage from "./parents/loginPage.js";
 
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Options/>}/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="search_page" element={<Options/>}/>
         <Route path="creator_page" element={<ShippingCreator />} />
         <Route path="pack_slip" element={<PackSlip />} />
         <Route path="labels" element={<Labels />} />
@@ -113,6 +116,14 @@ function Options(){
     <div id="options_body">
       <Nav />
       <OptionsPage />
+    </div>
+  )
+}
+
+function Login() {
+  return(
+    <div id="login_page">
+      <LoginPage />
     </div>
   )
 }
