@@ -1,6 +1,7 @@
-import * as React from 'react'
-import "../assets/login.scss"
-import { Link } from "react-router-dom"
+import * as React from 'react';
+import "../assets/login.scss";
+import { Link } from "react-router-dom";
+import postData from "../functions/postRequest.js";
 
 class LoginPage extends React.Component {
     constructor(props){
@@ -25,7 +26,7 @@ class LoginPage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        postData('/login/request', this.state);
     }
 
     render(){

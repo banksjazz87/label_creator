@@ -155,3 +155,17 @@ app.get('/chosen/data', (req, res, next) => {
     res.send(confirmedSelection);
     next();
 })
+
+//Route used for retrieving information from the login
+let loginData;
+app.post('/login/request', (req, res, next) => {
+    loginData = req.body;
+    res.send(loginData);
+    next();
+})
+
+app.get('/login/request', (req, res, next) => {
+    res.send(loginData);
+    next(console.log(loginData));
+})
+
