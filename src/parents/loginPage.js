@@ -26,7 +26,8 @@ class LoginPage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        postData('/login/request', this.state);
+        postData('/login/request', this.state)
+        .then(res => console.log(res))
     }
 
     render(){

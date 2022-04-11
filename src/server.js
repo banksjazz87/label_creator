@@ -157,15 +157,35 @@ app.get('/chosen/data', (req, res, next) => {
 })
 
 //Route used for retrieving information from the login
-let loginData;
+let LoginData;
 app.post('/login/request', (req, res, next) => {
-    loginData = req.body;
-    res.send(loginData);
+    LoginData = req.body;
+
+    let senecaUser = process.env.MONGO_SENECA_USERNAME;
+    let senecaPassword = process.env.MONGO_SENECA_PASSWORD;
+    let demoUser = process.env.MONGO_TEST_USERNAME;
+    let demoPassword = process.env.MONGO_TEST_PASSWORD;
+
+    const testValidUser = (user, password) => {
+        if (user === senecaUser && password === senecaPassword) {
+            return 'success';
+        } else if (user === demoUser && password === demoPassword) {
+            return 'success';
+        } else {
+            return 'failure'
+        }
+    }
+
+    const verifiedUser = testValidUser(req.body.username, req.body.password);
+   
+    console.log(verifiedUser);
+    res.send('post request has been sent');
+
     next();
 })
 
 app.get('/login/request', (req, res, next) => {
-    res.send(loginData);
-    next(console.log(loginData));
+    res.send(LoginData);
+    next(console.log(LoginData));
 })
 
