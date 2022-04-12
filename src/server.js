@@ -168,11 +168,13 @@ app.post('/', (req, res, next) => {
 
     const testValidUser = (user, password) => {
         if (user === senecaUser && password === senecaPassword) {
-            return 'success';
+            LoginData.user = 'seneca';
+            return true;
         } else if (user === demoUser && password === demoPassword) {
-            return 'success';
+            LoginData.user = 'demo';
+            return true;
         } else {
-            return 'failure'
+            return false
         }
     }
 
@@ -182,8 +184,4 @@ app.post('/', (req, res, next) => {
     res.send({'validated': verifiedUser});
 })
 
-app.get('/login/request', (req, res, next) => {
-    res.send(LoginData);
-    next(console.log(LoginData));
-})
 

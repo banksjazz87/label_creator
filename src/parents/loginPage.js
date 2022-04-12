@@ -1,5 +1,6 @@
 import * as React from 'react';
 import "../assets/login.scss";
+import "../assets/library.scss";
 import { Link } from "react-router-dom";
 import postData from "../functions/postRequest.js";
 
@@ -9,11 +10,13 @@ class LoginPage extends React.Component {
 
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            validUser: ""
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.checkForUser = this.checkForUser.bind(this);
     }
 
     handleChange(e) {
@@ -27,7 +30,19 @@ class LoginPage extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         postData('/', this.state)
-        .then(data => console.log(data))
+        .then(data => this.checkForUser(data.validated))
+    }
+
+    checkForUser(verified) {
+        if (verified) {
+            this.setState({
+                validUser: true
+            })
+        } else {
+            this.setState({
+                validUser: false
+            })
+        }
     }
 
     render(){
@@ -37,7 +52,9 @@ class LoginPage extends React.Component {
                 <LoginForm 
                     changeHandler={this.handleChange}
                     submitHandler={this.handleSubmit}
+                    valid={this.state.validUser}
                 />
+                <p id="invalid_user_message" style={this.state.validUser === false ? {display: ''} : {display: 'none'}}>Username and/or Password are incorrect.</p>
 
             </div>
 
@@ -64,7 +81,16 @@ function LoginForm(props) {
             />
             <br />
 
-            <button type="submit" onSubmit={props.submitHandler}>Submit</button>
+            <button type="submit" onSubmit={props.submitHandler}>
+                <Link 
+                    to={props.valid === true ? "/search_page" : ""}
+                    className="button"
+                    onClick={props.submitHandler}
+                >
+                    
+                Submit
+                </Link>
+            </button>
 
         </form>
     )

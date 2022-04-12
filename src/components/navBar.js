@@ -74,6 +74,12 @@ class Nav extends React.Component {
         : {display: "none"}}>
 
      
+      <Link to="/search_page"
+        className="link"
+        >
+        Search
+      </Link> 
+
       <Link to="/creator_page"
         className="link"
         >
