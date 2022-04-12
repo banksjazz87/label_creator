@@ -158,7 +158,7 @@ app.get('/chosen/data', (req, res, next) => {
 
 //Route used for retrieving information from the login
 let LoginData;
-app.post('/login/request', (req, res, next) => {
+app.post('/', (req, res, next) => {
     LoginData = req.body;
 
     let senecaUser = process.env.MONGO_SENECA_USERNAME;
@@ -179,9 +179,7 @@ app.post('/login/request', (req, res, next) => {
     const verifiedUser = testValidUser(req.body.username, req.body.password);
    
     console.log(verifiedUser);
-    res.send('post request has been sent');
-
-    next();
+    res.send({'validated': verifiedUser});
 })
 
 app.get('/login/request', (req, res, next) => {
