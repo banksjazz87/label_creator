@@ -1,8 +1,9 @@
 import * as React from 'react';
 import "../assets/login.scss";
 import "../assets/library.scss";
-import { Link } from "react-router-dom";
+import {useNavigate} from "react-router-dom"
 import postData from "../functions/postRequest.js";
+
 
 class LoginPage extends React.Component {
     constructor(props){
@@ -17,6 +18,7 @@ class LoginPage extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.checkForUser = this.checkForUser.bind(this);
+        this.redirectToSearchPage = this.redirectToSearchPage.bind(this);
     }
 
     handleChange(e) {
@@ -31,6 +33,7 @@ class LoginPage extends React.Component {
         e.preventDefault();
         postData('/', this.state)
         .then(data => this.checkForUser(data.validated))
+        .then(response => this.redirectToSearchPage(response))
     }
 
     checkForUser(verified) {
@@ -38,10 +41,22 @@ class LoginPage extends React.Component {
             this.setState({
                 validUser: true
             })
+            return true;
         } else {
             this.setState({
                 validUser: false
             })
+        }
+        return false;
+    }
+
+    redirectToSearchPage(valid) {
+        if (valid) {
+            console.log('redirect');
+            const navigate = useNavigate;
+            navigate('search_page');
+        } else {
+            console.log('no redirect');
         }
     }
 
@@ -63,6 +78,17 @@ class LoginPage extends React.Component {
 }
 
 function LoginForm(props) {
+
+    /*const redirectOrNot = () => {
+        if (props.valid) {
+            console.log('login success');
+            return(
+                <Navigate to="search_page" />
+            )
+        } else {
+            console.log('login failure');
+        }
+    }*/
     return(
         <form action='' onSubmit={props.submitHandler}>
             <label for="username">Username</label>
@@ -81,15 +107,10 @@ function LoginForm(props) {
             />
             <br />
 
-            <button type="submit" onSubmit={props.submitHandler}>
-                <Link 
-                    to={props.valid === true ? "/search_page" : ""}
-                    className="button"
-                    onClick={props.submitHandler}
-                >
+            <button type="submit">
                     
                 Submit
-                </Link>
+               
             </button>
 
         </form>
