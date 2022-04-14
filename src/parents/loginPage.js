@@ -53,8 +53,6 @@ class LoginPage extends React.Component {
     redirectToSearchPage(valid) {
         if (valid) {
             console.log('redirect');
-            const navigate = useNavigate;
-            navigate('search_page');
         } else {
             console.log('no redirect');
         }
@@ -107,7 +105,7 @@ function LoginForm(props) {
             />
             <br />
 
-            <button type="submit">
+            <button type="submit" onClick={()=> console.log('clicked')}>
                     
                 Submit
                
@@ -116,6 +114,15 @@ function LoginForm(props) {
         </form>
     )
 }
+
+/*function SubmitButton(){
+    let navigate = useNavigate();
+
+    const testClick = () => navigate('search_page');
+    return(
+        <button onClick={testClick}>Search Page</button>
+    )
+}*/
 
 
 export default LoginPage;
