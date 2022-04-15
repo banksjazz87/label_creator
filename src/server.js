@@ -23,12 +23,12 @@ const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
 const userDatabase = (user) => {
-  if (user === 'seneca') {
-    console.log('senecaPrinting database in use');
-    return 'senecaPrinting';
-  } else if (user === 'demo') {
-    console.log('shippingDemo database is in use');
-    return 'shippingDemo';
+  if (user === "seneca") {
+    console.log("senecaPrinting database in use");
+    return "senecaPrinting";
+  } else if (user === "demo") {
+    console.log("shippingDemo database is in use");
+    return "shippingDemo";
   } else {
     return -1;
   }
@@ -36,10 +36,10 @@ const userDatabase = (user) => {
 
 const userCollection = (user) => {
   if (user === "seneca") {
-    console.log('seneca slip collection is in use');
+    console.log("seneca slip collection is in use");
     return "packSlips";
   } else if (user === "demo") {
-    console.log('demo slip collection is in use');
+    console.log("demo slip collection is in use");
     return "demoPackSlips";
   } else {
     return "demoPackSlips";
