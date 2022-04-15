@@ -6,7 +6,6 @@ import serverCall from "../functions/serverCall.js"
 import { Link } from "react-router-dom"
 import MathFunctions from "../functions/mathFunctions";
 
-
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
 class OptionsPage extends React.Component{
@@ -154,7 +153,7 @@ class OptionsPage extends React.Component{
                   onClick={this.sendSelectedData} 
                   className="button"
                   style={this.state.dataSelectionMade ? {display: 'flex'} : {display: 'none'}}>
-                    <Link 
+                    <Link
                         to='/creator_page' 
                         className="button"
                     >
@@ -175,8 +174,8 @@ const Choice = (props) => {
             onClick={props.clickHandler}
             style={{display: props.currentDisplay}}
     >
-    <Link 
-        to='creator_page'
+    <Link
+        to='/creator_page'
         className='button'
     >    
         {props.label}

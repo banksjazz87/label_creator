@@ -22,6 +22,30 @@ app.listen(port, () => {
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
+const userDatabase = (user) => {
+  if (user === 'seneca') {
+    console.log('senecaPrinting database in use');
+    return 'senecaPrinting';
+  } else if (user === 'demo') {
+    console.log('shippingDemo database is in use');
+    return 'shippingDemo';
+  } else {
+    return -1;
+  }
+};
+
+const userCollection = (user) => {
+  if (user === "seneca") {
+    console.log('seneca slip collection is in use');
+    return "packSlips";
+  } else if (user === "demo") {
+    console.log('demo slip collection is in use');
+    return "demoPackSlips";
+  } else {
+    return "demoPackSlips";
+  }
+};
+
 let currentData = {};
 let allData = [];
 //Route for the post request for the label creator page.
@@ -51,8 +75,8 @@ async function fetchPastPackSlips(searchData) {
 
   try {
     await client.connect();
-    const database = client.db("senecaPrinting");
-    const slip = database.collection("packSlips");
+    const database = client.db(userDatabase(LoginData.user));
+    const slip = database.collection(userCollection(LoginData.user));
     let result = slip.find(searchData);
 
     if ((await result.count()) === 0) {
@@ -83,8 +107,8 @@ async function updatePastPackSlip(currentObject) {
   try {
     await client.connect();
 
-    const database = client.db("senecaPrinting");
-    const slip = database.collection("packSlips");
+    const database = client.db(userDatabase(LoginData.user));
+    const slip = database.collection(userCollection(LoginData.user));
     const filter = {
       Job: currentObject.Job,
       PO: currentObject.PO,
@@ -107,8 +131,8 @@ async function deletePastPackSlip(currentObject, key) {
   try {
     await client.connect();
 
-    const database = client.db("senecaPrinting");
-    const slip = database.collection("packSlips");
+    const database = client.db(userDatabase(LoginData.user));
+    const slip = database.collection(userCollection(LoginData.user));
     const currentIndex = currentObject[key];
     const currentDoc = { _id: ObjectId(currentIndex) };
 
@@ -170,15 +194,12 @@ app.post("/", (req, res, next) => {
   let demoPassword = process.env.MONGO_TEST_PASSWORD;
 
   const testValidUser = (user, password) => {
-
     if (user === senecaUser && password === senecaPassword) {
       LoginData.user = "seneca";
       return true;
-
     } else if (user === demoUser && password === demoPassword) {
       LoginData.user = "demo";
       return true;
-      
     } else {
       return false;
     }
