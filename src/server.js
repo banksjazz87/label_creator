@@ -170,15 +170,15 @@ app.post("/", (req, res, next) => {
   let demoPassword = process.env.MONGO_TEST_PASSWORD;
 
   const testValidUser = (user, password) => {
+
     if (user === senecaUser && password === senecaPassword) {
       LoginData.user = "seneca";
-      //return true;
-      res.redirect("search_page");
       return true;
+
     } else if (user === demoUser && password === demoPassword) {
       LoginData.user = "demo";
-      res.redirect("search_page");
       return true;
+      
     } else {
       return false;
     }
