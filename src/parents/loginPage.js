@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../assets/login.scss";
 import "../assets/library.scss";
+import "../assets/printButton.scss";
 import { Navigate } from "react-router-dom";
 import postData from "../functions/postRequest.js";
 
@@ -49,8 +50,8 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome to the login page</h1>
+      <div id="login_container">
+        <h1>Please Login</h1>
         <LoginForm
           changeHandler={this.handleChange}
           submitHandler={this.handleSubmit}
@@ -75,7 +76,7 @@ function LoginForm(props) {
   
   if (props.valid) {
     return <Navigate to="search_page" replace={true} />;
-    
+
   } else {
     return (
       <form action="" onSubmit={props.submitHandler}>
@@ -87,8 +88,8 @@ function LoginForm(props) {
         <input id="password" type="password" onChange={props.changeHandler} />
         <br />
 
-        <button type="submit" onClick={() => console.log("clicked")}>
-          Submit
+        <button id="login_submit" className="big_button" type="submit">
+          Login
         </button>
       </form>
     );

@@ -114,7 +114,6 @@ function ShippingCreator() {
 function Options(){
   return(
     <div id="options_body">
-      <Nav />
       <OptionsPage />
     </div>
   )
