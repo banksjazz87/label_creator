@@ -9,3 +9,38 @@ $dark-border: $secondary-color;
 $light-background: rgb(240, 240, 240);
 
 $login-search-background: linear-gradient(to bottom right, $hover-button, $secondary-color);
+
+@mixin login-data-box{
+    border-style: solid;
+    border-width: 2px;
+    border-color: $base-color;
+    border-radius: 6px;
+    padding: 2em 4em 2em 4em;
+    width: 50vw;
+    margin: auto;
+    box-shadow: 1px 3px $secondary-color;
+    background-color: $light-background;
+}
+
+@mixin print-button{
+    padding: 1em 3em 1em 3em;
+    color: white;
+    justify-self: center;
+    border-radius: 6px;
+    border-style: none;
+    font-size: 1.05em;
+    background-color: $hover-button;
+
+    &:hover{
+        background-color: $button-color;
+        
+    }
+
+    &:active{
+        background-color: $button-color;
+        border-style: solid;
+        border-width: 4px;
+        border-color: $third-color;
+    }
+
+}

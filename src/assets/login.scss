@@ -27,16 +27,7 @@
 }
 
 #login_container{
-    border-style: solid;
-    border-width: 2px;
-    border-color: $base-color;
-    border-radius: 6px;
-    padding: 2em 4em 2em 4em;
-    width: 50vw;
-    margin: auto;
-    box-shadow: 1px 3px $secondary-color;
-    background-color: $light-background;
-    
+    @include login-data-box;    
 }
 
 form{
