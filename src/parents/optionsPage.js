@@ -114,8 +114,8 @@ class OptionsPage extends React.Component {
     return (
       <div id="options_page_container">
         <h1 id="header_text">Welcome </h1>
-        <p id="search_or_new_text">
-          {" "}
+        <p id="search_or_new_text"
+            style={this.state.search ? {display: 'none'} : {display: ''}}>
           Would you like to create a new document or search for a previous one?
         </p>
 
@@ -136,6 +136,7 @@ class OptionsPage extends React.Component {
           />
         </div>
 
+        <div id="active_input_options">
         <Options
           searching={this.state.search}
           changeHandler={this.optionSelection}
@@ -171,6 +172,7 @@ class OptionsPage extends React.Component {
             Submit
           </Link>
         </button>
+        </div>
       </div>
     );
   }
@@ -219,6 +221,7 @@ const Options = (props) => {
   });
   return (
     <select
+      className="select_option"
       style={props.searching ? { display: "flex" } : { display: "none" }}
       onChange={props.changeHandler}
     >
@@ -230,14 +233,17 @@ const Options = (props) => {
 const Input = (props) => {
   return (
     <form
+      id="search_by"
       style={
         props.searchType.length === 0
           ? { display: "none" }
           : { display: "flex" }
       }
     >
+    <div className="label_and_input">
       <label>{props.searchType}</label>
       <input type="text" onChange={props.changeHandler}></input>
+    </div>
       <button
         type="button"
         onClick={props.clickHandler}
