@@ -122,6 +122,7 @@ class OptionsPage extends React.Component {
         <div id="button_container">
           <Choice
             idName="new"
+            linkName="link"
             clickHandler={this.choiceClick}
             label="New"
             buttonClass="button"
@@ -168,7 +169,7 @@ class OptionsPage extends React.Component {
               : { display: "none" }
           }
         >
-          <Link to="/creator_page" className="button">
+          <Link className="link" to="/creator_page">
             Submit
           </Link>
         </button>
@@ -190,7 +191,7 @@ const Choice = (props) => {
       >
         <Link
           to="/creator_page"
-          id={props.idName}
+          className={props.linkName}
         >
           {props.label}
         </Link>
@@ -269,6 +270,7 @@ const SelectResult = (props) => {
 
   return (
     <select
+      className="select_option"
       style={props.sent ? { display: "flex" } : { display: "none" }}
       onClick={props.clickHandler}
       onChange={props.changeHandler}

@@ -39,7 +39,8 @@
 }
 
 .select_option{
-    width: 15vw;
+    padding-left: 1em;
+    padding-right: 1em;
     text-align: center;
     font-size: 1.15em;
 }
@@ -50,7 +51,7 @@
     align-items: center;
 }
 
-#new{
+.link{
     text-decoration: none;
     color: white;
 }
@@ -58,9 +59,26 @@
 #search_by{
     display: flex;
     flex-direction: column;
-}
+    margin-top: 12px;
+    margin-bottom: 16px;
 
 .label_and_input{
     display: flex;
     flex-direction: row;
+    font-size: 1.15em;
+    margin-bottom: 8px;
+
+    input{
+        height: 1.15em;
+    }
 }
+
+button{
+    text-align: center;
+    margin: auto;
+    font-size: 1.05em;
+    padding: .75em 1.5em .75em 1.5em;
+}
+}
+
+
