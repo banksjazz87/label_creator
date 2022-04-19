@@ -15,6 +15,7 @@
     @include login-data-box;
     display: flex;
     flex-direction: column;
+    height: 50vh;
     
 
 
@@ -81,4 +82,10 @@ button{
 }
 }
 
+#selected_option_submit{
+    text-align: center;
+    margin: 8px auto auto auto;
+    font-size: 1.05em;
+    padding: .75em 1.5em .75em 1.5em;
+}
 

@@ -160,9 +160,10 @@ class OptionsPage extends React.Component {
         />
 
         <button
+          id="selected_option_submit"
+          className="button"
           type="submit"
           onClick={this.sendSelectedData}
-          className="button"
           style={
             this.state.dataSelectionMade
               ? { display: "flex" }
