@@ -25,14 +25,10 @@ class Nav extends React.Component {
               this.setState((state) => ({
                   width: state.width + 1
               }))
-              console.log('width = ', this.state.width);
-
               }else if(this.state.width > 0 && this.state.display === false){
               this.setState((state) => ({
                 width: state.width -1
               }))
-
-              console.log('width = ', this.state.width);
           }else{
               clearInterval(this.displayMenu);
               }

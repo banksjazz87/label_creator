@@ -89,3 +89,12 @@ button{
     padding: .75em 1.5em .75em 1.5em;
 }
 
+
+@media (max-width: 600px){
+    #options_body{
+    font-size: 12px;
+    }
+    .button{
+        margin-bottom: .25em;
+    }
+}

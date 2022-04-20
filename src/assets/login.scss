@@ -51,3 +51,12 @@ form{
     }
 
 }
+
+@media (max-width: 600px){
+    #login_page{
+    font-size: 12px;
+    }
+    input{
+        width: 50vw;
+    }
+}
