@@ -37,6 +37,7 @@
 
 .button{
     @include print-button;
+    text-decoration: none;
 }
 
 .select_option{

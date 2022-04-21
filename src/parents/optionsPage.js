@@ -183,20 +183,21 @@ class OptionsPage extends React.Component {
 const Choice = (props) => {
   if (props.idName === "new") {
     return (
-     <button
+     /*<button
         id={props.idName}
         type="button"
         className={props.buttonClass}
-        onClick={props.clickHandler}
+        //onClick={props.clickHandler}
         style={{ display: props.currentDisplay }}
-      >
+      >*/
         <Link
+          id={props.idName}
           to="/creator_page"
-          className={props.linkName}
+          className={props.buttonClass}
         >
           {props.label}
         </Link>
-      </button>
+      //</button>
     );
   } else {
     return (
