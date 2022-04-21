@@ -419,6 +419,7 @@ class ParentShippingCreator extends React.Component {
           >
             Send
           </button>
+          <br/>
           <button 
             id="delete"
             type="submit"

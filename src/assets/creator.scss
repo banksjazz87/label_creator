@@ -19,6 +19,7 @@
         color: white;
         padding: .25em 2em .25em 2em;
         border-radius: 8px;
+        border-style: none;
 }
 
 @mixin button-hover{
@@ -191,6 +192,14 @@ h2{
 
         &:hover{
             @include button-hover;
+        }
+    }
+
+    #delete{
+        background-color: rgb(230, 62, 62);
+
+        &:hover{
+            background-color: rgb(145, 4, 4);
         }
     }
 }

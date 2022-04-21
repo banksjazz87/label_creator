@@ -43,13 +43,7 @@ class OptionsPage extends React.Component {
         new: false,
         display: "none",
       });
-    } else {
-      this.setState({
-        search: false,
-        new: true,
-        display: "none",
-      });
-    }
+    } 
   }
 
   optionSelection(e) {
@@ -114,8 +108,10 @@ class OptionsPage extends React.Component {
     return (
       <div id="options_page_container">
         <h1 id="header_text">Welcome </h1>
-        <p id="search_or_new_text"
-            style={this.state.search ? {display: 'none'} : {display: ''}}>
+        <p
+          id="search_or_new_text"
+          style={this.state.search ? { display: "none" } : { display: "" }}
+        >
           Would you like to create a new document or search for a previous one?
         </p>
 
@@ -138,42 +134,42 @@ class OptionsPage extends React.Component {
         </div>
 
         <div id="active_input_options">
-        <Options
-          searching={this.state.search}
-          changeHandler={this.optionSelection}
-          arrayOfOptions={searchSelections}
-        />
-        <Input
-          searchType={this.state.searchBy}
-          searching={this.state.search}
-          changeHandler={this.searchInfo}
-          clickHandler={this.searchClick}
-          buttonClass="button"
-        />
-        <SelectResult
-          sent={this.state.searchDataSent}
-          query={this.state.searchBy}
-          searchDataResults={this.state.searchResults}
-          clickHandler={this.selectPrevious}
-          selectClicked={this.state.selectPreviousClicked}
-          changeHandler={this.updateSelectedResults}
-        />
+          <Options
+            searching={this.state.search}
+            changeHandler={this.optionSelection}
+            arrayOfOptions={searchSelections}
+          />
+          <Input
+            searchType={this.state.searchBy}
+            searching={this.state.search}
+            changeHandler={this.searchInfo}
+            clickHandler={this.searchClick}
+            buttonClass="button"
+          />
+          <SelectResult
+            sent={this.state.searchDataSent}
+            query={this.state.searchBy}
+            searchDataResults={this.state.searchResults}
+            clickHandler={this.selectPrevious}
+            selectClicked={this.state.selectPreviousClicked}
+            changeHandler={this.updateSelectedResults}
+          />
 
-        <button
-          id="selected_option_submit"
-          className="button"
-          type="submit"
-          onClick={this.sendSelectedData}
-          style={
-            this.state.dataSelectionMade
-              ? { display: "flex" }
-              : { display: "none" }
-          }
-        >
-          <Link className="link" to="/creator_page">
-            Submit
-          </Link>
-        </button>
+          <button
+            id="selected_option_submit"
+            className="button"
+            type="submit"
+            onClick={this.sendSelectedData}
+            style={
+              this.state.dataSelectionMade
+                ? { display: "flex" }
+                : { display: "none" }
+            }
+          >
+            <Link className="link" to="/creator_page">
+              Submit
+            </Link>
+          </button>
         </div>
       </div>
     );
@@ -183,21 +179,14 @@ class OptionsPage extends React.Component {
 const Choice = (props) => {
   if (props.idName === "new") {
     return (
-     /*<button
-        id={props.idName}
-        type="button"
+      <Link 
+        id={props.idName} 
+        to="/creator_page" 
         className={props.buttonClass}
-        //onClick={props.clickHandler}
         style={{ display: props.currentDisplay }}
-      >*/
-        <Link
-          id={props.idName}
-          to="/creator_page"
-          className={props.buttonClass}
-        >
-          {props.label}
-        </Link>
-      //</button>
+      >
+        {props.label}
+      </Link>
     );
   } else {
     return (
@@ -243,10 +232,10 @@ const Input = (props) => {
           : { display: "flex" }
       }
     >
-    <div className="label_and_input">
-      <label>{props.searchType}</label>
-      <input type="text" onChange={props.changeHandler}></input>
-    </div>
+      <div className="label_and_input">
+        <label>{props.searchType}</label>
+        <input type="text" onChange={props.changeHandler}></input>
+      </div>
       <button
         type="button"
         onClick={props.clickHandler}
