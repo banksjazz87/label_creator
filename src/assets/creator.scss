@@ -179,9 +179,9 @@
 
   .remove_button {
     margin-top: 9px;
-    
-    &:active{
-        box-shadow: .5px 1px $third-color;
+
+    &:active {
+      box-shadow: 0.5px 1px $third-color;
     }
   }
 }
