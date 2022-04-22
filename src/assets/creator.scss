@@ -194,6 +194,8 @@
 
   button {
     @include button-style;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   #delete {
@@ -218,5 +220,7 @@
   button {
     @include button-style;
     margin-top: 1px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 }

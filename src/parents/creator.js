@@ -59,7 +59,7 @@ const currentlyRevising = () => {
   } else {
     return false;
   }
-}
+};
 
 class ParentShippingCreator extends React.Component {
   constructor(props) {
@@ -102,7 +102,7 @@ class ParentShippingCreator extends React.Component {
         showSkidHeader: false,
         changing: false,
         deleteItems: false,
-        deleteMessage: false
+        deleteMessage: false,
       };
     }
 
@@ -125,11 +125,10 @@ class ParentShippingCreator extends React.Component {
 
   componentDidMount() {
     if (sessionStorage.getItem("revising")) {
-      serverCall("/chosen/data")
-      .then((res) =>
+      serverCall("/chosen/data").then((res) =>
         this.setState((prevState) => ({
           ...(prevState = res),
-          retrieved: true
+          retrieved: true,
         }))
       );
     }
@@ -282,39 +281,38 @@ class ParentShippingCreator extends React.Component {
     e.preventDefault();
     console.log("batman is your mother");
     sessionStorage.setItem("revising", false);
-    postData('/delete_current_item', this.state);
+    postData("/delete_current_item", this.state);
     this.confirmDelete();
   }
 
   confirmDelete() {
     this.setState({
-      deleteItems: true
+      deleteItems: true,
     });
     this.hideDeleteMessage();
-    alert('One document has been deleted');
-    window.location.href = '/';
-
+    alert("One document has been deleted");
+    window.location.href = "/";
   }
 
   cancelDelete(e) {
     e.preventDefault();
     this.setState({
-      deleteItems: false
+      deleteItems: false,
     });
     this.hideDeleteMessage();
   }
 
- showDeleteMessage() {
-   this.setState({
-     deleteMessage: true
-   })
- }
+  showDeleteMessage() {
+    this.setState({
+      deleteMessage: true,
+    });
+  }
 
- hideDeleteMessage() {
-   this.setState({
-     deleteMessage: false
-   })
- }
+  hideDeleteMessage() {
+    this.setState({
+      deleteMessage: false,
+    });
+  }
   render() {
     return (
       <div id="creator_container">
@@ -395,8 +393,15 @@ class ParentShippingCreator extends React.Component {
           removeChange={this.removeLine}
         />
 
-        <div id="final_buttons"
-             style={this.state.numberOfLinesSubmitClicked && this.state.deleteMessage === false ? {display: ""} : {display: "none"}}>
+        <div
+          id="final_buttons"
+          style={
+            this.state.numberOfLinesSubmitClicked &&
+            this.state.deleteMessage === false
+              ? { display: "" }
+              : { display: "none" }
+          }
+        >
           <button
             id="final_submit"
             type="submit"
@@ -407,30 +412,29 @@ class ParentShippingCreator extends React.Component {
             }
             onClick={this.updateSkid}
           >
-            Submit
+            Sum
           </button>
 
           <button
             id="send"
             type="submit"
-            style={
-              this.state.clicked ? { display: "" } : { display: "none" }}
+            style={this.state.clicked ? { display: "" } : { display: "none" }}
             onClick={this.finalSubmit}
           >
             Send
           </button>
-          <br/>
-          <button 
+          <br />
+          <button
             id="delete"
             type="submit"
-            style={this.state.clicked ? {display: ""} : {display: "none"}}
+            style={this.state.clicked ? { display: "" } : { display: "none" }}
             onClick={this.showDeleteMessage}
-            >
+          >
             Delete All
           </button>
         </div>
 
-        <ValidateRemoval 
+        <ValidateRemoval
           deleteClick={this.deleteAll}
           showMessage={this.state.deleteMessage}
           noDelete={this.hideDeleteMessage}
@@ -565,16 +569,15 @@ const SkidContents = (props) => {
 
 const ValidateRemoval = (props) => {
   return (
-    <div 
-      id='validate_removal'
-      style={props.showMessage === true ? {display: ""} : {display: "none"}}
-      >
+    <div
+      id="validate_removal"
+      style={props.showMessage === true ? { display: "" } : { display: "none" }}
+    >
       <p>Are you sure that you would like to delete this document?</p>
       <button onClick={props.deleteClick}>Yes</button>
-      <button onClick={props.noDelete}>No</button> 
-
+      <button onClick={props.noDelete}>No</button>
     </div>
-  )
-}
+  );
+};
 
 export default ParentShippingCreator;
