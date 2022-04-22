@@ -1,226 +1,222 @@
 @import "library";
 
-@mixin data-field{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    background-color: rgb(196, 196, 196);
-    background: linear-gradient(to bottom right, rgb(177, 173, 173), rgb(196, 196,196), rgb(177, 173, 173));
-    padding: 10px 20px 10px 20px;
-    justify-items: center;
-    border-radius: 1%;
-    box-shadow: 2px 4px $secondary-color;
-    color: black;
+@mixin data-field {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  background-color: rgb(196, 196, 196);
+  background: linear-gradient(
+    to bottom right,
+    rgb(177, 173, 173),
+    rgb(196, 196, 196),
+    rgb(177, 173, 173)
+  );
+  padding: 10px 20px 10px 20px;
+  justify-items: center;
+  border-radius: 1%;
+  box-shadow: 2px 4px $secondary-color;
+  color: black;
 }
 
-@mixin button-style{
-        margin: 16px auto 16px auto;
-        background-color: $button-color;
-        color: white;
-        padding: .25em 2em .25em 2em;
-        border-radius: 8px;
-        border-style: none;
-}
+@mixin button-style {
+  margin: 8px auto 8px auto;
+  background-color: $button-color;
+  color: white;
+  padding: 0.5em 2em 0.5em 2em;
+  border-radius: 8px;
+  border-style: none;
 
-@mixin button-hover{
+  &:hover {
     background-color: $hover-button;
+  }
+
+  &:active {
+    box-shadow: 1px 3px $third-color;
+  }
 }
 
-@mixin button-active{
-    border-style: solid;
-    border-width: 2px;
-    border-color: $third-color;
-}
+#creator_body {
+  background-color: rgb(196, 196, 196);
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  padding: 0px;
+  top: 0;
+  border: 0;
+  outline: 0;
+  color: $font-color;
+  text-align: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
 
+  input {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9em;
+  }
 
-#creator_body{
-    background-color: rgb(196, 196, 196);
-    display: flex;
-    flex-direction: row;
-    margin: 0px;
-    padding: 0px;
-    top: 0; 
-    border: 0;
-    outline: 0;
-    color: $font-color;
-    text-align: center;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100vw;
-
-input{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: .9em;
-}
-
-h1{
-    background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
+  h1 {
+    background: linear-gradient(
+      to bottom right,
+      #012138,
+      $secondary-color,
+      #012138
+    );
     text-shadow: 1px 3px black;
     margin-top: 0;
     margin-bottom: 0;
-    padding-top: .5em;
-    padding-bottom: .5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
 }
 
-}
+#ship_to_from_po {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  align-items: space-evenly;
+  margin: 0;
+  padding: 0;
+  background-color: white;
 
-#ship_to_from_po{
-    display: flex;
-    flex-direction: column;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    align-items: space-evenly;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-
-h2{
+  h2 {
     text-align: center;
     margin-bottom: 1px;
-}
-    
-.ship{
-    @include data-field;
-    margin: 8px auto 8px auto;
-  
- hr{
-     background-color: black;
-     border: 0;
-     height: .5px;
-     margin: 0 0 8px 0;
+  }
 
- }
-    
-   .input_field{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-content: space-between;
-        margin-top: 4px;
-
-    }
-
-    label{
-        margin-right: .5em;
-    }
-}
-}
-
-#po_container{
+  .ship {
     @include data-field;
     margin: 8px auto 8px auto;
 
-    h2{
-        margin-bottom: 1px;
+    hr {
+      background-color: black;
+      border: 0;
+      height: 0.5px;
+      margin: 0 0 8px 0;
     }
 
-    hr{
-        
-        background-color: black;
-        height: .5px;
-        border: 0;
-        margin: 0;
-        padding: 0;
-        text-align: center;
+    .input_field {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-content: space-between;
+      margin-top: 4px;
     }
 
-    .po_inputs{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: space-between;
-        margin-top: 8px;
+    label {
+      margin-right: 0.5em;
     }
-    label{
-        text-align: left;
-        margin-top: 8px;
-        margin-bottom: 1px;
-        margin-right: .25em;
-    }
-
-    button{
-        @include button-style;
-        &:hover{
-            @include button-hover;
-        &:active{
-            @include button-active;
-        }
-        }
-    }
+  }
 }
 
-#main_table{
-    width: 100vw;
-    
-    background: linear-gradient(to bottom right, #012138, $secondary-color, #012138);
-    padding: 1em 3em 1em 3em;
-    margin-top: 0;
-    margin-bottom: 0px;
-    color: rgb(223, 223, 223);
+#po_container {
+  @include data-field;
+  margin: 8px auto 8px auto;
 
-    .column_data{
-        margin-bottom: 8px;
-       
-    }
+  h2 {
+    margin-bottom: 1px;
+  }
 
-    #itemDescription_header{
-        width: 40vw;
-    }
-    .itemDescription{
-        width: 95%;
-        margin: 8px auto auto auto;
-    }
+  hr {
+    background-color: black;
+    height: 0.5px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
 
-    input{
-        margin-top: 8px;
-    }
-    
-    .remove_button{
-        margin-top: 9px;
-    }
-}
-
-#final_buttons{
+  .po_inputs {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    margin-bottom: 128px;
+    justify-content: space-between;
+    align-items: space-between;
+    margin-top: 8px;
+  }
+  label {
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 1px;
+    margin-right: 0.25em;
+  }
 
-    button{
-        @include button-style;
-
-        &:hover{
-            @include button-hover;
-        }
-    }
-
-    #delete{
-        background-color: rgb(230, 62, 62);
-
-        &:hover{
-            background-color: rgb(145, 4, 4);
-        }
-    }
+  button {
+    @include button-style;
+  }
 }
 
-#validate_removal{
-    text-align: center;
-    color: red;
-    font-weight: bold;
-    justify-content: center;
-    width: 100vw;
-    margin: auto;
-    margin-bottom: 2em;
-    line-height: 1px;
+#main_table {
+  width: 100vw;
 
-    button{
-        @include button-style;
-        margin-top: 1px;
+  background: linear-gradient(
+    to bottom right,
+    #012138,
+    $secondary-color,
+    #012138
+  );
+  padding: 1em 3em 1em 3em;
+  margin-top: 0;
+  margin-bottom: 0px;
+  color: rgb(223, 223, 223);
 
-        &:hover{
-            @include button-hover;
-        }
-    }
+  .column_data {
+    margin-bottom: 8px;
+  }
+
+  #itemDescription_header {
+    width: 40vw;
+  }
+  .itemDescription {
+    width: 95%;
+    margin: 8px auto auto auto;
+  }
+
+  input {
+    margin-top: 8px;
+  }
+
+  .remove_button {
+    margin-top: 9px;
     
+    &:active{
+        box-shadow: .5px 1px $third-color;
+    }
+  }
+}
+
+#final_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 128px;
+
+  button {
+    @include button-style;
+  }
+
+  #delete {
+    background-color: rgb(230, 62, 62);
+
+    &:hover {
+      background-color: rgb(145, 4, 4);
+    }
+  }
+}
+
+#validate_removal {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  justify-content: center;
+  width: 100vw;
+  margin: auto;
+  margin-bottom: 2em;
+  line-height: 1px;
+
+  button {
+    @include button-style;
+    margin-top: 1px;
+  }
 }
