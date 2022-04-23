@@ -12,12 +12,17 @@
 }
 
 #labels_needed{
+    width: 250px;
+    margin: 2em auto .25em auto;
     text-align: center;
     font-weight: bold;
-    margin-right: 1em;
-    margin-top: 2em;
+    color: white;
+    background-color: $attention-color;
+    padding: 16px 32px 16px 32px;
     font-size: 2em;
+    border-radius: 4px;
 }
+
 
 #label_container{
     display: flex;
@@ -34,6 +39,7 @@
     align-content: space-evenly;
     justify-content: space-between;
     line-height: .25em;
+    background-color: white;
 
     .label_content{
         margin-left: 1.25em;
@@ -100,5 +106,26 @@
         display: none;
     }
 
+}
+
+@media (max-width: 600px){
+    #labels_body{
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #label_buttons_container{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-right: 5vw;
+
+        .label_buttons{
+            padding: .5em 1em .5em 1em;
+        }
+
+    }
 }
 

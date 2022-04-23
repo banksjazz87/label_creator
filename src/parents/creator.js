@@ -412,7 +412,7 @@ class ParentShippingCreator extends React.Component {
             }
             onClick={this.updateSkid}
           >
-            Sum
+            Submit
           </button>
 
           <button
@@ -421,7 +421,7 @@ class ParentShippingCreator extends React.Component {
             style={this.state.clicked ? { display: "" } : { display: "none" }}
             onClick={this.finalSubmit}
           >
-            Send
+            Save
           </button>
           <br />
           <button

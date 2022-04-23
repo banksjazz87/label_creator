@@ -199,10 +199,10 @@
   }
 
   #delete {
-    background-color: rgb(230, 62, 62);
+    background-color: $attention-color;
 
     &:hover {
-      background-color: rgb(145, 4, 4);
+      background-color: $warning-color;
     }
   }
 }

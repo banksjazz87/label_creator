@@ -62,6 +62,7 @@ class ParentLabels extends React.Component {
     return (
       <div>
         <p id="labels_needed">{`Print ${this.state.userData.skid[this.state.count].numOfCartons}`}</p>
+      
 
       <div id="label_container">
         <TopHeading 
