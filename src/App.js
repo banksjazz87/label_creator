@@ -37,41 +37,6 @@ function App() {
   );
 }
 
-/*class Nav extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      display: false
-    }
-
-    this.showHide = this.showHide.bind(this);
-    
-  }
-
-  showHide = (e) => {
-    e.preventDefault();
-
-    if(this.state.display){
-      this.setState({
-        display: false
-      })
-    }else{
-      this.setState({
-        display: true
-      })
-    }
-  }
-  render(){
-  return (
-    <nav id="navbar">
-      <Link to="/shipping_creator">Shipping Create Docs</Link>
-      <Link to="/pack_slip">Pack Slip</Link>
-      <Link to="/labels">Lables</Link>
-      <Link to="/ship_to_papers">Ship To Slip</Link>
-    </nav>
-  )};
-}*/
-
 function PackSlip() {
   return (
     <div id="pack_slip_body">

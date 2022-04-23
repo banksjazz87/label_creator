@@ -3,7 +3,7 @@ import "../assets/shipTo.scss";
 import "../assets/nav.scss";
 
 //userDataFromCreator used for development
-//import userDataFromCreator from "../variables/dummyData";
+import userDataFromCreator from "../variables/dummyData";
 
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall"
@@ -15,20 +15,20 @@ class ParentShipTo extends React.Component {
 
     this.state = {
       //switch fectched to true for developoment, false for production
-      fetched: false,
+      fetched: true,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: "",
+      userData: userDataFromCreator[0],
     };
   }
 
   //use this function only for production
-  componentDidMount(){
+  /*componentDidMount(){
     serverCall("/allData")
     .then(items => this.setState({
         fetched: true,
         userData: items[0]
       }))
-  }
+  }*/
 
 
   render() {
@@ -36,6 +36,7 @@ class ParentShipTo extends React.Component {
     if(this.state.fetched){
     return( 
     <div id="ship_to_container">
+    <div id="ship_to_paper">
       <ShipToFrom 
         toFrom="ship_from"
         items={this.state.userData.shipFrom}
@@ -47,6 +48,7 @@ class ParentShipTo extends React.Component {
       />
 
       <p id="pack_slip_po">{`PO#: ${this.state.userData.PO}`}</p>
+      </div>
       
       <PrintButton />
     </div>
