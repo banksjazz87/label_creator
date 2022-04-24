@@ -488,6 +488,7 @@ const PoInput = (props) => {
     </div>
   );
 };
+
 const SkidContents = (props) => {
   const newInput = props.title;
   const elements = newInput.map((x, y) => {

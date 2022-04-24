@@ -101,6 +101,7 @@ class OptionsPage extends React.Component {
     e.preventDefault();
     const url = "/chosen/data";
     postData(url, this.state.selectedResults);
+    postData('/shipping_creator/data', this.state.selectedResults);
     sessionStorage.setItem("revising", true);
   }
 
