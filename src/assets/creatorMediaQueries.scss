@@ -1,66 +1,72 @@
-@media (min-width: 1000px){
-    #creator_container{
-        display: grid;
-        grid-template-rows: 10vh;
-        grid-template-columns: auto auto auto;
-        width: 100vw;
-        margin: auto;
-        grid-template-areas: 
-        "head head head"
-        "to-from to-from to-from"
-        "table table table"
-        ". final-buttons .";
+@media (min-width: 1100px) {
+  #creator_container {
+    display: grid;
+    grid-template-rows: 10vh;
+    grid-template-columns: auto auto auto;
+    width: 100vw;
+    margin: auto;
+    grid-template-areas:
+      "head head head"
+      "to-from to-from to-from"
+      "table table table"
+      ". final-buttons .";
+  }
+
+  #header {
+    grid-area: head;
+  }
+
+  #ship_to_from_po {
+    grid-area: to-from;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    #shipFrom {
+      margin-left: 64px;
+      margin-right: 64px;
     }
 
-    #header{
-        grid-area: head;
+    #shipTo {
+      margin-right: 64px;
     }
 
-
-    #ship_to_from_po{
-        grid-area: to-from;
-        display: flex;
-        flex-direction: row;
-        width: 100vw;
-        padding-top: 16px;
-        padding-bottom: 16px;
-
-        #shipFrom{
-            margin-left: 64px;
-            margin-right: 64px;
-        }
-
-        #shipTo{
-            margin-right: 64px;
-        }
-
-        #po_container{
-            margin-right: 64px;
-        }
+    #po_container {
+      margin-right: 64px;
     }
+  }
 
-    
+  #main_table {
+    grid-area: table;
+  }
 
-    #main_table{
-        grid-area: table;
-    }
+  #final_buttons {
+    grid-area: final-buttons;
+  }
 
-   #final_buttons{
-       grid-area: final-buttons;
-   }
-
+  #creator_body {
+    font-size: 16px;
+  }
 }
 
-@media (max-width: 1000px){
-    #creator_body{
-        font-size: 14px;
-    }
+@media (max-width: 1100px) {
+  #creator_body {
+    font-size: 16px;
+    height: 100%;
+  }
 
-    #main_table{
-        display: flex;
-        flex-flow: row wrap;
-        transition: 0.5s;
-        font-size: 12px;
-        width: 100vw;
-    }
+  #ship_to_from_po {
+    width: 100vw;
+    margin-bottom: 5em;
+  }
+
+  #main_table {
+    display: flex;
+    flex-flow: row wrap;
+    transition: 0.5s;
+    font-size: 12px;
+    width: 100vw;
+  }
 }
