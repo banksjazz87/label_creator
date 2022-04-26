@@ -106,6 +106,8 @@ class ParentShippingCreator extends React.Component {
       };
     }
 
+    this.callToDatabase = this.callToDatabase.bind(this);
+    this.callToServer = this.callToServer.bind(this);
     this.updateObj = this.updateObj.bind(this);
     this.lineNumbers = this.lineNumbers.bind(this);
     this.poJobNumbers = this.poJobNumbers.bind(this);
@@ -124,28 +126,31 @@ class ParentShippingCreator extends React.Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem('revising') && sessionStorage.getItem('currentSession')) {
-      serverCall("/allData").then((res) =>
-        this.setState((prevState) => ({
-          ...(prevState = res[0]),
-          retrieved: true,
-        }))
-      );
-    } else if (sessionStorage.getItem('revising') && sessionStorage.getItem('currentSession') === null){
-      serverCall("/chosen/data").then((res) =>
-        this.setState((prevState) => ({
-          ...(prevState = res),
-          retrieved: true,
-        }))
-      );
-    } else if (sessionStorage.getItem('revising') === null && sessionStorage.getItem('currentSession')){
-      serverCall("/allData").then((res) =>
-        this.setState((prevState) => ({
-          ...(prevState = res[0]),
-          retrieved: true,
-        }))
-      );
+    if (currentStorageRunning() && currentlyRevising()) {
+      this.callToServer();
+    } else if (currentlyRevising() && currentStorageRunning() === false) {
+      this.callToDatabase();
+    } else if (currentStorageRunning() && currentlyRevising() === false) {
+      this.callToServer();
     }
+  }
+
+  callToDatabase() {
+    serverCall("/chosen/data").then((res) =>
+      this.setState((prevState) => ({
+        ...(prevState = res),
+        retrieved: true,
+      }))
+    );
+  }
+
+  callToServer() {
+    serverCall("/allData").then((res) =>
+      this.setState((prevState) => ({
+        ...(prevState = res[0]),
+        retrieved: true,
+      }))
+    );
   }
 
   //updates the ship to or from data fields.
