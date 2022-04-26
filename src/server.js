@@ -61,6 +61,7 @@ app.post("/delete_current_item", (req, res, next) => {
   currentData = req.body;
   deletePastPackSlip(currentData, "_id");
   confirmedSelection = "";
+  allData = [];
   next();
 });
 

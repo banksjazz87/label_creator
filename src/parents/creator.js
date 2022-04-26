@@ -124,10 +124,24 @@ class ParentShippingCreator extends React.Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem("revising")) {
+    if (sessionStorage.getItem('revising') && sessionStorage.getItem('currentSession')) {
+      serverCall("/allData").then((res) =>
+        this.setState((prevState) => ({
+          ...(prevState = res[0]),
+          retrieved: true,
+        }))
+      );
+    } else if (sessionStorage.getItem('revising') && sessionStorage.getItem('currentSession') === null){
       serverCall("/chosen/data").then((res) =>
         this.setState((prevState) => ({
           ...(prevState = res),
+          retrieved: true,
+        }))
+      );
+    } else if (sessionStorage.getItem('revising') === null && sessionStorage.getItem('currentSession')){
+      serverCall("/allData").then((res) =>
+        this.setState((prevState) => ({
+          ...(prevState = res[0]),
           retrieved: true,
         }))
       );
