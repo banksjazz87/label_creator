@@ -211,3 +211,10 @@ app.post("/", (req, res, next) => {
   console.log(verifiedUser);
   res.send({ validated: verifiedUser });
 });
+
+
+app.delete('/delete/allData', (req, res, next) => {
+  res.send('All data has been deleted');
+  allData = [];
+  next();
+})

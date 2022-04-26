@@ -43,6 +43,8 @@ class OptionsPage extends React.Component {
         new: false,
         display: "none",
       });
+    } else {
+      fetch('/delete/allData', {method: 'DELETE'});
     } 
   }
 
@@ -185,6 +187,7 @@ const Choice = (props) => {
         to="/creator_page" 
         className={props.buttonClass}
         style={{ display: props.currentDisplay }}
+        onClick={props.clickHandler}
       >
         {props.label}
       </Link>
