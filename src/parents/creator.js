@@ -5,6 +5,7 @@ import "../assets/nav.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 import postData from "../functions/postRequest.js";
 import serverCall from "../functions/serverCall";
+import deleteData from "../functions/deleteRequest";
 
 const SkidDescriptors = {
   qtyNeeded: null,
@@ -298,9 +299,8 @@ class ParentShippingCreator extends React.Component {
 
   deleteAll(e) {
     e.preventDefault();
-    console.log("batman is your mother");
     sessionStorage.setItem("revising", false);
-    postData("/delete_current_item", this.state);
+    deleteData("/delete_current_item", this.state);
     this.confirmDelete();
   }
 

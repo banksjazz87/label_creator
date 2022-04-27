@@ -56,8 +56,8 @@ app.post("/shipping_creator/data", (req, res) => {
   updatePastPackSlip(currentData);
 });
 
-//This post request will delete the current item from the database.
-app.post("/delete_current_item", (req, res, next) => {
+//This delete request will delete the current item from the database.
+app.delete("/delete_current_item", (req, res, next) => {
   currentData = req.body;
   deletePastPackSlip(currentData, "_id");
   confirmedSelection = "";
