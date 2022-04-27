@@ -8,6 +8,11 @@ import MathFunctions from "../functions/mathFunctions";
 
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
+const clearCurrentAndRevising = () => {
+  sessionStorage.removeItem('currentSession');
+  sessionStorage.removeItem('revising');
+}
+
 class OptionsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -43,8 +48,6 @@ class OptionsPage extends React.Component {
         new: false,
         display: "none",
       });
-    } else {
-      fetch('/delete/allData', {method: 'DELETE'});
     } 
   }
 
@@ -187,7 +190,7 @@ const Choice = (props) => {
         to="/creator_page" 
         className={props.buttonClass}
         style={{ display: props.currentDisplay }}
-        onClick={props.clickHandler}
+        onClick={clearCurrentAndRevising()}
       >
         {props.label}
       </Link>

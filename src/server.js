@@ -213,8 +213,3 @@ app.post("/", (req, res, next) => {
 });
 
 
-app.delete('/delete/allData', (req, res, next) => {
-  res.send('All data has been deleted');
-  allData = [];
-  next();
-})
