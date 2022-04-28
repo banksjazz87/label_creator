@@ -77,6 +77,7 @@ class ParentShippingCreator extends React.Component {
           city: "",
           state: "",
           zip: "",
+          phone: ""
         },
 
         shipTo: {
@@ -475,7 +476,7 @@ const ShippingToFrom = (props) => {
           id={props.toFrom + x}
           className={props.toFrom}
           placeHolder={x}
-          type="text"
+          type={x === 'phone' ? 'tel' :"text"}
           onChange={(e) => props.handleChange(e)}
           onClick={props.handleClick}
           value={returnValue(props.itemValue[x])}

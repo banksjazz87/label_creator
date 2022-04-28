@@ -60,13 +60,11 @@ class Nav extends React.Component {
             this.state.display
               ? {
                   display: "flex",
-                  height: "100vh",
                   width: `${this.state.width}vw`,
                 }
               : this.state.width > 0
               ? {
                   display: "flex",
-                  height: "100vh",
                   width: `${this.state.width}vw`,
                 }
               : { display: "none" }
