@@ -22,11 +22,11 @@ class Nav extends React.Component {
     setInterval(() => {
       if (this.state.width < 100 && this.state.display) {
         this.setState((state) => ({
-          width: state.width + 1,
+          width: state.width + 20,
         }));
       } else if (this.state.width > 0 && this.state.display === false) {
         this.setState((state) => ({
-          width: state.width - 1,
+          width: state.width - 20,
         }));
       } else {
         clearInterval(this.displayMenu);

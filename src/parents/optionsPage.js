@@ -9,9 +9,9 @@ import MathFunctions from "../functions/mathFunctions";
 const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
 
 const clearCurrentAndRevising = () => {
-  sessionStorage.removeItem('currentSession');
-  sessionStorage.removeItem('revising');
-}
+  sessionStorage.removeItem("currentSession");
+  sessionStorage.removeItem("revising");
+};
 
 class OptionsPage extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class OptionsPage extends React.Component {
         new: false,
         display: "none",
       });
-    } 
+    }
   }
 
   optionSelection(e) {
@@ -106,7 +106,7 @@ class OptionsPage extends React.Component {
     e.preventDefault();
     const url = "/chosen/data";
     postData(url, this.state.selectedResults);
-    postData('/shipping_creator/data', this.state.selectedResults);
+    postData("/shipping_creator/data", this.state.selectedResults);
     sessionStorage.setItem("revising", true);
   }
 
@@ -172,7 +172,7 @@ class OptionsPage extends React.Component {
                 : { display: "none" }
             }
           >
-            <Link className="link" to="/creator_page">
+            <Link className="options_link" to="/creator_page">
               Submit
             </Link>
           </button>
@@ -185,9 +185,9 @@ class OptionsPage extends React.Component {
 const Choice = (props) => {
   if (props.idName === "new") {
     return (
-      <Link 
-        id={props.idName} 
-        to="/creator_page" 
+      <Link
+        id={props.idName}
+        to="/creator_page"
         className={props.buttonClass}
         style={{ display: props.currentDisplay }}
         onClick={clearCurrentAndRevising()}
