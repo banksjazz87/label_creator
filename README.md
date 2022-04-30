@@ -1,6 +1,6 @@
 # The Label Creator
 
-## What Does It Do?
+## ``What Does It Do?``
 
 ### Problem
   Companies that ship out a number of different items on one skid need a way to create a pack slip, carton labels, and skid labels.  From my experience, this would require typing out the same data more than once.
@@ -13,9 +13,25 @@
 
 
 
-## Getting Started
+## ``Getting Started``
 
-In the project directory, you can run:
+### Node
+* You will need to have node.js installed on your local system.  You can do this by following the directions listed [here](https://nodejs.org/en/). 
+
+### Dependencies
+* Once Node is installed. In the project directory, you will need to  install all of the package.json dependencies, this can be done by running:
+    ```
+    npm install
+    ```
+
+### Development Mode
+* The development mode can be ran by using the command.
+    ```
+    npm run start
+    ``` 
+*All features will not be able to be used in the development       mode, because the back-end is needed to store data.  You can create a non-functional (pre-determined data) development mode by following the insructions in the: `creator.js`, `label.js`, `packSlip.js`, and `shipTo.js` files.*
+
+
 
 ### `npm start`
 
