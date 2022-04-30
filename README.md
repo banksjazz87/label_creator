@@ -1,6 +1,7 @@
 # The Label Creator
 
 ## ``What Does It Do?``
+<hr/>
 
 ### Problem
   Companies that ship out a number of different items on one skid need a way to create a pack slip, carton labels, and skid labels.  From my experience, this would require typing out the same data more than once.
@@ -10,85 +11,90 @@
 * Pack Slip
 * Carton Labels
 * Skid Papers
+<br/>
+<br/>
 
+## ``Features``
+<hr/>
 
+### ``Login page``
+For demo purposes the username is "Demo" and the password is "demo123".
+
+### ``Options Page``
+The options page gives you the opportunity to either create a new document or search for a previous document.  You can search by Job#, PO# or company name.
+
+### ``Creator Page``
+**The creator page gives you the ability to:**
+* Create an entirely new document.
+* Modify an already exisiting document.
+* Delete the current document.
+
+You will need to be sure to click the 'Submit' button and then then the 'Save' button, in order to save the document to the database.
+
+**Math functions provided in the Creator Page:**
+* Commas are placed automatically, for all numbers.
+
+### ``Pack Slip Page``
+The pack slip page displays the data from the creator page in a way that resembles a stylized Excel sheet.
+
+**Math functions provided in the Creator Page:**
+* The sum of all of the items is automatically calculated.
+* The sum of all of the cartons is automatically calculated.
+
+### ``Labels Page``
+This page gives the user the ability to select each label and print out the required number that they need.  The number of copies needed for each label is provided at the top of the page.  Once you have printed all of the required labels, an alert message appears to let you know that all of the labels have been printed.
+
+### ``Ship To Page``
+This page provides the tag that should be placed on the front and the back of a skid.  This containes the ship from address, ship to address, and PO#.
+<br/>
+<br/>
 
 ## ``Getting Started``
+<hr/>
 
-### Node
-* You will need to have node.js installed on your local system.  You can do this by following the directions listed [here](https://nodejs.org/en/). 
+### ``Node``
+You will need to have node.js installed on your local system.  You can do this by following the directions listed [here](https://nodejs.org/en/). 
 
-### Dependencies
-* Once Node is installed. In the project directory, you will need to  install all of the package.json dependencies, this can be done by running:
-    ```
+### ``Dependencies``
+Once Node is installed. In the project directory, you will need to  install all of the package.json dependencies, this can be done by running:
+
+    
     npm install
-    ```
+    
 
-### Development Mode
-* The development mode can be ran by using the command.
-    ```
+### ``Development Mode``
+
+The development mode can be ran by using the command.  The development mode will run on http://localhost:3000.
+
+    
     npm run start
-    ``` 
+    
 *All features will not be able to be used in the development       mode, because the back-end is needed to store data.  You can create a non-functional (pre-determined data) development mode by following the insructions in the: `creator.js`, `label.js`, `packSlip.js`, and `shipTo.js` files.*
 
+### ``Production Mode``
+The entire application can be ran by entering the following commands.  The server will run on http://localhost:4500.
 
+    npm run build
+    npm run server
+<br/>
+<br/>
+    
+## ``Dependencies``
+<hr/>
 
-### `npm start`
+* cors
+* express
+* mongodb
+* nodemon
+* react
+* react-dom
+* react-router-dom
+* react-scripts
+* web-vitals
+<br/>
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# ``Summary``
+This application is going to remove a lot of redundancies in my place of current employment.  We will go from typing each item twice, to only once, and we will only need to create one document, rather than three.  This should save a lot of time, and gives me a launching pad to possibly create other applications that will further expedite the shipping process.  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+If you would like to have any features added or if you would like to make any, just shoot me a message or a pull request.  Thanks for checking this out.
