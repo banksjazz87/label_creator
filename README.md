@@ -2,10 +2,10 @@
 
 ## What Does It Do?
 
-### Problem
+### ``Problem``
   Companies that ship out a number of different items on one skid need a way to create a pack slip, carton labels, and skid labels.  From my experience, this would require typing out the same data more than once.
 
-### Solution
+### ``Solution``
   With this application, companies no longer need to iterate over the same data more than once.  By simply entering all of the information in the creator_page, all of the data is then modified to create:
 * Pack Slip
 * Carton Labels
@@ -13,8 +13,7 @@
 <br/>
 <br/>
 
-## ``Features``
-<hr/>
+## Features
 
 ### ``Login page``
 For demo purposes the username is "Demo" and the password is "demo123".
@@ -48,8 +47,7 @@ This page provides the tag that should be placed on the front and the back of a 
 <br/>
 <br/>
 
-## ``Getting Started``
-<hr/>
+## Getting Started
 
 ### ``Node``
 You will need to have node.js installed on your local system.  You can do this by following the directions listed [here](https://nodejs.org/en/). 
@@ -78,7 +76,7 @@ The server will run on http://localhost:4500. The entire application can be ran 
 <br/>
 <br/>
     
-## ``Dependencies``
+## Dependencies
 <hr/>
 
 * cors
@@ -93,7 +91,7 @@ The server will run on http://localhost:4500. The entire application can be ran 
 <br/>
 <br/>
 
-# ``Summary``
+## Summary
 This application is going to remove a lot of redundancies in my place of current employment.  We will go from typing each item twice, to only once, and we will only need to create one document, rather than three.  This should save a lot of time, and gives me a launching pad to possibly create other applications that will further expedite the shipping process.  
 
 If you would like to have any features added or if you would like to make any, just shoot me a message or a pull request.  Thanks for checking this out.
