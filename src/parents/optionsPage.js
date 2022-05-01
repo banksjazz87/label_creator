@@ -261,7 +261,7 @@ const Input = (props) => {
 const SelectResult = (props) => {
   const optionsFromSearchResults = (arr, searchedItem) => {
     const displayResults = arr.map((x, y) => {
-      if (searchedItem === "company") {
+      if (searchedItem === "Company") {
         return (
           <option id={`option${y}`} key={y}>
           {`${y + 1}. Job: ${x.Job}, PO: ${x.PO} ${x.shipTo.company}`}
