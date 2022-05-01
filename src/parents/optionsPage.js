@@ -67,10 +67,14 @@ class OptionsPage extends React.Component {
 
   searchClick(e) {
     let url = "/options/data";
-    let searchObject = {
-      [this.state.searchBy]: this.state.searchText,
+    let searchObject = () => {
+      if (this.state.searchBy === 'Company') {
+        return {shipTocompany: this.state.searchText}
+      } else {
+        return {[this.state.searchBy]: this.state.searchText}
+      }
     };
-    postData(url, searchObject).then(
+    postData(url, searchObject()).then(
       this.setState({
         searchDataSent: true,
       })
