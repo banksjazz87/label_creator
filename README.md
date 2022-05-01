@@ -32,6 +32,16 @@ You will need to be sure to click the 'Submit' button and then then the 'Save' b
 **Math functions provided in the Creator Page:**
 * Commas are placed automatically, for all numbers.
 
+**Handling items that have cartons at different quantitites.**
+* You will have to type the total quantity needed and total shipped on two seperate lines, with the carton with the differing quantity on a line of its own.
+
+| qtyNeed   | itemDescription   | packsRolls  | qtyPerCarton  | numOfCartons  | qtyShipped  |
+| --------  | ---------------   | ----------  | ------------  | ------------  | ----------  |
+| 200       | Bananas           | 50          | 150           | 1             | 200         |
+| 200       | Bananas           | 50          | 50            | 1             | 200         |
+
+The pack slip will turn this two line item, into one line.
+
 ### ``Pack Slip Page``
 The pack slip page displays the data from the creator page in a way that resembles a stylized Excel sheet.
 
@@ -57,6 +67,11 @@ Once Node is installed. In the project directory, you will need to  install all 
 
     
     npm install
+
+### ``Change Directory``
+You will need to enter into the correct directory in you terminal.
+
+    cd my-app
     
 
 ### ``Development Mode``
