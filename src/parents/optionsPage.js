@@ -69,7 +69,7 @@ class OptionsPage extends React.Component {
     let url = "/options/data";
     let searchObject = () => {
       if (this.state.searchBy === 'Company') {
-        return {shipTocompany: this.state.searchText}
+        return {"shipTo.company": this.state.searchText}
       } else {
         return {[this.state.searchBy]: this.state.searchText}
       }
@@ -261,11 +261,19 @@ const Input = (props) => {
 const SelectResult = (props) => {
   const optionsFromSearchResults = (arr, searchedItem) => {
     const displayResults = arr.map((x, y) => {
+      if (searchedItem === "company") {
+        return (
+          <option id={`option${y}`} key={y}>
+          {`${y + 1}. Job: ${x.Job}, PO: ${x.PO} ${x.shipTo.company}`}
+        </option>
+        )
+      } else {
       return (
         <option id={`option${y}`} key={y}>
           {`${y + 1}. ${x[searchedItem]}, ${x.shipTo.company}`}
         </option>
       );
+      }
     });
     return displayResults;
   };
