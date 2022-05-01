@@ -1,7 +1,6 @@
 # The Label Creator
 
-## ``What Does It Do?``
-<hr/>
+## What Does It Do?
 
 ### Problem
   Companies that ship out a number of different items on one skid need a way to create a pack slip, carton labels, and skid labels.  From my experience, this would require typing out the same data more than once.
@@ -45,7 +44,7 @@ The pack slip page displays the data from the creator page in a way that resembl
 This page gives the user the ability to select each label and print out the required number that they need.  The number of copies needed for each label is provided at the top of the page.  Once you have printed all of the required labels, an alert message appears to let you know that all of the labels have been printed.
 
 ### ``Ship To Page``
-This page provides the tag that should be placed on the front and the back of a skid.  This containes the ship from address, ship to address, and PO#.
+This page provides the tag that should be placed on the front and the back of a skid.  This contains the ship from address, ship to address, and PO#.
 <br/>
 <br/>
 
@@ -64,7 +63,7 @@ Once Node is installed. In the project directory, you will need to  install all 
 
 ### ``Development Mode``
 
-The development mode can be ran by using the command.  The development mode will run on http://localhost:3000.
+The development mode will run on http://localhost:3000. The development mode can be ran by using the command.
 
     
     npm run start
@@ -72,7 +71,7 @@ The development mode can be ran by using the command.  The development mode will
 *All features will not be able to be used in the development       mode, because the back-end is needed to store data.  You can create a non-functional (pre-determined data) development mode by following the insructions in the: `creator.js`, `label.js`, `packSlip.js`, and `shipTo.js` files.*
 
 ### ``Production Mode``
-The entire application can be ran by entering the following commands.  The server will run on http://localhost:4500.
+The server will run on http://localhost:4500. The entire application can be ran by entering the following commands. 
 
     npm run build
     npm run server
