@@ -17,7 +17,6 @@ class Nav extends React.Component {
   }
 
   //A function that will update how the navbar should be displayed, and the rate in which it should do so.
-
   displayMenu = () => {
     setInterval(() => {
       if (this.state.width < 100 && this.state.display) {
