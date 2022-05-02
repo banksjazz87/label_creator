@@ -1,118 +1,109 @@
 @import "library";
 
-#pack_slip_body{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
+#pack_slip_body {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
 }
 
-#packing_slip_header{
-    text-align: right;
-    margin-right: 64px;
-    color: gray;
+#packing_slip_header {
+  text-align: right;
+  margin-right: 64px;
+  color: gray;
 }
 
-#container{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-left: 64px;
-    margin-right: 64px;
+#container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: 64px;
+  margin-right: 64px;
 }
 
-.ship_from{
-    line-height: 1px;
-    top: 0px;
-    font-size: 1.75em;
-    color: gray;
-    font-style: italic;
+.ship_from {
+  line-height: 1px;
+  top: 0px;
+  font-size: 1.75em;
+  color: gray;
+  font-style: italic;
 }
 
-.ship_to{
-    margin-top: 24px;
-    line-height: 6px;
-    font-size: 1.15em;
-    margin-left: 24px;
+.ship_to {
+  margin-top: 24px;
+  line-height: 6px;
+  font-size: 1.15em;
+  margin-left: 24px;
 }
 
-#po_num{
-    margin-top: 0px;
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 16px;
-    margin-bottom: 16px;
-    margin-left: 24px;
+#po_num {
+  margin-top: 0px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 16px;
+  margin-bottom: 16px;
+  margin-left: 24px;
 }
 
-#details_header{
-    background-color: $hover-button;
-    color: white;  
+#details_header {
+  background-color: $hover-button;
+  color: white;
 }
 
+#table_container {
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  font-size: 18px;
+  font-family: arial;
 
-
-#table_container{
-    display: flex;
-    flex-direction: column;
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-    font-size: 18px;
-    font-family: arial;
-
-    #date_job_header{
-        text-align: center;
-        background-color: rgb(206, 206, 206);
-    }
-}
-
-.item_info{
-    text-align: left;
-    font-weight: 525;
-}
-
-.qty{
+  #date_job_header {
     text-align: center;
-}
-
-#qty_desc_ship_headers{
-    background-color: $hover-button;
-    color: white;
-}
-
-#description_row{
     background-color: rgb(206, 206, 206);
+  }
 }
 
-#thank_you_text{
+.item_info {
+  text-align: left;
+  font-weight: 525;
+}
+
+.qty {
+  text-align: center;
+}
+
+#qty_desc_ship_headers {
+  background-color: $hover-button;
+  color: white;
+}
+
+#description_row {
+  background-color: rgb(206, 206, 206);
+}
+
+#thank_you_text {
+  text-align: center;
+  line-height: 24px;
+  margin-top: 2em;
+}
+
+#print_container {
+  display: flex;
+  justify-content: center;
+}
+
+.totals {
+  th {
+    text-align: right;
+  }
+
+  td {
     text-align: center;
-    line-height: 24px;
-    margin-top: 2em;
+    background-color: rgb(206, 206, 206);
+  }
 }
-
-#print_container{
-    display: flex;
-    justify-content: center;
-}
-
-
-.totals{
-    
-    th{
-        text-align: right;
-        
-    }
-    td{
-        text-align: center;
-        background-color: rgb(206, 206, 206);
-
-    }
-}
-
-
-
-

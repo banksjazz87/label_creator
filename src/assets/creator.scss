@@ -135,6 +135,7 @@
     align-items: space-between;
     margin-top: 8px;
   }
+
   label {
     text-align: left;
     margin-top: 8px;
@@ -149,7 +150,6 @@
 
 #main_table {
   width: 100vw;
-
   background: linear-gradient(
     to bottom right,
     #012138,
@@ -168,6 +168,7 @@
   #itemDescription_header {
     width: 40vw;
   }
+
   .itemDescription {
     width: 95%;
     margin: 8px auto auto auto;

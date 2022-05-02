@@ -12,7 +12,7 @@ $warning-color: rgb(145, 4, 4);
 
 $login-search-background: linear-gradient(to bottom right, $hover-button, $secondary-color);
 
-@mixin login-data-box{
+@mixin login-data-box {
     border-style: none;
     border-radius: 6px;
     padding: 2em 4em 2em 4em;
@@ -22,7 +22,7 @@ $login-search-background: linear-gradient(to bottom right, $hover-button, $secon
     background-color: $light-background;
 }
 
-@mixin print-button{
+@mixin print-button {
     padding: 1em 3em 1em 3em;
     color: white;
     justify-self: center;
@@ -31,12 +31,12 @@ $login-search-background: linear-gradient(to bottom right, $hover-button, $secon
     font-size: 1.05em;
     background-color: $hover-button;
 
-    &:hover{
+    &:hover {
         background-color: $button-color;
-        
+
     }
 
-    &:active{
+    &:active {
         background-color: $button-color;
         border-style: solid;
         border-width: 4px;

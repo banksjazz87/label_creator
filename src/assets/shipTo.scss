@@ -1,30 +1,30 @@
 @import "library";
 
-#ship_to_body{
+#ship_to_body {
     margin: 0;
     height: 100vh;
     width: 100vw;
 
-    #hamburger_icon{
+    #hamburger_icon {
         margin-top: 0;
     }
 }
 
-#ship_to_container{
+#ship_to_container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 0 3em 1.5em 1em;
     padding: 0;
     margin: auto;
-    background-color: white; 
+    background-color: white;
 }
 
-#print_button{
+#print_button {
     margin-top: .1em;
 }
 
-#ship_to_paper{
+#ship_to_paper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,39 +39,41 @@
 }
 
 
-#ship_from{
+#ship_from {
     margin-left: 4em;
     font-size: 1.25em;
     line-height: .25em;
 }
 
 
-#ship_to{
+#ship_to {
     margin-left: 20vw;
     font-size: 2.75em;
     line-height: .25em;
 }
 
 
-#pack_slip_po{
+#pack_slip_po {
     font-size: 2.5em;
     margin-left: .25em;
 }
 
 
-@media print{
-    #hamburger_icon{
+@media print {
+    #hamburger_icon {
         display: none;
     }
-    #print_container{
+
+    #print_container {
         display: none;
         margin-bottom: 0px;
     }
-    #ship_to_paper{
+
+    #ship_to_paper {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 816px; 
+        height: 816px;
         width: 1056px;
         margin: 0;
         padding: 0;
@@ -81,30 +83,32 @@
     }
 }
 
-@media (max-width: 1075px){
-    #ship_to_container{
-    font-size: 12px;
+@media (max-width: 1075px) {
+    #ship_to_container {
+        font-size: 12px;
     }
-    #print_button{
+
+    #print_button {
         font-size: 16px;
     }
 }
 
-@media (max-width: 660px){
-    #ship_to_container{
+@media (max-width: 660px) {
+    #ship_to_container {
         font-size: 8px;
 
-        #ship_to_paper{
+        #ship_to_paper {
             margin-top: 4em;
             padding: .25em .25em .25em .25em;
             width: 90vw;
             height: 75vh;
         }
-        #ship_to{
+
+        #ship_to {
             font-size: 2em;
         }
 
-        #print_button{
+        #print_button {
             margin-top: 2em;
         }
     }
