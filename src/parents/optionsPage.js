@@ -6,7 +6,7 @@ import serverCall from "../functions/serverCall.js";
 import { Link } from "react-router-dom";
 import MathFunctions from "../functions/mathFunctions";
 
-const searchSelections = ["Select One", "Company", "Job", "PO", "Date"];
+const searchSelections = ["Select One", "Company", "Job", "PO"];
 
 const clearCurrentAndRevising = () => {
   sessionStorage.removeItem("currentSession");
@@ -261,19 +261,11 @@ const Input = (props) => {
 const SelectResult = (props) => {
   const optionsFromSearchResults = (arr, searchedItem) => {
     const displayResults = arr.map((x, y) => {
-      if (searchedItem === "Company") {
-        return (
-          <option id={`option${y}`} key={y}>
-          {`${y + 1}. Job: ${x.Job}, PO: ${x.PO} ${x.shipTo.company}`}
-        </option>
-        )
-      } else {
       return (
         <option id={`option${y}`} key={y}>
-          {`${y + 1}. ${x[searchedItem]}, ${x.shipTo.company}`}
+          {`${y + 1}. Job#: ${x.Job}, PO#: ${x.PO}, Company: ${x.shipTo.company}`}
         </option>
-      );
-      }
+      )
     });
     return displayResults;
   };
