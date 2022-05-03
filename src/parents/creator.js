@@ -233,8 +233,6 @@ class ParentShippingCreator extends React.Component {
     //Using the session storage object to keep track if there is an active session
     sessionStorage.setItem("currentSession", "running");
     sessionStorage.setItem("userData", JSON.stringify(this.state));
-
-    console.log("this is the final state", this.state);
   }
 
   //function to automatically added a comma to a number that should have a comma, based on its length.

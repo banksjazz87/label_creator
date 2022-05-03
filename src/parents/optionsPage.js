@@ -91,7 +91,6 @@ class OptionsPage extends React.Component {
             selectPreviousClicked: true,
           })
     );
-    console.log(this.state.searchResults);
   }
 
   updateSelectedResults(e) {
