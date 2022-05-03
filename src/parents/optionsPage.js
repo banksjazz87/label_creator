@@ -68,10 +68,10 @@ class OptionsPage extends React.Component {
   searchClick(e) {
     let url = "/options/data";
     let searchObject = () => {
-      if (this.state.searchBy === 'Company') {
-        return {"shipTo.company": this.state.searchText}
+      if (this.state.searchBy === "Company") {
+        return { "shipTo.company": this.state.searchText };
       } else {
-        return {[this.state.searchBy]: this.state.searchText}
+        return { [this.state.searchBy]: this.state.searchText };
       }
     };
     postData(url, searchObject()).then(
@@ -263,9 +263,11 @@ const SelectResult = (props) => {
     const displayResults = arr.map((x, y) => {
       return (
         <option id={`option${y}`} key={y}>
-          {`${y + 1}. Job#: ${x.Job}, PO#: ${x.PO}, Company: ${x.shipTo.company}`}
+          {`${y + 1}. Job#: ${x.Job}, PO#: ${x.PO}, Company: ${
+            x.shipTo.company
+          }`}
         </option>
-      )
+      );
     });
     return displayResults;
   };

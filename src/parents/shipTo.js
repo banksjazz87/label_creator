@@ -39,9 +39,10 @@ class ParentShipTo extends React.Component {
               toFrom="ship_from"
               items={this.state.userData.shipFrom}
             />
-
-            <ShipToFrom toFrom="ship_to" items={this.state.userData.shipTo} />
-
+            <ShipToFrom 
+              toFrom="ship_to" 
+              items={this.state.userData.shipTo} 
+            />
             <p id="pack_slip_po">{`PO#: ${this.state.userData.PO}`}</p>
           </div>
           <PrintButton />

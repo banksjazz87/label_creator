@@ -48,6 +48,7 @@ const userCollection = (user) => {
 
 let currentData = {};
 let allData = [];
+
 //Route for the post request for the label creator page.
 app.post("/shipping_creator/data", (req, res) => {
   currentData = req.body;
@@ -103,6 +104,7 @@ const removeId = (object, id) => {
     return;
   }
 };
+
 //Update method for the database, this is going to first take the information from the current pack slip that is being revised.  It's going to check that it has a currentId, po and job in the database.
 async function updatePastPackSlip(currentObject) {
   try {
@@ -211,5 +213,3 @@ app.post("/", (req, res, next) => {
   console.log(verifiedUser);
   res.send({ validated: verifiedUser });
 });
-
-

@@ -30,8 +30,7 @@ class LoginPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    postData("/", this.state)
-      .then((data) => this.checkForUser(data.validated))
+    postData("/", this.state).then((data) => this.checkForUser(data.validated));
   }
 
   checkForUser(verified) {
@@ -73,10 +72,8 @@ class LoginPage extends React.Component {
 }
 
 function LoginForm(props) {
-  
   if (props.valid) {
     return <Navigate to="search_page" replace={true} />;
-
   } else {
     return (
       <form action="" onSubmit={props.submitHandler}>

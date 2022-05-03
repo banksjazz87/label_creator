@@ -1,5 +1,4 @@
 //This is going to be dummy data used for DEVELOPMENT
-//let userDataFromCreator;
 let userDataFromCreator = [
   {
     shipFrom: {

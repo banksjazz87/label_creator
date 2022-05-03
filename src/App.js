@@ -21,13 +21,12 @@ import PrintButton from "./components/printButton.js";
 import OptionsPage from "./parents/optionsPage.js";
 import LoginPage from "./parents/loginPage.js";
 
-
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login/>}/>
-        <Route path="search_page" element={<Options/>}/>
+        <Route path="/" element={<Login />} />
+        <Route path="search_page" element={<Options />} />
         <Route path="creator_page" element={<ShippingCreator />} />
         <Route path="pack_slip" element={<PackSlip />} />
         <Route path="labels" element={<Labels />} />
@@ -65,7 +64,6 @@ function ShipTo() {
   );
 }
 
-
 function ShippingCreator() {
   return (
     <body id="creator_body">
@@ -76,21 +74,20 @@ function ShippingCreator() {
   );
 }
 
-function Options(){
-  return(
+function Options() {
+  return (
     <div id="options_body">
       <OptionsPage />
     </div>
-  )
+  );
 }
 
 function Login() {
-  return(
+  return (
     <div id="login_page">
       <LoginPage />
     </div>
-  )
+  );
 }
-
 
 export default App;
