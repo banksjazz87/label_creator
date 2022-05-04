@@ -47,5 +47,10 @@
     },
     "devDependencies": {
         "sass": "^1.45.2"
-    }
+    },
+    "engines": {
+        "node": "14.16.0"
+    },
+    "author": "Chris Banks",
+    "license": "MIT"
 }
