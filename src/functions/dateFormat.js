@@ -5,7 +5,7 @@ const changeDateFormat = (str) => {
   let year = str.slice(0, 4);
 
   let date = `${month}/${day}/${year}`;
-
+console.log('fart for brains');
   return date;
 };
 
