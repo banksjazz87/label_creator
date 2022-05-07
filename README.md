@@ -79,7 +79,7 @@ You will need to enter into the correct directory in you terminal.
 The development mode will run on http://localhost:3000. The development mode can be ran by using the command.
 
     
-    npm run start
+    npm run development
     
 *All features will not be able to be used in the development       mode, because the back-end is needed to store data.  You can create a non-functional (pre-determined data) development mode by following the insructions in the: `creator.js`, `label.js`, `packSlip.js`, and `shipTo.js` files.*
 
@@ -87,7 +87,7 @@ The development mode will run on http://localhost:3000. The development mode can
 The server will run on http://localhost:4500. The entire application can be ran by entering the following commands. 
 
     npm run build
-    npm run server
+    npm run start
 <br/>
 <br/>
     
