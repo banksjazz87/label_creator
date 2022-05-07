@@ -92,9 +92,14 @@
 
 @media (max-width: 600px) {
   #options_body {
-    font-size: 12px;
+    font-size: 16px;
   }
 
+  #options_page_container{
+    width: 80vw;
+    height: 60vh;
+    padding: 2em 1em 2em 1em;
+  }
   .button {
     margin-bottom: 0.25em;
   }
