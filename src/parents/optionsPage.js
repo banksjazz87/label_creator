@@ -273,6 +273,7 @@ const SelectResult = (props) => {
 
   return (
     <select
+      id="final_options"
       className="select_option"
       style={props.sent ? { display: "flex" } : { display: "none" }}
       onClick={props.clickHandler}
