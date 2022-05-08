@@ -105,6 +105,7 @@ class ParentShippingCreator extends React.Component {
         changing: false,
         deleteItems: false,
         deleteMessage: false,
+        packageUnit: "",
       };
     }
 
@@ -125,6 +126,7 @@ class ParentShippingCreator extends React.Component {
     this.cancelDelete = this.cancelDelete.bind(this);
     this.showDeleteMessage = this.showDeleteMessage.bind(this);
     this.hideDeleteMessage = this.hideDeleteMessage.bind(this);
+    this.definePackageUnit = this.definePackageUnit.bind(this);
   }
 
   componentDidMount() {
@@ -331,6 +333,13 @@ class ParentShippingCreator extends React.Component {
       deleteMessage: false,
     });
   }
+
+  definePackageUnit(e) {
+    this.setState({
+      packageUnit: e.target.value,
+    });
+  }
+
   render() {
     return (
       <div id="creator_container">
@@ -382,6 +391,7 @@ class ParentShippingCreator extends React.Component {
               handleOnChange={this.poJobNumbers}
             />
 
+            <PackType clickHandler={this.definePackageUnit} />
             <PoInput
               labelName="Lines Needed"
               differentType="number"
@@ -507,6 +517,35 @@ const PoInput = (props) => {
   );
 };
 
+const PackType = (props) => {
+  const options = ["Bulk", "Poly'd", "Roll"];
+
+  const optionInputs = options.map((x, y) => {
+    return (
+      <>
+        <input
+          key={`pack_option_${x}`}
+          className="pack_option"
+          onClick={props.clickHandler}
+          type="radio"
+          name="pack_unit"
+          value={x}
+        />
+
+        <label key={`pack_option_label_${y}`} htmlFor={x}>
+          {x}
+        </label>
+      </>
+    );
+  });
+
+  return (
+    <div id="pack_option_parent">
+      <p>Pack Type</p>
+      {optionInputs}
+    </div>
+  );
+};
 const SkidContents = (props) => {
   const newInput = props.title;
   const elements = newInput.map((x, y) => {
