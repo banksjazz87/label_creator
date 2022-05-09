@@ -81,6 +81,7 @@ class ParentLabels extends React.Component {
               attention={this.state.userData.shipTo.attention}
               purchaseOrder={this.state.userData.PO}
               packs={this.state.userData.skid[this.state.count].packsRolls}
+              unitType={this.state.userData.packageUnit}
               quantityPerCarton={
                 this.state.userData.skid[this.state.count].qtyPerCarton
               }
@@ -133,7 +134,7 @@ const LabelBottom = (props) => {
     <div id="bottom_label" class="label_content">
       <p id="attention">{`Attention: ${props.attention}`}</p>
       <p id="purchase_order">{`PO#: ${props.purchaseOrder}`}</p>
-      <p id="packs_rolls">{`Poly'd/Rolls @ ${props.packs}`}</p>
+      <p id="packs_rolls">{`${props.unitType} @ ${props.packs}`}</p>
       <p id="qtyPerCarton">{`Quantity= ${props.quantityPerCarton}`}</p>
       <p id="date">{`Date: ${props.date}`}</p>
     </div>

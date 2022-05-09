@@ -391,7 +391,11 @@ class ParentShippingCreator extends React.Component {
               handleOnChange={this.poJobNumbers}
             />
 
-            <PackType clickHandler={this.definePackageUnit} />
+            <PackType 
+              clickHandler={this.definePackageUnit} 
+              unitType={this.state.packageUnit}
+            />
+
             <PoInput
               labelName="Lines Needed"
               differentType="number"
@@ -530,6 +534,7 @@ const PackType = (props) => {
           type="radio"
           name="pack_unit"
           value={x}
+          defaultChecked={true}
         />
 
         <label key={`pack_option_label_${y}`} htmlFor={x}>

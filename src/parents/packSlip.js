@@ -55,6 +55,7 @@ class ParentPackSlip extends React.Component {
             />
             <MainTable
               items={this.state.userData["skid"]}
+              unitType={this.state.userData["packageUnit"]}
               totalCartons={this.state.userData["totalCartons"]}
               total={this.state.userData["totalQty"]}
             />
@@ -113,8 +114,8 @@ const MainTable = (props) => {
     let text = "";
 
     arr[itemNum].numOfCartons > 1
-      ? (text = `${arr[itemNum].numOfCartons} Cartons @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})`)
-      : (text = `${arr[itemNum].numOfCartons} Carton @ ${arr[itemNum].qtyPerCarton} (Packs/Rolls @ ${arr[itemNum].packsRolls})`);
+      ? (text = `${arr[itemNum].numOfCartons} Cartons @ ${arr[itemNum].qtyPerCarton} (${props.unitType} @ ${arr[itemNum].packsRolls})`)
+      : (text = `${arr[itemNum].numOfCartons} Carton @ ${arr[itemNum].qtyPerCarton} (${props.unitType} @ ${arr[itemNum].packsRolls})`);
 
     return text;
   };
