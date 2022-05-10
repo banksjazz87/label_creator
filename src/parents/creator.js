@@ -337,6 +337,7 @@ class ParentShippingCreator extends React.Component {
   definePackageUnit(e) {
     this.setState({
       packageUnit: e.target.value,
+      
     });
   }
 
@@ -392,8 +393,9 @@ class ParentShippingCreator extends React.Component {
             />
 
             <PackType 
-              clickHandler={this.definePackageUnit} 
+              changeHandler={this.definePackageUnit} 
               unitType={this.state.packageUnit}
+              currentlyChecked={this.state.checked}
             />
 
             <PoInput
@@ -530,11 +532,10 @@ const PackType = (props) => {
         <input
           key={`pack_option_${x}`}
           className="pack_option"
-          onClick={props.clickHandler}
+          onChange={props.changeHandler}
           type="radio"
           name="pack_unit"
           value={x}
-          defaultChecked={true}
         />
 
         <label key={`pack_option_label_${y}`} htmlFor={x}>
@@ -551,6 +552,7 @@ const PackType = (props) => {
     </div>
   );
 };
+
 const SkidContents = (props) => {
   const newInput = props.title;
   const elements = newInput.map((x, y) => {

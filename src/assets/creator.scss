@@ -143,6 +143,24 @@
     margin-right: 0.25em;
   }
 
+  #pack_option_parent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    p{
+      margin-right: 0.25em;
+    }
+    input{
+      margin-top: 1em;
+      &:hover{
+        background-color: $hover-button;
+      }
+    }
+    label{
+      margin-top: 1em;
+    }
+  }
+
   button {
     @include button-style;
   }
