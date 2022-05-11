@@ -3,7 +3,7 @@
         color-adjust: exact;
     }
 
-    #container{
+    #container {
         margin: 48px 24px 48px 24px;
     }
 
@@ -16,8 +16,31 @@
         display: none;
     }
 
+    #table_container {
+        font-size: 14px;
+    }
+
     #packing_slip_header {
         margin-right: 0px;
+    }
+
+    #container {
+        margin-left: 12px;
+        margin-right: 12px;
+        margin-top: 2px;
+    }
+
+    .ship_from {
+        font-size: 20px;
+    }
+
+    .ship_to {
+        font-size: 16px;
+        line-height: 1px;
+    }
+
+    #po_num {
+        font-size: 18px;
     }
 }
 
