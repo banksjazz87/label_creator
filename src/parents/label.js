@@ -68,7 +68,7 @@ class ParentLabels extends React.Component {
           <div id="label_container">
             <TopHeading
               job={this.state.userData.Job}
-              shipFrom={this.state.userData.shipFrom.company}
+              shipTo={this.state.userData.shipTo.company}
             />
 
             <LabelMiddle
@@ -116,7 +116,7 @@ const TopHeading = (props) => {
   return (
     <div id="top_of_label" class="label_content">
       <p id="job">{`Job# ${props.job}`}</p>
-      <p id="company_name">{props.shipFrom}</p>
+      <p id="company_name">{props.shipTo}</p>
     </div>
   );
 };
