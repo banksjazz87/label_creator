@@ -97,7 +97,7 @@ const JobNum = (props) => {
         <td>{props.date}</td>
         <th></th>
         <th></th>
-        <th>{props.job}</th>
+        <td>{props.job}</td>
       </tr>
     </table>
   );

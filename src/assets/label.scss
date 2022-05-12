@@ -27,7 +27,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 264px;
-  height: 456px;
+  height: 420px;
   border-style: solid;
   border-width: 2px;
   border-color: $button-color;
@@ -100,7 +100,7 @@
     .label_content {
       margin-left: 12px;
       margin-right: 12px;
-      font-size: 18px;
+      font-size: 16px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-weight: bold;
     }
@@ -109,11 +109,11 @@
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
-      line-height: 1.15em;
+      line-height: 1em;
     }
 
     #middle_label {
-      font-size: 24px;
+      font-size: 22px;
     }
 
     #attention {

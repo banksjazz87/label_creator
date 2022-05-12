@@ -7,6 +7,7 @@ import "../assets/nav.scss";
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall";
 import changeDateFormat from "../functions/dateFormat.js";
+import { findAllByDisplayValue } from "@testing-library/react";
 
 class ParentLabels extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class ParentLabels extends React.Component {
 
     this.state = {
       //switch fetched to true for development, false for production
-      fetched: false,
+      fetched: findAllByDisplayValue,
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
       count: 0,
@@ -25,7 +26,7 @@ class ParentLabels extends React.Component {
   }
 
   //use this function only for production
-  componentDidMount() {
+ componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         fetched: true,
