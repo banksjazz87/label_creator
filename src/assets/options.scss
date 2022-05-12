@@ -90,7 +90,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   #options_body {
     font-size: 16px;
   }
@@ -102,6 +102,7 @@
 
     #final_options {
       font-size: 14px;
+      width: 60vw;
     }
   }
 
