@@ -25,7 +25,7 @@ class ParentLabels extends React.Component {
   }
 
   //use this function only for production
- componentDidMount() {
+  componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         fetched: true,
@@ -132,7 +132,14 @@ const LabelMiddle = (props) => {
 const LabelBottom = (props) => {
   return (
     <div id="bottom_label" class="label_content">
-      <p id="attention">{`Attention: ${props.attention}`}</p>
+      <p
+        id="attention"
+        style={
+          props.attention.length > 0 ? { display: "" } : { display: "none" }
+        }
+      >
+        {`Attention: ${props.attention}`}
+      </p>
       <p id="purchase_order">{`PO#: ${props.purchaseOrder}`}</p>
       <p id="packs_rolls">{`${props.unitType} @ ${props.packs}`}</p>
       <p id="qtyPerCarton">{`Quantity= ${props.quantityPerCarton}`}</p>
