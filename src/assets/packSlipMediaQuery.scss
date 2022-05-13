@@ -42,14 +42,16 @@
     #po_num {
         font-size: 18px;
     }
+
+    #thank_you_text {
+        position: fixed;
+        bottom: 0;
+        margin-left: 10%;
+    }
 }
 
 @media (max-width: 850px) {
     #ship_to_container {
         font-size: 10px;
-    }
-
-    #print_button {
-        font-size: 1.5em;
     }
 }
