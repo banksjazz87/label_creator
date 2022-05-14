@@ -154,27 +154,56 @@ const MainTable = (props) => {
 
   const noDuplicates = checkForDuplicateItems();
 
-  const menuItems = noDuplicates.map((x, y) => {
-    return (
-      <>
-        <tr key={"row" + y} id="description_row">
-          <td id="qty_needed" class="item_info qty">
-            {noDuplicates[y].qtyNeeded}
-          </td>
-          <td id="item_description" class="item_info">
-            {noDuplicates[y].itemDescription}
-          </td>
-          <td id="qty_shipped" class="item_info qty">
-            {noDuplicates[y].qtyShipped}
-          </td>
-        </tr>
-        <tr key={"description" + y}>
+  //This method will return an array of 8 elements, if the array that is being checked contains fewer than 8.
+  const moreLines = (checkedArr) => {
+    if (checkedArr.length < 8) {
+      const finalArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+      return finalArr;
+    } else {
+      return checkedArr;
+    }
+  };
+
+  const linesArr = moreLines(noDuplicates);
+
+  const menuItems = linesArr.map((x, y) => {
+    if (y < noDuplicates.length) {
+      return (
+        <>
+          <tr key={"row" + y} id="description_row">
+            <td id="qty_needed" class="item_info qty">
+              {noDuplicates[y].qtyNeeded}
+            </td>
+            <td id="item_description" class="item_info">
+              {noDuplicates[y].itemDescription}
+            </td>
+            <td id="qty_shipped" class="item_info qty">
+              {noDuplicates[y].qtyShipped}
+            </td>
+          </tr>
+          <tr key={"description" + y}>
+            <td></td>
+            <td class="item_info">{noDuplicates[y].cartonText}</td>
+          </tr>
           <td></td>
-          <td class="item_info">{noDuplicates[y].cartonText}</td>
-        </tr>
-        <td></td>
-      </>
-    );
+        </>
+      );
+    } else {
+      return (
+        <>
+          <tr key={"row" + y} id="blank_description_row" className="blank_row">
+            <td id="qty_needed"></td>
+            <td id="item_description"></td>
+            <td id="qty_shipped"></td>
+          </tr>
+          <tr key={"description" + y} id="blank_white_row">
+            <td></td>
+            <td class="item_info"></td>
+          </tr>
+          <td></td>
+        </>
+      );
+    }
   });
   return (
     <table id="pack_slip_table">

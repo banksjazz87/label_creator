@@ -40,12 +40,12 @@
 }
 
 #po_num {
-  margin-top: 0px;
+  margin-top: 12px;
   font-size: 22px;
   font-weight: bold;
   line-height: 16px;
   margin-bottom: 16px;
-  margin-left: 24px;
+  margin-left: 0px;
 }
 
 #details_header {
@@ -86,10 +86,25 @@
   background-color: rgb(206, 206, 206);
 }
 
+
+
+
+#blank_description_row {
+  background-color: rgb(206, 206, 206);
+  height: 18px;
+}
+
+#blank_white_row {
+  background-color: white;
+  height: 18px;
+}
+
+
+
 #thank_you_text {
   text-align: center;
   line-height: 22px;
-  margin-top: 12px;
+  margin-top: 36px;
 }
 
 #print_container {
