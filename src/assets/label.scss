@@ -26,8 +26,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 264px;
-  height: 420px;
+  width: 288px;
+  height: 480px;
   border-style: solid;
   border-width: 2px;
   border-color: $button-color;
@@ -45,6 +45,15 @@
     font-size: 1.15em;
     line-height: 0.35em;
   }
+
+  #job {
+    margin-top: 28px;
+  }
+
+  #bottom_label {
+    margin-bottom: 14px;
+  }
+
 
   #middle_label {
     font-size: 1.5em;
@@ -96,13 +105,11 @@
   #label_container {
     border: none;
     box-shadow: none;
-    padding-top: 96px;
-    padding-bottom: 29px;
 
     .label_content {
       margin-left: 12px;
       margin-right: 12px;
-      font-size: 16px;
+      font-size: 18px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-weight: bold;
     }
@@ -115,7 +122,7 @@
     }
 
     #middle_label {
-      font-size: 22px;
+      font-size: 24px;
     }
 
     #attention {
