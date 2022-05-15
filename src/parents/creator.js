@@ -527,6 +527,26 @@ const PackType = (props) => {
   const options = ["Bulk", "Poly'd", "Roll"];
 
   const optionInputs = options.map((x, y) => {
+
+    if (props.unitType === x){
+      return (
+        <>
+        <input
+          key={`pack_option_${x}`}
+          className="pack_option"
+          onChange={props.changeHandler}
+          type="radio"
+          name="pack_unit"
+          value={x}
+          checked
+        />
+
+        <label key={`pack_option_label_${y}`} htmlFor={x}>
+          {x}
+        </label>
+      </>
+      )
+    } else {
     return (
       <>
         <input
@@ -543,6 +563,7 @@ const PackType = (props) => {
         </label>
       </>
     );
+    }
   });
 
   return (
