@@ -1,6 +1,6 @@
 @import "library";
 
-@mixin data-field {
+/*@mixin data-field {
   display: flex;
   flex-direction: column;
   flex-grow: 2;
@@ -16,9 +16,9 @@
   border-radius: 1%;
   box-shadow: 2px 4px $secondary-color;
   color: black;
-}
+}*/
 
-@mixin button-style {
+/*@mixin button-style {
   margin: 8px auto 8px auto;
   background-color: $button-color;
   color: white;
@@ -33,7 +33,7 @@
   &:active {
     box-shadow: 1px 3px $third-color;
   }
-}
+}*/
 
 #creator_body {
   background-color: rgb(196, 196, 196);

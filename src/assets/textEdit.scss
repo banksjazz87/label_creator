@@ -1,0 +1,39 @@
+@import "library";
+
+#text_edit_box{
+    @include data-field;
+    width: 50vw;
+    z-index: 2;
+    position: fixed;
+    height: 20vh;
+    width: 40vw;
+    margin: 30vh 30vw 30vh 30vw;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    button{
+       @include button-style;
+    }
+    #text_edit_buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 20vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #cancel_edit_btn{
+        background-color: $attention-color;
+        &:hover {
+            background-color: $warning-color;
+        }
+    }
+
+    input{
+        width: 30vw;
+    }
+    label{
+        margin-right: 24px;
+    }
+}

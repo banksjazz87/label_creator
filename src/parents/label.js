@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../assets/label.scss";
 import "../assets/nav.scss";
+import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator used for development mode
 //import userDataFromCreator from "../variables/dummyData";
@@ -18,6 +19,7 @@ class ParentLabels extends React.Component {
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
       count: 0,
+      showEditBox: false
     };
 
     this.incrementHandler = this.incrementHandler.bind(this);
@@ -75,6 +77,10 @@ class ParentLabels extends React.Component {
               description={
                 this.state.userData.skid[this.state.count].itemDescription
               }
+            />
+
+            <TextEdit 
+              show={this.state.showEditBox}
             />
 
             <LabelBottom

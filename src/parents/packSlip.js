@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../assets/packSlip.scss";
 import "../assets/nav.scss";
+import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator for development only
 //import userDataFromCreator from "../variables/dummyData"
@@ -19,6 +20,7 @@ class ParentPackSlip extends React.Component {
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
+      showEditBox: false
     };
   }
 
@@ -52,6 +54,10 @@ class ParentPackSlip extends React.Component {
             <JobNum
               job={this.state.userData["Job"]}
               date={changeDateFormat(this.state.userData.date)}
+            />
+
+            <TextEdit 
+              show={this.state.showEditBox}
             />
             <MainTable
               items={this.state.userData["skid"]}

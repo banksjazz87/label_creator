@@ -44,3 +44,38 @@ $login-search-background: linear-gradient(to bottom right, $hover-button, $secon
     }
 
 }
+
+@mixin button-style {
+    margin: 8px auto 8px auto;
+    background-color: $button-color;
+    color: white;
+    padding: 0.5em 2em 0.5em 2em;
+    border-radius: 8px;
+    border-style: none;
+  
+    &:hover {
+      background-color: $hover-button;
+    }
+  
+    &:active {
+      box-shadow: 1px 3px $third-color;
+    }
+  }
+
+  @mixin data-field {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    background-color: rgb(196, 196, 196);
+    background: linear-gradient(
+      to bottom right,
+      rgb(177, 173, 173),
+      rgb(196, 196, 196),
+      rgb(177, 173, 173)
+    );
+    padding: 10px 20px 10px 20px;
+    justify-items: center;
+    border-radius: 1%;
+    box-shadow: 2px 4px $secondary-color;
+    color: black;
+  }

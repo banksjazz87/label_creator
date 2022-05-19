@@ -1,6 +1,7 @@
 import * as React from "react";
 import "../assets/shipTo.scss";
 import "../assets/nav.scss";
+import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator used for development
 //import userDataFromCreator from "../variables/dummyData";
@@ -17,6 +18,7 @@ class ParentShipTo extends React.Component {
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
+      showEditBox: false
     };
   }
 
@@ -38,6 +40,10 @@ class ParentShipTo extends React.Component {
             <ShipToFrom
               toFrom="ship_from"
               items={this.state.userData.shipFrom}
+            />
+
+            <TextEdit 
+              show={this.state.showEditBox}
             />
             <ShipToFrom 
               toFrom="ship_to" 
