@@ -46,6 +46,12 @@
     line-height: 0.35em;
   }
 
+  #company_name{
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1.2em;
+  }
+
   #job {
     margin-top: 28px;
   }
@@ -105,10 +111,14 @@
   #label_container {
     border: none;
     box-shadow: none;
+    width: 384px;
+    height: 576px;
 
     .label_content {
-      margin-left: 12px;
-      margin-right: 12px;
+      margin-left: 24px;
+      margin-right: 24px;
+      margin-top: 24px;
+      margin-bottom: 24px;
       font-size: 18px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-weight: bold;
