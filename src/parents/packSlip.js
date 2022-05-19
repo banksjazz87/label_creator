@@ -20,9 +20,16 @@ class ParentPackSlip extends React.Component {
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
-      showEditBox: false
+      showEditBox: false,
+      editContent: "",
+      editItem: ""
     };
-  }
+  
+
+this.showEdit = this.showEdit.bind(this);
+this.cancelEdit = this.cancelEdit.bind(this);
+this.editChange = this.editChange.bind(this);
+}
 
   //used for PRODUCTION mode, only
   componentDidMount() {
@@ -33,6 +40,32 @@ class ParentPackSlip extends React.Component {
       })
     );
   }
+
+showEdit(e){
+  e.preventDefault();
+
+  this.setState({
+    showEditBox: true,
+    editContent: e.target.textContent,
+    editItem: e.target.id 
+  })
+
+  console.log('id = ' +  e.target.id);
+  console.log('text = ' + e.target.textContent)
+}
+
+cancelEdit(e){
+  e.preventDefault();
+  this.setState({
+    showEditBox: false
+  })
+}
+
+editChange(e){
+  this.setState({
+    editContent: e.target.value
+  })
+}
 
   render() {
     if (this.state.fetched === true) {
@@ -58,12 +91,17 @@ class ParentPackSlip extends React.Component {
 
             <TextEdit 
               show={this.state.showEditBox}
+              cancelOnClick={this.cancelEdit}
+              text={this.state.editContent}
+              textChange={this.editChange}
             />
             <MainTable
               items={this.state.userData["skid"]}
               unitType={this.state.userData["packageUnit"]}
               totalCartons={this.state.userData["totalCartons"]}
               total={this.state.userData["totalQty"]}
+
+              handleOnClick={this.showEdit}
             />
           </div>
           <ThankYou phone={this.state.userData["shipFrom"]["phone"]} />
@@ -177,7 +215,10 @@ const MainTable = (props) => {
       return (
         <>
           <tr key={"row" + y} id="description_row">
-            <td id="qty_needed" class="item_info qty">
+            <td 
+              id="qty_needed" 
+              class="item_info qty" 
+            >
               {noDuplicates[y].qtyNeeded}
             </td>
             <td id="item_description" class="item_info">
@@ -189,7 +230,12 @@ const MainTable = (props) => {
           </tr>
           <tr key={"description" + y}>
             <td></td>
-            <td class="item_info">{noDuplicates[y].cartonText}</td>
+            <td 
+              id={`item_info_y`} 
+              class="item_info" 
+              onDoubleClick={props.handleOnClick}
+            >
+              {noDuplicates[y].cartonText}</td>
           </tr>
           <td></td>
         </>
@@ -199,7 +245,9 @@ const MainTable = (props) => {
         <>
           <tr key={"row" + y} id="blank_description_row" className="blank_row">
             <td id="qty_needed"></td>
-            <td id="item_description"></td>
+            <td 
+              id={`item_description_${y}`}
+              onDoubelClick={props.handleOnClick}></td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">
