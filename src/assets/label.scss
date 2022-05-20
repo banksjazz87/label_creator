@@ -44,6 +44,8 @@
     margin-right: 1.25em;
     font-size: 1.15em;
     line-height: 0.35em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
   }
 
   #company_name{
@@ -115,10 +117,7 @@
     height: 576px;
 
     .label_content {
-      margin-left: 24px;
-      margin-right: 24px;
-      margin-top: 24px;
-      margin-bottom: 24px;
+      margin: 20px 20px 20px 20px;
       font-size: 18px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-weight: bold;

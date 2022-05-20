@@ -11,7 +11,7 @@ let userDataFromCreator = [
     },
 
     shipTo: {
-      company: "Chris Banks joseph banks Albequerque",
+      company: "Chris Banks",
       street: "402 Myrtle Street",
       city: "Emlenton",
       state: "PA",

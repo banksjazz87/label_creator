@@ -4,7 +4,7 @@ import "../assets/nav.scss";
 import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator used for development
-//import userDataFromCreator from "../variables/dummyData";
+import userDataFromCreator from "../variables/dummyData";
 
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall";
@@ -15,22 +15,22 @@ class ParentShipTo extends React.Component {
 
     this.state = {
       //switch fectched to true for developoment, false for production
-      fetched: false,
+      fetched: true,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: "",
+      userData: userDataFromCreator[0],
       showEditBox: false
     };
   }
 
   //use this function only for production
-  componentDidMount() {
+  /*componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         fetched: true,
         userData: items[0],
       })
     );
-  }
+  }*/
 
   render() {
     if (this.state.fetched) {
@@ -63,7 +63,7 @@ class ParentShipTo extends React.Component {
 const ShipToFrom = (props) => {
   const checkForItem = () => {
     if (props.items.attention) {
-      return <p>{`ATTENTION: ${props.items.attention}`}</p>;
+      return <p style={{paddingTop: "24px"}}>{`ATTENTION: ${props.items.attention}`}</p>;
     }
   };
 
@@ -75,7 +75,7 @@ const ShipToFrom = (props) => {
             Ship From:{" "}
           </span>
         ) : (
-          <span style={{ fontSize: ".75em", marginLeft: "-3.7em" }}>
+          <span style={{ fontSize: ".75em", marginLeft: "-3.7em"}}>
             Ship To:{" "}
           </span>
         )}
