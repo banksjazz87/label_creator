@@ -4,7 +4,7 @@ import "../assets/nav.scss";
 import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator used for development
-import userDataFromCreator from "../variables/dummyData";
+//import userDataFromCreator from "../variables/dummyData";
 
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall";
@@ -15,22 +15,22 @@ class ParentShipTo extends React.Component {
 
     this.state = {
       //switch fectched to true for developoment, false for production
-      fetched: true,
+      fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: userDataFromCreator[0],
+      userData: "",
       showEditBox: false
     };
   }
 
   //use this function only for production
-  /*componentDidMount() {
+  componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         fetched: true,
         userData: items[0],
       })
     );
-  }*/
+  }
 
   render() {
     if (this.state.fetched) {
