@@ -2,9 +2,10 @@ import * as React from "react";
 import "../assets/packSlip.scss";
 import "../assets/nav.scss";
 import TextEdit from "../components/textEdit.js";
+import Edit from "../functions/editMethods.js";
 
 //userDataFromCreator for development only
-//import userDataFromCreator from "../variables/dummyData"
+import userDataFromCreator from "../variables/dummyData"
 
 import MathFunctions from "../functions/mathFunctions.js";
 import serverCall from "../functions/serverCall";
@@ -17,12 +18,9 @@ class ParentPackSlip extends React.Component {
     //The code listed below is just for the DEVELOPMENT mode
     this.state = {
       //switch fetched to true for development, false for production
-      fetched: false,
+      fetched: true,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: "",
-      showEditBox: false,
-      editContent: "",
-      editItem: ""
+      userData: userDataFromCreator[0]
     };
   
 
@@ -32,26 +30,22 @@ this.editChange = this.editChange.bind(this);
 }
 
   //used for PRODUCTION mode, only
-  componentDidMount() {
+ /* componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         userData: items[0],
         fetched: true,
       })
     );
-  }
+  }*/
 
 showEdit(e){
   e.preventDefault();
-
   this.setState({
     showEditBox: true,
     editContent: e.target.textContent,
     editItem: e.target.id 
   })
-
-  console.log('id = ' +  e.target.id);
-  console.log('text = ' + e.target.textContent)
 }
 
 cancelEdit(e){
@@ -233,7 +227,7 @@ const MainTable = (props) => {
             <td 
               id={`item_info_y`} 
               class="item_info" 
-              onDoubleClick={props.handleOnClick}
+              onDoubleClick={Edit.showEditBox}
             >
               {noDuplicates[y].cartonText}</td>
           </tr>
@@ -247,7 +241,7 @@ const MainTable = (props) => {
             <td id="qty_needed"></td>
             <td 
               id={`item_description_${y}`}
-              onDoubelClick={props.handleOnClick}></td>
+              onClick={props.handleOnClick}></td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">

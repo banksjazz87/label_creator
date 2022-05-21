@@ -1,11 +1,13 @@
 import * as React from "react";
 import "../assets/textEdit.scss";
+import Edit from "../functions/editMethods.js"
 
 function TextEdit(props) {
   return (
+
     <div 
         id="text_edit_box"
-        style={props.show === !false ? {display: "flex"} : {display: "none"}}
+        style={{display: 'none'}}
         >
       <div id="text_edit_input">
         <label for="edit_input">Edit</label>
@@ -22,7 +24,7 @@ function TextEdit(props) {
         <button 
             id="cancel_edit_btn" 
             type="button"
-            onClick={props.cancelOnClick}
+            onClick={Edit.hideEditBox}
             >
           Cancel
         </button>
