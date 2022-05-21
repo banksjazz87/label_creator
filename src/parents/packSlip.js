@@ -5,7 +5,7 @@ import TextEdit from "../components/textEdit.js";
 import Edit from "../functions/editMethods.js";
 
 //userDataFromCreator for development only
-import userDataFromCreator from "../variables/dummyData"
+//import userDataFromCreator from "../variables/dummyData"
 
 import MathFunctions from "../functions/mathFunctions.js";
 import serverCall from "../functions/serverCall";
@@ -18,9 +18,9 @@ class ParentPackSlip extends React.Component {
     //The code listed below is just for the DEVELOPMENT mode
     this.state = {
       //switch fetched to true for development, false for production
-      fetched: true,
+      fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: userDataFromCreator[0]
+      userData: ""
     };
   
 
@@ -30,14 +30,14 @@ this.editChange = this.editChange.bind(this);
 }
 
   //used for PRODUCTION mode, only
- /* componentDidMount() {
+ componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         userData: items[0],
         fetched: true,
       })
     );
-  }*/
+  }
 
 showEdit(e){
   e.preventDefault();
@@ -166,27 +166,39 @@ const MainTable = (props) => {
     let newArr = props.items;
 
     for (let i = 0; i < newArr.length; i++) {
-      if (
-        newArr[i + 1] &&
-        newArr[i + 1].itemDescription === newArr[i].itemDescription
+
+      if (newArr[i + 1] 
+        //&&
+        //newArr[i + 1].itemDescription === newArr[i].itemDescription
       ) {
-        while (newArr[i].itemDescription === newArr[i + 1].itemDescription) {
+        let j = i + 1;
+        let currentArrCopy = newArr.slice(i);
+        while (j < currentArrCopy.length
+          //newArr[i].itemDescription === newArr[i + 1].itemDescription
+          ) {
+
+            if (newArr[i].itemDescription === newArr[j].itemDescription) {
           newArr[i].cartonText =
-            skidText(newArr, i) + " " + skidText(newArr, i + 1);
+            skidText(newArr, i) + " " + skidText(newArr, j);
 
           let sum =
             MathFunctions.numOrNot(newArr[i].qtyShipped) +
-            MathFunctions.numOrNot(newArr[i + 1].qtyShipped);
+            MathFunctions.numOrNot(newArr[j].qtyShipped);
 
           newArr[i].qtyShipped = MathFunctions.commaPlacer(sum);
 
-          newArr.splice(i + 1, 1);
+          newArr.splice(j, 1);
+           j++;
+        } else {
+          j++;
         }
+      }
       } else {
         newArr[i].cartonText = skidText(newArr, i);
+      
       }
     }
-
+    console.log(newArr);
     return newArr;
   };
 
@@ -284,5 +296,6 @@ const ThankYou = (props) => {
     </p>
   );
 };
+
 
 export default ParentPackSlip;
