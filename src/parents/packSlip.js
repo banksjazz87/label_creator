@@ -20,17 +20,16 @@ class ParentPackSlip extends React.Component {
       //switch fetched to true for development, false for production
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: ""
+      userData: "",
     };
-  
 
-this.showEdit = this.showEdit.bind(this);
-this.cancelEdit = this.cancelEdit.bind(this);
-this.editChange = this.editChange.bind(this);
-}
+    this.showEdit = this.showEdit.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
+    this.editChange = this.editChange.bind(this);
+  }
 
   //used for PRODUCTION mode, only
- componentDidMount() {
+  componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         userData: items[0],
@@ -39,27 +38,27 @@ this.editChange = this.editChange.bind(this);
     );
   }
 
-showEdit(e){
-  e.preventDefault();
-  this.setState({
-    showEditBox: true,
-    editContent: e.target.textContent,
-    editItem: e.target.id 
-  })
-}
+  showEdit(e) {
+    e.preventDefault();
+    this.setState({
+      showEditBox: true,
+      editContent: e.target.textContent,
+      editItem: e.target.id,
+    });
+  }
 
-cancelEdit(e){
-  e.preventDefault();
-  this.setState({
-    showEditBox: false
-  })
-}
+  cancelEdit(e) {
+    e.preventDefault();
+    this.setState({
+      showEditBox: false,
+    });
+  }
 
-editChange(e){
-  this.setState({
-    editContent: e.target.value
-  })
-}
+  editChange(e) {
+    this.setState({
+      editContent: e.target.value,
+    });
+  }
 
   render() {
     if (this.state.fetched === true) {
@@ -83,7 +82,7 @@ editChange(e){
               date={changeDateFormat(this.state.userData.date)}
             />
 
-            <TextEdit 
+            <TextEdit
               show={this.state.showEditBox}
               cancelOnClick={this.cancelEdit}
               text={this.state.editContent}
@@ -94,7 +93,6 @@ editChange(e){
               unitType={this.state.userData["packageUnit"]}
               totalCartons={this.state.userData["totalCartons"]}
               total={this.state.userData["totalQty"]}
-
               handleOnClick={this.showEdit}
             />
           </div>
@@ -166,36 +164,26 @@ const MainTable = (props) => {
     let newArr = props.items;
 
     for (let i = 0; i < newArr.length; i++) {
+      newArr[i].cartonText = skidText(newArr, i);
 
-      if (newArr[i + 1] 
-        //&&
-        //newArr[i + 1].itemDescription === newArr[i].itemDescription
-      ) {
+      if (newArr[i + 1]) {
         let j = i + 1;
-        let currentArrCopy = newArr.slice(i);
-        while (j < currentArrCopy.length
-          //newArr[i].itemDescription === newArr[i + 1].itemDescription
-          ) {
 
-            if (newArr[i].itemDescription === newArr[j].itemDescription) {
-          newArr[i].cartonText =
-            skidText(newArr, i) + " " + skidText(newArr, j);
+        while (j < newArr.length) {
+          if (newArr[i].itemDescription === newArr[j].itemDescription) {
+            newArr[i].cartonText =
+              newArr[i].cartonText + " " + skidText(newArr, j);
 
-          let sum =
-            MathFunctions.numOrNot(newArr[i].qtyShipped) +
-            MathFunctions.numOrNot(newArr[j].qtyShipped);
+            let sum =
+              MathFunctions.numOrNot(newArr[i].qtyShipped) +
+              MathFunctions.numOrNot(newArr[j].qtyShipped);
 
-          newArr[i].qtyShipped = MathFunctions.commaPlacer(sum);
-
-          newArr.splice(j, 1);
-           j++;
-        } else {
-          j++;
+            newArr[i].qtyShipped = MathFunctions.commaPlacer(sum);
+            newArr.splice(j, 1);
+          } else {
+            j++;
+          }
         }
-      }
-      } else {
-        newArr[i].cartonText = skidText(newArr, i);
-      
       }
     }
     console.log(newArr);
@@ -221,10 +209,7 @@ const MainTable = (props) => {
       return (
         <>
           <tr key={"row" + y} id="description_row">
-            <td 
-              id="qty_needed" 
-              class="item_info qty" 
-            >
+            <td id="qty_needed" class="item_info qty">
               {noDuplicates[y].qtyNeeded}
             </td>
             <td id="item_description" class="item_info">
@@ -236,12 +221,13 @@ const MainTable = (props) => {
           </tr>
           <tr key={"description" + y}>
             <td></td>
-            <td 
-              id={`item_info_y`} 
-              class="item_info" 
+            <td
+              id={`item_info_y`}
+              class="item_info"
               onDoubleClick={Edit.showEditBox}
             >
-              {noDuplicates[y].cartonText}</td>
+              {noDuplicates[y].cartonText}
+            </td>
           </tr>
           <td></td>
         </>
@@ -251,9 +237,7 @@ const MainTable = (props) => {
         <>
           <tr key={"row" + y} id="blank_description_row" className="blank_row">
             <td id="qty_needed"></td>
-            <td 
-              id={`item_description_${y}`}
-              onClick={props.handleOnClick}></td>
+            <td id={`item_description_${y}`} onClick={props.handleOnClick}></td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">
@@ -296,6 +280,5 @@ const ThankYou = (props) => {
     </p>
   );
 };
-
 
 export default ParentPackSlip;
