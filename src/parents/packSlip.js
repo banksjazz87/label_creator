@@ -20,7 +20,7 @@ class ParentPackSlip extends React.Component {
       //switch fetched to true for development, false for production
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: "",
+      userData: " ",
     };
 
     this.showEdit = this.showEdit.bind(this);
@@ -186,7 +186,6 @@ const MainTable = (props) => {
         }
       }
     }
-    console.log(newArr);
     return newArr;
   };
 
@@ -222,7 +221,7 @@ const MainTable = (props) => {
           <tr key={"description" + y}>
             <td></td>
             <td
-              id={`item_info_y`}
+              id={`item_info_${y}`}
               class="item_info"
               onDoubleClick={Edit.showEditBox}
             >
