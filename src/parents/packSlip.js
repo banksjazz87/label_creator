@@ -236,12 +236,12 @@ const MainTable = (props) => {
         <>
           <tr key={"row" + y} id="blank_description_row" className="blank_row">
             <td id="qty_needed"></td>
-            <td id={`item_description_${y}`} onClick={props.handleOnClick}></td>
+            <td id={`item_description_${y}`} onClick={Edit.showEditBox}></td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">
             <td></td>
-            <td class="item_info"></td>
+            <td id={`blank_white_${y}`} class="item_info"></td>
           </tr>
           <td></td>
         </>

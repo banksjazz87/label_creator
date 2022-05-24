@@ -14,7 +14,7 @@ function TextEdit(props) {
         <input 
             id="edit_input" 
             type="text" 
-            value={props.text}
+            value={Edit.get.clickedValue()}
             onChange={props.textChange}
         >
         </input>
