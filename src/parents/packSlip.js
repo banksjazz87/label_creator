@@ -2,7 +2,6 @@ import * as React from "react";
 import "../assets/packSlip.scss";
 import "../assets/nav.scss";
 import TextEdit from "../components/textEdit.js";
-import Edit from "../functions/editMethods.js";
 
 //userDataFromCreator for development only
 //import userDataFromCreator from "../variables/dummyData"
@@ -20,7 +19,7 @@ class ParentPackSlip extends React.Component {
       //switch fetched to true for development, false for production
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: " ",
+      userData: "",
     };
 
     this.showEdit = this.showEdit.bind(this);
@@ -223,7 +222,7 @@ const MainTable = (props) => {
             <td
               id={`item_info_${y}`}
               class="item_info"
-              onDoubleClick={Edit.showEditBox}
+              onDoubleClick={props.handleOnClick}
             >
               {noDuplicates[y].cartonText}
             </td>
@@ -236,7 +235,7 @@ const MainTable = (props) => {
         <>
           <tr key={"row" + y} id="blank_description_row" className="blank_row">
             <td id="qty_needed"></td>
-            <td id={`item_description_${y}`} onClick={Edit.showEditBox}></td>
+            <td id={`item_description_${y}`} onClick={props.handleOnClick}></td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">
