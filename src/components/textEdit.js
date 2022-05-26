@@ -13,7 +13,7 @@ function TextEdit(props) {
         <input 
             id="edit_input" 
             type="text" 
-            value="testing"
+            value={props.text}
             onChange={props.textChange}
         >
         </input>

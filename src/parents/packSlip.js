@@ -19,7 +19,7 @@ class ParentPackSlip extends React.Component {
       //switch fetched to true for development, false for production
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: " ",
+      userData: "",
     };
 
     this.showEdit = this.showEdit.bind(this);
@@ -39,6 +39,7 @@ class ParentPackSlip extends React.Component {
 
   showEdit(e) {
     e.preventDefault();
+    console.log('cat');
     this.setState({
       showEditBox: true,
       editContent: e.target.textContent,
@@ -74,6 +75,13 @@ class ParentPackSlip extends React.Component {
             from={false}
             items={this.state.userData["shipTo"]}
           />
+
+          <TextEdit
+              show={this.state.showEditBox}
+              cancelOnClick={this.cancelEdit}
+              text={this.state.editContent}
+              textChange={this.editChange}
+            />
           <p id="po_num">{`PO#: ${this.state.userData["PO"]}`}</p>
           <div id="table_container">
             <JobNum
@@ -81,12 +89,7 @@ class ParentPackSlip extends React.Component {
               date={changeDateFormat(this.state.userData.date)}
             />
 
-            <TextEdit
-              show={this.state.showEditBox}
-              cancelOnClick={this.cancelEdit}
-              text={this.state.editContent}
-              textChange={this.editChange}
-            />
+
             <MainTable
               items={this.state.userData["skid"]}
               unitType={this.state.userData["packageUnit"]}
@@ -159,8 +162,8 @@ const MainTable = (props) => {
    *
    * @returns an array of objects with a cartonText field added to it. All duplicate items with the same name are conoslidated to one object.
    */
-  const checkForDuplicateItems = () => {
-    let newArr = props.items;
+  const checkForDuplicateItems = (newArr) => {
+    //let newArr = props.items;
 
     for (let i = 0; i < newArr.length; i++) {
       newArr[i].cartonText = skidText(newArr, i);
@@ -188,7 +191,7 @@ const MainTable = (props) => {
     return newArr;
   };
 
-  const noDuplicates = checkForDuplicateItems();
+  const noDuplicates = checkForDuplicateItems(props.items);
 
   //This method will return an array of 8 elements, if the array that is being checked contains fewer than 8.
   const moreLines = (checkedArr) => {
@@ -222,7 +225,6 @@ const MainTable = (props) => {
             <td
               id={`item_info_${y}`}
               class="item_info"
-              onDoubleClick={props.handleOnClick}
             >
               {noDuplicates[y].cartonText}
             </td>
@@ -235,7 +237,7 @@ const MainTable = (props) => {
         <>
           <tr key={"row" + y} id="blank_description_row" className="blank_row">
             <td id="qty_needed"></td>
-            <td id={`item_description_${y}`} onClick={props.handleOnClick}></td>
+            <td id={`item_description_${y}`}></td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">
