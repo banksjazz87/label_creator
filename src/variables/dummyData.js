@@ -21,7 +21,7 @@ let userDataFromCreator = [
 
     skid: [
       {
-        itemDescription: "Giorgio Whole Whites 16oz",
+        itemDescription: "Giorgio Whole Whites jklfdf; akjflk sajdkajs dflkajsfklsjd 16oz",
         qtyNeeded: "16,000",
         qtyShipped: "18,000",
         packsRolls: "1,000",

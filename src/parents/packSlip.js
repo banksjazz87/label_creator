@@ -19,7 +19,7 @@ class ParentPackSlip extends React.Component {
       //switch fetched to true for development, false for production
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: "",
+      userData: " ",
     };
 
     this.showEdit = this.showEdit.bind(this);

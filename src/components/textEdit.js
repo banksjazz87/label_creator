@@ -6,7 +6,7 @@ function TextEdit(props) {
 
     <div 
         id="text_edit_box"
-        style={props.showEditBox ? {display: ""} : {display: 'none'}}
+        style={props.show ? {display: ""} : {display: 'none'}}
         >
       <div id="text_edit_input">
         <label for="edit_input">Edit</label>
@@ -20,7 +20,7 @@ function TextEdit(props) {
       </div>
       <div id="text_edit_buttons">
         <button type="button">Apply</button>
-        <button 
+        <button
             id="cancel_edit_btn" 
             type="button"
             onClick={props.cancelOnClick}
