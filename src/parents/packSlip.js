@@ -10,6 +10,7 @@ import MathFunctions from "../functions/mathFunctions.js";
 import serverCall from "../functions/serverCall";
 import changeDateFormat from "../functions/dateFormat.js";
 
+
 class ParentPackSlip extends React.Component {
   constructor(props) {
     super(props);
@@ -163,7 +164,6 @@ const MainTable = (props) => {
    * @returns an array of objects with a cartonText field added to it. All duplicate items with the same name are conoslidated to one object.
    */
   const checkForDuplicateItems = (newArr) => {
-    //let newArr = props.items;
 
     for (let i = 0; i < newArr.length; i++) {
       newArr[i].cartonText = skidText(newArr, i);
