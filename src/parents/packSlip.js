@@ -6,10 +6,9 @@ import TextEdit from "../components/textEdit.js";
 //userDataFromCreator for development only
 //import userDataFromCreator from "../variables/dummyData"
 
-import MathFunctions from "../functions/mathFunctions.js";
 import serverCall from "../functions/serverCall";
 import changeDateFormat from "../functions/dateFormat.js";
-
+import NoDuplicates from "../functions/removeDuplicates.js";
 
 class ParentPackSlip extends React.Component {
   constructor(props) {
@@ -19,8 +18,16 @@ class ParentPackSlip extends React.Component {
     this.state = {
       //switch fetched to true for development, false for production
       fetched: false,
+
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
+
+      /*for developmnet switch skidInfo to 
+      NoDuplicates.checkForDuplicateItems(userDataFromCreator[0]['skid'], userDataFromCreator[0])
+      
+      for production switch skidInfo to ""
+      */
+      skidInfo: "",
     };
 
     this.showEdit = this.showEdit.bind(this);
@@ -34,13 +41,17 @@ class ParentPackSlip extends React.Component {
       this.setState({
         userData: items[0],
         fetched: true,
+        skidInfo: NoDuplicates.checkForDuplicateItems(
+          items[0]["skid"],
+          items[0]
+        ),
       })
     );
   }
 
   showEdit(e) {
     e.preventDefault();
-    console.log('cat');
+    console.log("cat");
     this.setState({
       showEditBox: true,
       editContent: e.target.textContent,
@@ -78,27 +89,24 @@ class ParentPackSlip extends React.Component {
           />
 
           <TextEdit
-              show={this.state.showEditBox}
-              cancelOnClick={this.cancelEdit}
-              text={this.state.editContent}
-              textChange={this.editChange}
-            />
+            show={this.state.showEditBox}
+            cancelOnClick={this.cancelEdit}
+            text={this.state.editContent}
+            textChange={this.editChange}
+          />
           <p id="po_num">{`PO#: ${this.state.userData["PO"]}`}</p>
+
           <div id="table_container">
             <JobNum
               job={this.state.userData["Job"]}
               date={changeDateFormat(this.state.userData.date)}
             />
-
-
             <MainTable
-              items={this.state.userData["skid"]}
-              unitType={this.state.userData["packageUnit"]}
-              totalCartons={this.state.userData["totalCartons"]}
-              total={this.state.userData["totalQty"]}
+              items={this.state.skidInfo}
               handleOnClick={this.showEdit}
             />
           </div>
+
           <ThankYou phone={this.state.userData["shipFrom"]["phone"]} />
         </div>
       );
@@ -143,56 +151,6 @@ const JobNum = (props) => {
 };
 
 const MainTable = (props) => {
-  /**
-   *
-   * @param {*} arr
-   * @param {*} itemNum
-   * @returns text for the cartonText field.
-   */
-  const skidText = (arr, itemNum) => {
-    let text = "";
-
-    arr[itemNum].numOfCartons > 1
-      ? (text = `${arr[itemNum].numOfCartons} Cartons @ ${arr[itemNum].qtyPerCarton} (${props.unitType} @ ${arr[itemNum].packsRolls})`)
-      : (text = `${arr[itemNum].numOfCartons} Carton @ ${arr[itemNum].qtyPerCarton} (${props.unitType} @ ${arr[itemNum].packsRolls})`);
-
-    return text;
-  };
-
-  /**
-   *
-   * @returns an array of objects with a cartonText field added to it. All duplicate items with the same name are conoslidated to one object.
-   */
-  const checkForDuplicateItems = (newArr) => {
-
-    for (let i = 0; i < newArr.length; i++) {
-      newArr[i].cartonText = skidText(newArr, i);
-
-      if (newArr[i + 1]) {
-        let j = i + 1;
-
-        while (j < newArr.length) {
-          if (newArr[i].itemDescription === newArr[j].itemDescription) {
-            newArr[i].cartonText =
-              newArr[i].cartonText + " " + skidText(newArr, j);
-
-            let sum =
-              MathFunctions.numOrNot(newArr[i].qtyShipped) +
-              MathFunctions.numOrNot(newArr[j].qtyShipped);
-
-            newArr[i].qtyShipped = MathFunctions.commaPlacer(sum);
-            newArr.splice(j, 1);
-          } else {
-            j++;
-          }
-        }
-      }
-    }
-    return newArr;
-  };
-
-  const noDuplicates = checkForDuplicateItems(props.items);
-
   //This method will return an array of 8 elements, if the array that is being checked contains fewer than 8.
   const moreLines = (checkedArr) => {
     if (checkedArr.length < 8) {
@@ -203,30 +161,28 @@ const MainTable = (props) => {
     }
   };
 
-  const linesArr = moreLines(noDuplicates);
+  const linesArr = moreLines(props.items);
 
   const menuItems = linesArr.map((x, y) => {
-    if (y < noDuplicates.length) {
+    if (y < props.items.length) {
       return (
         <>
           <tr key={"row" + y} id="description_row">
             <td id="qty_needed" class="item_info qty">
-              {noDuplicates[y].qtyNeeded}
+              {props.items[y].qtyNeeded}
             </td>
             <td id="item_description" class="item_info">
-              {noDuplicates[y].itemDescription}
+              {props.items[y].itemDescription}
             </td>
             <td id="qty_shipped" class="item_info qty">
-              {noDuplicates[y].qtyShipped}
+              {props.items[y].qtyShipped}
             </td>
           </tr>
           <tr key={"description" + y}>
             <td></td>
-            <td
-              id={`item_info_${y}`}
-              class="item_info"
-            >
-              {noDuplicates[y].cartonText}
+            <td id={`item_info_${y}`} class="item_info"
+            onDoubleClick={props.handleOnClick}>
+              {props.items[y].cartonText}
             </td>
           </tr>
           <td></td>
@@ -237,12 +193,19 @@ const MainTable = (props) => {
         <>
           <tr key={"row" + y} id="blank_description_row" className="blank_row">
             <td id="qty_needed"></td>
-            <td id={`item_description_${y}`}></td>
+            <td 
+              id={`item_description_${y}`}
+              onDoubleClick={props.handleOnClick}
+            > 
+            </td>
             <td id="qty_shipped"></td>
           </tr>
           <tr key={"description" + y} id="blank_white_row">
             <td></td>
-            <td id={`blank_white_${y}`} class="item_info"></td>
+            <td 
+              id={`blank_white_${y}`} class="item_info"
+              onDoubleClick={props.handleOnClick}
+              ></td>
           </tr>
           <td></td>
         </>
