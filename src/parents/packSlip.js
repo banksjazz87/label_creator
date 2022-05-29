@@ -10,6 +10,7 @@ import serverCall from "../functions/serverCall";
 import changeDateFormat from "../functions/dateFormat.js";
 import NoDuplicates from "../functions/removeDuplicates.js";
 
+
 class ParentPackSlip extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +34,7 @@ class ParentPackSlip extends React.Component {
     this.showEdit = this.showEdit.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.editChange = this.editChange.bind(this);
+    this.confirmChange = this.confirmChange.bind(this);
   }
 
   //used for PRODUCTION mode, only
@@ -72,6 +74,16 @@ class ParentPackSlip extends React.Component {
     });
   }
 
+  confirmChange(e) {
+    e.preventDefault();
+    const changedElement = document.getElementById(this.state.editItem);
+    changedElement.textContent = this.state.editContent;
+
+    this.setState({
+      showEditBox: false
+    })
+  }
+
   render() {
     if (this.state.fetched === true) {
       return (
@@ -93,6 +105,7 @@ class ParentPackSlip extends React.Component {
             cancelOnClick={this.cancelEdit}
             text={this.state.editContent}
             textChange={this.editChange}
+            makeChange={this.confirmChange}
           />
           <p id="po_num">{`PO#: ${this.state.userData["PO"]}`}</p>
 
