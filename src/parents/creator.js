@@ -6,7 +6,6 @@ import MathFunctions from "../functions/mathFunctions.js";
 import postData from "../functions/postRequest.js";
 import serverCall from "../functions/serverCall";
 import deleteData from "../functions/deleteRequest";
-import TextEdit from "../components/textEdit.js";
 
 const SkidDescriptors = {
   qtyNeeded: null,
