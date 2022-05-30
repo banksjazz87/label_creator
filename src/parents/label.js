@@ -4,10 +4,12 @@ import "../assets/nav.scss";
 import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator used for development mode
-//import userDataFromCreator from "../variables/dummyData";
+import userDataFromCreator from "../variables/dummyData";
+
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall";
 import changeDateFormat from "../functions/dateFormat.js";
+
 
 class ParentLabels extends React.Component {
   constructor(props) {
@@ -15,26 +17,33 @@ class ParentLabels extends React.Component {
 
     this.state = {
       //switch fetched to true for development, false for production
-      fetched: false,
+      fetched: true,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: "",
+      userData: userDataFromCreator[0],
       count: 0,
       showEditBox: false
     };
 
     this.incrementHandler = this.incrementHandler.bind(this);
     this.decrementHandler = this.decrementHandler.bind(this);
+
+    this.showEdit = this.showEdit.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
+    this.editChange = this.editChange.bind(this);
+    this.confirmChange = this.confirmChange.bind(this);
+
+    this.listenerForAllPElements = this.listenerForAllPElements.bind(this);
   }
 
   //use this function only for production
-  componentDidMount() {
+  /*componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         fetched: true,
         userData: items[0],
       })
     );
-  }
+  }*/
 
   incrementHandler = (e) => {
     e.preventDefault();
@@ -59,10 +68,50 @@ class ParentLabels extends React.Component {
       alert("You are currently on the first label");
     }
   };
+
+  showEdit(e) {
+    e.preventDefault();
+    console.log("cat");
+    this.setState({
+      showEditBox: true,
+      editContent: e.target.textContent,
+      editItem: e.target.id,
+    });
+  }
+
+  cancelEdit(e) {
+    e.preventDefault();
+    this.setState({
+      showEditBox: false,
+    });
+  }
+
+  editChange(e) {
+    this.setState({
+      editContent: e.target.value,
+    });
+  }
+
+  confirmChange(e) {
+    e.preventDefault();
+    const changedElement = document.getElementById(this.state.editItem);
+    changedElement.textContent = this.state.editContent;
+
+    this.setState({
+      showEditBox: false
+    })
+  }
+
+  listenerForAllPElements(e) {
+    if(e.target.tagName === 'P') {
+      this.showEdit(e);
+    }
+  }
+
   render() {
     if (this.state.fetched) {
-      return (
-        <div>
+      return(
+        <div onDoubleClick={this.listenerForAllPElements}>
           <p id="labels_needed">{`Print ${
             this.state.userData.skid[this.state.count].numOfCartons
           }`}</p>
@@ -71,6 +120,7 @@ class ParentLabels extends React.Component {
             <TopHeading
               job={this.state.userData.Job}
               shipTo={this.state.userData.shipTo.company}
+              dblClickHandler={this.showEdit}
             />
 
             <LabelMiddle
@@ -81,6 +131,10 @@ class ParentLabels extends React.Component {
 
             <TextEdit 
               show={this.state.showEditBox}
+              cancelOnClick={this.cancelEdit}
+              text={this.state.editContent}
+              textChange={this.editChange}
+              makeChange={this.confirmChange}
             />
 
             <LabelBottom
@@ -121,7 +175,8 @@ class ParentLabels extends React.Component {
 const TopHeading = (props) => {
   return (
     <div id="top_of_label" class="label_content">
-      <p id="job">{`Job# ${props.job}`}</p>
+      <p id="job" 
+      onDoubleClick={props.dblClickHandler}>{`Job# ${props.job}`}</p>
       <p id="company_name">{props.shipTo}</p>
     </div>
   );
