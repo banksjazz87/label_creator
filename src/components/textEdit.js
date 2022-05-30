@@ -1,7 +1,7 @@
 import * as React from "react";
 import "../assets/textEdit.scss";
 
-function TextEdit(props) {
+function TextEdit(props){
   return (
     <div
       id="text_edit_box"
@@ -31,5 +31,6 @@ function TextEdit(props) {
     </div>
   );
 }
+
 
 export default TextEdit;

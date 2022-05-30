@@ -117,6 +117,8 @@ class ParentPackSlip extends React.Component {
             <MainTable
               items={this.state.skidInfo}
               handleOnClick={this.showEdit}
+              total={this.state.userData.totalQty}
+              totalCartons={this.state.userData.totalCartons}
             />
           </div>
 
