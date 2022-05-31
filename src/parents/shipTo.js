@@ -18,8 +18,13 @@ class ParentShipTo extends React.Component {
       fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
-      showEditBox: false
+      showEditBox: false,
     };
+
+    this.showEdit = this.showEdit.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
+    this.editChange = this.editChange.bind(this);
+    this.confirmChange = this.confirmChange.bind(this);
   }
 
   //use this function only for production
@@ -32,6 +37,39 @@ class ParentShipTo extends React.Component {
     );
   }
 
+  showEdit(e) {
+    e.preventDefault();
+    console.log("cat");
+    this.setState({
+      showEditBox: true,
+      editContent: e.target.textContent,
+      editItem: e.target.id,
+    });
+  }
+
+  cancelEdit(e) {
+    e.preventDefault();
+    this.setState({
+      showEditBox: false,
+    });
+  }
+
+  editChange(e) {
+    this.setState({
+      editContent: e.target.value,
+    });
+  }
+
+  confirmChange(e) {
+    e.preventDefault();
+    const changedElement = document.getElementById(this.state.editItem);
+    changedElement.textContent = this.state.editContent;
+
+    this.setState({
+      showEditBox: false,
+    });
+  }
+
   render() {
     if (this.state.fetched) {
       return (
@@ -42,14 +80,18 @@ class ParentShipTo extends React.Component {
               items={this.state.userData.shipFrom}
             />
 
-            <TextEdit 
+            <TextEdit
               show={this.state.showEditBox}
+              cancelOnClick={this.cancelEdit}
+              text={this.state.editContent}
+              textChange={this.editChange}
+              makeChange={this.confirmChange}
             />
-            <ShipToFrom 
-              toFrom="ship_to" 
-              items={this.state.userData.shipTo} 
-            />
-            <p id="pack_slip_po">{`PO#: ${this.state.userData.PO}`}</p>
+
+            <ShipToFrom toFrom="ship_to" items={this.state.userData.shipTo} />
+            <p id="pack_slip_po" onDoubleClick={this.showEdit}>
+              {`PO#: ${this.state.userData.PO}`}
+            </p>
           </div>
           <PrintButton />
         </div>
@@ -63,7 +105,11 @@ class ParentShipTo extends React.Component {
 const ShipToFrom = (props) => {
   const checkForItem = () => {
     if (props.items.attention) {
-      return <p style={{paddingTop: "24px"}}>{`ATTENTION: ${props.items.attention}`}</p>;
+      return (
+        <p
+          style={{ paddingTop: "24px" }}
+        >{`ATTENTION: ${props.items.attention}`}</p>
+      );
     }
   };
 
@@ -75,7 +121,7 @@ const ShipToFrom = (props) => {
             Ship From:{" "}
           </span>
         ) : (
-          <span style={{ fontSize: ".75em", marginLeft: "-3.7em"}}>
+          <span style={{ fontSize: ".75em", marginLeft: "-3.7em" }}>
             Ship To:{" "}
           </span>
         )}
