@@ -74,18 +74,17 @@ class ParentShipTo extends React.Component {
     if (this.state.fetched) {
       return (
         <div id="ship_to_container">
-          <div id="ship_to_paper">
-            <ShipToFrom
-              toFrom="ship_from"
-              items={this.state.userData.shipFrom}
-            />
-
-            <TextEdit
+           <TextEdit
               show={this.state.showEditBox}
               cancelOnClick={this.cancelEdit}
               text={this.state.editContent}
               textChange={this.editChange}
               makeChange={this.confirmChange}
+            />
+          <div id="ship_to_paper">
+            <ShipToFrom
+              toFrom="ship_from"
+              items={this.state.userData.shipFrom}
             />
 
             <ShipToFrom toFrom="ship_to" items={this.state.userData.shipTo} />

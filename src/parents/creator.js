@@ -524,7 +524,7 @@ const PoInput = (props) => {
 };
 
 const PackType = (props) => {
-  const options = ["Bulk", "Poly'd", "Roll"];
+  const options = ["Bulk", "Poly'd", "Rolls"];
 
   const optionInputs = options.map((x, y) => {
 

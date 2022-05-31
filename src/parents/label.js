@@ -10,7 +10,6 @@ import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall";
 import changeDateFormat from "../functions/dateFormat.js";
 
-
 class ParentLabels extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,7 @@ class ParentLabels extends React.Component {
       //switch userData to userDataFromCreator[0] for development and "" for production
       userData: "",
       count: 0,
-      showEditBox: false
+      showEditBox: false,
     };
 
     this.incrementHandler = this.incrementHandler.bind(this);
@@ -98,23 +97,31 @@ class ParentLabels extends React.Component {
     changedElement.textContent = this.state.editContent;
 
     this.setState({
-      showEditBox: false
-    })
+      showEditBox: false,
+    });
   }
 
   listenerForAllPElements(e) {
-    if(e.target.tagName === 'P') {
+    if (e.target.tagName === "P") {
       this.showEdit(e);
     }
   }
 
   render() {
     if (this.state.fetched) {
-      return(
+      return (
         <div onDoubleClick={this.listenerForAllPElements}>
           <p id="labels_needed">{`Print ${
             this.state.userData.skid[this.state.count].numOfCartons
           }`}</p>
+
+          <TextEdit
+            show={this.state.showEditBox}
+            cancelOnClick={this.cancelEdit}
+            text={this.state.editContent}
+            textChange={this.editChange}
+            makeChange={this.confirmChange}
+          />
 
           <div id="label_container">
             <TopHeading
@@ -129,14 +136,6 @@ class ParentLabels extends React.Component {
                 this.state.userData.skid[this.state.count].itemDescription
               }
               currentCount={this.state.count}
-            />
-
-            <TextEdit 
-              show={this.state.showEditBox}
-              cancelOnClick={this.cancelEdit}
-              text={this.state.editContent}
-              textChange={this.editChange}
-              makeChange={this.confirmChange}
             />
 
             <LabelBottom
@@ -178,8 +177,10 @@ class ParentLabels extends React.Component {
 const TopHeading = (props) => {
   return (
     <div id="top_of_label" class="label_content">
-      <p id="job" 
-      onDoubleClick={props.dblClickHandler}>{`Job# ${props.job}`}</p>
+      <p
+        id="job"
+        onDoubleClick={props.dblClickHandler}
+      >{`Job# ${props.job}`}</p>
       <p id="company_name">{props.shipTo}</p>
     </div>
   );
@@ -205,8 +206,14 @@ const LabelBottom = (props) => {
         {`Attention: ${props.attention}`}
       </p>
       <p id="purchase_order">{`PO#: ${props.purchaseOrder}`}</p>
-      <p id="packs_rolls">{`${props.unitType} @ ${props.packs}`}</p>
-      <p id="qtyPerCarton">{`Quantity= ${props.quantityPerCarton}`}</p>
+      <p
+        id="packs_rolls"
+        className="rolls"
+      >{`${props.unitType} @ ${props.packs}`}</p>
+      <p
+        id="qtyPerCarton"
+        className="rolls"
+      >{`Quantity= ${props.quantityPerCarton}`}</p>
       <p id="date">{`Date: ${props.date}`}</p>
     </div>
   );
