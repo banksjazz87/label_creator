@@ -24,7 +24,7 @@ const NoDuplicates = {
             newArr[i].cartonText =
               newArr[i].cartonText +
               " " +
-              NoDuplicates.skidText(newArr, i, obj);
+              NoDuplicates.skidText(newArr, j, obj);
 
             let sum =
               MathFunctions.numOrNot(newArr[i].qtyShipped) +
