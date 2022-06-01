@@ -4,7 +4,7 @@ import "../assets/nav.scss";
 import TextEdit from "../components/textEdit.js";
 
 //userDataFromCreator used for development mode
-import userDataFromCreator from "../variables/dummyData";
+//import userDataFromCreator from "../variables/dummyData";
 
 import PrintButton from "../components/printButton";
 import serverCall from "../functions/serverCall";
@@ -16,9 +16,9 @@ class ParentLabels extends React.Component {
 
     this.state = {
       //switch fetched to true for development, false for production
-      fetched: true,
+      fetched: false,
       //switch userData to userDataFromCreator[0] for development and "" for production
-      userData: userDataFromCreator[0],
+      userData: "",
       count: 0,
       showEditBox: false,
     };
@@ -35,14 +35,14 @@ class ParentLabels extends React.Component {
   }
 
   //use this function only for production
-  /*componentDidMount() {
+  componentDidMount() {
     serverCall("/allData").then((items) =>
       this.setState({
         fetched: true,
         userData: items[0],
       })
     );
-  }*/
+  }
 
   incrementHandler = (e) => {
     e.preventDefault();
