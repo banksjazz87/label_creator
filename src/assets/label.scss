@@ -26,8 +26,8 @@
   display: flex;
   flex-direction: column;
   width: 268px;
-  height: 445px;
-  padding: 22px 10px 3px 10px;
+  height: 436px;
+  padding: 31px 10px 3px 10px;
   border-style: solid;
   border-width: 2px;
   border-color: $button-color;
@@ -61,10 +61,6 @@
 
   #attention {
     font-weight: bold;
-  }
-
-  .rolls {
-    line-height: 18px;
   }
 }
 
