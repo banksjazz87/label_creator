@@ -75,6 +75,14 @@ const MathFunctions = {
     }
     return arr.join("");
   },
+
+  //Returns the product of two numbers
+  getProduct: function(x, y) {
+    const numOfX = MathFunctions.numOrNot(x);
+    const numOfY = MathFunctions.numOrNot(y);
+    let product = numOfX * numOfY;
+    return MathFunctions.commaPlacer(product);
+  }
 };
 
 export default MathFunctions;
