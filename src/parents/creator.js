@@ -264,15 +264,30 @@ class ParentShippingCreator extends React.Component {
   //This function will be used to update the state of the skid item, if the session storage is true.
   updateSkidItem(e) {
     e.preventDefault();
+    let currentId = e.target.id;
+    let rowNum = MathFunctions.numbers(currentId);
+    let name = e.target.className;
 
+    this.updateShipQuantity(name, rowNum);
     if (currentStorageRunning() || currentlyRevising()) {
-      let currentId = e.target.id;
-      let rowNum = MathFunctions.numbers(currentId);
-      let name = e.target.className;
-
       this.setState((prevState) => ({
         skid: { ...prevState.skid[rowNum], [name]: e.target.value },
       }));
+    }
+  }
+
+  updateShipQuantity(str, num) {
+    const cartonValue = document.getElementById(`qtyPerCarton${num}`);
+    const cartonCount = document.getElementById(`numOfCartons${num}`);
+    const currentShipped = document.getElementById(`qtyShipped${num}`);
+
+    if (str === "qtyPerCarton" || str === "numOfCartons") {
+      if (cartonValue.value.length > 0 && cartonCount.value.length > 0) {
+        currentShipped.value = MathFunctions.getProduct(
+          cartonValue.value,
+          cartonCount.value
+        );
+      }
     }
   }
 
@@ -337,7 +352,6 @@ class ParentShippingCreator extends React.Component {
   definePackageUnit(e) {
     this.setState({
       packageUnit: e.target.value,
-      
     });
   }
 
@@ -392,8 +406,8 @@ class ParentShippingCreator extends React.Component {
               handleOnChange={this.poJobNumbers}
             />
 
-            <PackType 
-              changeHandler={this.definePackageUnit} 
+            <PackType
+              changeHandler={this.definePackageUnit}
               unitType={this.state.packageUnit}
               currentlyChecked={this.state.checked}
             />
@@ -527,42 +541,41 @@ const PackType = (props) => {
   const options = ["Bulk", "Poly'd", "Rolls"];
 
   const optionInputs = options.map((x, y) => {
-
-    if (props.unitType === x){
+    if (props.unitType === x) {
       return (
         <>
-        <input
-          key={`pack_option_${x}`}
-          className="pack_option"
-          onChange={props.changeHandler}
-          type="radio"
-          name="pack_unit"
-          value={x}
-          checked
-        />
+          <input
+            key={`pack_option_${x}`}
+            className="pack_option"
+            onChange={props.changeHandler}
+            type="radio"
+            name="pack_unit"
+            value={x}
+            checked
+          />
 
-        <label key={`pack_option_label_${y}`} htmlFor={x}>
-          {x}
-        </label>
-      </>
-      )
+          <label key={`pack_option_label_${y}`} htmlFor={x}>
+            {x}
+          </label>
+        </>
+      );
     } else {
-    return (
-      <>
-        <input
-          key={`pack_option_${x}`}
-          className="pack_option"
-          onChange={props.changeHandler}
-          type="radio"
-          name="pack_unit"
-          value={x}
-        />
+      return (
+        <>
+          <input
+            key={`pack_option_${x}`}
+            className="pack_option"
+            onChange={props.changeHandler}
+            type="radio"
+            name="pack_unit"
+            value={x}
+          />
 
-        <label key={`pack_option_label_${y}`} htmlFor={x}>
-          {x}
-        </label>
-      </>
-    );
+          <label key={`pack_option_label_${y}`} htmlFor={x}>
+            {x}
+          </label>
+        </>
+      );
     }
   });
 
