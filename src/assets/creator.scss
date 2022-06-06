@@ -206,6 +206,12 @@
   }
 }
 
+#copy_row {
+  @include button-style; 
+  margin-left: 45vw;
+  margin-bottom: 24px;
+}
+
 #final_buttons {
   display: flex;
   flex-direction: row;

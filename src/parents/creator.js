@@ -94,6 +94,7 @@ class ParentShippingCreator extends React.Component {
         Job: null,
         lines: 0,
         addingLines: 0,
+        duplicateRow: false,
         date: "",
 
         totalCartons: 0,
@@ -127,6 +128,8 @@ class ParentShippingCreator extends React.Component {
     this.showDeleteMessage = this.showDeleteMessage.bind(this);
     this.hideDeleteMessage = this.hideDeleteMessage.bind(this);
     this.definePackageUnit = this.definePackageUnit.bind(this);
+    this.updateShipQuantity = this.updateShipQuantity.bind(this);
+    this.copyRow = this.copyRow.bind(this);
   }
 
   componentDidMount() {
@@ -295,6 +298,7 @@ class ParentShippingCreator extends React.Component {
     this.setState((prev) => ({
       lines: parseInt(prev.lines) + 1,
       clicked: false,
+      duplicateRow: false,
     }));
   }
 
@@ -352,6 +356,14 @@ class ParentShippingCreator extends React.Component {
   definePackageUnit(e) {
     this.setState({
       packageUnit: e.target.value,
+    });
+  }
+
+  copyRow(e) {
+    e.preventDefault();
+    this.addLine();
+    this.setState({
+      duplicateRow: true,
     });
   }
 
@@ -439,7 +451,25 @@ class ParentShippingCreator extends React.Component {
           numberChange={this.numberOnChange}
           itemChange={this.updateSkidItem}
           removeChange={this.removeLine}
+          copyRow={this.state.duplicateRow}
         />
+
+      <div id="copy_row_container">
+        <button
+          id="copy_row"
+          style={
+            this.state.numberOfLinesSubmitClicked &&
+            this.state.deleteMessage === false
+              ? { display: "" }
+              : { display: "none" }
+          }
+          type="button"
+          onClick={this.copyRow}
+        >
+          Copy Row
+        </button>
+        <br/>
+      </div>
 
         <div
           id="final_buttons"
@@ -628,7 +658,9 @@ const SkidContents = (props) => {
                 : props.itemChange
             }
             value={
-              number < props.skidObjectsArr.length
+              props.copyRow && number === props.linesNeeded - 1
+                ? document.getElementById(`${x}${number - 1}`).value
+                : number < props.skidObjectsArr.length
                 ? props.skidObjectsArr[number][x]
                 : null
             }
