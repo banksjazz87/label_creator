@@ -454,6 +454,7 @@ class ParentShippingCreator extends React.Component {
           copyRow={this.state.duplicateRow}
         />
 
+      <div id="all_buttons">
       <div id="copy_row_container">
         <button
           id="copy_row"
@@ -510,6 +511,7 @@ class ParentShippingCreator extends React.Component {
           >
             Delete All
           </button>
+          </div>
         </div>
 
         <ValidateRemoval
