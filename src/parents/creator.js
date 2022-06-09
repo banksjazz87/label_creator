@@ -243,7 +243,10 @@ class ParentShippingCreator extends React.Component {
   //function to automatically added a comma to a number that should have a comma, based on its length.
   numberOnChange(e) {
     e.preventDefault();
-
+    this.setState({
+      duplicateRow: false
+    });
+    
     if (parseInt(e.target.value)) {
       let newValue = MathFunctions.numOrNot(e.target.value);
       e.target.value = MathFunctions.commaPlacer(newValue);
