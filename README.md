@@ -14,7 +14,6 @@
 <br/>
 
 ## Features
-
 ### ``Login page``
 For demo purposes the username is "Demo" and the password is "demo123".
 
@@ -33,7 +32,7 @@ You will need to be sure to click the 'Submit' button and then then the 'Save' b
 * Commas are placed automatically, for all numbers.
 
 **Handling items that have cartons at different quantitites.**
-* You will have to type the total quantity needed and total shipped on two seperate lines, with the carton with the differing quantity on a line of its own.
+* You will have to type the total quantity needed and total shipped on two seperate lines, with the carton with the differing quantity on a line of its own.  ``The different lines do not have to be right next to each other.``  If any item is listed more than once, it will automatically consolidate down to one line, placing the joined line when in the place where it was first typed.
 
 | qtyNeed   | itemDescription   | packsRolls  | qtyPerCarton  | numOfCartons  | qtyShipped  |
 | --------  | ---------------   | ----------  | ------------  | ------------  | ----------  |
@@ -41,6 +40,9 @@ You will need to be sure to click the 'Submit' button and then then the 'Save' b
 | 200       | Bananas           | 50          | 50            | 1             | 200         |
 
 The pack slip will turn this two line item, into one line.
+
+**Make a copy of the previous line.**
+* This can be used simply by pushing the button labeled, 'Copy Row'.
 
 ### ``Pack Slip Page``
 The pack slip page displays the data from the creator page in a way that resembles a stylized Excel sheet.
@@ -54,9 +56,18 @@ This page gives the user the ability to select each label and print out the requ
 
 ### ``Ship To Page``
 This page provides the tag that should be placed on the front and the back of a skid.  This contains the ship from address, ship to address, and PO#.
-<br/>
-<br/>
 
+### ``Edit Function``
+The Packing Slip Page, Labels Page, and Ship to Page all have an edit feature built in.  The feauture can be utilized by double clicking:
+* Packing Slip Page
+  * Any blank line.
+  * Any carton contents line.
+* Labels Page
+  * Any part of the labels page.
+* Ship To Page
+  * The PO#.
+<br/>
+<br/>
 ## Getting Started
 
 ### ``Node``
